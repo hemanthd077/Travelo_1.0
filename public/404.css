@@ -1,0 +1,13 @@
+h1{
+    display: flex;
+    justify-content: center;
+    color:  rgb(171, 0, 0);
+    margin-top: 260px;
+    font-family: ui-sans-serif;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    font-family: ui-sans-serif;
+}

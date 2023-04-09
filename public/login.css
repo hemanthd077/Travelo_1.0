@@ -1,0 +1,118 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+body{
+    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    background-repeat: no-repeat;
+    height: 79.4vh;
+    font-family: system-ui;
+}
+
+#block{
+    background-color: #e1e6eb;
+    margin-left: 550px;
+    margin-top: 10%;
+    width: 25%;
+    padding: 40px;
+    border-radius: 15px;
+    height: 53vh;
+}
+
+button#signupbutton {
+    display: flex;
+    margin-left: 170px;
+    height: 25px;
+    width: 55px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-style: hidden;
+    cursor: pointer;
+    font-size: medium;
+    color: #910087;
+}
+
+button#signupbutton:hover {
+    color: #2d3467;
+}
+
+p#or {
+    margin-top: 25px;
+    margin-left: 140px;
+    font-size: small;
+}
+
+#loginform{
+    display: inline-flex;
+    align-items: flex-start;
+    flex-direction: column;
+   
+}
+
+h2#logintxt {
+    margin-left: 155px;
+}
+
+#uname,#pwd{
+    padding: 2%;
+    height: 3vh;
+    width: 97%;
+    margin-top: 7px;
+    border-style: hidden;
+    font-size:small;
+    border-radius: 5px;
+}
+
+.outline:focus{
+    outline: none;
+}
+
+button#loginbuttom{
+    color: white;
+    width: 26vh;
+    margin-left: 98px;
+    font-size: medium;
+    height: 5vh;
+    border-radius: 2vh;
+    background-color: #2d3465;
+    border-style: hidden;
+    cursor: pointer;
+}
+
+button#loginbuttom:hover {
+    color: white;
+    background-color:#7c7e7e;
+}
+  
+
+hr#line{
+    border-style: outset;
+}
+
+a#fpwd {
+    margin-left: 280px;
+    margin-right: 2px;
+    font-size: small;
+    cursor: pointer;
+}
+
+a#fpwd:hover{
+    color: #e99700;
+}
+
+h4#warning {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    border-style: none;
+    color: white;
+    background-color: brown;
+    font-size: small;
+    width: 370px;
+    border-radius: 6px;
+    border-color: black;
+    margin-bottom: 10px;
+    justify-content: center;
+}

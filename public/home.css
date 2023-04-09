@@ -1,0 +1,214 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    font-family: system-ui;
+}
+
+#homenavbar {
+    width: 174px;
+    height: 100vh;
+    background-color: white;
+    border-radius: 0%;
+    -webkit-border-radius: 0px 25px 25px 0px;
+}
+
+#appicon {
+    height: 80px;
+    width: 130px;
+    margin-left: 17px;
+    margin-top: 28px;
+}
+body{
+    background-image: url('/images/homeBackground.jpg');
+}
+
+#main{
+    display: flex;
+    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+}
+.bookingdiv,.accountdiv,.profilediv {
+    display: inline-flex;
+    align-items: end;
+    margin-top: 20px;
+}
+
+button#bookingbutton{
+    height: 40px;
+    width: 159px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    column-gap: 10px;
+    color:white;
+}
+
+button#accountbutton{
+    height: 40px;
+    width: 159px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    column-gap: 10px;
+    cursor: pointer;
+
+}
+
+button#profilebutton{
+    height: 40px;
+    width: 159px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+
+img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.exitdiv {
+    margin-top: 390px;
+    display: flex;
+}
+
+button#exitbutton {
+    margin-left: 15px;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+}
+
+.bookingdiv {
+    background-color: #518fff;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#fromToBlock {
+    width: 350px;
+    height: 282px;
+    display: inline-flex;
+    flex-direction: column;
+    margin-left: 450px;
+    margin-top: 195px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 500px 1px rgba(0,0,0,0.3), inset 500px 10px 20px rgba(0,0,0,0.3), inset 500px -15px 30px rgba(0,0,0,0.3);
+    padding-top: 35px;
+    gap: 10px;
+}
+
+p#fromtext,p#totext {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: inherit;
+}
+
+input#from{
+    padding: 5px;
+    width: 275px;
+    border-style: none;
+    margin-left: 10px;
+}
+
+input#from:focus , input#to:focus{
+    outline: none;
+}
+
+input#to {
+    padding: 5px;
+    width: 275px;
+    margin-left: 23px;
+    border-style: none;
+    margin-left: 10px;
+}
+
+img#city {
+    width: 20px;
+    height: 20px;
+}
+
+input#calander {
+    padding: 10px;
+    width: 330px;
+    border-radius: 5px;
+    border-style: none;
+    height: 25px;
+    margin-top: 25px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position:fixed;
+    left: 43.2%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+input::-webkit-datetime-edit-fields-wrapper {
+    position: relative;
+    left: 6%;
+    opacity: 80%;
+}
+input::-webkit-datetime-edit {
+    position: relative;
+    left: 5%;
+}
+
+button#searchbutton {
+    margin-left: 80px;
+    width: 180px;
+    height: 40px;
+    background-color: #518fff;
+    color: white;
+    border-style: none;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-size: medium;
+    cursor: pointer;
+}
+
+button#searchbutton:hover{
+    background-color:rgb(193, 193, 193);
+    color: #518fff;
+}
+
+#content{
+    display: inline-flex;
+    flex-direction: column;
+}
+
+img#swapicon {
+    width: 50px;
+    height: 50px;
+    margin-top: -15px;
+    cursor: pointer;
+    margin-top: -26px;
+    margin-left: -5px;
+    position: absolute;
+    border-radius: 100px;
+}
+
+button#swapbutton {
+    width: 2px;
+    height: 2px;
+    margin-left: 290px;
+    border-radius: 50px;
+    margin-top: -1px;
+}

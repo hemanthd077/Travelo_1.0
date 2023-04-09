@@ -1,0 +1,100 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    background-image:rgb(201, 201, 201);
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: system-ui;
+}
+
+#homenavbar {
+    width: 174px;
+    height: 100vh;
+    background-color: white;
+    border-radius: 0%;
+    -webkit-border-radius: 0px 25px 25px 0px;
+}
+
+#appicon {
+    height: 80px;
+    width: 130px;
+    margin-left: 17px;
+    margin-top: 28px;
+}
+
+#main{
+    display: flex;
+    background-color: rgba(187, 187, 187, 0.47);
+}
+.bookingdiv,.accountdiv,.profilediv {
+    display: inline-flex;
+    align-items: end;
+    margin-top: 20px;
+}
+
+button#bookingbutton{
+    height: 40px;
+    width: 159px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+button#accountbutton{
+    height: 40px;
+    width: 159px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+button#profilebutton{
+    height: 40px;
+    width: 159px;
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 15px;
+    column-gap: 10px;
+    cursor: pointer;
+    color: #2d3465;
+}
+
+
+img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.exitdiv {
+    margin-top: 390px;
+    display: flex;
+}
+
+button#exitbutton {
+    margin-left: 15px;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+}
+
+.profilediv{
+    background-color: hwb(239.16deg 24.37% 70.55% / 47%);
+    border-radius: 10px 0px 0px 10px;
+}

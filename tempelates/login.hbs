@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/login.css">
+</head>
+<body >
+    <div  id="block">
+        <form action="/login" method="POST" id="loginform">
+            <h2 id="logintxt">LOGIN</h2><br>
+            <label for="Email">Email-Id</label>
+            <input class="outline" type="email" placeholder="Type your Email-Id" name="Email" id="uname" required>
+            <hr id="line" style="width:100%;text-align:left;margin-left:0;"><br>
+            
+            <label for="password">Password</label>
+            <input class="outline" type="password" placeholder="Type your Password" name="password" id="pwd" required>
+            <hr id="line" style="width:100%;text-align:left;margin-left:0;"><br>
+            
+            <a id="fpwd">Forget Password?</a><br>
+            {{#if control}}
+                    <h4 id="warning">{{res}}</h4>
+            {{/if}}
+
+            <button type="submit" id="loginbuttom" href="/login">Login</button>
+            
+            <p id="or">Create an Account</p>
+        </form>
+        <form action="/signup">
+            <button id="signupbutton" href="/signup" >Signup</button>
+        </form>
+    </div>
+</body>
+</html>

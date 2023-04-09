@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer</title>
+    <link rel="stylesheet" href="/dealer.css">
+</head>
+<body>
+    <div id="main">
+        <div id="homenavbar">
+                <img id="appicon" src="/images/homelogo.png" alt="logo">
+               <form action="/home" class="bookingdiv">
+                    <button id="bookingbutton" href="/home" ><img id="bookingimg" src="/images/booking.png" alt="homeicon">Booking</button>
+               </form>
+
+                <div class="accountdiv" >
+                    <button id="accountbutton" href="/dealer"> <img id="accountimg" src="/images/dealercolour.png" alt="dealericon">Dealer</button>
+                </div>
+
+                <form action="/profile" class="profilediv">
+                    <button id="profilebutton" href="/profile"><img id="profileimg" src="/images/profile.png" alt="profileicon">Profile</button>
+                </form>
+
+                <form action="/exit" class="exitdiv">
+                    <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
+                </form>
+        </div>
+        
+        <div id="dealerlogin">
+            <form action="/dealerlogin" method="POST" id="loginform">
+                
+                <h2 id="logintxt">DEALER LOGIN</h2>
+                <label for="Email">Dealer-Id</label>
+                <input class="outline" type="email" placeholder="Type your Dealer-Id" name="dealerid" id="uname" required>
+                
+                <label for="password">Password</label>
+                <input class="outline" type="password" placeholder="Type your Password" name="password" id="pwd" required>
+                {{#if control}}
+                    <h4 id="warning">{{res}}</h4>
+                {{/if}}
+                <button type="submit" id="loginbuttom" href="/dealerlogin">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

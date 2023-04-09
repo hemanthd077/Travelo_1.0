@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+    <div id="main">
+        <div id="homenavbar">
+                <img id="appicon" src="/images/homelogo.png" alt="logo">
+                <div class="bookingdiv">
+                    <button id="bookingbutton" href="/home" ><img id="bookingimg" src="/images/bookingcolour.png" alt="homeicon">Booking</button>
+                </div>
+
+                <form action="/dealer" class="accountdiv" >
+                    <button id="accountbutton" href="/dealer"> <img id="accountimg" src="/images/dealer.png" alt="dealericon">Dealer</button>
+                </form>
+
+                <form action="/profile" class="profilediv">
+                    <button id="profilebutton" href="/profile"><img id="profileimg" src="/images/profile.png" alt="profileicon">Profile</button>
+                </form>
+
+                <form action="/exit" class="exitdiv">
+                    <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
+                </form>                                                                                                 
+        </div>
+
+        <div id="content">
+            <form action="/search" id="fromToBlock">
+                <p id="fromtext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="from" placeholder="From" name="source" required></p>
+                <button id="swapbutton" href="/home"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
+                <p id="totext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="to" placeholder="To" name="destination" required></p>
+                <input type="date" id="calander" name="date">
+                <button id="searchbutton" href="/search" >Search</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

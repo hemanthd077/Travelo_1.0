@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/signup.css">
+</head>
+<body>
+    <div  id="block">
+        <form action="/signup" method='POST' id="loginform">
+           <h2 id="logintxt">Sign Up</h2><br>
+            <label for="fname">First Name</label><br>
+            <input class="outline" type="text" placeholder="Enter the First Name" name="fname" id="fname" required>
+            <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
+
+            <label for="lname">Last Name</label>
+            <input class="outline"type="text" placeholder="Enter the Last Name" name="lname" id="lname" required>
+            <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
+            
+            <label for="Email">Email</label>
+            <input class="outline" type="email" placeholder="Enter the Email" name="Email" id="email" required>
+            <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
+            
+            <label for="password">Password</label>
+            <input class="outline" type="password" placeholder="Enter the Password" name="password" id="pwd" required>
+            <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
+            
+            <label for="confirmPassword">Confirm Password</label>
+            <input class="outline" type="password" placeholder="Re-enter the Password" name="confirmPassword" id="pwd" required>
+            <hr id="line" style="width:97%;text-align:left;margin-left:0;">
+            
+            {{#if control}}
+                    <h4 id="warning">{{res}}</h4>
+            {{/if}}
+
+            <button type="submit" id="signupbuttom" href="/signup">Sign Up</button>            
+            
+           <p id="or">Already have an account</p>
+        </form>
+        <form action="/login">
+            <button id="loginbutton" href="/login">Login</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/profile.css">
+</head>
+<body>
+    <div id="main">
+        <div id="homenavbar">
+                <img id="appicon" src="/images/homelogo.png" alt="logo">
+                <form action="/home" class="bookingdiv">
+                    <button id="bookingbutton" href="/home" ><img id="bookingimg" src="/images/booking.png" alt="homeicon">Booking</button>
+                </form>
+
+                <form action="/dealer" class="accountdiv" >
+                    <button id="accountbutton" href="/dealer"> <img id="accountimg" src="/images/dealer.png" alt="dealericon">Dealer</button>
+                </form>
+
+                <div class="profilediv">
+                    <button id="profilebutton" href="/profile"><img id="profileimg" src="/images/profilecolour.png" alt="profileicon">Profile</button>
+                </div>
+
+                <form action="/exit" class="exitdiv">
+                    <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
+                </form>                                                                                                 
+        </div>
+            <form action="/uploads" method="post" enctype="multipart/form-data">
+                <input type="file" name="profileimage"/>
+                <button type="submit">upload</button>
+            </form>
+        <div id="content">
+            <h1>Profile<h1>
+        </div>
+    </div>
+</body>
+</html>
