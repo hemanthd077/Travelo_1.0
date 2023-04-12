@@ -27,13 +27,48 @@
                     <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
                 </form>                                                                                                 
         </div>
-            <form action="/uploads" method="post" enctype="multipart/form-data">
-                <input type="file" name="profileimage"/>
-                <button type="submit">upload</button>
-            </form>
-        <div id="content">
-            <h1>Profile<h1>
+
+        <div id="profilecontent">
+            <div id="contentdivision1">
+                <div id="profile">
+                    <img id="profilepic" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" />
+                    <h4 id="username">{{lname}} {{fname}}</h4>
+                </div><br>
+                
+                <form action="/photouploads" method="post" enctype="multipart/form-data">
+                    <input type="file" name="profileimage"/>
+                    <button type="submit">upload</button>
+                </form>
+                
+            </div>
+
+            <div id="contentdivision2">
+                <div id="personalinfo">
+                    <h1 id="title">Personal Information<h1>
+                    <p>Manage your personal Information, including your name and email address where you can contacted</p>
+                </div>
+
+                <div id="usercontent">
+                    <div id="fname">
+                        <h2>First Name</h2>
+                        <h4 id="firstname">{{fname}}</h4>
+                    </div>
+
+                    <div id="lname">
+                        <h2>Last Name</h2>
+                        <h4 id="lastname">{{lname}}</h4>
+                    </div>
+
+                    <div id="mail">
+                        <h2>Email-Id</h2>
+                        <h4 id="email">{{email}}</h4>
+                    </div>
+                </div>
+            </div>
         </div>
+
+            
+
     </div>
 </body>
 </html>

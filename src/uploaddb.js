@@ -16,11 +16,12 @@ mongoose.connect(`mongodb://0.0.0.0:27017/userdetails`,{
 const imageSchema = new mongoose.Schema({
     userid:{
         type:String,
+        required : true,
     }, 
     profileimage:{
         data:Buffer,
         ContentType:String,
-    }
+    },
 })
 
 const collection = new mongoose.model('profileimage',imageSchema)

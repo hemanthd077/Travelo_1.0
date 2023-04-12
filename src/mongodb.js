@@ -28,7 +28,7 @@ const loginSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
 })
 
 const collection = new mongoose.model('collection1',loginSchema)

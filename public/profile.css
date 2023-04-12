@@ -4,7 +4,7 @@
 }
 
 body{
-    background-image:rgb(201, 201, 201);
+    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     background-repeat: no-repeat;
     height: 100vh;
     font-family: system-ui;
@@ -27,7 +27,6 @@ body{
 
 #main{
     display: flex;
-    background-color: rgba(187, 187, 187, 0.47);
 }
 .bookingdiv,.accountdiv,.profilediv {
     display: inline-flex;
@@ -72,7 +71,7 @@ button#profilebutton{
     margin-left: 15px;
     column-gap: 10px;
     cursor: pointer;
-    color: #2d3465;
+    color: white;
 }
 
 
@@ -95,6 +94,84 @@ button#exitbutton {
 }
 
 .profilediv{
-    background-color: hwb(239.16deg 24.37% 70.55% / 47%);
+    background-color:#6e717a;
     border-radius: 10px 0px 0px 10px;
+}
+
+div#profilecontent {
+    display: flex;
+    padding-left: 75px;
+    gap: 30px;
+}
+
+div#personalinfo{
+    margin-top: 100px;
+}
+
+h1#title {
+    font-size: 25px;
+    color: black;
+    margin-top: -60px;
+}
+
+div#usercontent{
+    display: flex;
+    gap: 30px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+    flex-direction: unset;
+}
+
+h2 {
+    font-size: 20px;
+    color: black;
+}
+
+#fname, #lname, #mail {
+    padding: 15px;
+    width: 330px;
+    border-style:ridge;
+    height: 55px;
+    color: #707070;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+p {
+    margin-top: 5px;
+    color: #707070;
+    font-size: 15px;
+    margin-bottom: 60px;
+}
+
+div#contentdivision2 {
+    padding-left: 30px;
+    height: 500px;
+    margin-top: 100px;
+    border-radius: 15px;
+    margin-right: 50px;
+    width: 790px;
+    background-color: white;
+}
+
+img#profilepic {
+    width: 100px;
+    height: 100px;
+    border-radius: 70px;
+    margin-top: 20px;
+    border-style: solid;
+    margin-left: 100px;
+}
+
+div#contentdivision1 {
+    background-color: white;
+    margin-top: 100px;
+    border-radius: 15px;
+    padding: 25px;
+    height: 450px;
+}
+
+h4#username {
+    display: flex;
+    justify-content: center;
 }

@@ -11,13 +11,14 @@ const signup = async (req,res)=>{
         }
         else{
             const body = req.body;
-            if(!(body.Email && body.fname && body.lname && body.password && body.confirmPassword
-            )){
+            if(!(body.Email && body.fname && body.lname && body.password && body.confirmPassword))
+            {
                 return res.status(400).render('signup',{'res' : "details not entered properly",'control':true})
             }
 
             const hashedpassword = await bcrypt.hash(body.password, 10);
             body.password = hashedpassword.toString();
+            body.profileimage
 
             validation.insertMany([body])
         
