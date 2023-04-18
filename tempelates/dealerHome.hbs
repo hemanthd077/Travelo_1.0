@@ -4,9 +4,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dealer Home</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="/dealerHome.css">
 </head>
 <body>
-    <h1>DealerHome</h1>
+    <div id="main">
+        <div id="homenavbar">
+                <img id="appicon" src="/images/homelogo.png" alt="logo">
+               <form action="/home" class="bookingdiv">
+                    <button id="bookingbutton" href="/home" ><img id="bookingimg" src="/images/booking.png" alt="homeicon">Booking</button>
+               </form>
+
+                <div class="accountdiv" >
+                    <button id="accountbutton" href="/dealer"> <img id="accountimg" src="/images/dealercolour.png" alt="dealericon">Dealer</button>
+                </div>
+
+                <form action="/profile" class="profilediv">
+                    <button id="profilebutton" href="/profile"><img id="profileimg" src="/images/profile.png" alt="profileicon">Profile</button>
+                </form>
+
+                <form action="/exit" class="exitdiv">
+                    <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
+                </form>                                                                                          
+        </div>
+            
+        <div id="content">
+            <nav id="nav">
+                <form action="/plan">
+                    <button id="plan{{#if plan}}active{{/if}}" href="/plan">Plan</button>
+                </form>
+                <form action="/busdetails">
+                    <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails">Bus Details</button>
+                </form>
+                <form action="/dealerprofile">
+                    <button id="profile{{#if dealerprofile}}active{{/if}}" href="/dealerprofile">Profile</button>
+                </form>
+            </nav>
+
+            {{#if plan}}
+                <div id="plan">
+                    <div id="plantitle">
+                        <p class="plantextcontent">City :</p>
+                        <input class="planinputcontent" type="text" placeholder="Enter the City" name="plantitle" required>
+                    </div>
+                    <div id="imagediv">
+                            <label  for="inputTag">
+                                Select Plan <br/>
+                                <i class="fa fa-2x fa-file"></i>
+                                <input id="inputTag" type="file" name="imagefile" multiple required/>
+                                <br/>
+                            </label>
+                        </div>
+                        <button id="uploadbutton" href="/busdetailsupload">Upload</button>
+                    <p class="disclimer">NOTE : *The entered date needs to be 100% accurate.otherwise strict action with taken.*</p>
+                </div>         
+            {{/if}}
+
+            {{#if busdetails}}
+                <div id="busdetails">
+                    <form  action="/busdetailsupload" method="post" enctype="multipart/form-data">
+                        <div id="busname">
+                            <p class="textcontent">Bus Name : </p>
+                            <input class="textinput" type="text" placeholder="Enter the Bus Name" name="busname" required>
+                            <p class="textcontent">Seat Count : </p>
+                            <input class="textinput" type="text" placeholder="Enter the Seat Capacity" name="seatcount" required>
+                        </div>
+                        <div id="imagediv">
+                            <label  for="inputTag">
+                                Select Images<br/>
+                                <i class="fa fa-2x fa-camera"></i>
+                                <input id="inputTag" type="file" name="busimage" multiple>
+                                <br/>
+                            </label>
+                        </div>
+                        <button id="uploadbutton" href="/busdetailsupload">Upload</button>
+                    </form>
+                    <p class="disclimer">NOTE : *The entered date needs to be 100% accurate.otherwise strict action with taken.*</p>
+                </div>           
+            {{/if}}
+
+            {{#if dealerprofile}}
+                <div id="dealerprofile">
+                    <h1>dealerprofile</h1>
+                </div>              
+            {{/if}}
+        </div>
+    </div>
 </body>
 </html>

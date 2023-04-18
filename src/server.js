@@ -17,12 +17,14 @@ const signupRoutes = require('../routes/signuproutes')
 const homeRoutes = require('../routes/homeroutes')
 const dealerRoutes = require('../routes/dealerroutes')
 const profileRoutes = require('../routes/profileroutes')
+const dealerhomeroutes = require('../routes/dealerhomeroutes')
 
 app.use(loginRoutes)
 app.use(signupRoutes)
 app.use(homeRoutes)
 app.use(dealerRoutes)
 app.use(profileRoutes)
+app.use(dealerhomeroutes)
 
 
 app.use((req,res,next)=>{

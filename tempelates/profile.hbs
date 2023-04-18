@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/profile.css">
 </head>
 <body>
@@ -35,9 +36,16 @@
                     <h4 id="username">{{lname}} {{fname}}</h4>
                 </div><br>
                 
-                <form action="/photouploads" method="post" enctype="multipart/form-data">
-                    <input type="file" name="profileimage"/>
-                    <button type="submit">upload</button>
+                <form id="photoinput" action="/photouploads" method="post" enctype="multipart/form-data">
+                    <div id="photodiv">
+                        <label for="inputTag">
+                            CHANGE IMAGE<br>
+                            <i class="fa fa-camera"></i>
+                            <input id="inputimage" type="file" name="profileimage" required>
+                            <span id="imagename"></span>
+                        </label>
+                    </div>
+                    <button id="savebutton" type="submit">Save</button>
                 </form>
                 
             </div>
