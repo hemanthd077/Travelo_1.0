@@ -4,8 +4,7 @@
 }
 
 body{
-    /* background-image:rgb(201, 201, 201); */
-    background-image: url("./images/mainbackground.png");
+    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     background-repeat: no-repeat;
     height: 100vh;
     font-family: system-ui;
@@ -95,9 +94,19 @@ button#exitbutton {
     cursor: pointer;
 }
 
-.accountdiv{
+.accountdiv {
     border-radius: 10px 0px 0px 10px;
-    background-image: linear-gradient(95deg,#2d3464, #6e717a);
+    background-image: linear-gradient(95deg,#2d3464, #5e6274);
+}
+
+.profilediv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadada;
+}
+
+.bookingdiv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadada;
 }
 
 form#loginform {
@@ -105,12 +114,12 @@ form#loginform {
     flex-direction: column;
     margin-left: 450px;
     margin-top: 175px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 500px 1px rgba(0,0,0,0.3), inset 500px 10px 20px rgba(0,0,0,0.3), inset 500px -15px 30px rgba(0,0,0,0.3);
-    color: white;
+    background-color: white;
     padding: 30px;
     width: 400px;
     height: 340px;
     border-radius: 15px;
+    
 }
 
 .outline:focus{
@@ -125,6 +134,8 @@ form#loginform {
     border-style: hidden;
     font-size: small;
     border-radius: 5px;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    background-color: #dadada;
 }
 
 button#loginbuttom {
@@ -137,11 +148,12 @@ button#loginbuttom {
     border-radius: 5px;
     font-size: medium;
     cursor: pointer;
+    box-shadow: 0px 1px 5px 0px #2d3467;
 }
 
 
 button#loginbuttom:hover{
-    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    background-image: linear-gradient(45deg,#2d3465,#7c7e7e);
     color: white;
 }
 

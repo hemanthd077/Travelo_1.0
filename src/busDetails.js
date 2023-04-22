@@ -12,9 +12,12 @@ mongoose.connect(`mongodb://0.0.0.0:27017/userdetails`,{
 })
 
 const busDetailsSchema = new mongoose.Schema({
+    id:{
+        type:String,
+        unique : true,
+    },
     dealerid:{
         type:String,
-        required : true,
     },
     busname:{
         type:String,

@@ -4,9 +4,8 @@
 }
 
 body{
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
     background-repeat: no-repeat;
-    background-image: url("./images/mainbackground.png");
+    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     height: 100vh;
     font-family: system-ui;
 }
@@ -17,6 +16,16 @@ body{
     background-color: white;
     border-radius: 0%;
     -webkit-border-radius: 0px 25px 25px 0px;
+}
+
+.bookingdiv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadada;
+}
+
+.accountdiv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadada;
 }
 
 #appicon {
@@ -94,8 +103,8 @@ button#exitbutton {
     cursor: pointer;
 }
 
-.profilediv{
-    background-image: linear-gradient(95deg,#2d3464, #6e717a);
+.profilediv {
+    background-image: linear-gradient(95deg,#2d3464, #606475);
     border-radius: 10px 0px 0px 10px;
 }
 
@@ -124,25 +133,27 @@ div#usercontent{
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 14px;
     color: black;
 }
 
 #fname, #lname, #mail {
     padding: 15px;
-    width: 330px;
-    border-style:ridge;
-    height: 55px;
-    color: #6e717a;
+    width: 290px;
+    height: 40px;
+    background-color: #dadada;
     border-radius: 5px;
-    border-width: 3px;
+    display: flex;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    flex-direction: column;
+    justify-content: center;
 }
 
 p {
     margin-top: 5px;
     color: #6d7079;
     font-size: 15px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 div#contentdivision2 {
@@ -152,18 +163,24 @@ div#contentdivision2 {
     border-radius: 15px;
     margin-right: 65px;
     margin-left: 20px;
-    width: 790px;
+    width: 700px;
     background-color: white;
 }
 
+div#profile {
+    display: inline-flex;
+    align-items: center;
+    padding: 20px;
+}
+
 img#profilepic {
-    width: 140px;
-    height: 140px;
-    border-radius: 130px;
-    margin-top: 20px;
+    width: 110px;
+    height: 110px;
+    border-radius: 155px;
     border-style: solid;
-    border-color: #6d7079;
-    margin-left: 78px;
+    border-color: #dadada;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    border-bottom-right-radius: 1px;
 }
 
 div#contentdivision1 {
@@ -172,12 +189,25 @@ div#contentdivision1 {
     border-radius: 15px;
     padding: 25px;
     height: 450px;
-    width: 295px;
+    width: 390px;
+    margin-left: -3px;
 }
 
 h4#username {
+    border-color: #dadada;
     display: flex;
     justify-content: center;
+    width: 215px;
+    height: 25px;
+    margin-top: 70px;
+    background-color: #dadada;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    border-left-style: solid;
+    margin-left: 112px;
+    border-radius: 0px 55px 5px 0px;
+    box-shadow: 2px 1px 5px 0px #2d3467;
 }
 
 form#photoinput {
@@ -185,29 +215,33 @@ form#photoinput {
     flex-direction: column;
 }
 
-button#savebutton{
-    margin-top: 10px;
-    color: white;
-    width: 140px;
+button#savebutton {
+    margin-top: 20px;
+    width: 212px;
     font-size: medium;
-    height: 4vh;
+    height: 5vh;
     border-radius: 5px;
-    background-color: #6d7079;
+    background-color: #dadada;
     border-style: hidden;
     cursor: pointer;
-    margin-left: 77px;
+    margin-left: 90px;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+}
+
+button#savebutton:hover{
+    background-image: linear-gradient(95deg, #2d3464, #6e717a);
+    color: white;
 }
 
 #photodiv {
     text-align: center;
+    border-style: dashed;
     padding: 2%;
-    border-style: solid;
     border-width: 1px;
-    /* background-color: #6d7079;
-    color: white; */
     border-radius: 5px;
-    width: 200px;
-    margin-left: 40px;
+    width: 334px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 input {

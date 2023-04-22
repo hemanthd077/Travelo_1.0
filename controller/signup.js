@@ -1,5 +1,7 @@
 const validation = require('../src/mongodb')
 const bcrypt = require('bcrypt')
+const uploaddb = require('../src/uploaddb')
+const fs = require('fs')
 
 const signup = async (req,res)=>{
     validation.findOne({Email : req.body.Email}).then(async(data)=>{
@@ -18,7 +20,16 @@ const signup = async (req,res)=>{
 
             const hashedpassword = await bcrypt.hash(body.password, 10);
             body.password = hashedpassword.toString();
-            body.profileimage
+            
+            const newvalues = new uploaddb({
+                userid:body.Email,
+                profileimage:{
+                    data:fs.readFileSync('public/images/user.png'),
+                    ContentType:'image/png'
+                },
+            })
+            newvalues.save().then(()=>{
+                console.log('successfully uploaded')}).catch((err)=>console.log(err))
 
             validation.insertMany([body])
         

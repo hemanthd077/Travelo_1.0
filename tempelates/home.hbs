@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/home.css">
 </head>
 <body>
@@ -28,14 +29,59 @@
                 </form>                                                                                                 
         </div>
 
-        <div id="content">
-            <form action="/search" id="fromToBlock">
-                <p id="fromtext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="from" placeholder="From" name="source" required></p>
-                <button id="swapbutton" href="/home"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
-                <p id="totext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="to" placeholder="To" name="destination" required></p>
-                <input type="date" id="calander" name="date">
-                <button id="searchbutton" href="/search" >Search</button>
-            </form>
+        {{#if content}}
+            <div id="content">
+                <form action="/search" method="post" id="fromToBlock">
+                    <p id="fromtext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="from" placeholder="From" name="source" required></p>
+                    <button id="swapbutton" href="/home"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
+                    <p id="totext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="to" placeholder="To" name="destination" required></p>
+                    <input type="date" id="calander" name="date">
+                    <button id="searchbutton" href="/search" >Search</button>
+                </form>
+            </div>
+        {{/if}}
+
+        <div class="mainblock">
+            {{#if searchresult}}
+                <nav id="nav">
+                    <form action="/home">
+                        <button id="home{{#if home}}active{{/if}}" href="/home">Home</button>
+                    </form>
+                </nav>
+            {{/if}}
+
+            {{#if result}}
+                
+                <div id="fetch-content-maindiv">
+                    {{#each buscontent}}
+                        <div id="search-div">
+                            <img id="right" src="/images/right.png" alt="rightarrow">
+                            <div id="searchresultdiv">
+                                <img class="journey" src="/images/journey.png" alt="journey">
+
+                                {{#each this}}
+                                    <h1 id="{{@index}}content">{{this}}</h1>
+                                {{/each}}
+                                <i id="seatcount" class="fa-solid fa-user-group fa-2x"></i>
+                            </div>
+
+                            <div id="extradetaildiv">
+                                <img id="down-arrow" src="/images/down-arrow.png" alt="downarrow">
+                            </div>
+                        </div>
+                        
+
+                    {{/each}}
+                </div>
+            {{/if}}
+
+            {{#if error}}
+                <div id="searchresultdiv1">
+                    <i id="sademoji" class="fa fa-frown fa-3x" aria-hidden="true" ></i>
+                    <h1 id="error">{{res}}</h1>
+                    <h1 id="error1">Do check Other Routes</h1>
+                </div><br>
+            {{/if}}
         </div>
     </div>
 </body>

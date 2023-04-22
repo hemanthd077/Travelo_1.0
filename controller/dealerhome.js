@@ -1,17 +1,13 @@
 const busdetails = require('../src/busDetails')
+const plandetails = require('../src/planDetails')
 const Login = require('../controller/dealer');
 const fs = require('fs');
 const dealermail = Login.dealermail();
 const multer  = require('multer');
-const { json } = require('express');
 
 
-const storage = multer.diskStorage({
+const storage1 = multer.diskStorage({
     destination: function (req, file, cb) {
-        var dir = 'uploads/busimages/'
-        if(!fs.existsSync(dir)){
-            fs.mkdirSync(dir);
-        }
       cb(null,"uploads/busimages/");
     },
     filename: function (req, file, cb) {
@@ -19,40 +15,84 @@ const storage = multer.diskStorage({
     },
 })
 
-const upload = multer({storage:storage}).array("busimage",6);
+const storage2 = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null,"uploads/plans/");
+    },
+    filename: function (req, file, cb) {
+       return cb(null,file.originalname)
+    },
+})
+
+const upload1 = multer({storage:storage1}).array("busimage",6);
+
+const upload2 = multer({storage:storage2}).single('planfile');
+
 
 
 const plandetailsupload = async(req,res)=>{
+    upload2(req,res,async(err)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            const newvalues = new plandetails({
+                id:Date.now().toString(36),
+                city:req.body.city,
+                busname:req.body.busname,
+                dealerid:dealermail[0],
+                planfile:{
+                    data:fs.readFileSync('uploads/plans/'+req.file.originalname),
+                    ContentType:'file/pdf'
+                },
+            })
+            newvalues.save().then(()=>{
+                console.log('successfully file uploaded ')
+            }).catch(err=>{
+                console.log(err)
+                res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , plan:true})
+            })
+            res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , plan:true})
+        }
+    })
 
 }
 
 const busdetailsupload = (req,res)=>{
-    upload(req,res,(err)=>{
+    upload1(req,res,async(err)=>{
         let files = req.files;
         if(err){
             console.log(err);
         }
         else{
             let imageArray = files.map((file)=>{
-                return img = fs.readFileSync('uploads/busimages/'+file.filename);
+                return img = file;
 
             })
-            console.log('dealerid: '+dealermail[0]);
-            imageArray.map((src,index)=>{
+            const data = await busdetails.findOne({busname:req.body.busname});
+            if(!data){
+                imageArray.map((src,index)=>{
                     const newvalues = new busdetails({
-                        dealerid:dealermail[0],
+                        id:Date.now().toString(36)+""+index,
                         busname:req.body.busname,
                         seatcount:req.body.seatcount,
+                        dealerid:dealermail[0],
                         busimage:{
-                            data:files[index].originalname,
-                            ContentType:files[index].Mimetype
+                            data:fs.readFileSync('uploads/busimages/'+src.originalname),
+                            ContentType:'image/png'
                         },
                     })
+
                     newvalues.save().then(()=>{
-                        console.log('successfully uploaded one photo')
+                        console.log('successfully uploaded '+(index+1)+' photo')
                     }).catch(err=>console.log(err))
-            })
-            res.redirect('/busdetails')
+                })
+                res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , busdetails:true})
+            }
+            else{
+                res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , busdetails:true})
+        
+            }
         }
     })
 }

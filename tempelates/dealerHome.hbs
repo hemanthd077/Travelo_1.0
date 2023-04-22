@@ -44,19 +44,29 @@
 
             {{#if plan}}
                 <div id="plan">
-                    <div id="plantitle">
+                    <form action="/plandetailsupload" method="post" enctype="multipart/form-data">
+                        <div id="plantitle">
                         <p class="plantextcontent">City :</p>
-                        <input class="planinputcontent" type="text" placeholder="Enter the City" name="plantitle" required>
+                        <input class="planinputcontent" type="text" placeholder="Enter the City" name="city" required>
+                        <p class="textcontent1">Bus Name : </p>
+                        <input class="textinput" type="text" placeholder="Enter the Bus Name" name="busname" required>
                     </div>
                     <div id="imagediv">
                             <label  for="inputTag">
                                 Select Plan <br/>
                                 <i class="fa fa-2x fa-file"></i>
-                                <input id="inputTag" type="file" name="imagefile" multiple required/>
+                                <input id="inputTag" type="file" name="planfile" required/>
                                 <br/>
                             </label>
                         </div>
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
+                    </form>
+                    {{#if disclimer}}
+                        <p id="status">{{res}}</p>
+                    {{/if}}
+                    {{#if disclimerfail}}
+                        <p id="status1">{{res}}</p>
+                    {{/if}}
                     <p class="disclimer">NOTE : *The entered date needs to be 100% accurate.otherwise strict action with taken.*</p>
                 </div>         
             {{/if}}
@@ -74,12 +84,18 @@
                             <label  for="inputTag">
                                 Select Images<br/>
                                 <i class="fa fa-2x fa-camera"></i>
-                                <input id="inputTag" type="file" name="busimage" multiple>
+                                <input id="inputTag" type="file" name="busimage" multiple required>
                                 <br/>
                             </label>
                         </div>
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
+                    {{#if disclimer}}
+                        <p id="status">{{res}}</p>
+                    {{/if}}
+                    {{#if disclimerfail}}
+                        <p id="status1">{{res}}</p>
+                    {{/if}}
                     <p class="disclimer">NOTE : *The entered date needs to be 100% accurate.otherwise strict action with taken.*</p>
                 </div>           
             {{/if}}

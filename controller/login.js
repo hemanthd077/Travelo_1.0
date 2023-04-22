@@ -7,8 +7,8 @@ const login = async(req,res)=>{
     const mail=req.body.Email;
     
     validation.findOne({Email:mail}).then(async(user)=>{
-        detailsArray[0]=user.fname;
-        detailsArray[1]=user.lname;
+        detailsArray[0]=user.fname.toUpperCase();
+        detailsArray[1]=user.lname.toUpperCase();
         detailsArray[2]=user.Email;
     }).catch((err)=>console.log('error in finding'))
     
@@ -16,7 +16,7 @@ const login = async(req,res)=>{
         if(data){
             const validpassword = await bcrypt.compare(req.body.password,data.password)
             if(validpassword){
-                res.render('home')
+                res.render('home',{content:true})
             }
             else{
                 res.status(400).render('login',{'res':'Invalid Password','control':true})
