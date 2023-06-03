@@ -35,7 +35,7 @@
                     <p id="fromtext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="from" placeholder="From" name="source" required></p>
                     <button id="swapbutton" href="/home"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
                     <p id="totext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="to" placeholder="To" name="destination" required></p>
-                    <input type="date" id="calander" name="date">
+                    <input type="date" id="calander" name="date" required>
                     <button id="searchbutton" href="/search" >Search</button>
                 </form>
             </div>
@@ -62,15 +62,19 @@
                                 {{#each this}}
                                     <h1 id="{{@index}}content">{{this}}</h1>
                                 {{/each}}
-                                <i id="seatcount" class="fa-solid fa-user-group fa-2x"></i>
-                            </div>
-
-                            <div id="extradetaildiv">
-                                <img id="down-arrow" src="/images/down-arrow.png" alt="downarrow">
+                                <i id="seatcount" style="margin-top: 5px;" class="fa fa-users" aria-hidden="true"></i>
+                                <div id="buttons">
+                                    <form action="/busimg" method="post">
+                                        <input type="hidden" name="busid" value={{@index}}>
+                                        <button type="submit" id="busimg" href="/busimg"><i class="fa fa-bus" aria-hidden="true"></i> Bus Image</button>
+                                    </form>
+                                    <form action="busplan" method="post">
+                                        <input type="hidden" name="planid" value={{@index}}>
+                                        <button type="submit" id="plan" href="/busplan"><i class="fa fa-file" aria-hidden="true"></i> Plan</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        
-
                     {{/each}}
                 </div>
             {{/if}}
@@ -82,7 +86,19 @@
                     <h1 id="error1">Do check Other Routes</h1>
                 </div><br>
             {{/if}}
+
+            {{#if image}}
+                <div id="bus-img">
+                    {{#each imagecontent}}
+                            <div id="particularimg">
+                                <img id="buspic" class="{{@indeximg}}" src="data:{{this}}" width="600px" height="400px" alt="Bus Image" />
+                            </div>
+                    {{/each}}
+                </div>
+            {{/if}}
         </div>
     </div>
 </body>
 </html>
+
+

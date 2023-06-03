@@ -12,4 +12,7 @@ router.get('/exit',(req,res)=>{
 
 router.post('/search',booking.getin)
 
+router.post('/busimg',booking.getImg)
+
+
 module.exports =router;

@@ -172,21 +172,21 @@ div#profile {
     align-items: center;
     padding: 20px;
 }
-
 img#profilepic {
     width: 110px;
     height: 110px;
-    border-radius: 155px;
+    border-radius: 10px;
     border-style: solid;
     border-color: #dadada;
-    box-shadow: 0px 1px 5px 0px #2d3467;
-    border-bottom-right-radius: 1px;
+    box-shadow: 2px 1px 5px 0px #2d3467;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 1px;
 }
 
 div#contentdivision1 {
     background-color: white;
     margin-top: 100px;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 25px;
     height: 450px;
     width: 390px;
@@ -198,15 +198,15 @@ h4#username {
     display: flex;
     justify-content: center;
     width: 215px;
-    height: 25px;
-    margin-top: 70px;
+    height: 95px;
+    margin-top: 0px;
     background-color: #dadada;
     align-items: center;
     padding: 10px;
     position: absolute;
     border-left-style: solid;
     margin-left: 112px;
-    border-radius: 0px 55px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
     box-shadow: 2px 1px 5px 0px #2d3467;
 }
 
@@ -228,7 +228,7 @@ button#savebutton {
     box-shadow: 0px 1px 5px 0px #2d3467;
 }
 
-button#savebutton:hover{
+button#savebutton:hover,#photodiv:hover{
     background-image: linear-gradient(95deg, #2d3464, #6e717a);
     color: white;
 }

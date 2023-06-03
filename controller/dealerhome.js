@@ -1,10 +1,23 @@
 const busdetails = require('../src/busDetails')
 const plandetails = require('../src/planDetails')
 const Login = require('../controller/dealer');
+const dealer = require('../src/dealerdb')
 const fs = require('fs');
 const dealermail = Login.dealermail();
 const multer  = require('multer');
+const dealerjs = require('../controller/dealer');
+const { log } = require('console');
 
+const detailsArray = dealerjs.dealermail();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "uploads/")
+    },
+    filename: function (req, file, cb) {
+       return cb(null,file.originalname)
+    },
+})
 
 const storage1 = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -23,6 +36,8 @@ const storage2 = multer.diskStorage({
        return cb(null,file.originalname)
     },
 })
+
+const upload = multer({storage:storage}).single('profileimage')
 
 const upload1 = multer({storage:storage1}).array("busimage",6);
 
@@ -78,7 +93,7 @@ const busdetailsupload = (req,res)=>{
                         seatcount:req.body.seatcount,
                         dealerid:dealermail[0],
                         busimage:{
-                            data:fs.readFileSync('uploads/busimages/'+src.originalname),
+                            data:fs.readFileSync('uploads/busimages/'+src.filename),
                             ContentType:'image/png'
                         },
                     })
@@ -97,7 +112,83 @@ const busdetailsupload = (req,res)=>{
     })
 }
 
+const dealerpic = async(req,res)=>{
+  const data = await dealer.findOne({dealerid:detailsArray[0]});
+  if(data){
+    upload(req,res,async(err)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            const newvalues ={$set:{profileimage:{
+                data:fs.readFileSync('uploads/'+req.file.filename),
+                ContentType:'image/png'
+            }}};
+            const filter = {_id : data._id}
+            const options = { upsert: false };           
+            await dealer.updateOne(filter,newvalues,options, (err , collection) => {
+                if(err){
+                    console.log('error'+err)
+                }
+            })
+            console.log("profile photo updated successfully");
+            res.redirect('/dealerprofile')
+        }
+    });
+  }  
+}
+
+const profile = async(req,res)=>{
+    
+    await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
+        dealername=data.dealername.toUpperCase();
+        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true})
+    }).catch(err=>{
+        console.log('image not inserted yet...:'+err)
+    })
+}
+
+const busdetail = async(req,res)=>{
+    
+    await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
+        dealername=data.dealername.toUpperCase();
+        let busdetailArray=[];
+        let buspicArray = [];
+        let buspictypeArray = [];
+        await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(detail)=>{
+            for (let index = 0; index < detail.length; index++) {
+                let temp = [];
+                await busdetails.findOne({busname:detail[index]}).then(async(buscontent)=>{
+                    temp[0] = buscontent.busname;
+                    temp[1] = buscontent.seatcount+" Seats";
+                    temp[2]=  buscontent.busimage.ContentType+";base64,"+buscontent.busimage.data.toString('base64');
+                    busdetailArray[index]=temp;
+                })
+            }
+        })
+        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray,buspicArray})
+    }).catch(err=>{
+        console.log('busdetail not found!!!!'+err)
+    })
+}
+
+
+const plandetail = async(req,res)=>{
+    
+    await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
+        dealername=data.dealername.toUpperCase();
+        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true})
+    }).catch(err=>{
+        console.log('plan details not found!!!'+err)
+    })
+}
+
+
 module.exports = {
     plandetailsupload,
-    busdetailsupload
+    busdetailsupload,
+    dealerpic,
+    profile,
+    plandetail,
+    busdetail
 };

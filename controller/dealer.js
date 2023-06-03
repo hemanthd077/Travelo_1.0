@@ -9,7 +9,7 @@ const dealerlogin = async(req,res)=>{
             detailsArray[0]=data.dealerid;
             const validpassword = await bcrypt.compare(req.body.password,data.password)
             if(validpassword){
-                res.render('dealerHome',{dealerprofile:true})
+                res.redirect('/busdetail');
             }
             else{
                 res.status(400).render('dealer',{'res':'Invalid Password','control':true})
@@ -27,4 +27,7 @@ function dealermail() {
     return detailsArray;
 }
 
-module.exports = {dealerlogin,dealermail};
+module.exports = {
+    dealerlogin,
+    dealermail
+};

@@ -15,10 +15,18 @@ const dealerloginSchema = new mongoose.Schema({
     dealerid:{
         type:String,
         required : true,
+        unique:true,
     },
     password:{
         type:String,
         required:true
+    },
+    dealername:{
+        type:String
+    },
+    profileimage:{
+        data:Buffer,
+        ContentType:String,
     }
 })
 
