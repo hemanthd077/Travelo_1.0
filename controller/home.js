@@ -1,5 +1,6 @@
 const plandetails = require('../src/planDetails')
 const busdetails = require('../src/busDetails')
+const dealerdetails = require('../src/dealerdb');
 
 function casedetective(a){
     let capFirstLetter = a[0].toUpperCase();
@@ -16,16 +17,22 @@ const getin = async(req,res)=>{
     if(data.length>0){
         
         for (let ind = 0; ind < data.length; ind++) {
-            const busdata = await busdetails.find({busname:data[ind].busname})
+            const busdata = await busdetails.find({busname:data[ind].busname});
             let temp = [];
-            let i=0;
-            if(busdata.length>0){
-                temp[i++] = data[ind].busname.toUpperCase();
-                temp[i++] = casedetective(req.body.source);
+            const dealer = await dealerdetails.findOne({dealerid:busdata[0].dealerid});
+            if(busdata.length>0) {
+                temp[0] = dealer.profileimage.ContentType+";base64,"+dealer.profileimage.data.toString('base64');
+                temp[1] = data[ind].busname.toUpperCase();
+                temp[2] = casedetective(req.body.source);
                 busnamearr[ind] = data[ind].busname;
-                temp[i++] = casedetective(data[ind].city);
-                temp[i++] = busdata[0].seatcount;
+                temp[3] = casedetective(data[ind].city);
+                temp[4] = busdata[0].seatcount;
+                temp[5] = busdata[0].busimage.ContentType+";base64,"+busdata[0].busimage.data.toString('base64');
                 buscontent[ind]=temp;
+                
+            }
+            if(busdata.length>0){
+                
             }
         }
         const state = buscontent.length===0;

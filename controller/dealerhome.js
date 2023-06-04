@@ -177,7 +177,21 @@ const plandetail = async(req,res)=>{
     
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
         dealername=data.dealername.toUpperCase();
-        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true})
+        let planArray=[];
+        await plandetails.find({dealerid:detailsArray[0]}).then(async(detail)=>{
+            for (let index = 0; index < detail.length; index++) {
+                let temp = [];
+                temp[0] = detail[index].city.toUpperCase();
+                temp[1] = detail[index].busname.toUpperCase();
+
+                //pdf data convert from bufferdata to dataURL
+                const pdfData = detail[index].planfile.data.toString('base64');
+                temp[2] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+
+                planArray[index] = temp; 
+            }
+        })
+        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray})
     }).catch(err=>{
         console.log('plan details not found!!!'+err)
     })

@@ -488,7 +488,7 @@ div#contentdivision2 {
 
 #searchresultdiv {
     display: inline-flex;
-    width: 400px;
+    width: 390px;
     align-items: center;
     font-size: 10px;
     align-items: center;
@@ -502,14 +502,19 @@ div#contentdivision2 {
     padding: 15px;
     border-radius: 5px;
     height: 225px;
-    width: 435px;
+    width: 425px;
     box-shadow: 0px 1px 5px 0px #2d3467;
+}
+
+#search-div:hover {
+    box-shadow: 0px 5px 5px 5px #2d3467;
+    background-color: #dadada;
 }
 
 #contentdivision2{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap:35px;
     overflow: scroll;
 }
 
@@ -519,7 +524,7 @@ div#contentdivision2 {
 
 #buspic {
     height: 207px;
-    width: 465px;
+    width: 455px;
     border-radius: 0px 0px 5px 5px;
     margin-left: -15px;
     margin-top: 17px;
@@ -530,8 +535,44 @@ div#contentdivision2 {
     cursor: pointer;
 }
 
-#busdelete{
+#busdelete,#plandelete{
     cursor: pointer;
 }
 
+#plan-module-inner{
+    display: inline-flex;
+    width: 390px;
+    align-items: center;
+    font-size: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
+#plan-module-outer {
+    background-color: white;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    height: 416px;
+    width: 410px;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+
+}
+
+#plan-module-outer:hover {
+    background-color: #dadada;
+    box-shadow: 0px 2px 5px 5px #2d3467;
+}
+
+#busplan{
+    height: 400px;
+    width: 441px;
+    border: 30px;
+    border-radius: 0px 0px 5px 5px;
+    margin-left: -16px;
+    cursor: pointer;
+    margin-top: 10px;
+    overflow:hidden;
+}

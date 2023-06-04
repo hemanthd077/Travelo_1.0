@@ -128,8 +128,9 @@
                             <button class="contentbutton2{{#if plandetail}}active{{/if}}"><i class="fa fa fa-file"></i> PLAN<div id="activestatus2{{#if plancontent}}active{{/if}}"></div></button>
                         </form>
                     </div>
-                    <div id="contentdivision2">
+                    
                         {{#if busdetail}}
+                            <div id="contentdivision2">    
                                 {{#each busdetailArray}}
                                     <div id="search-div">
                                         <div id="searchresultdiv">
@@ -139,15 +140,28 @@
                                                 <i id="busdelete" class="fa fa-trash fa-2x" aria-hidden="true"></i>
                                             </form>
                                         </div>
-                                        <img id="buspic" src="data:{{this.[2]}}" alt="Bus Image">
+                                        <img  id="buspic" src="data:{{this.[2]}}" alt="Bus Image">
                                     </div>
                                 {{/each}}
+                            </div>
                         {{/if}}
 
                         {{#if plandetail}}
-                            <h1>plandetail</h1>
+                            <div id="contentdivision2">
+                                {{#each planArray}}
+                                    <div id="plan-module-outer">
+                                        <div id="plan-module-inner">
+                                            <p style="font-weight: 500; font-size:15px;">City : {{this.[0]}}</p>
+                                            <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
+                                            <form action="/plandelete">
+                                                <i id="plandelete" class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                                            </form>
+                                        </div>
+                                        <iframe id="busplan" src="{{this.[2]}}" name="myIframe"></iframe>
+                                    </div>
+                                {{/each}}
+                              </div>
                         {{/if}}
-                    </div>
                 </div>          
             {{/if}}
         </div>

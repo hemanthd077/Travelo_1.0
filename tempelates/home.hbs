@@ -51,22 +51,22 @@
             {{/if}}
 
             {{#if result}}
-                
                 <div id="fetch-content-maindiv">
                     {{#each buscontent}}
-                        <div id="search-div">
-                            <img id="right" src="/images/right.png" alt="rightarrow">
-                            <div id="searchresultdiv">
-                                <img class="journey" src="/images/journey.png" alt="journey">
-
-                                {{#each this}}
-                                    <h1 id="{{@index}}content">{{this}}</h1>
-                                {{/each}}
-                                <i id="seatcount" style="margin-top: 5px;" class="fa fa-users" aria-hidden="true"></i>
+                            <div id="search-div">
+                                <div id="searchresultdiv">
+                                    <img style="width: 30px; height:30px;border-radius:50px" src="data:{{this.[0]}}" alt="dealerpic">
+                                    <p style="font-weight: 500; font-size:15px;">{{this.[1]}}</p>
+                                    <p style="font-weight: 500; font-size:15px;">{{this.[2]}}</p>
+                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    <p style="font-weight: 500; font-size:15px;">{{this.[3]}}</p>
+                                    <p style="font-weight: 500; font-size:15px;">{{this.[4]}} Seater</p>
+                                </div>
+                                <img id="busimg" src="data:{{this.[5]}}" alt="buspic">
                                 <div id="buttons">
                                     <form action="/busimg" method="post">
                                         <input type="hidden" name="busid" value={{@index}}>
-                                        <button type="submit" id="busimg" href="/busimg"><i class="fa fa-bus" aria-hidden="true"></i> Bus Image</button>
+                                        <button type="submit" id="buspic-buttons" href="/busimg"><i class="fa fa-bus" aria-hidden="true"></i> Bus Image</button>
                                     </form>
                                     <form action="busplan" method="post">
                                         <input type="hidden" name="planid" value={{@index}}>
@@ -74,7 +74,6 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
                     {{/each}}
                 </div>
             {{/if}}
@@ -89,11 +88,13 @@
 
             {{#if image}}
                 <div id="bus-img">
-                    {{#each imagecontent}}
+                    <div id="outer-photo-block">
+                        {{#each imagecontent}}
                             <div id="particularimg">
                                 <img id="buspic" class="{{@indeximg}}" src="data:{{this}}" width="600px" height="400px" alt="Bus Image" />
                             </div>
-                    {{/each}}
+                        {{/each}}
+                    </div>
                 </div>
             {{/if}}
         </div>
