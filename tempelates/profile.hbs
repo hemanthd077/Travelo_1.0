@@ -59,12 +59,18 @@
                 <div id="usercontent">
                     <div id="fname">
                         <h2>First Name</h2>
-                        <h4 id="firstname">{{fname}}</h4>
+                        <div class="name-replace">
+                            <h4 id="firstname">{{fname}}</h4>
+                            <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                        </div>
                     </div>
 
                     <div id="lname">
                         <h2>Last Name</h2>
-                        <h4 id="lastname">{{lname}}</h4>
+                        <div class="name-replace">
+                            <h4 id="lastname">{{lname}}</h4>
+                            <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                        </div>
                     </div>
 
                     <div id="mail">
@@ -74,9 +80,57 @@
                 </div>
             </div>
         </div>
-
-            
-
+        <div class="formPopup popupForm-outclick" id="popupForm">
+            <form action="/updateinfo" class="formContainer" method="post">
+                <p id="update-title">UPDATE INFO</p>
+                <input type="hidden" name="email" value="{{email}}">
+                <label for="fname-update">First Name</label>
+                <input class="outline" type="text" placeholder="Enter your First Name" name="fname" id="fname-update" ><br>
+                
+                <label for="lname-update">Last Name</label>
+                <input class="outline" type="text" placeholder="Enter your Last Name" name="lname" id="lname-update" ><br>
+                
+                <label for="password">Password</label>
+                <input class="outline" type="password" placeholder="Type your Password" name="password" id="pwd" required><br>
+                
+                <div id="button-update">
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    <button type="submit" class="btn"  >Update</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
+<script>
+    function openForm() {
+        var profilecont = document.getElementById("profilecontent");
+
+        document.getElementById("popupForm").style.display = "block";
+        profilecont.style.opacity="0.5"
+        profilecont.style.animationDelay="1s"
+        window.onclick = function (event) {
+            if (event.target.className === "popupForm") {
+
+            }
+            else{
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        }
+    }
+    function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+        document.getElementById("profilecontent").style.opacity="1"
+        document.getElementById("profilecontent").style.animationDelay="1s"
+        window.onclick = function (event) {
+            if (event.target.className === "popupForm") {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            else{
+    
+            }
+        }
+    }
+</script>

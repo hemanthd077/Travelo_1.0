@@ -14,5 +14,8 @@ router.post('/search',booking.getin)
 
 router.post('/busimg',booking.getImg)
 
+router.post('/busplan',booking.getplan)
+
+
 
 module.exports =router;

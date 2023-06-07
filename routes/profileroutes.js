@@ -10,4 +10,7 @@ router.get('/exit',(req,res)=>{
 })
 
 router.post('/photouploads',photouploads.profileupload)
+
+router.post('/updateinfo',photouploads.infoUpdate)
+
 module.exports =router;

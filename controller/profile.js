@@ -2,6 +2,7 @@ const uploaddb = require('../src/uploaddb')
 const multer  = require('multer')
 const fs = require('fs');
 const Login = require('../controller/login');
+const userdb = require('../src/mongodb');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -71,7 +72,17 @@ const profile = async(req,res)=>{
   })
 }
 
-  module.exports = {
+const infoUpdate = async(req,res)=>{
+    console.log(req.body.email);
+    await userdb.findOne({Email:req.body.email}).then(async(data)=>{
+        console.log(req.body.email);
+    }).catch(err=>{
+        alert("errorrrr");
+    })
+}
+
+module.exports = {
     profileupload,
-    profile
+    profile,
+    infoUpdate,
   };

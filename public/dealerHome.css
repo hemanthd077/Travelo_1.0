@@ -321,7 +321,7 @@ p#status1 {
 div#contentdivision1 {
     background-color: white;
     margin-top: 55px;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 25px;
     height: 536px;
     width: 200px;
@@ -404,7 +404,7 @@ label{
 div#contentdivision2 {
     background-color: white;
     margin-top: 55px;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 25px;
     height: 536px;
     width: 950px;
@@ -507,7 +507,7 @@ div#contentdivision2 {
 }
 
 #search-div:hover {
-    box-shadow: 0px 5px 5px 5px #2d3467;
+    box-shadow: 0px 1px 5px 3px #2d3467;
     background-color: #dadada;
 }
 
@@ -527,7 +527,7 @@ div#contentdivision2 {
     width: 455px;
     border-radius: 0px 0px 5px 5px;
     margin-left: -15px;
-    margin-top: 17px;
+    margin-top: 9px;
     cursor: pointer;
 }
 
@@ -563,14 +563,14 @@ div#contentdivision2 {
 
 #plan-module-outer:hover {
     background-color: #dadada;
-    box-shadow: 0px 2px 5px 5px #2d3467;
+    box-shadow: 0px 1px 5px 2px #2d3467;
 }
 
 #busplan{
     height: 400px;
     width: 441px;
     border: 30px;
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 1px 5px 0px;
     margin-left: -16px;
     cursor: pointer;
     margin-top: 10px;
