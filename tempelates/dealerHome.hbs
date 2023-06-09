@@ -23,10 +23,7 @@
                 <div class="profilediv">
                     <button id="profilebutton"><img id="profileimg" src="/images/profile.png" alt="profileicon">Profile</button>
                 </div>
-
-                <form action="/dealer" class="exitdiv">
-                    <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
-                </form>                                                                                          
+                                                                                      
         </div>
             
         <div id="content">
@@ -127,6 +124,9 @@
                             <input type="hidden" name="planid" value={{email}}>
                             <button class="contentbutton2{{#if plandetail}}active{{/if}}"><i class="fa fa fa-file"></i> PLAN<div id="activestatus2{{#if plancontent}}active{{/if}}"></div></button>
                         </form>
+                          <form action="/dealer" class="exitdiv"> <br>
+                            <button id="exitbutton"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button>
+                        </form>    
                     </div>
                     
                         {{#if busdetail}}

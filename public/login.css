@@ -16,8 +16,9 @@ body{
     margin-top: 10%;
     width: 25%;
     padding: 40px;
-    border-radius: 15px;
+    border-radius: 10px;
     height: 53vh;
+    box-shadow: 0px 1px 5px 0px #7c7e7e;
 }
 
 button#signupbutton {
@@ -31,7 +32,7 @@ button#signupbutton {
     border-style: hidden;
     cursor: pointer;
     font-size: medium;
-    color: #910087;
+    color: #ae006b;
 }
 
 button#signupbutton:hover {
@@ -53,12 +54,22 @@ p#or {
 
 h2#logintxt {
     margin-left: 155px;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-#uname,#pwd{
+h2#logintxt-fpwd,.logintxt-verify {
+    font-size: 22px;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#uname,#pwd,#email,.input-pwd{
     padding: 2%;
     height: 3vh;
-    width: 97%;
+    width: 370px;
     margin-top: 7px;
     border-style: hidden;
     font-size:small;
@@ -67,13 +78,14 @@ h2#logintxt {
     background-color: white;
 }
 
-.outline:focus{
+.outline:focus,.input-opt{
     outline: none;
 }
 
-button#loginbuttom{
+.loginbutton{
     width: 26vh;
     margin-left: 98px;
+    margin-top: 40px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;
@@ -83,7 +95,19 @@ button#loginbuttom{
     box-shadow: 0px 0px 5px 0px #2d3467;
 }
 
-button#loginbuttom:hover {
+.submitbutton{
+    width: 26vh;
+    margin-top: 40px;
+    font-size: medium;
+    height: 5vh;
+    border-radius: 5px;
+    background-color:white;
+    border-style: hidden;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+}
+
+.loginbutton:hover,.submitbutton:hover {
     background-image: linear-gradient(95deg,#5c6074, #2d3464);
     color: white;
 }
@@ -93,28 +117,179 @@ hr#line{
     border-style: outset;
 }
 
-a#fpwd {
+#fpwd {
     margin-left: 280px;
     margin-right: 2px;
     font-size: small;
     cursor: pointer;
+    width: 110px;
+    background: transparent;
+    border-style: none;
+    position: absolute;
+    margin-top: -130px;
 }
 
-a#fpwd:hover{
-    color: red;
+#fpwd:hover{
+    color: #ae006b;
 }
 
-h4#warning {
+.warning {
     padding: 5px;
     display: flex;
     align-items: center;
     border-style: none;
     color: white;
-    background-color: brown;
+    background-color: #ae006b;
     font-size: small;
     width: 370px;
     border-radius: 6px;
     border-color: black;
     margin-bottom: 10px;
     justify-content: center;
+}
+
+#optInput{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 500px;
+}
+
+.input-opt {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 5px;
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+}
+
+.verify-btn {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    border-style: none;
+    background-color: white;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+    color: #2d3467;
+    border: none;
+    margin-top: 35px;
+    margin-left: 60px;
+    border-radius: 5px;
+}
+
+.verify-btn:hover{
+    background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    color: white;
+}
+
+.contentBlock {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    animation: swipeLeft 0.1s ease-in ;
+    width: 400px;
+}
+
+@keyframes swipeLeft {
+  0%,50% {
+    transform: translateX(+100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.p-verify {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* #blockactive {
+    background-color: white;
+    margin-left: 550px;
+    margin-top: 10%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px #7c7e7e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: column;
+} */
+
+#blockactive {
+    background-color: white;
+    margin-left: 550px;
+    margin-right: 496px;
+    margin-top: 10%;
+    padding: 30px;
+    height: 50vh;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px #7c7e7e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.updateBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .dot-pos{
+    position: fixed;
+    text-align:center;
+    margin-top: 355px;
+  }
+
+.invalidcode {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 5px;
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 0px 0px 5px 1px #ae006b;
+}
+
+.input-pwdactive {
+    padding: 2%;
+    height: 3vh;
+    width: 370px;
+    margin-top: 7px;
+    border-style: hidden;
+    font-size: small;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 1px #ae006b;
+}
+
+#cpwd-content{
+    display: flex;
+    flex-direction: column;
 }

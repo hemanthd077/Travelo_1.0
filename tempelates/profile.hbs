@@ -33,7 +33,7 @@
             <div id="contentdivision1">
                 <div id="profile">
                     <img id="profilepic" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" />
-                    <h4 id="username">{{lname}} {{fname}}</h4>
+                    <h4 id="username">{{fname}} {{lname}}</h4>
                 </div><br>
                 
                 <form id="photoinput" action="/photouploads" method="post" enctype="multipart/form-data">
@@ -94,8 +94,8 @@
                 <input class="outline" type="password" placeholder="Type your Password" name="password" id="pwd" required><br>
                 
                 <div id="button-update">
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                    <button type="submit" class="btn"  >Update</button>
+                    <a href="/profile" class="aunchor-close"><button type="button" class="btn cancel">Close</button></a>
+                    <button type="submit" class="btn" href="/updateinfo" >Update</button>
                 </div>
             </form>
         </div>
@@ -109,28 +109,43 @@
         document.getElementById("popupForm").style.display = "block";
         profilecont.style.opacity="0.5"
         profilecont.style.animationDelay="1s"
-        window.onclick = function (event) {
-            if (event.target.className === "popupForm") {
 
-            }
-            else{
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        }
+        document.getElementById('bookingbutton').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('accountbutton').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('exitbutton').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('photoinput').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementsByClassName('update-button').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        
     }
-    function closeForm() {
+    {{!-- function closeForm() {
         document.getElementById("popupForm").style.display = "none";
         document.getElementById("profilecontent").style.opacity="1"
         document.getElementById("profilecontent").style.animationDelay="1s"
-        window.onclick = function (event) {
-            if (event.target.className === "popupForm") {
-                event.stopPropagation();
-                event.preventDefault();
-            }
-            else{
-    
-            }
-        }
-    }
+       
+        document.getElementById('bookingbutton').removeEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('accountbutton').removeEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('exitbutton').removeEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('photoinput').removeEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementsByClassName('update-button').removeEventListener('click', function(event) {
+            event.preventDefault();
+        });
+    } --}}
 </script>

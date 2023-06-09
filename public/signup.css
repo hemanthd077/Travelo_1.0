@@ -20,8 +20,17 @@ body {
     font-family: system-ui;
 }
 
+#loginform-cpwd{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 h2#logintxt {
     margin-left: 140px;
+    background: -webkit-linear-gradient(#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 
@@ -41,7 +50,7 @@ button#loginbutton {
     border-style: hidden;
     cursor: pointer;
     font-size: medium;
-    color: #910087;
+    color: #ae006b;
 }
 
 button#loginbutton:hover {
@@ -52,7 +61,7 @@ button#loginbutton:hover {
     outline: none;
 }
 
-button#signupbuttom{
+button#signupbutton{
     width: 26vh;
     margin-left: 95px;
     font-size: medium;
@@ -65,7 +74,7 @@ button#signupbuttom{
     box-shadow: 0px 1px 5px 0px #2d3467;
 }
 
-button#signupbuttom:hover {
+button#signupbutton:hover {
     color: white;
     background-image: linear-gradient(95deg,#5c6074, #2d3464);
 }
@@ -80,16 +89,16 @@ button#signupbuttom:hover {
 }
 
 
-button#signupbutton,#loginbutton {
+button#signupbutton, #loginbutton {
     display: flex;
-    margin-left: 217px;
-    height: 25px;
-    width: 55px;
-    align-items: center;
-    justify-content: center;
+    margin-left: 132px;
+    height: 30px;
+    width: 115px;
     background-color: transparent;
     border-style: hidden;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 p#or {
@@ -108,7 +117,7 @@ h4#warning {
     align-items: center;
     border-style: none;
     color: white;
-    background-color: brown;
+    background-color: #ae006b;
     font-size: small;
     width: 370px;
     border-radius: 6px;

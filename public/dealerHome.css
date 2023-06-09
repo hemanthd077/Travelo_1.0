@@ -85,16 +85,20 @@ img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
     margin-left: 5px;
 }
 
-.exitdiv {
-    margin-top: 390px;
-    display: flex;
-}
 
 button#exitbutton {
-    margin-left: 15px;
-    background-color: transparent;
+    margin-left: 45px;
     border-style: none;
     cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 5px;
+    font-size: 15px;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 nav#nav {
@@ -166,6 +170,7 @@ div#busname {
     background-color: #dadada;
     border-radius: 5px;
     margin-left: 30px;
+    
 }
 
 input.textinput {
@@ -265,6 +270,7 @@ button#planactive,button#busdetailsactive,button#profileactive{
     cursor: pointer;
     margin-left: 40px;
     font-size: medium;
+    font-weight: 700;
 }
 
 button#planactive {
@@ -347,6 +353,9 @@ h4#username {
     align-items: center;
     padding: 10px;
     position: absolute;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 form#photoinput {
     margin-top: 70px;
@@ -421,6 +430,7 @@ div#contentdivision2 {
     cursor: pointer;
     font-weight: 500;
     font-size: 15px;
+    
 }
 
 .contentbutton1active {
@@ -428,13 +438,14 @@ div#contentdivision2 {
     gap: 10px;
     margin-top: 20px;
     border-style: none;
-    background-color: transparent;
     width: 180px;
     margin-left: 55px;
-    color: #7b014c;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 15px;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .contentbutton2{
@@ -450,7 +461,7 @@ div#contentdivision2 {
 }
 
 .contentbutton2:hover,.contentbutton1:hover{
-   color: #ae006b;
+   color: #2d3467;
 }
 
 .contentbutton2active{
@@ -462,28 +473,11 @@ div#contentdivision2 {
     margin-left: 57px;
     color: #ae006b;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 15px;
-}
-
-#activestatus1active {
-    border-radius: 0px;
-    background-color: #ae006b;
-    width: 3px;
-    height: 25px;
-    position: absolute;
-    margin-left: 168px;
-    margin-top: -4px;
-}
-
-#activestatus2active {
-    border-radius: 0px;
-    background-color: #7b014c;
-    width: 3px;
-    height: 25px;
-    position: absolute;
-    margin-left: 166px;
-    margin-top: -5px;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #searchresultdiv {
@@ -533,10 +527,16 @@ div#contentdivision2 {
 
 #busname{
     cursor: pointer;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #busdelete,#plandelete{
     cursor: pointer;
+    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #plan-module-inner{

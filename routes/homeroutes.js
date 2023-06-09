@@ -7,7 +7,7 @@ router.get('/home',(req,res)=>{
 })
 
 router.get('/exit',(req,res)=>{
-    res.render('login')
+    res.redirect('/')
 })
 
 router.post('/search',booking.getin)

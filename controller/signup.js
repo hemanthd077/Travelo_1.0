@@ -33,7 +33,7 @@ const signup = async (req,res)=>{
 
             validation.insertMany([body])
         
-            res.render('login')            
+            res.redirect('/');            
         }
     }).catch((err)=>{
         console.log(err)

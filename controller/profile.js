@@ -3,6 +3,15 @@ const multer  = require('multer')
 const fs = require('fs');
 const Login = require('../controller/login');
 const userdb = require('../src/mongodb');
+const { log } = require('console');
+const bcrypt = require('bcrypt')
+let alert = require('alert'); 
+
+function casedetective(a){
+    let capFirstLetter = a[0].toUpperCase();
+    let restOfGreeting = a.slice(1).toLowerCase();
+    return newGreeting = capFirstLetter + restOfGreeting; 
+}
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -64,8 +73,15 @@ const profileupload =async(req, res)=>{
 
 const profile = async(req,res)=>{
     
-  await uploaddb.findOne({userid:detailsArray[2]}).then(async(data)=>{
-      res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],data,value:data.profileimage.data.toString('base64'),'control':true})
+    await uploaddb.findOne({userid:detailsArray[2]}).then(async(data)=>{
+        await userdb.findOne({Email:data.userid}).then(async(data1)=>{
+            detailsArray[0] = casedetective(data1.fname);
+            detailsArray[1] = casedetective(data1.lname);
+        }).catch(err=>{
+            console.log(err);
+            console.log("error in fetching userdb data");
+        })
+        res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],data,value:data.profileimage.data.toString('base64'),'control':true})
   }).catch(err=>{
       console.log('image not inserted yet...:'+err)
       res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],'control':true})
@@ -73,11 +89,26 @@ const profile = async(req,res)=>{
 }
 
 const infoUpdate = async(req,res)=>{
-    console.log(req.body.email);
     await userdb.findOne({Email:req.body.email}).then(async(data)=>{
-        console.log(req.body.email);
+        const validpassword = await bcrypt.compare(req.body.password,data.password)
+        if(validpassword){
+            const newvalues ={$set:{fname:req.body.fname,lname:req.body.lname}};
+            const filter = {_id : data._id}
+            const options = { upsert: false };           
+            await userdb.updateOne(filter,newvalues,options,(err , collection) => {
+                if(err){
+                    console.log('error'+err)
+                }
+            })
+            console.log("info updated sucessfully");
+            res.redirect('/profile')
+        }
+        else{
+            console.log("wrong password");
+            alert("wrong password")
+        }
     }).catch(err=>{
-        alert("errorrrr");
+        console.log(err);
     })
 }
 
