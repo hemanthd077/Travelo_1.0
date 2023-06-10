@@ -42,7 +42,7 @@ img#buspic:hover{
 #outer-photo-block {
     position: absolute;
     margin-top: 75px;
-    width: 730px;
+    width: 820px;
     height: 480px;
     background-color: white;
     padding: 30px;
@@ -562,7 +562,7 @@ summary {
 }
 
 /* Fading animation */
-.fade {
+/* .fade {
   animation-name: fade;
   animation-duration: 1s;
   background:black;
@@ -571,7 +571,7 @@ summary {
 @keyframes fade {
   from {opacity: .4} 
   to {opacity: 1}
-}
+} */
 
 #dot{
     display: flex;
@@ -593,14 +593,24 @@ summary {
 
 #busdetail {
     display: flex;
-    width: 764px;
+    width: 850px;
     font-size: 10px;
     align-items: center;
-    /* justify-content: space-around; */
     background-color: lavender;
     padding: 13px;
     border-radius: 10px 10px 0px 0px;
     margin-top: -30px;
+}
+
+button#button-busdetial-plan {
+    margin-left: 33px;
+    width: 1010px;
+    background: transparent;
+    border-style: none;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #plandetail {
@@ -623,7 +633,7 @@ summary {
 }
 
 .bus-name{
-    width: 150px;
+    width: 220px;
     padding-right: 10px;
 }
 
@@ -642,4 +652,13 @@ summary {
 .seat-count,.place-name,.bus-name,.arrow-right{
     display: flex;
     justify-content: center;
+}
+
+button#button-busdetial {
+    width: 765px;
+    background: transparent;
+    border-style: none;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
 }

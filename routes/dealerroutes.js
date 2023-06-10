@@ -21,6 +21,8 @@ router.get('/busdetails',(req,res)=>{
     res.render('dealerHome',{busdetails:true})
 })
 
+
+
 // router.get('/dealerprofile',(req,res)=>{
 //     res.render('dealerHome',{dealerprofile:true});
 // })

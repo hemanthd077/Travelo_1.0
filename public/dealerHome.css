@@ -96,7 +96,13 @@ button#exitbutton {
     font-weight: bold;
     gap: 5px;
     font-size: 15px;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+button#exitbutton:hover{
+    background-image: linear-gradient(275deg,#2d3464, #6e717a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -104,16 +110,14 @@ button#exitbutton {
 nav#nav {
     display: inline-flex;
     height: 40px;
-    width: 400px;
+    width: 440px;
     gap: 20px;
     background-color: white;
     border-radius: 0px 0px 10px 10px;
     align-items: center;
-    margin-left: 480px;
-}
-
-button#plan {
-    width: 40px;
+    margin-left: 460px;
+    justify-content: space-evenly;
+    align-content: center;
 }
 
 button#plan ,button#busdetails,button#profile{
@@ -122,16 +126,7 @@ button#plan ,button#busdetails,button#profile{
     border-style: none;
     color: #2d3467;
     cursor: pointer;
-    margin-left: 40px;
     font-size: medium;
-}
-
-button#busdetails{
-    width: 100px;
-}
-
-button#profile{
-    width: 60px;
 }
 
 #content{
@@ -224,9 +219,10 @@ button#uploadbutton {
 }
 
 p.disclimer {
-    margin-left: 190px;
     margin-top: 40px;
+    display: flex;
     opacity: 80%;
+    justify-content: center;
 }
 
 input.planinputcontent {
@@ -268,21 +264,8 @@ button#planactive,button#busdetailsactive,button#profileactive{
     border-style: none;
     color: #7b014c;
     cursor: pointer;
-    margin-left: 40px;
     font-size: medium;
-    font-weight: 700;
-}
-
-button#planactive {
-    width: 40px;
-}
-
-button#busdetailsactive{
-    width: 100px;
-}
-
-button#profileactive{
-    width: 60px;
+    font-weight: bolder;
 }
 
 input.textinput:focus,input.planinputcontent:focus{
@@ -353,7 +336,7 @@ h4#username {
     align-items: center;
     padding: 10px;
     position: absolute;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -378,7 +361,8 @@ button#savebutton {
 }
 
 button#savebutton:hover,#photodiv:hover{
-    background-image: linear-gradient(95deg, #2d3464, #6e717a);
+    background-color: #5d6175;
+    /* background-image: linear-gradient(95deg, #2d3464, #6e717a); */
     color: white;
 }
 
@@ -410,7 +394,7 @@ label{
     gap: 30px;
 }
 
-div#contentdivision2 {
+.contentdivision2 {
     background-color: white;
     margin-top: 55px;
     border-radius: 10px;
@@ -443,7 +427,7 @@ div#contentdivision2 {
     cursor: pointer;
     font-weight: 700;
     font-size: 15px;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    background-image: linear-gradient(95deg,#2d3464, #6e717a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -471,11 +455,10 @@ div#contentdivision2 {
     border-style: none;
     background-color: transparent;
     margin-left: 57px;
-    color: #ae006b;
     cursor: pointer;
     font-weight: 700;
     font-size: 15px;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    background-image: linear-gradient(95deg,#2d3464, #6e717a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -505,14 +488,15 @@ div#contentdivision2 {
     background-color: #dadada;
 }
 
-#contentdivision2{
+.contentdivision2 {
     display: flex;
     flex-wrap: wrap;
-    gap:35px;
+    gap: 35px;
     overflow: scroll;
+    align-content: flex-start;
 }
 
-#contentdivision2::-webkit-scrollbar {
+.contentdivision2::-webkit-scrollbar {
     display: none;
 }
 
@@ -525,16 +509,17 @@ div#contentdivision2 {
     cursor: pointer;
 }
 
-#busname{
+#bus-name{
     cursor: pointer;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    font-weight: 800;
+    background: -webkit-linear-gradient(95deg,#6e717a, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-#busdelete,#plandelete{
+#bus-name-edit,#plandelete,#busdelete{
     cursor: pointer;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -575,4 +560,171 @@ div#contentdivision2 {
     cursor: pointer;
     margin-top: 10px;
     overflow:hidden;
+}
+
+#slideshow {
+    width: 455px; /* Adjust the width and height according to your images */
+    height: 216px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  #slide {
+    display: none;
+  }
+  
+#contentdivision3{
+    display: flex;
+    flex-wrap: wrap;
+    gap:35px;
+    overflow: scroll;
+}
+
+#contentdivision3::-webkit-scrollbar {
+    display: none;
+}
+
+div#contentdivision3 {
+    background-color: white;
+    margin-top: 55px;
+    border-radius: 10px;
+    padding: 25px;
+    height: 536px;
+    width: 950px;
+    display: flex;
+}
+
+.bus-content {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    width: 1023px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: lavender;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -26px;
+    margin-right: -25px;
+}
+
+#search-div-1 {
+    background-color: white;
+    border-radius: 5px;
+    height: 225px;
+    width: 425px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+}
+
+.delete-btn {
+    margin-left: -125px;
+    position: sticky;
+    margin-top: 0px;
+    background-color: white;
+    width: 95px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 5px 0px 30px;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    cursor: pointer;
+    color: #7b014c;
+}
+
+.img-result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.edit-info-input{
+    padding: 2%;
+    height: 3vh;
+    width: 370px;
+    margin-top: 7px;
+    border-style: hidden;
+    font-size: small;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+}
+
+div#searchresultdiv2 {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 955px;
+    margin-top: 55px;
+    border-radius: 10px;
+    padding: 25px;
+    align-items: center;
+}
+
+#searchresultdiv3 {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    height: 250px;
+    background-color: #5d6175;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 910px;
+}
+
+#edit-content {
+    margin-top: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 15px;
+    color: white;
+}
+
+#edit-info-input,#edit-info-input-1{
+    padding: 2%;
+    height: 3vh;
+    width: 370px;
+    margin-right: 20px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+    border-style: hidden;
+    font-size: small;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+    outline: none;
+}
+
+#buspic-edit {
+    height: 320px;
+    width: 450px;
+    margin-left: 25px;
+    margin-top: 270px;
+    border-radius: 10px;
+    margin-right: 15px;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+}
+
+.savebutton{
+    position: absolute;
+    width: 26vh;
+    margin-left: 150px;
+    margin-top: -240px;
+    font-size: medium;
+    height: 5vh;
+    border-radius: 5px;
+    background-color:white;
+    border-style: hidden;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px #2d3467;
+}
+
+.savebutton:hover{
+    background-color: #5d6175;
+    /* background-image: linear-gradient(95deg, #2d3464, #6e717a); */
+    color: white;
 }

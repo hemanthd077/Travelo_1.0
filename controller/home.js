@@ -10,7 +10,7 @@ function casedetective(a){
 
 let busnamearr = [];
 let buscontent = [];
-
+let date;
 const getin = async(req,res)=>{
     let destination = req.body.destination.toLowerCase();
     const data = await plandetails.find({city:destination})
@@ -18,6 +18,7 @@ const getin = async(req,res)=>{
     source_destination[0] = req.body.source;
     source_destination[1]= req.body.destination;
     source_destination[2]=req.body.date;
+    date=req.body.date;
     source_destination[3] = casedetective(req.body.source);
     source_destination[4] = casedetective(req.body.destination);
 
@@ -89,7 +90,7 @@ const getImg = async(req,res)=>{
             imagecontent[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');
         }
     } 
-    res.render('home',{searchresult:true,image:true,imagecontent,totalDetail});
+    res.render('home',{searchresult:true,image:true,imagecontent,totalDetail,date});
 }
 
 const getplan = async(req,res)=>{
@@ -104,7 +105,7 @@ const getplan = async(req,res)=>{
         const pdfData = data2.planfile.data.toString('base64');
         planpdf = `data:application/pdf;base64,${pdfData.toString('base64')}`;
     })
-    res.render('home',{detailplan:true,planpdf,totalDetail,searchresult:true});
+    res.render('home',{detailplan:true,planpdf,totalDetail,searchresult:true,date});
 }
 
 module.exports = {

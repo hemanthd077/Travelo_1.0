@@ -29,10 +29,10 @@
         <div id="content">
             <nav id="nav">
                 <form action="/plan">
-                    <button id="plan{{#if plan}}active{{/if}}" href="/plan">Plan</button>
+                    <button id="plan{{#if plan}}active{{/if}}" href="/plan">Add Plan</button>
                 </form>
                 <form action="/busdetails">
-                    <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails">Bus Details</button>
+                    <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails">Add Bus</button>
                 </form>
                 <form action="/busdetail">
                     <button id="profile{{#if dealerprofile}}active{{/if}}" href="/dealerprofile">Profile</button>
@@ -64,7 +64,7 @@
                     {{#if disclimerfail}}
                         <p id="status1">{{res}}</p>
                     {{/if}}
-                    <p class="disclimer">NOTE : *The entered date needs to be 100% accurate.otherwise strict action with taken.*</p>
+                    <p class="disclimer">NOTE : *Ensure that the Data is Correct*</p>
                 </div>         
             {{/if}}
 
@@ -130,37 +130,83 @@
                     </div>
                     
                         {{#if busdetail}}
-                            <div id="contentdivision2">    
+                            <div class="contentdivision2">    
                                 {{#each busdetailArray}}
                                     <div id="search-div">
-                                        <div id="searchresultdiv">
-                                            <p style="font-weight: 500; font-size:18px;" id="busname">{{this.[0]}}</p>
-                                            <p style="font-weight: 500; font-size:18px;" id="seats">{{this.[1]}}</p>
-                                            <form action="/busdelete">
-                                                <i id="busdelete" class="fa fa-trash fa-2x" aria-hidden="true"></i>
-                                            </form>
-                                        </div>
-                                        <img  id="buspic" src="data:{{this.[2]}}" alt="Bus Image">
+                                        <form action="/edit-businfo" method="post">
+                                            <div id="searchresultdiv">
+                                                <input type="hidden" name="busname" value="{{this.[0]}}">
+                                                <p style="font-weight: 500; font-size:18px;" id="bus-name">{{this.[0]}}</p>
+                                                <p style="font-weight: 500; font-size:18px;" id="seats">{{this.[1]}}</p>
+                                                <button style="background-color: transparent;border-style:none;" type="submit"><i id="bus-name-edit" class="fas fa-edit fa-2x"></i></button>
+                                            </div>
+                                        </form>
+                                        <form action="/bus-img-details" method="post">
+                                            <input type="hidden" value="{{this.[0]}}" name="busname" >
+                                            <button style="background-color: transparent;border-style:none;" type="submit"><img  id="buspic" src="data:{{this.[2]}}" alt="Bus Image"></button>
+                                        </form>
                                     </div>
                                 {{/each}}
                             </div>
                         {{/if}}
 
                         {{#if plandetail}}
-                            <div id="contentdivision2">
+                            <div class="contentdivision2">
                                 {{#each planArray}}
                                     <div id="plan-module-outer">
                                         <div id="plan-module-inner">
                                             <p style="font-weight: 500; font-size:15px;">City : {{this.[0]}}</p>
                                             <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
-                                            <form action="/plandelete">
-                                                <i id="plandelete" class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                                            <form action="/plandelete" method="post">
+                                                <input type="hidden" name="planindex" value="{{@index}}">
+                                                <button style="background-color: transparent;border-style:none;" type="submit"><i id="plandelete" class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
                                             </form>
                                         </div>
                                         <iframe id="busplan" src="{{this.[2]}}" name="myIframe"></iframe>
                                     </div>
                                 {{/each}}
                               </div>
+                        {{/if}}
+
+                        {{#if busimage}}
+                            <div class="contentdivision2">
+                                <div class="bus-content">
+                                    <p style="font-weight: 500; font-size:18px;" id="busname">{{Busname}}</p>
+                                    <p style="font-weight: 500; font-size:18px;" id="seats">{{Busseat}} Seater</p>
+                                    <form action="/busfull-delete">
+                                        <i id="busdelete" class="fa fa-trash" aria-hidden="true"></i>
+                                    </form>
+                                </div>
+                               <div class="img-result">
+                                    {{#each busimg}}
+                                        <img id="search-div-1" src="data:{{this}}" alt="">
+                                        <form action="/buspic-delete" method="post">
+                                            <input type="hidden" name="busidindex" value="{{@index}}">
+                                            <button style="background-color: transparent;border-style:none;" type="submit"><i class="fa fa-trash delete-btn" aria-hidden="true"></i></button>
+                                        </form>
+                                    {{/each}}
+                                    </form>
+                               </div>
+                            </div>
+                        {{/if}}
+
+                        {{#if editbusinfo}}
+                            <form action="/save-edit" method="post">
+                                <div class="contentdivision2">
+                                    <div id="searchresultdiv3">
+                                        <div id="edit-content">
+                                            <input type="hidden" value="{{busname}}" name="oldbusname">
+                                            <label for="edit-info-input">Busname</label>
+                                            <input id="edit-info-input" type="text" name="busname" value="{{busname}}">
+
+                                            <label for="edit-info-input-1">Seat Count</label>
+                                            <input id="edit-info-input-1" type="text" name="seatcount" value="{{seatCount}}">
+                                        </div>
+                                        <img  id="buspic-edit" src="data:{{img}}" alt="Bus Image">
+                                    </div>
+                                </div>
+                                <button type="submit" class="savebutton" href="/save-edit">Save</button>
+                            </form>
                         {{/if}}
                 </div>          
             {{/if}}

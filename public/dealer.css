@@ -163,6 +163,9 @@ label {
 
 h2#logintxt {
     margin-left: 112px;
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 h4#warning {

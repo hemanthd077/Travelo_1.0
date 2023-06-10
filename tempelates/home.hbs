@@ -110,21 +110,28 @@
                     <div id="outer-photo-block">
                         <div id="busdetail">
                             {{#if totalDetail}}
-                                <div class="bus-name">
-                                    <p style="font-weight: 500; font-size:18px;"><img src="/images/bus.png" alt="seats" style="height: 15px;width: 15px;">  {{totalDetail.[0]}}</p>
-                                </div>
-                                <div class="place-name">
-                                    <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[1]}}</p>
-                                </div>
-                                <div class="arrow-right">
-                                    <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
-                                </div>
-                                <div class="place-name">
-                                    <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[2]}}</p>
-                                </div>
-                                <div class="seat-count">
-                                    <p style="font-weight: 500; font-size:18px;">{{totalDetail.[3]}}seater</p>
-                                </div>
+                                <form action="/search" method="post">
+                                    <input type="hidden" id="from" placeholder="From" name="source" value="{{totalDetail.[1]}}" required>
+                                    <input type="hidden" id="to" placeholder="To" name="destination" value="{{totalDetail.[2]}}" required>
+                                    <input type="hidden" id="calander" name="date" value="{{date}}" required>
+                                    <button type="submit" id="button-busdetial" >
+                                        <div class="bus-name">
+                                            <p style="font-weight: 500; font-size:18px;"><img src="/images/bus.png" alt="seats" style="height: 15px;width: 15px;">  {{totalDetail.[0]}}</p>
+                                        </div>
+                                        <div class="place-name">
+                                            <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[1]}}</p>
+                                        </div>
+                                        <div class="arrow-right">
+                                            <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
+                                        </div>
+                                        <div class="place-name">
+                                            <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[2]}}</p>
+                                        </div>
+                                        <div class="seat-count">
+                                            <p style="font-weight: 500; font-size:18px;">{{totalDetail.[3]}}seater</p>
+                                        </div>
+                                    </button>
+                                </form>
                             {{/if}}
                         </div><br>
                         {{#each imagecontent}}
@@ -148,11 +155,18 @@
                 <div id="fetch-content-maindiv">
                     <div id="plandetail">
                         {{#if totalDetail}}
-                            <p style="font-weight: 500; font-size:20px;"><img src="/images/bus.png" alt="seats" style="height: 20px;width: 25px;">  {{totalDetail.[0]}}</p>
-                            <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[1]}}</p>
-                            <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
-                            <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[2]}}</p>
-                            <p style="font-weight: 500; font-size:20px;">{{totalDetail.[3]}}seater</p>
+                        <form action="/search" method="post">
+                                <input type="hidden" id="from" placeholder="From" name="source" value="{{totalDetail.[1]}}" required>
+                                <input type="hidden" id="to" placeholder="To" name="destination" value="{{totalDetail.[2]}}" required>
+                                <input type="hidden" id="calander" name="date" value="{{date}}" required>
+                                <button type="submit" id="button-busdetial-plan" >
+                                    <p style="font-weight: 500; font-size:20px;"><img src="/images/bus.png" alt="seats" style="height: 20px;width: 25px;">  {{totalDetail.[0]}}</p>
+                                    <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[1]}}</p>
+                                    <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
+                                    <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[2]}}</p>
+                                    <p style="font-weight: 500; font-size:20px;">{{totalDetail.[3]}}seater</p>
+                                </button>
+                            </form>
                         {{/if}}
                     </div><br>
                     <iframe id="planfile" src="{{planpdf}}" frameborder="0"  title="{{totalDetail.[1]}}-{{totalDetail.[2]}}"></iframe>
@@ -163,25 +177,26 @@
 </body>
 
 <script>
-let slideIndex = 0;
-showSlides();
+    let slideIndex = 0;
+    showSlides();
 
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 2000);
+    }
+
 </script>
 
 </html>
