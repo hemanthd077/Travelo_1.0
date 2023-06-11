@@ -13,9 +13,7 @@ router.get('/exit',(req,res)=>{
 
 router.post('/dealerlogin',dealerlogin.dealerlogin)
 
-router.get('/plan',(req,res)=>{
-    res.render('dealerHome',{plan:true})
-})
+router.get('/plan',dealerlogin.dealerbus)
 
 router.get('/busdetails',(req,res)=>{
     res.render('dealerHome',{busdetails:true})

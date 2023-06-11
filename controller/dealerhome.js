@@ -61,13 +61,20 @@ const plandetailsupload = async(req,res)=>{
                     ContentType:'file/pdf'
                 },
             })
+            let busname=[];
+            await busdetails.distinct("busname",{dealerid:dealermail[0]}).then(async(data)=>{
+                for (let index = 0; index < data.length; index++) {
+                    busname[index] = data[index];
+                }
+            })
             newvalues.save().then(()=>{
                 console.log('successfully file uploaded ')
             }).catch(err=>{
                 console.log(err)
-                res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , plan:true})
+                res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , plan:true,busname})
             })
-            res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , plan:true})
+            
+            res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , plan:true,busname})
         }
     })
 
@@ -77,7 +84,7 @@ const busdetailsupload = (req,res)=>{
     upload1(req,res,async(err)=>{
         let files = req.files;
         if(err){
-            console.log(err);
+            res.render('dealerHome',{disclimerfail:true,'res':'Image Limit is 6' , busdetails:true})
         }
         else{
             let imageArray = files.map((file)=>{
@@ -106,7 +113,6 @@ const busdetailsupload = (req,res)=>{
             }
             else{
                 res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , busdetails:true})
-        
             }
         }
     })
@@ -153,7 +159,6 @@ const busdetail = async(req,res)=>{
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
         dealername=data.dealername.toUpperCase();
         let busdetailArray=[];
-        let buspicArray = [];
         await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(detail)=>{
             for (let index = 0; index < detail.length; index++) {
                 let temp = [];
@@ -165,7 +170,12 @@ const busdetail = async(req,res)=>{
                 })
             }
         })
-        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray,buspicArray})
+        if(busdetailArray.length===0){
+            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,flag:true})
+        }
+        else{
+            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray})
+        }
     }).catch(err=>{
         console.log('busdetail not found!!!!'+err)
     })
@@ -192,8 +202,12 @@ const plandetail = async(req,res)=>{
                 planArray[index] = temp; 
             }
         })
-        console.log(planArray.length);
-        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray})
+        if(planArray.length===0){
+            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,flag:true})
+        }
+        else{
+            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray})
+        }
     }).catch(err=>{
         console.log('plan details not found!!!'+err)
     })
@@ -296,8 +310,6 @@ const busImageDelete = (async(req,res)=>{
 })
 
 const busPlanDelete = (async(req,res)=>{
-    console.log("planid:"+req.body.planindex);
-    console.log(planid[req.body.planindex]);
     try {
         let result = await plandetails.deleteOne({ id: planid[req.body.planindex]});
         console.log("Successfully Deleted the Selected Plan.");

@@ -108,6 +108,7 @@
 
         document.getElementById("popupForm").style.display = "block";
         profilecont.style.opacity="0.5"
+        document.getElementById("popupForm").style.zIndex: "2";
         profilecont.style.animationDelay="1s"
 
         document.getElementById('bookingbutton').addEventListener('click', function(event) {
@@ -127,25 +128,5 @@
         });
         
     }
-    {{!-- function closeForm() {
-        document.getElementById("popupForm").style.display = "none";
-        document.getElementById("profilecontent").style.opacity="1"
-        document.getElementById("profilecontent").style.animationDelay="1s"
-       
-        document.getElementById('bookingbutton').removeEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementById('accountbutton').removeEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementById('exitbutton').removeEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementById('photoinput').removeEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementsByClassName('update-button').removeEventListener('click', function(event) {
-            event.preventDefault();
-        });
-    } --}}
+ 
 </script>

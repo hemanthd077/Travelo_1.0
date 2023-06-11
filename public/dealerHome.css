@@ -617,11 +617,10 @@ div#contentdivision3 {
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0px 1px 5px 0px #2d3467;
 }
-
 .delete-btn {
-    margin-left: -125px;
+    margin-left: -115px;
     position: sticky;
-    margin-top: 0px;
+    margin-top: -113px;
     background-color: white;
     width: 95px;
     height: 35px;
@@ -633,11 +632,10 @@ div#contentdivision3 {
     cursor: pointer;
     color: #7b014c;
 }
-
 .img-result {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
 }
 
 .edit-info-input{
@@ -727,4 +725,118 @@ div#searchresultdiv2 {
     background-color: #5d6175;
     /* background-image: linear-gradient(95deg, #2d3464, #6e717a); */
     color: white;
+}
+
+#button-update,#button-update-bus{
+    margin-left: -210px;
+    height: 150px;
+    margin-top: 60px;
+    width: 450px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 3px #2d3467;
+    z-index: 2;
+}
+
+.aunchor-close{
+    text-decoration: none !important;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    background-color: #2aa544;
+    color: #fff;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+.btn:hover{
+    opacity: 1;
+}
+
+.cancel {
+    background-color: #cc0000;
+}
+
+#sure-id{
+    margin-top: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 800;
+    background: -webkit-linear-gradient(95deg,#6e717a, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-yes-no{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+select.textcontent1.textinput {
+    width: 315px;
+    margin-left: 20px;
+    height: 45px;
+    border-radius: 5px;
+    outline: none;
+    border-style: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.text-input{
+    margin-left: 30px;
+}
+
+#txt-nobus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin-left: 600px;
+    flex-wrap: nowrap;
+    margin-top: 310px;
+}
+
+#sademoji::before {
+    color: grey;
+}
+
+#error{
+    font-size: 20px;
+}
+#error1{
+    font-size: 13px;
+}
+
+#searchresultdiv1 {
+    display: flex;
+    flex-direction: column;
+    width: 325px;
+    margin-top: 230px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: -685px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 219px;
+    background-color: white;
 }

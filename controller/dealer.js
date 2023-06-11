@@ -1,5 +1,7 @@
 const validation = require('../src/dealerdb')
 const bcrypt = require('bcrypt')
+const busdetails = require('../src/busDetails')
+
 
 let detailsArray=[];
 
@@ -23,11 +25,25 @@ const dealerlogin = async(req,res)=>{
     })
 }
 
+const dealerbus = (async(req,res)=>{
+    let busname=[];
+    await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(data)=>{
+        for (let index = 0; index < data.length; index++) {
+            busname[index] = data[index];
+        }
+    })
+    res.render('dealerHome',{plan:true,busname})
+
+})
+
+
+
 function dealermail() {
     return detailsArray;
 }
 
 module.exports = {
     dealerlogin,
-    dealermail
+    dealermail,
+    dealerbus,
 };
