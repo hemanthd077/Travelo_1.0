@@ -209,7 +209,7 @@ button#uploadbutton {
     width: 200px;
     height: 40px;
     margin-left: 400px;
-    margin-top: 50px;
+    margin-top: 30px;
     border-radius: 5px;
     background-color: #2d3467;
     color: white;
@@ -219,7 +219,7 @@ button#uploadbutton {
 }
 
 p.disclimer {
-    margin-top: 40px;
+    margin-top: 15px;
     display: flex;
     opacity: 80%;
     justify-content: center;
@@ -517,11 +517,16 @@ label{
     -webkit-text-fill-color: transparent;
 }
 
-#bus-name-edit,#plandelete,#busdelete{
+#bus-name-edit,#plandelete{
     cursor: pointer;
     background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+#busdelete{
+    cursor: pointer;
+    color: white ;
 }
 
 #plan-module-inner{
@@ -563,7 +568,7 @@ label{
 }
 
 #slideshow {
-    width: 455px; /* Adjust the width and height according to your images */
+    width: 455px; 
     height: 216px;
     overflow: hidden;
     cursor: pointer;
@@ -600,13 +605,14 @@ div#contentdivision3 {
     align-content: center;
     width: 1023px;
     flex-wrap: wrap;
-    justify-content: space-evenly;
     align-items: center;
-    background-color: lavender;
+    color: white;
+    background-color: #2d3467;
     height: 50px;
     margin-top: -25px;
     margin-left: -26px;
     margin-right: -25px;
+    justify-content: space-around;
 }
 
 #search-div-1 {
@@ -615,13 +621,14 @@ div#contentdivision3 {
     height: 225px;
     width: 425px;
     border-radius: 5px 5px 5px 5px;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    box-shadow: 0px 1px 5px 3px #2d3467;
 }
-.delete-btn {
+.fa-trash-restore-alt {
     margin-left: -115px;
     position: sticky;
     margin-top: -113px;
-    background-color: white;
+    background-color: #2d3467;
+    color: white;
     width: 95px;
     height: 35px;
     display: flex;
@@ -630,8 +637,13 @@ div#contentdivision3 {
     border-radius: 0px 5px 0px 30px;
     box-shadow: 0px 1px 5px 0px #2d3467;
     cursor: pointer;
+}
+
+.fa-trash-restore-alt:hover{
+    background-color: white;
     color: #7b014c;
 }
+
 .img-result {
     display: flex;
     flex-wrap: wrap;
@@ -723,7 +735,6 @@ div#searchresultdiv2 {
 
 .savebutton:hover{
     background-color: #5d6175;
-    /* background-image: linear-gradient(95deg, #2d3464, #6e717a); */
     color: white;
 }
 
@@ -731,6 +742,25 @@ div#searchresultdiv2 {
     margin-left: -210px;
     height: 150px;
     margin-top: 60px;
+    width: 450px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 3px #2d3467;
+    z-index: 2;
+}
+
+#button-delete-bus {
+    margin-left: -605px;
+    height: 150px;
+    margin-top: 175px;
     width: 450px;
     display: flex;
     flex-direction: row;
@@ -770,17 +800,17 @@ div#searchresultdiv2 {
     background-color: #cc0000;
 }
 
-#sure-id{
+#sure-id {
     margin-top: 30px;
-    font-size: 15px;
     cursor: pointer;
-    font-weight: 800;
+    font-weight: 700;
     background: -webkit-linear-gradient(95deg,#6e717a, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: medium;
 }
 
 #btn-yes-no{
@@ -834,9 +864,127 @@ select.textcontent1.textinput {
     margin-top: 230px;
     padding: 15px;
     border-radius: 10px;
-    margin-left: -685px;
+    margin-left: -700px;
     align-items: center;
     justify-content: center;
     margin-bottom: 219px;
     background-color: white;
+}
+
+a#target-page {
+    display: flex;
+    height: 30px;
+    gap: 7px;
+    text-decoration: none;
+    margin-top: 10px;
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: medium;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
+
+a#target-page-1 {
+    display: flex;
+    height: 30px;
+    gap: 7px;
+    text-decoration: none;
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: medium;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
+
+#target-page:hover,#target-page-1:hover{
+    background: -webkit-linear-gradient(95deg,#6e717a, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+}
+
+
+.fa-chevron-right{
+    margin-top: 5px;
+}
+
+#btn-plus{
+    background-color: transparent;
+    border-style: solid;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#align-addnew {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    background: -webkit-linear-gradient(95deg,#6e717a, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#align-addnew:hover{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#search-div-plus {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    height: 225px;
+    width: 425px;
+    display: flex;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    justify-content: center;
+
+}
+
+button#uploadbutton-1 {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #2d3467;
+    color: white;
+    font-size: medium;
+    border-style: none;
+    cursor: pointer;
+}
+
+#search-div-addimage {
+    background-color: white;
+    border-radius: 5px;
+    height: 225px;
+    width: 425px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#label-addimage {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #2d3467;
+}
+
+#btn-delete-total{
+    margin-left: 150px;
 }

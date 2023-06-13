@@ -24,6 +24,8 @@ router.post('/buspic-delete',dealerlogin.busImageDelete);
 
 router.post('/plandelete',dealerlogin.busPlanDelete);
 
+router.post('/busfull-delete',dealerlogin.busfullDeleteinfo);
+
 
 
 

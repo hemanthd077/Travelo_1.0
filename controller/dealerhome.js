@@ -278,6 +278,7 @@ const updatebusinfo = (async(req,res)=>{
 })
 
 const busImageDelete = (async(req,res)=>{
+    console.log("index:"+req.body.busidindex);
     try {
         let Busname;
         let Busseat;
@@ -319,6 +320,22 @@ const busPlanDelete = (async(req,res)=>{
     }
 })
 
+const busfullDeleteinfo = (async(req,res)=>{
+    console.log(req.body.busname);
+    const filter = {busname:req.body.busname};
+    try {
+        let result1 =  await busdetails.deleteMany(filter);
+        console.log(result1.deletedCount + ' documents deleted in busdatabase');
+        let result2 = await plandetails.deleteMany(filter);
+        console.log(result2.deletedCount + ' documents deleted in plandatabase');
+        console.log("Successfully Deleted the bus detail on plan and bus Database");
+        res.redirect('/busdetail');
+    } catch (error) {
+        console.log("Error occur while deleting totaal businfo in plan and bus DB : "+error);
+    }
+    
+})
+
 
 module.exports = {
     plandetailsupload,
@@ -332,4 +349,5 @@ module.exports = {
     updatebusinfo,
     busImageDelete,
     busPlanDelete,
+    busfullDeleteinfo,
 };

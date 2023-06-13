@@ -58,20 +58,21 @@
                     <div id="imagediv">
                             <label  for="inputTag" id="">
                                 Select Plan <br/>
-                                <i class="fa fa-2x fa-file"></i>
+                                <i class="fas fa-folder-plus fa-2x"></i>
                                 <input id="inputTag" type="file" name="planfile" required/>
                                 <br/>
                             </label>
                         </div>
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
+                    <a id="target-page" href="/plandetail">Go to Plan <i class="fas fa-chevron-right"></i></i></a>
+                    <p class="disclimer">NOTE : PLAN ACCEPT ONLY PDF FORMAT</p>
                     {{#if disclimer}}
                         <p id="status">{{res}}</p>
                     {{/if}}
                     {{#if disclimerfail}}
                         <p id="status1">{{res}}</p>
                     {{/if}}
-                    <p class="disclimer">NOTE : *Ensure that the Bus Details are added.*</p>
                 </div>         
             {{/if}}
 
@@ -94,13 +95,14 @@
                         </div>
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
+                    <a id="target-page" href="/busdetail">Go to Buses <i class="fas fa-chevron-right"></i></a>
+                    <p class="disclimer">NOTE : IMAGE ACCEPT ONLY JPEG OR PNG</p>
                     {{#if disclimer}}
                         <p id="status">{{res}}</p>
                     {{/if}}
                     {{#if disclimerfail}}
                         <p id="status1">{{res}}</p>
                     {{/if}}
-                    <p class="disclimer">NOTE : *Ensure that the Data is Correct*</p>
                 </div>           
             {{/if}}
 
@@ -145,7 +147,7 @@
                                                 <input type="hidden" name="busname" value="{{this.[0]}}">
                                                 <p style="font-weight: 500; font-size:18px;" id="bus-name">{{this.[0]}}</p>
                                                 <p style="font-weight: 500; font-size:18px;" id="seats">{{this.[1]}}</p>
-                                                <button style="background-color: transparent;border-style:none;" type="submit"><i id="bus-name-edit" class="fas fa-edit fa-2x"></i></button>
+                                                <button style="background-color: transparent;border-style:none;" type="submit"><i id="bus-name-edit" class="fas fa-edit"></i></button>
                                             </div>
                                         </form>
                                         <form action="/bus-img-details" method="post">
@@ -154,12 +156,19 @@
                                         </form>
                                     </div>
                                 {{/each}}
+                                <div id="search-div-plus">
+                                    <a href="/busdetails" id="align-addnew" style="outline: none;">
+                                        <button id="btn-plus"><i class="fas fa-plus fa-2x"></i></button>
+                                        <p>Add Bus</p>
+                                    </a>
+                                </div>
                             </div>
                             {{#if flag}}
                                 <div id="searchresultdiv1">
                                    <i id="sademoji" class="fas fa-heart-broken fa-3x"></i>
                                     <h1 id="error">No Buses found on Your Company</h1>
                                     <h1 id="error1">Kindly Add the Buses</h1>
+                                    <a id="target-page-1" href="/busdetails">Go to Add Buses <i class="fas fa-chevron-right"></i></a>
                                 </div>
                             {{/if}}
                         {{/if}}
@@ -171,13 +180,13 @@
                                         <div id="plan-module-inner">
                                             <p style="font-weight: 500; font-size:15px;">City : {{this.[0]}}</p>
                                             <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
-                                            <button style="background-color: transparent;border-style:none;" onclick="openForm()"><i id="plandelete" class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+                                            <button style="background-color: transparent;border-style:none;" onclick="openForm({{@index}})"><i id="plandelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
                                             <form action="/plandelete" method="post">
-                                                <input type="hidden" name="planindex" value="{{@index}}">
+                                                <input id="input2" type="hidden" name="planindex">
                                                 <div id="button-update">
                                                     <p id="sure-id">Are you Sure want to delete?</p>
                                                     <div id="btn-yes-no">
-                                                        <a href="/plandetail" class="aunchor-close"><button type="button" class="btn cancel" onclick="closeForm()">NO</button></a>
+                                                        <a class="aunchor-close"><button type="button" class="btn cancel" onclick="closeForm()">NO</button></a>
                                                         <button type="submit" class="btn" href="/plandelete" >YES</button>
                                                     </div>
                                                 </div>
@@ -190,9 +199,9 @@
                               {{#if flag}}
                                 <div id="searchresultdiv1">
                                     <i id="sademoji" class="fas fa-paper-plane fa-3x"></i>
-                                   {{!-- <i id="sademoji" class="fas fa-heart-broken fa-3x"></i> --}}
                                     <h1 id="error">No Plan found for Your Buses</h1>
                                     <h1 id="error1">Kindly Add the Plan</h1>
+                                    <a id="target-page-1" href="/plan">Go to Add Plan <i class="fas fa-chevron-right"></i></a>
                                 </div>
                             {{/if}}
                         {{/if}}
@@ -200,27 +209,48 @@
                         {{#if busimage}}
                             <div class="contentdivision2">
                                 <div class="bus-content">
-                                    <p style="font-weight: 500; font-size:18px;" id="busname">{{Busname}}</p>
-                                    <p style="font-weight: 500; font-size:18px;" id="seats">{{Busseat}} Seater</p>
-                                    <form action="/busfull-delete">
-                                        <i id="busdelete" class="fa fa-trash" aria-hidden="true"></i>
+                                    <p style="font-weight: 500;font-size: 18px;display: flex;gap: 5px;justify-content: center;align-items: baseline;margin-left:30px" id="busname"><i class="fas fa-bus"></i> Bus Name : {{Busname}}</p>
+                                    <p style="font-weight: 500;font-size: 18px;display: flex;gap: 5px;justify-content: center;align-items: baseline; margin-left:100px" id="seats"><i class="fas fa-couch"></i>Seats: {{Busseat}}</p>
+                                    <button id="btn-delete-total" style="background-color: transparent;border-style:none;margin-left:400px" onclick="openDeletebusform()" ><i id="busdelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
+                                    <form action="/busfull-delete" method="post">
+                                        <input type="hidden" name="busname" value="{{Busname}}">
+                                        <div id="button-delete-bus">
+                                            <p id="sure-id">Are you Sure want to delete?</p>
+                                            <p style="display: flex;align-items: center;font-size: small;justify-content: center;}">NOTE: it will delete both plan and bus details</p>
+                                            <div id="btn-yes-no">
+                                                <a class="aunchor-close"><button type="button" class="btn cancel" onclick="closeDeletebusForm()">NO</button></a>
+                                                <button type="submit" class="btn" href="/busfull-delete" >YES</button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                                <div class="img-result">
                                     {{#each busimg}}
                                         <img id="search-div-1" src="data:{{this}}" alt="">
-                                        <button style="background-color: transparent;border-style:none;" onclick="openbusform()"><i class="fa fa-trash delete-btn" aria-hidden="true"></i></button>
+                                        <button style="background-color: transparent;border-style:none;" onclick="openbusform({{@index}})"><i class="fas fa-trash-restore-alt fa-lg"></i></i></button>
                                         <form action="/buspic-delete" method="post">
-                                            <input type="hidden" name="busidindex" value="{{@index}}">
+                                            <input id="input2" type="hidden" name="busidindex">
                                             <div id="button-update-bus">
-                                                <p id="sure-id">Are you Sure want to delete?</p>
+                                                <p id="sure-id">Are you Sure want to delete  ?</p>
                                                 <div id="btn-yes-no">
-                                                    <a href="/busdetail" class="aunchor-close"><button type="button" class="btn cancel" onclick="closeForm()">NO</button></a>
+                                                    <a  class="aunchor-close"><button type="button" class="btn cancel" onclick="closebusForm()">NO</button></a>
                                                     <button type="submit" class="btn" href="/buspic-delete" >YES</button>
                                                 </div>
                                             </div>
                                         </form>
                                     {{/each}}
+                                    <form  action="/busdetailsupload" method="post" enctype="multipart/form-data">
+                                        <input  type="hidden"  name="busname" value="{{Busname}}">
+                                        <input  type="hidden"  name="seatcount" value="{{Busseat}}">
+                                        <div id="search-div-addimage">
+                                            <label id="label-addimage" for="inputTag">
+                                                Add Image<br/>
+                                                <i class="fas fa-camera-retro fa-2x"></i>
+                                                <input id="inputTag" type="file" name="busimage" multiple required>
+                                                <br/>
+                                            </label>
+                                            <button id="uploadbutton-1" href="/busdetailsupload">Upload</button>
+                                        </div>
                                     </form>
                                </div>
                             </div>
@@ -251,8 +281,10 @@
 </body>
 
 <script>
-    function openForm() {
+    function openForm(index) {
         var profilecont1 = document.getElementById("profilecontent");
+
+        document.getElementById('input2').value = index;
 
         document.getElementById("button-update").style.display = "block";
         profilecont1.style.animationDelay="1s"
@@ -274,12 +306,13 @@
         var profilecont1 = document.getElementById("profilecontent");
 
         document.getElementById("button-update").style.display = "none";
-        profilecont1.style.opacity="0"
         profilecont1.style.animationDelay="1s"
     }
 
-    function openbusform() {
+    function openbusform(index) {
         var profilecont1 = document.getElementById("profilecontent");
+
+        document.getElementById('input2').value = index;
 
         document.getElementById("button-update-bus").style.display = "block";
         profilecont1.style.animationDelay="1s"
@@ -291,7 +324,10 @@
         document.getElementById('nav').addEventListener('click', function(event) {
             event.preventDefault();
         });
-        document.getElementsByClassName('contentdivision2').style.overflow="hidden";
+    }
+
+    function closebusForm(){
+        document.getElementById("button-update-bus").style.display = "none";
     }
 
     function validateForm() {
@@ -310,6 +346,35 @@
             document.getElementById("imagediv").style.color = "#2d3467";
         }
     })
+
+    var plan = document.getElementById("inputTag");
+    plan.addEventListener("input", function() {
+        if (plan.value !== "") {
+            document.getElementById("label-addimage").style.color = "red";
+        } else {
+            document.getElementById("label-addimage").style.color = "#2d3467";
+        }
+    })
+
+    function openDeletebusform(){
+        var profilecont1 = document.getElementById("profilecontent");
+
+        document.getElementById("button-delete-bus").style.display = "block";
+        profilecont1.style.animationDelay="1s"
+        document.getElementById("button-delete-bus").style.opacity="1";
+
+        document.getElementById('contentdivision1').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementById('nav').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+        document.getElementsByClassName('contentdivision2').style.overflow="hidden";
+    }
+
+    function closeDeletebusForm(){
+        document.getElementById("button-delete-bus").style.display = "none";
+    }
 
 </script>
 </html>
