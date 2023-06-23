@@ -23,5 +23,4 @@ router.post('/verify-code',Login.verify_code)
 
 router.post('/update-password',Login.changePassword)
 
-
 module.exports =router;

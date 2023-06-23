@@ -205,7 +205,7 @@ h4#username {
     padding: 10px;
     position: absolute;
     border-left-style: solid;
-    margin-left: 112px;
+    margin-left: 114px;
     border-radius: 0px 5px 5px 0px;
     box-shadow: 2px 1px 5px 0px #2d3467;
 }
@@ -373,3 +373,11 @@ label{
       transform: scale(0.98);
     }
 } */
+
+h4#email::-webkit-scrollbar {
+    display: none;
+}
+
+h4#email{
+    overflow: scroll;
+}

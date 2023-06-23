@@ -40,7 +40,7 @@ button#signupbutton:hover {
 }
 
 p#or {
-    margin-top: 25px;
+    margin-top: 55px;
     margin-left: 140px;
     font-size: small;
 }
@@ -85,7 +85,7 @@ h2#logintxt-fpwd,.logintxt-verify {
 .loginbutton{
     width: 26vh;
     margin-left: 98px;
-    margin-top: 40px;
+    margin-top: 45px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;
@@ -126,7 +126,7 @@ hr#line{
     background: transparent;
     border-style: none;
     position: absolute;
-    margin-top: -130px;
+    margin-top: -165px;
 }
 
 #fpwd:hover{
@@ -135,6 +135,7 @@ hr#line{
 
 .warning {
     padding: 5px;
+    position: absolute;
     display: flex;
     align-items: center;
     border-style: none;
@@ -144,10 +145,10 @@ hr#line{
     width: 370px;
     border-radius: 6px;
     border-color: black;
+    margin-top: 235px;
     margin-bottom: 10px;
     justify-content: center;
 }
-
 #optInput{
     display: flex;
     justify-content: center;

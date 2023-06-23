@@ -30,7 +30,7 @@
             <nav id="nav">
                 <form action="/plan">
 
-                    <button id="plan{{#if plan}}active{{/if}}" href="/plan">Add Plan</button>
+                    <button id="plan{{#if plan}}active{{/if}}" href="/plan">Add Itinerary</button>
                 </form>
                 <form action="/busdetails">
                     <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails">Add Bus</button>
@@ -57,7 +57,7 @@
                     </div>
                     <div id="imagediv">
                             <label  for="inputTag" id="">
-                                Select Plan <br/>
+                                Select Itinerary <br/>
                                 <i class="fas fa-folder-plus fa-2x"></i>
                                 <input id="inputTag" type="file" name="planfile" required/>
                                 <br/>
@@ -65,8 +65,8 @@
                         </div>
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
-                    <a id="target-page" href="/plandetail">Go to Plan <i class="fas fa-chevron-right"></i></i></a>
-                    <p class="disclimer">NOTE : PLAN ACCEPT ONLY PDF FORMAT</p>
+                    <a id="target-page" href="/plandetail">Go to Itinerary <i class="fas fa-chevron-right"></i></i></a>
+                    <p class="disclimer">NOTE : Itinerary ACCEPT ONLY PDF FORMAT</p>
                     {{#if disclimer}}
                         <p id="status">{{res}}</p>
                     {{/if}}
@@ -93,6 +93,7 @@
                                 <br/>
                             </label>
                         </div>
+                        <input type="hidden" name="flag" id="0">
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
                     <a id="target-page" href="/busdetail">Go to Buses <i class="fas fa-chevron-right"></i></a>
@@ -131,7 +132,7 @@
                         </form>
                         <form action="/plandetail">
                             <input type="hidden" name="planid" value={{email}}>
-                            <button class="contentbutton2{{#if plandetail}}active{{/if}}"><i class="fa fa fa-file"></i> PLAN<div id="activestatus2{{#if plancontent}}active{{/if}}"></div></button>
+                            <button class="contentbutton2{{#if plandetail}}active{{/if}}"><i class="fa fa fa-file"></i> ITINERARY<div id="activestatus2{{#if plancontent}}active{{/if}}"></div></button>
                         </form>
                           <form action="/dealer" class="exitdiv"> <br>
                             <button id="exitbutton"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button>
@@ -198,16 +199,16 @@
                                 <div id="plan-module-outer-1">
                                     <a href="/plan" id="align-addnew" style="outline: none;">
                                         <button id="btn-plus-1"><i class="fas fa-file-pdf fa-2x"></i></button>
-                                        <p>Add Plan</p>
+                                        <p>Add Itinerary</p>
                                     </a>
                                 </div>
                               </div>
                               {{#if flag}}
                                 <div id="searchresultdiv1">
                                     <i id="sademoji" class="fas fa-paper-plane fa-3x"></i>
-                                    <h1 id="error">No Plan found for Your Buses</h1>
-                                    <h1 id="error1">Kindly Add the Plan</h1>
-                                    <a id="target-page-1" href="/plan">Go to Add Plan <i class="fas fa-chevron-right"></i></a>
+                                    <h1 id="error">No Itinerary found for Your Buses</h1>
+                                    <h1 id="error1">Kindly Add the Itinerary</h1>
+                                    <a id="target-page-1" href="/plan">Go to Add Itinerary <i class="fas fa-chevron-right"></i></a>
                                 </div>
                             {{/if}}
                         {{/if}}
@@ -222,7 +223,7 @@
                                         <input type="hidden" name="busname" value="{{Busname}}">
                                         <div id="button-delete-bus">
                                             <p id="sure-id">Are you Sure want to delete?</p>
-                                            <p style="display: flex;align-items: center;font-size: small;justify-content: center;}">NOTE: it will delete both plan and bus details</p>
+                                            <p style="display: flex;align-items: center;font-size: small;justify-content: center;}">NOTE: it will delete both itinerary and bus details</p>
                                             <div id="btn-yes-no">
                                                 <a class="aunchor-close"><button type="button" class="btn cancel" onclick="closeDeletebusForm()">NO</button></a>
                                                 <button type="submit" class="btn" href="/busfull-delete" >YES</button>
@@ -248,6 +249,7 @@
                                     <form  action="/busdetailsupload" method="post" enctype="multipart/form-data">
                                         <input  type="hidden"  name="busname" value="{{Busname}}">
                                         <input  type="hidden"  name="seatcount" value="{{Busseat}}">
+                                        <input type="hidden" name="flag" value="1">
                                         <div id="search-div-addimage">
                                             <label id="label-addimage" for="inputTag">
                                                 Add Image<br/>

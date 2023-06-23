@@ -9,10 +9,11 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     port: 465,
+    secure:true,
     auth: {
       user: 'traveloindia01@gmail.com',
       pass: 'xnxzxcsuxtidzkvk'
-    }
+    },
   });
 
 let detailsArray=[];
@@ -59,7 +60,7 @@ const fpass_nodemail=(async(req,res)=>{
         // Generate a token
         const payload = { userId: generate()};
         const secretKey = 'your_valid_secret_key';
-        const options = { expiresIn: '1h' }; // Token expiration time
+        const options = { expiresIn: '60s' }; // Token expiration time
 
         token = jwt.sign(payload, secretKey, options);
         const decodedToken = jwt.decode(token);
@@ -74,7 +75,7 @@ const fpass_nodemail=(async(req,res)=>{
         }
 
         const mailOptions = {
-            from: 'hemanth8356@gmail.com',
+            from: 'traveloindia01@gmail.com',
             to: data.Email,
             subject: 'verification code',
             html:'<!DOCTYPE html> <html> <head> <title>Email Verification Code</title> <style> body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; } .container { max-width: 500px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); } h1 { text-align: center; color: #333; } p { line-height: 1.5; margin-bottom: 20px; } .verification-code { text-align: center; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 30px; } .button { display: inline-block; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: background-color 0.3s; } .button:hover { background-color: #0056b3; } .footer { text-align: center; color: #777; font-size: 14px; margin-top: 40px; } </style> </head> <body> <div class="container"> <h1>Email Verification</h1> <p>Forgot Password! Please verify your email address by entering the verification code below:</p> <p class="verification-code">'+usercode+'</p> <p>If you did not request this verification code, you can safely ignore this email.</p> <p> If you have any questions or need further assistance, please contact our support team at <a href="mailto:traveloindia01@gmail.com">TraveloIndia</a>. </p> <p> To verify your email, click the button below: </p> <p> <a class="button" href="http://localhost:8080/">Login</a> </p> <p class="footer"> This email is automatically generated. Please do not reply to this message. </p> </div> </body> </html>',
@@ -99,9 +100,6 @@ const verify_code = (async(req,res)=>{
     let code_string = req.body.index0+""+req.body.index1+""+req.body.index2+""+req.body.index3+""+req.body.index4;
     let enterCode = parseInt(code_string, 10);
     if(usercode ===enterCode){
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
         res.render('login',{changepwd:true,email:detailsArray[2]})
         console.log("verifcation:"+detailsArray[2]);
     }

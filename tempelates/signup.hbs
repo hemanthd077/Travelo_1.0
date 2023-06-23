@@ -29,15 +29,15 @@
             
             <label for="confirmPassword">Confirm Password</label>
             <input class="outline" type="password" placeholder="Re-enter the Password" name="confirmPassword" id="pwd" required>
-            <hr id="line" style="width:97%;text-align:left;margin-left:0;">
+            <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
             
             {{#if control}}
                     <h4 id="warning">{{res}}</h4>
             {{/if}}
 
-            <br><button type="submit" id="signupbutton" href="/signup">Sign Up</button><br>     
+            <br><button type="submit" id="signupbutton" href="/signup">Sign Up</button>   
             
-           <p id="or">Already have an account</p>
+           <br><p id="or">Already have an account</p>
         </form>
         <form action="/login">
             <button id="loginbutton" href="/login">Login</button>

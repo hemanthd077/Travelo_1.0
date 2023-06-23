@@ -60,6 +60,7 @@
                             <p id="destination-place-1">{{source_destination.[4]}}<input type="hidden" id="to" placeholder="To" name="destination" value="{{source_destination.[0]}}" required></p>
                         </div>
                             <input type="hidden" id="calander" name="date" value="{{source_destination.[2]}}" required>
+                            
                         </form>
                     {{/if}}
                 </nav>
@@ -89,7 +90,7 @@
                                     <input type="hidden" name="source" value={{this.[2]}}>
                                         <input type="hidden" name="destination" value={{this.[3]}}>
                                         <input type="hidden" name="planid" value={{@index}}>
-                                        <button type="submit" id="plan" href="/busplan"><i class="fa fa-file" aria-hidden="true"></i> Plan</button>
+                                        <button type="submit" id="plan" href="/busplan"><i class="fa fa-file" aria-hidden="true"></i> Itinerary</button>
                                     </form>
                                 </div>
                             </div>

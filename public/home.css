@@ -141,7 +141,6 @@ button#exitbutton {
 }
 
 p#fromtext,p#totext {
-    background-color: #dadada;
     padding: 10px;
     border-radius: 5px;
     display: inherit;
@@ -153,7 +152,6 @@ input#from{
     width: 275px;
     border-style: none;
     margin-left: 10px;
-    background-color: #dadada;
 }
 
 input#from:focus , input#to:focus{
@@ -166,7 +164,6 @@ input#to {
     margin-left: 23px;
     border-style: none;
     margin-left: 10px;
-    background-color: #dadada;
 }
 
 img#city {
@@ -181,7 +178,6 @@ input#calander {
     border-style: none;
     height: 25px;
     margin-top: 25px;
-    background-color: #dadada;
     box-shadow: 0px 1px 5px 0px #2d3467;
 }
 
@@ -191,6 +187,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    color: red;
 }
 
 input#calander:focus{
@@ -661,4 +658,12 @@ button#button-busdetial {
     display: flex;
     cursor: pointer;
     align-items: center;
+}
+
+#calendar-icon{
+    position: absolute;
+    margin-left: 12px;
+    margin-top: 170px;
+    color: #2d3464;
+    cursor: pointer;
 }

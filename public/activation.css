@@ -1,0 +1,108 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    background-color: #009ba9;
+}
+
+video {
+    height: 745px;
+    position: absolute;
+    width: 990px;
+    margin-left: 125px;
+}
+
+div#block-1{
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 745px;
+    align-items: center;
+    background-color: white;
+    /* border-radius: 0px 25px 25px 0px; */
+    position: relative;
+    animation: myfirst 2s 1;
+    animation-direction: alternate;
+    /* height: 705px;
+    margin-top: 20px;
+    margin-bottom: 20px; */
+}
+
+@keyframes myfirst {
+  0%   {left: -320px; top: 0px;}
+  100% {left: 0px; top: 0px;}
+}
+
+#p-content {
+    margin-top: 130px;
+    padding: 29px;
+    font-size: 21px;
+    font-weight: 700;
+}
+#disclimer-openmail {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #7b014c;
+}
+
+#main_block{
+    display: flex;
+    flex-direction: row;
+}
+
+div#block-2 {
+    width: 1216px;
+    height: 745px;
+    background-color: #009ba9;
+}
+
+#button {
+    width: 170px;
+    height: 40px;
+    color: white;
+    background: #007bff;
+    border-radius: 5px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 19px;
+}
+
+#button:hover{
+    background-color: #0056b3;
+}
+
+#img-applogo {
+    margin-top: 40px;
+    width: 170px;
+}
+
+#down-arrow-img{
+    height: 40px;
+    width: 50px;
+}
+
+#content-over-video {
+    margin-left: 350px;
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    font-weight:bolder;
+    font-size: 36px;
+    color: white;
+    margin-top: 325px;
+    animation: mysecond 4s 1;
+    animation-direction: alternate;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes mysecond {
+    0%   {opacity: 0%;}
+    40% {opacity: 0%;}
+    100% {opacity: 100%;}
+  }

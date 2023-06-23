@@ -109,7 +109,22 @@ const busdetailsupload = (req,res)=>{
                         console.log('successfully uploaded '+(index+1)+' photo')
                     }).catch(err=>console.log(err))
                 })
-                res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , busdetails:true})
+                if(req.body.flag==="1"){
+                    await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
+                        dealername=data.dealername.toUpperCase();
+                        let busimg = [];
+                        await busdetails.find({busname:req.body.busname}).then(async(data1)=>{
+                            for (let index = 0; index < data1.length; index++) {
+                                busid[index] = data1[index].id;
+                                busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
+                            }
+                        })
+                        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname:req.body.busname,Busseat:req.body.seatcount,'busimage':true})
+                    })
+                }
+                else{
+                    res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , busdetails:true})
+                }
             }
             else{
                 res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , busdetails:true})
@@ -300,7 +315,7 @@ const busImageDelete = (async(req,res)=>{
                     busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
                 }
             })
-            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true})
+            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true,dealerid:data.dealerid})
         }).catch(err=>{
             console.log('Bus Image details not found!!!'+err);
         })
