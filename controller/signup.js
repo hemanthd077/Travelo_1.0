@@ -95,7 +95,6 @@ const verify = async (req,res)=>{
                 ContentType:'image/png'
             },
         })
-
         validation.findOne({Email : arr[0].Email}).then(async(data)=>{
             if(data){
                 console.log("User already Exist so redirect to login.");

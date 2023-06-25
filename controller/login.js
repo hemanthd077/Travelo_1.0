@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const async = require('hbs/lib/async');
-
+const fs = require('fs');
+const mime = require('mime');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -73,12 +74,81 @@ const fpass_nodemail=(async(req,res)=>{
         } else {
         console.log('User ID:', usercode);
         }
-
+        
         const mailOptions = {
             from: 'traveloindia01@gmail.com',
             to: data.Email,
             subject: 'verification code',
-            html:'<!DOCTYPE html> <html> <head> <title>Email Verification Code</title> <style> body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; } .container { max-width: 500px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); } h1 { text-align: center; color: #333; } p { line-height: 1.5; margin-bottom: 20px; } .verification-code { text-align: center; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 30px; } .button { display: inline-block; background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: background-color 0.3s; } .button:hover { background-color: #0056b3; } .footer { text-align: center; color: #777; font-size: 14px; margin-top: 40px; } </style> </head> <body> <div class="container"> <h1>Email Verification</h1> <p>Forgot Password! Please verify your email address by entering the verification code below:</p> <p class="verification-code">'+usercode+'</p> <p>If you did not request this verification code, you can safely ignore this email.</p> <p> If you have any questions or need further assistance, please contact our support team at <a href="mailto:traveloindia01@gmail.com">TraveloIndia</a>. </p> <p> To verify your email, click the button below: </p> <p> <a class="button" href="http://localhost:8080/">Login</a> </p> <p class="footer"> This email is automatically generated. Please do not reply to this message. </p> </div> </body> </html>',
+            html:`<!DOCTYPE html> 
+            <html> 
+              <head> 
+                <title>Email Verification Code</title>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+                <style>
+                  body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f0f0f0;
+                    padding: 20px;
+                    display:flex;
+                    flex-direction:colomn
+                  } 
+                  .container {
+                      max-width: 500px;
+                      margin: 0 auto;
+                      background-color: #fff;
+                      padding: 30px;
+                      border-radius: 5px;
+                      border: 1px solid gainsboro;
+                  }  
+                  svg {
+                      margin-left: -30px;
+                      width: 560px;
+                      margin-top: 90px;
+                      position: absolute;
+                  } 
+                  h1 {
+                    z-index: 2;
+                    margin-top: -30px;
+                    text-align: center;
+                    color: #007bff;
+                    position: relative;
+                  } 
+                  p {
+                      line-height: 1.5;
+                  } 
+                  .verification-code {
+                    text-align: center;
+                    font-size: 28px;
+                    margin-bottom: -15px;
+                    font-weight: bold;
+                    margin-top: -5px;
+                }
+                  .footer {
+                      text-align: center;
+                      color: #777;
+                      font-size: 14px;
+                      margin-top: 20px;
+                  } 
+                </style> 
+              </head>
+              
+              <body style="font-family:'Montserrat', sans-serif;">
+                <div class="container">
+                    <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                        <tr>
+                            <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AFGJ81ohz6q6b-L-4vqvsvgkNZ6I2AD6Igskizea3c3e4bwj76ph5U0dulnF9tclQQuSsgM4x1S-x8UcrXgYu7yky1G4f65qLQ=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td>
+                        </tr>
+                    </table>
+                    <h1>Email Verification</h1>
+                    <p>Forgot Password! Please verify your email address by entering the verification code:</p>
+                    <p class="verification-code">${usercode}</p>
+                    <p>If you did not request this verification code, you can safely ignore this email.If you have any questions or need further assistance, please contact our support team at <a href="mailto:traveloindia01@gmail.com">TraveloIndia</a>. </p>
+                    <p class="footer"> This email is automatically generated. Please do not reply to this message.</p>
+                    <p style="text-align: center;color: #777;font-size: 11px;font-weight: 600;">&#169; Copyrighted 2023 </p>
+                </div>
+              </body>
+        </html>`,
             text: 'Your authentication token:'+ usercode
         };
 
