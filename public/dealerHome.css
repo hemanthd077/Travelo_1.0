@@ -3,11 +3,16 @@
     margin: 0px;
 }
 
+body{
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
+}
+
 #main{
     background-image: url("./images/mainbackground.png");
     background-repeat: no-repeat;
     height: 100vh;
-    font-family: system-ui;
 }
 
 #homenavbar {
@@ -16,6 +21,11 @@
     background-color: white;
     border-radius: 0%;
     -webkit-border-radius: 0px 25px 25px 0px;
+}
+
+form.exitdiv {
+    margin-top: 300px;
+    margin-left: -20px;
 }
 
 #appicon {
@@ -27,11 +37,6 @@
 
 #main{
     display: flex;
-}
-.bookingdiv,.accountdiv,.profilediv {
-    display: inline-flex;
-    align-items: end;
-    margin-top: 20px;
 }
 
 .accountdiv{
@@ -66,25 +71,42 @@ button#accountbutton{
 
 }
 
-button#profilebutton{
+button#profile,button#plan,button#busdetails {
     height: 40px;
-    width: 159px;
+    width: 179px;
     border-style: none;
     background-color: transparent;
     font-size: 17px;
     display: inline-flex;
+    column-gap: 20px;
+    margin-top: 25px;
+    border-radius: 10px 0px 0px 10px;
     align-items: center;
-    margin-left: 15px;
-    column-gap: 10px;
+    padding-left: 30px;
+    cursor: pointer;
 }
 
-
-img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
+button#profile:hover,button#plan:hover,button#busdetails:hover{
+    background-image: linear-gradient(95deg,#2d3464, #6e717a);
+    color: white;
+    opacity: 80%;
 }
 
+button#profileactive,button#planactive,button#busdetailsactive {
+    height: 40px;
+    width: 179px;
+    border-style: none;
+    background-image: linear-gradient(95deg,#2d3464, #6e717a);
+    font-size: 17px;
+    color: #FFFFFF;
+    display: inline-flex;
+    column-gap: 20px;
+    margin-top: 25px;
+    border-radius: 10px 0px 0px 10px;
+    align-items: center;
+    padding-left: 30px;
+    cursor: pointer;
+}
 
 button#exitbutton {
     margin-left: 45px;
@@ -120,15 +142,6 @@ nav#nav {
     align-content: center;
 }
 
-button#plan ,button#busdetails,button#profile{
-    height: 25px;
-    background-color: transparent;
-    border-style: none;
-    color: #2d3467;
-    cursor: pointer;
-    font-size: medium;
-}
-
 #content{
     display: flex;
     flex-direction: column;
@@ -136,10 +149,10 @@ button#plan ,button#busdetails,button#profile{
 
 div#plan {
     background-color: white;
-    height: 450px;
+    height: 500px;
     width: 1000px;
     margin-left: 170px;
-    margin-top: 25px;
+    margin-top: 70px;
     padding: 20px;
     border-radius: 10px;
 }
@@ -148,12 +161,11 @@ div#busdetails {
     padding: 20px;
     background-color: white;
     margin-left: 170px;
-    margin-top: 25px;
+    margin-top: 70px;
     width: 1000px;
-    height: 450px;
+    height: 500px;
     border-radius: 10px;
     font-size: medium;
-    font-family: system-ui;
 }
 
 div#busname {
@@ -258,16 +270,6 @@ p.plantextcontent {
     margin-left: 22px;
 }
 
-button#planactive,button#busdetailsactive,button#profileactive{
-    height: 25px;
-    background-color: transparent;
-    border-style: none;
-    color: #7b014c;
-    cursor: pointer;
-    font-size: medium;
-    font-weight: bolder;
-}
-
 input.textinput:focus,input.planinputcontent:focus{
     outline: none;
 }
@@ -312,7 +314,7 @@ div#contentdivision1 {
     margin-top: 55px;
     border-radius: 10px;
     padding: 25px;
-    height: 536px;
+    height: 580px;
     width: 200px;
     margin-left: 40px;
 }
@@ -399,7 +401,7 @@ label{
     margin-top: 55px;
     border-radius: 10px;
     padding: 25px;
-    height: 536px;
+    height: 580px;
     width: 950px;
 }
 
@@ -480,6 +482,7 @@ label{
     border-radius: 5px;
     height: 225px;
     width: 425px;
+    margin-top: 15px;
     box-shadow: 0px 1px 5px 0px #2d3467;
 }
 
@@ -618,24 +621,24 @@ div#contentdivision3 {
 #search-div-1 {
     background-color: white;
     border-radius: 5px;
-    height: 225px;
-    width: 425px;
-    border-radius: 5px 5px 5px 5px;
+    height: 245px;
+    width: 435px;
     box-shadow: 0px 1px 5px 3px #2d3467;
 }
+
 .fa-trash-restore-alt {
-    margin-left: -115px;
+    margin-left: -110px;
     position: sticky;
-    margin-top: -113px;
-    background-color: #2d3467;
-    color: white;
+    margin-top: -122px;
+    background-color: #dadada;
+    color: #2d3467;
     width: 95px;
     height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0px 5px 0px 30px;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    box-shadow: 0px 1px 5px -1px #2d3467;
     cursor: pointer;
 }
 
@@ -647,7 +650,7 @@ div#contentdivision3 {
 .img-result {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
 }
 
 .edit-info-input{
@@ -952,6 +955,7 @@ a#target-page-1 {
     background-color: white;
     padding: 15px;
     border-radius: 5px;
+    margin-top: 15px;
     height: 225px;
     width: 425px;
     display: flex;
@@ -974,8 +978,8 @@ button#uploadbutton-1 {
 #search-div-addimage {
     background-color: white;
     border-radius: 5px;
-    height: 225px;
-    width: 425px;
+    height: 245px;
+    width: 435px;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0px 1px 5px 0px #2d3467;
     display: flex;

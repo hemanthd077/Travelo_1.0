@@ -4,8 +4,11 @@
 }
 
 body{
-    background-color: #009ba9;
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+    /* background-color: #009ba9; */
+    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
 }
 
 video {
@@ -65,8 +68,9 @@ div#block-2 {
 #button {
     width: 170px;
     height: 40px;
-    color: white;
-    background: #007bff;
+    /* color: white;
+    background: #007bff; */
+    box-shadow: 0px 0px 5px -2px rgb(0, 0, 0.1);
     border-radius: 5px;
     border-style: none;
     cursor: pointer;
@@ -74,7 +78,8 @@ div#block-2 {
 }
 
 #button:hover{
-    background-color: #0056b3;
+    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+    color: white;
 }
 
 #img-applogo {
@@ -88,28 +93,31 @@ div#block-2 {
 }
 
 #content-over-video {
-    margin-left: 350px;
+    margin-left: 140px;
     display: flex;
     position: absolute;
     z-index: 2;
-    font-weight:bolder;
-    font-size: 36px;
-    color: white;
-    margin-top: 325px;
-    animation: mysecond 4s 1;
+    font-weight: bolder;
+    font-size: 27px;
+    color: #FFFFFF;
+    margin-top: 250px;
+    animation: mysecond 3s 1;
     animation-direction: alternate;
     flex-direction: column;
     align-items: center;
+    padding: 40px;
+    border-radius: 10px;
 }
 
 @keyframes mysecond {
     0%   {opacity: 0%;}
     40% {opacity: 0%;}
-    100% {opacity: 100%;}
+    100% {opacity: 100%;;}
   }
 
-  #app-name,.fa-route{
-    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+  #app-name{
+    font-size: 90px;
+    background: url('https://img.freepik.com/free-photo/beautiful-cliff-landscape_23-2150540397.jpg?t=st=1688111917~exp=1688112517~hmac=59a0b6642eacf3c1dfc34600cff313292ad14e7821a5f3b048aa1b8a4c38124e&w=1380');
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

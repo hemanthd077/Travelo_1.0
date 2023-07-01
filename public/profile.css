@@ -7,7 +7,9 @@ body{
     background-repeat: no-repeat;
     background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     height: 100vh;
-    font-family: system-ui;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
 }
 
 #homenavbar {
@@ -22,12 +24,6 @@ body{
     border-radius: 10px 0px 0px 10px;
     background-color: #dadada;
 }
-
-.accountdiv:hover {
-    border-radius: 10px 0px 0px 10px;
-    background-color: #dadada;
-}
-
 #appicon {
     height: 80px;
     width: 130px;
@@ -54,19 +50,7 @@ button#bookingbutton{
     align-items: center;
     margin-left: 15px;
     column-gap: 10px;
-    cursor: pointer;
-}
-
-button#accountbutton{
-    height: 40px;
-    width: 159px;
-    border-style: none;
-    background-color: transparent;
-    font-size: 17px;
-    display: inline-flex;
-    align-items: center;
-    margin-left: 15px;
-    column-gap: 10px;
+    padding-left: 20px;
     cursor: pointer;
 }
 
@@ -80,6 +64,7 @@ button#profilebutton{
     align-items: center;
     margin-left: 15px;
     column-gap: 10px;
+    padding-left: 20px;
     cursor: pointer;
     color: white;
 }
@@ -94,13 +79,28 @@ img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
 .exitdiv {
     margin-top: 390px;
     display: flex;
+    margin-left: -10px;
 }
 
 button#exitbutton {
-    margin-left: 15px;
-    background-color: transparent;
+    margin-left: 45px;
     border-style: none;
     cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    gap: 5px;
+    font-size: 18px;
+    background-image: linear-gradient(275deg,#2d3464, #6e717a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+button#exitbutton:hover{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .profilediv {
@@ -135,16 +135,24 @@ div#usercontent{
 h2 {
     font-size: 14px;
     color: black;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+h4{
+    font-size: 18px;
+    font-weight: 500;
 }
 
 #fname, #lname, #mail {
     padding: 15px;
-    width: 290px;
-    height: 40px;
+    width: 325px;
+    height: 50px;
     background-color: #dadada;
     border-radius: 5px;
     display: flex;
     box-shadow: 0px 1px 5px 0px #2d3467;
+    color: #2d3467;
     flex-direction: column;
     justify-content: center;
 }
@@ -161,9 +169,8 @@ div#contentdivision2 {
     height: 500px;
     margin-top: 100px;
     border-radius: 10px;
-    margin-right: 65px;
     margin-left: 20px;
-    width: 700px;
+    width: 770px;
     background-color: white;
 }
 
@@ -190,7 +197,7 @@ div#contentdivision1 {
     padding: 25px;
     height: 450px;
     width: 390px;
-    margin-left: -3px;
+    margin-left: -40px;
 }
 
 h4#username {
@@ -218,7 +225,7 @@ form#photoinput {
 button#savebutton {
     margin-top: 20px;
     width: 212px;
-    font-size: medium;
+    font-size: 18px;
     height: 5vh;
     border-radius: 5px;
     background-color: #dadada;
@@ -380,4 +387,8 @@ h4#email::-webkit-scrollbar {
 
 h4#email{
     overflow: scroll;
+}
+
+.fa-edit{
+    color: #2d3467;
 }

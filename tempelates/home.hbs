@@ -5,27 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
         <div id="homenavbar">
                 <img id="appicon" src="/images/homelogo.png" alt="logo">
                 <div class="bookingdiv">
-                    <button id="bookingbutton" href="/home" ><img id="bookingimg" src="/images/bookingcolour.png" alt="homeicon">Booking</button>
+                    <button id="bookingbutton" href="/home" ><i class="fas fa-clipboard-check fa-lg"></i> Booking</button>
                 </div>
 
-                <form action="/dealer" class="accountdiv" >
-                    <button id="accountbutton" href="/dealer"> <img id="accountimg" src="/images/dealer.png" alt="dealericon">Dealer</button>
-                </form>
-
                 <form action="/profile"  class="profilediv">
-                    <button id="profilebutton" href="/profile"><img id="profileimg" src="/images/profile.png" alt="profileicon">Profile</button>
+                    <button id="profilebutton" href="/profile"><i class="fas fa-id-badge fa-lg"></i> Profile</button>
                 </form>
 
                 <form action="/exit" class="exitdiv">
-                    <button id="exitbutton"><img id="exitimg" src="/images/exit.png" alt="exiticon"></button>
+                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i> Log Out</button>
                 </form>                                                                                                 
         </div>
 
@@ -33,10 +33,10 @@
             <div id="content">
                 <form action="/search" method="post" id="fromToBlock">
                     <p id="fromtext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="from" placeholder="From" name="source" required></p>
-                    <button id="swapbutton" href="/home"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
+                    <button id="swapbutton"  onclick="swapInputs()" type="button"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
                     <p id="totext"><img id="city" src="/images/city.png" alt="city"><input type="text" id="to" placeholder="To" name="destination" required></p>
                     <input type="date" id="calander" name="date" required>
-                    <button id="searchbutton" href="/search" >Search</button>
+                    <button id="searchbutton" href="/search" type="submit">Search</button>
                 </form>
             </div>
         {{/if}}
@@ -137,7 +137,7 @@
                         </div><br>
                         {{#each imagecontent}}
                             <div class="mySlides fade">
-                                <img src="data:{{this}}" style="width:740px;height:400px;" alt="Bus Image" />
+                                <img src="data:{{this}}" style="width: 1040px;height: 480px;" alt="Bus Image" />
                             </div>
                         {{/each}}
 
@@ -178,8 +178,30 @@
 </body>
 
 <script>
+
+    const rotateButton = document.getElementById('swapbutton');
+     const rotateMe = document.getElementById('swapicon');
     let slideIndex = 0;
+    let isRotated = false;
+    let val=0;
     showSlides();
+
+    function swapInputs() {
+        var input1 = document.getElementById('from');
+        var input2 = document.getElementById('to');
+        
+        var temp = input1.value;
+        input1.value = input2.value;
+        input2.value = temp;
+        val+=180;
+        if (!isRotated) {
+            rotateMe.style.transform = `rotate(${val}deg)`;
+            isRotated = true;
+        } else {
+            rotateMe.style.transform = `rotate(${val}deg)`;
+            isRotated = false;
+        }
+    }
 
     function showSlides() {
         let i;
@@ -197,7 +219,7 @@
         dots[slideIndex-1].className += " active";
         setTimeout(showSlides, 2000);
     }
-
+   
 </script>
 
 </html>

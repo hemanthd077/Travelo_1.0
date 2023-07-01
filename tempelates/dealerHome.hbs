@@ -7,39 +7,29 @@
     <title>Dealer Home</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/dealerHome.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
         <div id="homenavbar">
-                <img id="appicon" src="/images/homelogo.png" alt="logo">
-               <div action="/home" class="bookingdiv">
-                    <button id="bookingbutton" href="/home" ><img id="bookingimg" src="/images/booking.png" alt="homeicon">Booking</button>
-               </div>
-
-                <div class="accountdiv" >
-                    <button id="accountbutton" href="/dealer"> <img id="accountimg" src="/images/dealercolour.png" alt="dealericon">Dealer</button>
-                </div>
-
-                <div class="profilediv">
-                    <button id="profilebutton"><img id="profileimg" src="/images/profile.png" alt="profileicon">Profile</button>
-                </div>
-                                                                                      
+            <img id="appicon" src="/images/homelogo.png" alt="logo">
+            <form action="/busdetail">
+                <button id="profile{{#if dealerprofile}}active{{/if}}"><i class="far fa-id-card"></i> Home</button>
+            </form>
+            <form action="/plan">
+                <button id="plan{{#if plan}}active{{/if}}" href="/plan"><i class="fas fa-clipboard-list"></i> Add Itinerary</button>
+            </form>
+            <form action="/busdetails">
+                <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails"><i class="fas fa-bus"></i> Add Bus</button>
+            </form>   
+            <form action="/dealer" class="exitdiv"> <br>
+                <button id="exitbutton"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button>
+            </form>                                                      
         </div>
             
         <div id="content">
-            <nav id="nav">
-                <form action="/plan">
-
-                    <button id="plan{{#if plan}}active{{/if}}" href="/plan">Add Itinerary</button>
-                </form>
-                <form action="/busdetails">
-                    <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails">Add Bus</button>
-                </form>
-                <form action="/busdetail">
-                    <button id="profile{{#if dealerprofile}}active{{/if}}" href="/dealerprofile">Profile</button>
-                </form>
-            </nav>
-
 
             {{#if plan}} 
                 <div id="plan">
@@ -66,7 +56,7 @@
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
                     <a id="target-page" href="/plandetail">Go to Itinerary <i class="fas fa-chevron-right"></i></i></a>
-                    <p class="disclimer">NOTE : Itinerary ACCEPT ONLY PDF FORMAT</p>
+                    <p class="disclimer">NOTE : Itinerary Accept only pdf format</p>
                     {{#if disclimer}}
                         <p id="status">{{res}}</p>
                     {{/if}}
@@ -134,9 +124,7 @@
                             <input type="hidden" name="planid" value={{email}}>
                             <button class="contentbutton2{{#if plandetail}}active{{/if}}"><i class="fa fa fa-file"></i> ITINERARY<div id="activestatus2{{#if plancontent}}active{{/if}}"></div></button>
                         </form>
-                          <form action="/dealer" class="exitdiv"> <br>
-                            <button id="exitbutton"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button>
-                        </form>    
+                            
                     </div>
                     
                         {{#if busdetail}}

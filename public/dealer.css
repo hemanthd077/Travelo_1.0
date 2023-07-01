@@ -7,119 +7,21 @@ body{
     background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     background-repeat: no-repeat;
     height: 100vh;
-    font-family: system-ui;
-}
-
-#homenavbar {
-    width: 174px;
-    height: 100vh;
-    background-color: white;
-    border-radius: 0%;
-    -webkit-border-radius: 0px 25px 25px 0px;
-}
-
-#appicon {
-    height: 80px;
-    width: 130px;
-    margin-left: 17px;
-    margin-top: 28px;
-}
-
-#main{
-    display: flex;
-}
-.bookingdiv,.accountdiv,.profilediv {
-    display: inline-flex;
-    align-items: end;
-    margin-top: 20px;
-}
-
-button#bookingbutton{
-    height: 40px;
-    width: 159px;
-    border-style: none;
-    background-color: transparent;
-    font-size: 17px;
-    display: inline-flex;
-    align-items: center;
-    margin-left: 15px;
-    column-gap: 10px;
-    cursor: pointer;
-}
-
-button#accountbutton{
-    height: 40px;
-    width: 159px;
-    border-style: none;
-    background-color: transparent;
-    font-size: 17px;
-    display: inline-flex;
-    align-items: center;
-    margin-left: 15px;
-    column-gap: 10px;
-    cursor: pointer;
-    color: white;
-
-}
-
-button#profilebutton{
-    height: 40px;
-    width: 159px;
-    border-style: none;
-    background-color: transparent;
-    font-size: 17px;
-    display: inline-flex;
-    align-items: center;
-    margin-left: 15px;
-    column-gap: 10px;
-    cursor: pointer;
-}
-
-
-img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
-}
-
-.exitdiv {
-    margin-top: 390px;
-    display: flex;
-}
-
-button#exitbutton {
-    margin-left: 15px;
-    background-color: transparent;
-    border-style: none;
-    cursor: pointer;
-}
-
-.accountdiv {
-    border-radius: 10px 0px 0px 10px;
-    background-image: linear-gradient(95deg,#2d3464, #575c72);
-}
-
-.profilediv:hover {
-    border-radius: 10px 0px 0px 10px;
-    background-color: #dadada;
-}
-
-.bookingdiv:hover {
-    border-radius: 10px 0px 0px 10px;
-    background-color: #dadada;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
 }
 
 form#loginform {
     display: inline-flex;
     flex-direction: column;
-    margin-left: 450px;
-    margin-top: 175px;
+    margin-left: 550px;
+    margin-top: 145px;
     background-color: white;
     padding: 30px;
     width: 400px;
-    height: 340px;
+    height: 420px;
     border-radius: 10px;
-    
 }
 
 .outline:focus{
@@ -134,7 +36,7 @@ form#loginform {
     border-style: hidden;
     font-size: small;
     border-radius: 5px;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
 button#loginbuttom {
@@ -146,14 +48,14 @@ button#loginbuttom {
     margin-top: 30px;
     font-size: medium;
     cursor: pointer;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
     border-radius: 5px;
 
 }
 
 
 button#loginbuttom:hover{
-    background-image: linear-gradient(45deg,#2d3465,#7c7e7e);
+    background-image: linear-gradient(95deg,#2d3465,#7c7e7e);
     color: white;
 }
 
@@ -175,8 +77,46 @@ h4#warning {
     border-style:none;
     margin-top: 15px;
     color: white;
-    background-color: brown;
+    background: linear-gradient(275deg,#ae006b, #2d3464);
     font-size: small;
     border-radius: 5px;
     justify-content: center;
+}
+
+#button-home {
+    position: sticky;
+    padding-left: 30px;
+    height: 40px;
+    margin-top: -55px;
+    width: 220px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-style: none;
+    box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
+    background: linear-gradient(275deg,#ae006b, #2d3464);
+    /* background-image: linear-gradient(225deg,#2d3465,#7c7e7e); */
+    /* background-color: #2d3465; */
+    justify-content: flex-start;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 665px;
+}
+
+.fa-long-arrow-alt-right{
+    position: absolute;
+    margin-left: -150px;
+    color: white;
+    animation: swipeLeft 1s ease-in-out infinite ;
+    width: 360px;
+}
+
+@keyframes swipeLeft {
+  0%{
+    transform: translateX(85px);
+  }
+  100% {
+    transform: translateX(170px);
+  }
 }

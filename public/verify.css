@@ -7,7 +7,9 @@ body{
     background-color:black;
     flex-direction:column;
     margin-top:100px;
-    font-family:'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
 }
 
 video{

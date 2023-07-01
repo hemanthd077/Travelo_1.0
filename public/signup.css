@@ -7,6 +7,9 @@ body {
     background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     background-repeat: no-repeat;
     height: 86.6vh;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
 }
 
 #block{
@@ -17,7 +20,6 @@ body {
     padding: 40px;
     border-radius: 15px;
     height: 70vh;
-    font-family: system-ui;
 }
 
 #loginform-cpwd{
@@ -62,8 +64,8 @@ button#loginbutton:hover {
 }
 
 button#signupbutton{
-    width: 26vh;
-    margin-left: 95px;
+    width: 20vh;
+    margin-left: 115px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;
@@ -71,7 +73,7 @@ button#signupbutton{
     border-style: hidden;
     cursor: pointer;
     margin-top: 10px;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
 button#signupbutton:hover {
@@ -91,9 +93,7 @@ button#signupbutton:hover {
 
 button#signupbutton, #loginbutton {
     display: flex;
-    margin-left: 132px;
     height: 30px;
-    width: 115px;
     background-color: transparent;
     border-style: hidden;
     cursor: pointer;
@@ -118,7 +118,7 @@ h4#warning {
     align-items: center;
     border-style: none;
     color: white;
-    background-color: #ae006b;
+    background: linear-gradient(275deg,#ae006b, #2d3464);
     font-size: small;
     width: 370px;
     border-radius: 6px;
@@ -126,4 +126,12 @@ h4#warning {
     margin-bottom: 10px;
     justify-content: center;
     margin-top: -10px;
+}
+
+.fa-eye{
+    position: absolute;
+    margin-top: -45px;
+    cursor: pointer;
+    margin-left: 350px;
+    opacity: 70%;
 }

@@ -18,7 +18,7 @@ const dealerlogin = async(req,res)=>{
             }
         }
         else{
-            res.status(400).render('dealer',{'res':'User does not Exist','control':true});
+            res.status(400).render('dealer',{'res':'Dealer-Id does not Exist','control':true});
         }
     }).catch((err)=>{
         console.log(err)

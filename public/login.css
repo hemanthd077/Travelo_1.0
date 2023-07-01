@@ -6,19 +6,21 @@
 body{
     background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
     background-repeat: no-repeat;
-    height: 79.4vh;
-    font-family: system-ui;
+    height: 80.4vh;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
 }
 
-#block{
+#block {
     background-color: white;
     margin-left: 550px;
-    margin-top: 10%;
-    width: 25%;
-    padding: 40px;
+    margin-top: 145px;
+    width: 400px;
+    padding: 30px;
     border-radius: 10px;
-    height: 53vh;
-    box-shadow: 0px 1px 5px 0px #7c7e7e;
+    height: 445px;
+    box-shadow: 0px 0px 5px -1px #7c7e7e;
 }
 
 button#signupbutton {
@@ -40,7 +42,7 @@ button#signupbutton:hover {
 }
 
 p#or {
-    margin-top: 55px;
+    margin-top: 20px;
     margin-left: 140px;
     font-size: small;
 }
@@ -53,7 +55,7 @@ p#or {
 }
 
 h2#logintxt {
-    margin-left: 155px;
+    margin-left: 125px;
     background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -69,12 +71,12 @@ h2#logintxt-fpwd,.logintxt-verify {
 #uname,#pwd,#email,.input-pwd{
     padding: 2%;
     height: 3vh;
-    width: 370px;
+    width: 385px;
     margin-top: 7px;
     border-style: hidden;
     font-size:small;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
     background-color: white;
 }
 
@@ -84,15 +86,15 @@ h2#logintxt-fpwd,.logintxt-verify {
 
 .loginbutton{
     width: 26vh;
-    margin-left: 98px;
-    margin-top: 45px;
+    margin-left: 100px;
+    margin-top: 65px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;
     background-color:white;
     border-style: hidden;
     cursor: pointer;
-    box-shadow: 0px 0px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
 .submitbutton{
@@ -104,7 +106,7 @@ h2#logintxt-fpwd,.logintxt-verify {
     background-color:white;
     border-style: hidden;
     cursor: pointer;
-    box-shadow: 0px 0px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
 .loginbutton:hover,.submitbutton:hover {
@@ -126,7 +128,7 @@ hr#line{
     background: transparent;
     border-style: none;
     position: absolute;
-    margin-top: -165px;
+    margin-top: -150px;
 }
 
 #fpwd:hover{
@@ -140,13 +142,12 @@ hr#line{
     align-items: center;
     border-style: none;
     color: white;
-    background-color: #ae006b;
+    background: linear-gradient(275deg,#ae006b, #2d3464);
     font-size: small;
     width: 370px;
     border-radius: 6px;
     border-color: black;
-    margin-top: 235px;
-    margin-bottom: 10px;
+    margin-top: 250px;
     justify-content: center;
 }
 #optInput{
@@ -164,7 +165,7 @@ hr#line{
     margin: 0 5px;
     border-radius: 5px;
     border-style: none;
-    box-shadow: 0px 0px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
 .verify-btn {
@@ -174,7 +175,7 @@ hr#line{
     cursor: pointer;
     border-style: none;
     background-color: white;
-    box-shadow: 0px 0px 5px 0px #2d3467;
+    box-shadow: 0px 0px 5px -1px #2d3467;
     color: #2d3467;
     border: none;
     margin-top: 35px;
@@ -212,20 +213,6 @@ hr#line{
     margin-bottom: 20px;
   }
 
-  /* #blockactive {
-    background-color: white;
-    margin-left: 550px;
-    margin-top: 10%;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 1px 5px 0px #7c7e7e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    flex-direction: column;
-} */
-
 #blockactive {
     background-color: white;
     margin-left: 550px;
@@ -234,7 +221,7 @@ hr#line{
     padding: 30px;
     height: 50vh;
     border-radius: 10px;
-    box-shadow: 0px 1px 5px 0px #7c7e7e;
+    box-shadow: 0px 0px 5px -1px #7c7e7e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -276,7 +263,7 @@ hr#line{
     margin: 0 5px;
     border-radius: 5px;
     border-style: none;
-    box-shadow: 0px 0px 5px 1px #ae006b;
+    box-shadow: 0px 0px 5px -1px #ae006b;
 }
 
 .input-pwdactive {
@@ -287,10 +274,59 @@ hr#line{
     border-style: hidden;
     font-size: small;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px 1px #ae006b;
+    box-shadow: 0px 0px 5px -1px #ae006b;
 }
 
 #cpwd-content{
     display: flex;
     flex-direction: column;
+}
+
+.fa-eye {
+    margin-left: 365px;
+    position: absolute;
+    margin-top: 183px;
+    cursor: pointer;
+    opacity: 70%;
+}
+
+#button-home {
+    position: sticky;
+    padding-left: 30px;
+    height: 40px;
+    margin-top: 20px;
+    width: 220px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-style: none;
+    box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
+    background: linear-gradient(275deg,#ae006b, #2d3464);
+    /* background-image: linear-gradient(45deg,#2d3465,#7c7e7e); */
+    /* background-color: #2d3465; */
+    justify-content: flex-start;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 85px;
+}
+
+.fa-long-arrow-alt-right{
+    position: absolute;
+    margin-left: -150px;
+    color: white;
+    animation: swipeLeft 3s ease-in-out infinite ;
+    width: 360px;
+}
+
+@keyframes swipeLeft {
+  0%{
+    transform: translateX(30px);
+    opacity: 0%;
+  }50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(170px);
+  }
 }

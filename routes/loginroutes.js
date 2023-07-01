@@ -4,7 +4,7 @@ const Login = require('../controller/login');
 
 
 router.get('/',(req,res)=>{
-    res.render('login',{login:true})
+    res.render('main');
 })
 
 router.get('/forgot-password',(req,res)=>{

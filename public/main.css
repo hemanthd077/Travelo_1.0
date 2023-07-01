@@ -1,0 +1,64 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
+}
+
+#content {
+    width: 400px;
+    height: 250px;
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 30px;
+    margin-top: 70px;
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div#logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-dealer-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 35px;
+    align-items: center;
+}
+
+button{
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px -1px rgb(0, 0, 0.1);
+    border-style: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover{
+    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+    color: white;
+}
