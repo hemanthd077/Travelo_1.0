@@ -4,7 +4,7 @@
 }
 
 #homenavbar {
-    width: 174px;
+    width: 200px;
     height: 100vh;
     background-color: white;
     border-radius: 0%;
@@ -15,7 +15,7 @@
 #appicon {
     height: 80px;
     width: 130px;
-    margin-left: 17px;
+    margin-left: 30px;
     margin-top: 28px;
 }
 body{
@@ -66,7 +66,7 @@ img#buspic:hover{
 
 button#bookingbutton{
     height: 40px;
-    width: 159px;
+    width: 185px;
     border-style: none;
     background-color: transparent;
     font-size: 17px;
@@ -74,14 +74,14 @@ button#bookingbutton{
     align-items: center;
     margin-left: 15px;
     column-gap: 10px;
-    padding-left: 20px;
+    padding-left: 30px;
     cursor: pointer;
-    color: white;
+    color: white;   
 }
 
 button#profilebutton{
     height: 40px;
-    width: 159px;
+    width: 185px;
     border-style: none;
     background-color: transparent;
     font-size: 17px;
@@ -89,7 +89,7 @@ button#profilebutton{
     align-items: center;
     margin-left: 15px;
     column-gap: 10px;
-    padding-left: 20px;
+    padding-left: 30px;
     cursor: pointer;
 }
 
@@ -133,24 +133,36 @@ button#exitbutton:hover{
 }
 
 #fromToBlock {
-    width: 350px;
-    height: 287px;
+    width: 550px;
+    height: 500px;
     display: inline-flex;
     flex-direction: column;
-    margin-left: 630px;
-    margin-top: 195px;
+    margin-left: 550px;
+    margin-top: 90px;
     padding: 30px;
     border-radius: 10px;
     background-color: white;
     gap: 10px;
-    margin-bottom: 203px;
+    margin-bottom: 95px;
+    align-items: center;
 }
 
-p#fromtext,p#totext {
+#img-homepage-gif {
+    width: 610px;
+    height: 200px;
+    z-index: 2;
+    margin-top: -30px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+p#fromtext, p#totext {
+    width: 400px;
     padding: 10px;
     border-radius: 5px;
-    display: inherit;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    height: 30px;
+    display: flex;
+    box-shadow: 0px 0px 6px -2px #2d3467;
+    align-items: center;
 }
 
 input#from{
@@ -179,17 +191,17 @@ img#city {
 
 input#calander {
     padding: 10px;
-    width: 330px;
+    width: 400px;
     border-radius: 5px;
     border-style: none;
-    height: 25px;
+    height: 30px;
     margin-top: 25px;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    box-shadow: 0px 0px 6px -2px #2d3467;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     position:fixed;
-    left: 43.6%;
+    left: 655px;
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -211,8 +223,7 @@ input::-webkit-datetime-edit {
 }
 
 button#searchbutton {
-    margin-left: 80px;
-    width: 180px;
+    width: 220px;
     height: 40px;
     background-color: white;
     border-style: none;
@@ -220,8 +231,7 @@ button#searchbutton {
     border-radius: 5px;
     font-size: medium;
     cursor: pointer;
-    box-shadow: 0px 1px 8px 1px #2d3467;
-
+    box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
 button#searchbutton:hover{
@@ -275,7 +285,7 @@ nav#nav {
     height: 605px;
     background-color: white;
     padding: 30px;
-    margin-left: 260px;
+    margin-left: 280px;
     border-radius: 10px;
     margin-top: 65px;
     margin-bottom: 15px;
@@ -319,7 +329,7 @@ nav#nav {
 }
 
 #busimg {
-    height: 258px;
+    height: 238px;
     width: 545px;
     border-radius: 0px 0px 5px 5px;
     margin-left: -15px;
@@ -398,7 +408,7 @@ div#extradetaildiv:hover {
     margin-left: 345px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 219px;
+    margin-bottom: 233px;
     background-color: white;
 }
 
@@ -406,7 +416,7 @@ div#extradetaildiv:hover {
     background-color: white;
     padding: 15px;
     border-radius: 5px;
-    height: 280px;
+    height: 260px;
     width: 515px;
     box-shadow: 0px 1px 5px 0px #2d3467;
 }
@@ -683,3 +693,4 @@ button#button-busdetial {
     border-radius: 100px;
     transition: transform 0.3s ease-in-out;
 }
+
