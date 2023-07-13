@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dealer Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/dealerHome.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,16 +36,29 @@
                 <div id="plan">
                     <form action="/plandetailsupload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         <div id="plantitle">
-                        <p class="plantextcontent">City :</p>
-                        <input class="planinputcontent" type="text" placeholder="Enter the City" name="city" required>
-                        
-                        <label for="textcontent1" class="text-input">Bus Name : </label>
-                        <select name="busname" class="textcontent1 textinput" id="verify-value" required>
-                            {{#each busname}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
+                            <p class="plantextcontent">State :</p>
+                            <input class="planinputcontent" type="text" placeholder="Enter the Itinerary State" name="state" required autocomplete="off">
+                            
+                            <label for="textcontent1" class="text-input">Bus Name : </label>
+                            <select name="busname" class="textcontent1 textinput" id="verify-value" required>
+                                {{#each busname}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div id="plantitle">
+                            <p class="plantextcontent">No of Days :</p>
+                            <input class="planinputcontent" type="number" placeholder="Enter the No of Days" name="noofdays" required autocomplete="off">
+                            <p class="plantextcontent">Amount :</p>
+                            <input class="planinputcontent" type="number" placeholder="Enter the Amount" name="amount" required autocomplete="off">
+                        </div>
+                        <div id="planlocation">
+                            <p class="plantextcontent">Itinerary Cover Location : <button class="addinput" onclick="addInput()">Add <i class="fas fa-plus"></i></button></p><br>
+                            <div id="input-container">
+                                <!-- Input tags will be added here -->
+                            </div>
+                        </div>
+                        <input type="hidden" name="coverlocationcount" id="coverlocationcount">
                     <div id="imagediv">
                             <label  for="inputTag" id="">
                                 Select Itinerary <br/>
@@ -56,13 +70,13 @@
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
                     </form>
                     <a id="target-page" href="/plandetail">Go to Itinerary <i class="fas fa-chevron-right"></i></i></a>
-                    <p class="disclimer">NOTE : Itinerary Accept only pdf format</p>
                     {{#if disclimer}}
                         <p id="status">{{res}}</p>
                     {{/if}}
                     {{#if disclimerfail}}
                         <p id="status1">{{res}}</p>
                     {{/if}}
+                    <p class="disclimer">NOTE : Itinerary Accept only pdf format</p>
                 </div>         
             {{/if}}
 
@@ -74,6 +88,35 @@
                             <input class="textinput" type="text" placeholder="Enter the Bus Name" name="busname" required>
                             <p class="textcontent">Seat Count : </p>
                             <input class="textinput" type="text" placeholder="Enter the Seat Capacity" name="seatcount" required>
+                        </div>
+                        <div id="busname">
+                            <p class="textcontent">Sound System : </p>
+                            <select name="soundsystem" class="textinput-select" required>
+                                <option value="yes">NO</option>
+                                <option value="yes">YES</option>
+                            </select>
+                            <p class="textcontent">Bus Lighting : </p>
+                            <select name="lighting" class="textinput-select" required>
+                                <option value="no">NO</option>
+                                <option value="yes">YES</option>
+                            </select>
+                            <p class="textcontent">water Filter : </p>
+                            <select name="waterfilter" class="textinput-select" required>
+                                <option value="no">NO</option>
+                                <option value="yes">YES</option>
+                            </select>
+                        </div>
+                        <div id="busname">
+                            <p class="textcontent">Ac or Non Ac : </p>
+                            <select name="acornonac" class="textinput-select-1" required>
+                                <option value="ac">AC</option>
+                                <option value="nonac">NON AC</option>
+                            </select>
+                            <p class="textcontent">Seat Type : </p>
+                            <select name="seattype" class="textinput-select-1" required>
+                                <option value="seater">SEATER</option>
+                                <option value="semisleeper">SEMI SLEEPER</option>
+                            </select>
                         </div>
                         <div id="imagediv">
                             <label  for="inputTag">
@@ -103,6 +146,7 @@
                         <div id="profile">
                             <img id="profilepic" src="data:{{type.ContentType}};base64,{{value}}" alt="Profile Image" />
                             <h4 id="username">{{dealername}}</h4>
+                            <p id="username">{{dealercity}}</p>
                         </div><br>
                         
                         <form id="photoinput" action="/dealerprofile" method="post" enctype="multipart/form-data">
@@ -119,10 +163,12 @@
                         <form action="/busdetail">
                             <input type="hidden" name="busid" value={{email}}>
                             <button class="contentbutton1{{#if busdetail}}active{{/if}}"><i class="fa fa-bus" aria-hidden="true"></i> BUSES <div id="activestatus1{{#if buscontent}}active{{/if}}"></div></button>
+                            <div class="activestatus-div{{#if busdetail}}active{{/if}}"></div>
                         </form>
                         <form action="/plandetail">
                             <input type="hidden" name="planid" value={{email}}>
                             <button class="contentbutton2{{#if plandetail}}active{{/if}}"><i class="fa fa fa-file"></i> ITINERARY<div id="activestatus2{{#if plancontent}}active{{/if}}"></div></button>
+                            <div class="activestatus-div{{#if plandetail}}active{{/if}}"></div>
                         </form>
                             
                     </div>
@@ -138,10 +184,27 @@
                                                 <p style="font-weight: 500; font-size:18px;" id="seats">{{this.[1]}}</p>
                                                 <button style="background-color: transparent;border-style:none;" type="submit"><i id="bus-name-edit" class="fas fa-edit"></i></button>
                                             </div>
+                                            <div id="bus-features">
+                                                <div id="refer-avalibality">
+                                                    <p><i class="fa-solid fa-couch"></i> {{this.[2]}}</p>
+                                                    {{#if this.[8]}}
+                                                        <p id="plan-status-success"><i class="fa-regular fa-circle-check fa-xs"></i> Plan Avaliable</p> 
+                                                        <span class="tooltiptext">Plan Avaliable for this Bus</span>  
+                                                    {{/if}}
+                                                    {{#if this.[9]}}
+                                                        <p id="plan-status-failure"><i class="fa-regular fa-circle-xmark fa-xs"></i> Plan Not Avaliable</p>
+                                                        <span class="tooltiptext1">Plan Not Avaliable for this Bus Add plan</span>  
+                                                    {{/if}}
+                                                </div>
+                                                <p><i class="fa-solid fa-fan"></i> {{this.[3]}}</p>
+                                                <p><i class="fa-solid fa-radio"></i> {{this.[4]}}</p>
+                                                <p><i class="fa-solid fa-glass-water-droplet"></i> {{this.[5]}}</p>
+                                                <p><i class="fa-regular fa-lightbulb"></i> {{this.[6]}}</p>
+                                            </div>
                                         </form>
                                         <form action="/bus-img-details" method="post">
                                             <input type="hidden" value="{{this.[0]}}" name="busname" >
-                                            <button style="background-color: transparent;border-style:none;" type="submit"><img  id="buspic" src="data:{{this.[2]}}" alt="Bus Image"></button>
+                                            <button style="background-color: transparent;border-style:none;" type="submit"><img  id="buspic" src="data:{{this.[7]}}" alt="Bus Image"></button>
                                         </form>
                                     </div>
                                 {{/each}}
@@ -167,7 +230,7 @@
                                 {{#each planArray}}
                                     <div id="plan-module-outer">
                                         <div id="plan-module-inner">
-                                            <p style="font-weight: 500; font-size:15px;">City : {{this.[0]}}</p>
+                                            <p style="font-weight: 500; font-size:15px;">State : {{this.[0]}}</p>
                                             <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
                                             <button style="background-color: transparent;border-style:none;" onclick="openForm({{@index}})"><i id="plandelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
                                             <form action="/plandelete" method="post">
@@ -181,7 +244,17 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <iframe id="busplan" src="{{this.[2]}}" name="myIframe"></iframe>
+                                        <div id="plan-features">
+                                            <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p>
+                                            <p><i class="fa-solid fa-location-arrow"></i> Plan cover Location</p>
+                                            <div id="plan-location-cover">
+                                                {{#each this.[5]}}
+                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</i></p>
+                                                {{/each}}
+                                            </div>
+                                            <p><i class="fa-solid fa-tags"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>
+                                        </div>
+                                       <iframe id="busplan" src="{{this.[4]}}#toolbar=0" id="iframe11"></iframe>
                                     </div>
                                 {{/each}}
                                 <div id="plan-module-outer-1">
@@ -190,7 +263,8 @@
                                         <p>Add Itinerary</p>
                                     </a>
                                 </div>
-                              </div>
+                            </div>
+                        
                               {{#if flag}}
                                 <div id="searchresultdiv1">
                                     <i id="sademoji" class="fas fa-paper-plane fa-3x"></i>
@@ -256,16 +330,64 @@
                             <form action="/save-edit" method="post">
                                 <div class="contentdivision2">
                                     <div id="searchresultdiv3">
+                                    </div>
                                         <div id="edit-content">
                                             <input type="hidden" value="{{busname}}" name="oldbusname">
                                             <label for="edit-info-input">Busname</label>
                                             <input id="edit-info-input" type="text" name="busname" value="{{busname}}">
 
-                                            <label for="edit-info-input-1">Seat Count</label>
-                                            <input id="edit-info-input-1" type="text" name="seatcount" value="{{seatCount}}">
+                                            <div style="display: flex;flex-direction:row">
+                                                <div id="inner-div-content">
+                                                    <label for="edit-info-input-1">Seat Count</label>
+                                                    <input id="edit-info-input-1" type="number" name="seatcount" value="{{seatCount}}" min="0">
+                                                </div>
+                                                <div id="inner-div-content">
+                                                    <p class="textcontent">Seat Type</p>
+                                                    <select name="seattype" class="edit-selector" required>
+                                                        <option value="seater">SEATER</option>
+                                                        <option value="semisleeper">SEMI SLEEPER</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex;flex-direction:row">
+                                                <div id="inner-div-content">
+                                                    <p class="">Sound System</p>
+                                                    <select name="soundsystem" class="textinput-select" required>
+                                                        <option value="yes">NO</option>
+                                                        <option value="yes">YES</option>
+                                                    </select>
+                                                </div>
+                                                <div id="inner-div-content">
+                                                    <p class="">Bus Lighting</p>
+                                                    <select name="lighting" class="textinput-select" required>
+                                                        <option value="no">NO</option>
+                                                        <option value="yes">YES</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div style="display: flex;flex-direction:row">
+                                                <div id="inner-div-content">
+                                                    <p style="margin-top: 15px;color:#000000">Water Filter</p>
+                                                    <select style="box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);" name="waterfilter" class="textinput-select" required>
+                                                        <option value="no">NO</option>
+                                                        <option value="yes">YES</option>
+                                                    </select>
+                                                </div>
+                                                <div id="inner-div-content">
+                                                    <p style="margin-top: 15px;color:#000000">AC or Non AC</p>
+                                                    <select style="box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);" name="acornonac" class="textinput-select" required>
+                                                        <option value="ac">AC</option>
+                                                        <option value="nonac">NON AC</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            
                                         </div>
-                                        <img  id="buspic-edit" src="data:{{img}}" alt="Bus Image">
-                                    </div>
+                                        <div id="image-edit-div">
+                                            <img  id="buspic-edit" src="data:{{img}}" alt="Bus Image">
+                                        </div>
                                 </div>
                                 <button type="submit" class="savebutton" href="/save-edit">Save</button>
                             </form>
@@ -370,6 +492,32 @@
 
     function closeDeletebusForm(){
         document.getElementById("button-delete-bus").style.display = "none";
+    }
+
+    let inputCount = 0;
+
+    function addInput() {
+      inputCount++;
+      
+      const container = document.getElementById("input-container");
+      const coverlocationcount = document.getElementById("coverlocationcount");
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = "location_" + inputCount;
+      coverlocationcount.value=inputCount;
+      input.setAttribute("placeholder", "Enter the Location");
+      input.classList.add('planlocationinput');
+      
+      const deleteButton = document.createElement("button");
+      deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
+      deleteButton.classList.add('delete-button');
+      deleteButton.onclick = function() {
+        container.removeChild(input);
+        container.removeChild(deleteButton);
+      };
+      
+      container.appendChild(input);
+      container.appendChild(deleteButton);
     }
 
 </script>

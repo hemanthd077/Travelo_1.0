@@ -1,9 +1,11 @@
 const validation = require('../src/mongodb')
+const uploaddb = require('../src/uploaddb')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const async = require('hbs/lib/async');
 const fs = require('fs');
+const axios = require('axios');
 const mime = require('mime');
 
 const transporter = nodemailer.createTransport({
@@ -30,12 +32,17 @@ const login = async(req,res)=>{
     
     validation.findOne({Email : req.body.Email}).then(async(data)=>{
         if(data){
-            const validpassword = await bcrypt.compare(req.body.password,data.password)
-            if(validpassword){
-                res.render('home',{content:true})
+            if(data.flag===true){
+                res.status(400).render('login',{'res':'User does not Exist','control':true,login:true});
             }
             else{
-                res.status(400).render('login',{'res':'Invalid Password','control':true,login:true})
+                const validpassword = await bcrypt.compare(req.body.password,data.password)
+                if(validpassword){
+                    res.render('home',{content:true})
+                }
+                else{
+                    res.status(400).render('login',{'res':'Invalid Password','control':true,login:true})
+                }
             }
         }
         else{
@@ -207,6 +214,62 @@ const changePassword =(async(req,res)=>{
     }
 })
 
+const googleLogin = (async(req,res)=>{
+    // console.log(req.user);
+    // res.write(JSON.stringify(req.user));
+
+    validation.findOne({Email : req.user.email}).then(async(data)=>{
+        if(data){
+            if(data.flag===false){
+                res.render('login',{'res':'User Account Already Exist.Try with other E mail-id','control':true,login:true})
+            }
+            else{
+                detailsArray[0]=data.fname.toUpperCase();
+                detailsArray[1]=data.lname.toUpperCase();
+                detailsArray[2]=data.Email;
+                res.render('home')
+            }
+        }
+        else{
+            //need to proceed signup
+
+            axios
+            .get(req.user.picture, { responseType: 'arraybuffer' })
+            .then(response => {
+                const imageBuffer = Buffer.from(response.data, 'binary');
+            
+                const newvalues = new uploaddb({
+                    userid: req.user.email,
+                    profileimage: {
+                    data: imageBuffer,
+                    ContentType: 'image/png'
+                    }
+                });
+                
+                newvalues.save().then(()=>{
+                    console.log('google login profile photo added')}).catch((err)=>console.log(err))
+            })
+            const hashedpassword = await bcrypt.hash(req.user.sub, 10);
+            const pwd = hashedpassword.toString();
+            const newdata = new validation({
+                fname: req.user.given_name,
+                lname: req.user.family_name,
+                Email: req.user.email,
+                password:pwd,
+                flag:true,
+            })
+            await newdata.save().then(()=>{
+                console.log('google login account created')}).catch((err)=>console.log(err))
+                validation.findOne({Email:req.user.email}).then(async(user)=>{
+                    detailsArray[0]=user.fname.toUpperCase();
+                    detailsArray[1]=user.lname.toUpperCase();
+                    detailsArray[2]=user.Email;
+                    res.render('home',{content:true})
+                }).catch((err)=>console.log('error in finding'))
+        }
+    })
+})
+
 function mail() {
     return detailsArray;
 }
@@ -217,6 +280,7 @@ module.exports = {
     fpass_nodemail,
     verify_code,
     changePassword,
+    googleLogin,
 };
 
 

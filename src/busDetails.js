@@ -25,6 +25,21 @@ const busDetailsSchema = new mongoose.Schema({
     seatcount:{
         type:String,
     },
+    musicsystem:{
+        type:String,
+    },
+    acornonac:{
+        type:String,
+    },
+    seattype:{
+        type:String,
+    },
+    waterfilter:{
+        type:String,
+    },
+    lighting:{
+        type:String,
+    },
     busimage:{
         data:Buffer,
         ContentType:String,

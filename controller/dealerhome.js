@@ -3,12 +3,10 @@ const plandetails = require('../src/planDetails')
 const Login = require('../controller/dealer');
 const dealer = require('../src/dealerdb')
 const fs = require('fs');
-const dealermail = Login.dealermail();
 const multer  = require('multer');
-const dealerjs = require('../controller/dealer');
 const { log } = require('console');
 
-const detailsArray = dealerjs.dealermail();
+let detailsArray = Login.dealermail();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -51,18 +49,26 @@ const plandetailsupload = async(req,res)=>{
             console.log(err);
         }
         else{
+            let str ="";
+            for(let i=0;i<req.body.coverlocationcount;i++){
+                str+=req.body["location_"+(i+1)];
+                str+="-"
+            }
             const newvalues = new plandetails({
                 id:Date.now().toString(36),
-                city:req.body.city,
                 busname:req.body.busname,
-                dealerid:dealermail[0],
+                dealerid:detailsArray[0],
+                state:req.body.state,
+                noofdays:req.body.noofdays,
+                price:req.body.amount,
+                coverlocation:str,
                 planfile:{
                     data:fs.readFileSync('uploads/plans/'+req.file.originalname),
                     ContentType:'file/pdf'
                 },
             })
             let busname=[];
-            await busdetails.distinct("busname",{dealerid:dealermail[0]}).then(async(data)=>{
+            await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(data)=>{
                 for (let index = 0; index < data.length; index++) {
                     busname[index] = data[index];
                 }
@@ -98,7 +104,12 @@ const busdetailsupload = (req,res)=>{
                         id:Date.now().toString(36)+""+index,
                         busname:req.body.busname,
                         seatcount:req.body.seatcount,
-                        dealerid:dealermail[0],
+                        dealerid:detailsArray[0],
+                        musicsystem:req.body.soundsystem,
+                        acornonac:req.body.acornonac,
+                        seattype:req.body.seattype,
+                        waterfilter:req.body.waterfilter,
+                        lighting:req.body.lighting,
                         busimage:{
                             data:fs.readFileSync('uploads/busimages/'+src.filename),
                             ContentType:'image/png'
@@ -119,7 +130,7 @@ const busdetailsupload = (req,res)=>{
                                 busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
                             }
                         })
-                        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname:req.body.busname,Busseat:req.body.seatcount,'busimage':true})
+                        res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname:req.body.busname,Busseat:req.body.seatcount,'busimage':true})
                     })
                 }
                 else{
@@ -163,65 +174,118 @@ const profile = async(req,res)=>{
     
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
         dealername=data.dealername.toUpperCase();
-        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true})
+        res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true})
     }).catch(err=>{
         console.log('image not inserted yet...:'+err)
     })
 }
 
 const busdetail = async(req,res)=>{
-    
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
         dealername=data.dealername.toUpperCase();
         let busdetailArray=[];
         await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(detail)=>{
             for (let index = 0; index < detail.length; index++) {
                 let temp = [];
+                
                 await busdetails.find({busname:detail[index]}).then(async(buscontent)=>{
+                    await plandetails.findOne({busname:detail[index]}).then(async(value)=>{
+                        if(value){
+                            temp[8]=true;
+                            temp[9]=false;
+                        }
+                        else{
+                            temp[8] = false;
+                            temp[9] = true;
+                        }
+                    })
+
                     temp[0] = buscontent[0].busname;
                     temp[1] = buscontent[0].seatcount+" Seats";
-                    temp[2] = buscontent[0].busimage.ContentType+";base64,"+buscontent[0].busimage.data.toString('base64');
+                    if(buscontent[0].seattype==="seater"){
+                        temp[2] = "Seater";
+                    }
+                    else{
+                        temp[2] = "Semi Sleeper";
+                    }
+                    if(buscontent[0].acornonac==="ac"){
+                        temp[3] = "AC Bus";
+                    }
+                    else{
+                        temp[3] = "Non Ac Bus";
+                    }
+                    if(buscontent[0].musicsystem==="yes"){
+                        temp[4] = "Music System Installed";
+                    }
+                    else{
+                        temp[4] = "No Music System";
+                    }
+                    if(buscontent[0].waterfilter==="yes"){
+                        temp[5] = "Water Filter Installed";
+                    }
+                    else{
+                        temp[5] = "No Water Filter";
+                    }
+                    if(buscontent[0].lighting==="yes"){
+                        temp[6] = "Colour Lighting Installed";
+                    }
+                    else{
+                        temp[6] = "No Colour Lighting";
+                    }
+
+                    temp[7] = buscontent[0].busimage.ContentType+";base64,"+buscontent[0].busimage.data.toString('base64');
                     busdetailArray[index]=temp;
                 })
             }
         })
         if(busdetailArray.length===0){
-            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,flag:true})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,flag:true})
         }
         else{
-            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray})
         }
     }).catch(err=>{
         console.log('busdetail not found!!!!'+err)
     })
 }
 
+
+
 let planid =[];
 
 const plandetail = async(req,res)=>{
-    
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
         dealername=data.dealername.toUpperCase();
         let planArray=[];
         planid=[];
+        let coverlocation = [];
         await plandetails.find({dealerid:detailsArray[0]}).then(async(detail)=>{
             for (let index = 0; index < detail.length; index++) {
                 let temp = [];
-                temp[0] = detail[index].city.toUpperCase();
+                coverlocation = [];
+                let ind=0;
+                temp[0] = detail[index].state.toUpperCase();
                 temp[1] = detail[index].busname.toUpperCase();
-
+                temp[2] = detail[index].noofdays;
+                temp[3] = detail[index].price;
+                let str = detail[index].coverlocation.split("-");
+                for(let i=0;i<str.length-1;i++){
+                    if(str[i]!="undefined")
+                    coverlocation[ind++] = str[i];
+                }
                 //pdf data convert from bufferdata to dataURL
                 const pdfData = detail[index].planfile.data.toString('base64');
-                temp[2] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+                temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+                temp[5] = coverlocation;
                 planid[index]=detail[index].id;
                 planArray[index] = temp; 
             }
         })
         if(planArray.length===0){
-            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,flag:true})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,flag:true})
         }
         else{
-            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray,arrayplan:true})
         }
     }).catch(err=>{
         console.log('plan details not found!!!'+err)
@@ -244,7 +308,7 @@ const BusimageDetail = (async(req,res)=>{
                 busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
             }
         })
-        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true})
+        res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true})
     }).catch(err=>{
         console.log('Bus Image details not found!!!'+err)
     })
@@ -257,7 +321,7 @@ const editBusInfo = (async(req,res)=>{
             seatCount=data1.seatcount;
             img=data1.busimage.ContentType+";base64,"+data1.busimage.data.toString('base64');
         })
-        res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busname:req.body.busname,seatCount,editbusinfo:true,img})
+        res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busname:req.body.busname,seatCount,editbusinfo:true,img})
     })
 })
 
@@ -267,6 +331,11 @@ const updatebusinfo = (async(req,res)=>{
     const newvalues1 ={$set:{
         busname:req.body.busname,
         seatcount:req.body.seatcount,
+        musicsystem:req.body.soundsystem,
+        acornonac:req.body.acornonac,
+        seattype:req.body.seattype,
+        waterfilter:req.body.waterfilter,
+        lighting:req.body.lighting,
     }};
     const filter1 = {busname : req.body.oldbusname}
     const options1 = { upsert: false };           
@@ -315,7 +384,7 @@ const busImageDelete = (async(req,res)=>{
                     busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
                 }
             })
-            res.render('dealerHome',{dealerprofile:true,dealername,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true,dealerid:data.dealerid})
+            res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true,dealerid:data.dealerid})
         }).catch(err=>{
             console.log('Bus Image details not found!!!'+err);
         })

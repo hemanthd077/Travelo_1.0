@@ -17,11 +17,15 @@
         <div id="homenavbar">
                 <img id="appicon" src="/images/homelogo.png" alt="logo">
                 <form action="/home" class="bookingdiv">
-                    <button id="bookingbutton" href="/home" ><i class="fas fa-clipboard-check fa-lg"></i> Booking</button>
+                    <button id="bookingbutton" href="/home" ><i class="fa-solid fa-house"></i> Home</button>
+                </form>
+
+                <form action="/booking"  class="bookingdiv">
+                    <button id="bookingbutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
                 </form>
 
                 <div class="profilediv">
-                    <button id="profilebutton" href="/profile"><i class="fas fa-id-badge fa-lg"></i> Profile</button>
+                    <button id="profilebutton" href="/profile"><i class="fa-solid fa-user"></i> Profile</button>
                 </div>
 
                 <form action="/exit" class="exitdiv">
@@ -38,7 +42,7 @@
                 
                 <form id="photoinput" action="/photouploads" method="post" enctype="multipart/form-data">
                     <div id="photodiv">
-                        <label for="inputTag">
+                        <label for="inputimage">
                             CHANGE IMAGE<br>
                             <i class="fa fa-camera"></i>
                             <input id="inputimage" type="file" name="profileimage" required>
@@ -85,13 +89,13 @@
                 <p id="update-title">UPDATE INFO</p>
                 <input type="hidden" name="email" value="{{email}}">
                 <label for="fname-update">First Name</label>
-                <input class="outline" type="text" value="{{fname}}" name="fname" id="fname-update" ><br>
+                <input class="outline" type="text" value="{{fname}}" name="fname" id="fname-update" maxlength="20" autocomplete="off"><br>
                 
                 <label for="lname-update">Last Name</label>
-                <input class="outline" type="text" value="{{lname}}" name="lname" id="lname-update" ><br>
+                <input class="outline" type="text" value="{{lname}}" name="lname" id="lname-update" maxlength="20" autocomplete="off"><br>
                 
                 <label for="password">Password</label>
-                <input class="outline" type="password" placeholder="Enter Password to Verify" name="password" id="pwd" required><br>
+                <input class="outline" type="password" placeholder="Enter Password to Verify" name="password" id="pwd" required ><br>
                 
                 <div id="button-update">
                     <a href="/profile" class="aunchor-close"><button type="button" class="btn cancel">Close</button></a>
@@ -111,9 +115,8 @@
         profilecont.style.animationDelay="1s"
 
         document.getElementById('bookingbutton').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementById('accountbutton').addEventListener('click', function(event) {
+            {{!-- const element = document.getElementsByClassName("formContainer");
+            element.classList.add("flash-animation-formContainer"); --}}
             event.preventDefault();
         });
         document.getElementById('exitbutton').addEventListener('click', function(event) {

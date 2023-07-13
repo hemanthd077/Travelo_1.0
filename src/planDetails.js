@@ -1,3 +1,4 @@
+const { Decimal128, Double } = require('mongodb');
 const mongoose = require('mongoose');
 
 mongoose.connect(`mongodb://0.0.0.0:27017/userdetails`,{
@@ -19,10 +20,19 @@ const planDetailsSchema = new mongoose.Schema({
     dealerid:{
         type:String,
     },
-    city:{
+    state:{
         type:String,
     },     
     busname:{
+        type:String,
+    },
+    noofdays:{
+        type:Number,
+    },
+    price:{
+        type:Number,
+    },
+    coverlocation:{
         type:String,
     },
     planfile:{

@@ -38,6 +38,7 @@ const signup = async (req,res)=>{
             {
                 return res.status(400).render('signup',{'res' : "details not entered properly",'control':true})
             }
+            req.body.flag=false;
             arr = [];
             arr[0] = req.body;
 

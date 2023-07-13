@@ -17,7 +17,7 @@ body {
 #content {
     width: 400px;
     height: 250px;
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
     padding: 30px;
     border-radius: 10px;
 }
@@ -28,7 +28,7 @@ p {
     font-weight: bolder;
     font-size: 30px;
     margin-top: 70px;
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+    background: -webkit-linear-gradient(45deg,#5c6074, #ae006b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -48,7 +48,7 @@ div#logo-container {
     align-items: center;
 }
 
-button{
+button#dealer,button#user{
     width: 150px;
     height: 40px;
     border-radius: 5px;
@@ -58,7 +58,17 @@ button{
     font-size: 16px;
 }
 
-button:hover{
-    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+button#user:hover{
+    /* background-image: linear-gradient(45deg,#5c6074, #2d3464); */
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+
     color: white;
 }
+
+button#dealer:hover{
+    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
+
+    color: white;
+}
+

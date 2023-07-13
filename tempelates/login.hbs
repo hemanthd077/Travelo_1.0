@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="1071737044428-hn3l03k3a69vf5s1g06eb7bl5mj739tl.apps.googleusercontent.com">
     <title>User Login</title>
     <link rel="stylesheet" href="/login.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
     <div  id="block{{#if verificationCode}}active{{/if}}{{#if changepwd}}active{{/if}}{{#if fpassword}}active{{/if}}">
@@ -37,9 +38,15 @@
 
             <form action="/signup">
                 <button id="signupbutton" href="/signup" >Signup</button>
-            </form>
+            </form><br>
+
+            <hr style="display:flex:flex-direction:column;width:70%;margin-left:60px">
+            <p id="ortag">OR</p><br>
+            
+           <a id="continue-google" href="/google" ><i class="fab fa-google fa-2x"></i> Continue With Google</a>
+
             <form action="/">
-                <button id="button-home">Back to Home  <i class="fas fa-long-arrow-alt-right fa-lg"></i></button>
+                <button id="button-home">Select the Login <i class="fas fa-long-arrow-alt-right fa-lg"></i></button>
             </form>
         {{/if}}
         {{#if fpassword}}

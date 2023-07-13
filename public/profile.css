@@ -5,7 +5,8 @@
 
 body{
     background-repeat: no-repeat;
-    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Philosopher', sans-serif; */
@@ -92,7 +93,8 @@ button#exitbutton {
     font-weight: 700;
     gap: 5px;
     font-size: 18px;
-    background-image: linear-gradient(275deg,#2d3464, #6e717a);
+    /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -104,7 +106,8 @@ button#exitbutton:hover{
 }
 
 .profilediv {
-    background-image: linear-gradient(95deg,#2d3464, #606475);
+    /* background-image: linear-gradient(95deg,#2d3464, #606475); */
+    background-color: #472a66;
     border-radius: 10px 0px 0px 10px;
 }
 
@@ -175,19 +178,19 @@ div#contentdivision2 {
 }
 
 div#profile {
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     padding: 5px;
+    justify-content: center;
 }
+
 img#profilepic {
-    width: 110px;
-    height: 110px;
-    border-radius: 10px;
-    border-style: solid;
+    width: 130px;
+    height: 130px;
+    border-radius: 107px;
     border-color: #dadada;
-    box-shadow: 2px 1px 5px 0px #2d3467;
-    border-bottom-right-radius: 0px;
-    border-top-right-radius: 1px;
+    box-shadow: 0px 0px 5px -2px rgb(0,0,0.1);
 }
 
 div#contentdivision1 {
@@ -201,20 +204,8 @@ div#contentdivision1 {
 }
 
 h4#username {
-    border-color: #dadada;
-    display: flex;
-    justify-content: center;
-    width: 215px;
-    height: 95px;
-    margin-top: 0px;
-    background-color: #dadada;
-    align-items: center;
-    padding: 10px;
-    position: absolute;
-    border-left-style: solid;
-    margin-left: 114px;
-    border-radius: 0px 5px 5px 0px;
-    box-shadow: 2px 1px 5px 0px #2d3467;
+   padding: 10px;
+   z-index: 2;
 }
 
 form#photoinput {
@@ -236,7 +227,8 @@ button#savebutton {
 }
 
 button#savebutton:hover,#photodiv:hover{
-    background-image: linear-gradient(95deg, #2d3464, #6e717a);
+    /* background-image: linear-gradient(95deg, #2d3464, #6e717a); */
+    background: -webkit-linear-gradient(125deg,#ae006b, #2d3464);
     color: white;
 }
 
@@ -295,6 +287,29 @@ label{
     box-shadow: 0px 0px 5px 1px #2d3467;
 }
 
+.flash-animation-formContainer{
+    animation: flash 0.2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes flash {
+    0% {
+        box-shadow: 0px 0px 10px 1px #FFFFFF;
+    }
+    25%{
+        box-shadow: 0px 0px 5px 1px #FFFFFF;
+    }
+    50% {
+        box-shadow: 0px 0px 10px 1px #FFFFFF;
+    }
+    75%{
+        box-shadow: 0px 0px 5px 1px #FFFFFF;
+    }
+    100% {
+        box-shadow: 0px 0px 10px 1px #FFFFFF;
+    }
+  }
+
 /* .formContainer{
     padding: 12px 20px;
     border: none;
@@ -345,7 +360,8 @@ label{
     border-style: hidden;
     font-size: small;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px #2d3467;
+    outline:none;
+    box-shadow: 0px 0px 5px -2px #2d3467;
 }
 
 #button-update{
@@ -391,4 +407,17 @@ h4#email{
 
 .fa-edit{
     color: #2d3467;
+}
+
+#empty-block{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
+svg#svg-temp {
+    position: absolute;
+    width: 370px;
+    margin-top: 60px;
+    margin-left: 10px;
 }

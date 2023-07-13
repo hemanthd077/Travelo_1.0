@@ -18,10 +18,10 @@
     <p>Select To Login</p>
     <div id="user-dealer-nav">
       <form action="/dealer">
-        <button>Dealer</button>
+        <button id="dealer">Dealer</button>
       </form>
       <form action="/login">
-        <button>User</button>
+        <button id="user">User</button>
       </form>
     </div>
   </div>
@@ -32,8 +32,8 @@
     setTimeout(function() {
       document.getElementById("logo-container").style.display = "none";
       document.getElementById("content").style.display = "block";
-      document.querySelector("body").style.backgroundImage = "linear-gradient(to right, "+"#7c7e7e,#2d3465"+")";
-    }, 2000);
+      {{!-- document.querySelector("body").style.backgroundImage = "linear-gradient(to right, "+"#7c7e7e,#2d3465"+")"; --}}
+    }, 500);
   });
 </script>
 

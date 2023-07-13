@@ -4,9 +4,11 @@
 }
 
 body{
-    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+
     background-repeat: no-repeat;
-    height: 80.4vh;
+    height: 92vh;
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
@@ -15,11 +17,11 @@ body{
 #block {
     background-color: white;
     margin-left: 550px;
-    margin-top: 145px;
+    margin-top: 60px;
     width: 400px;
     padding: 30px;
     border-radius: 10px;
-    height: 445px;
+    height: 560px;
     box-shadow: 0px 0px 5px -1px #7c7e7e;
 }
 
@@ -110,7 +112,9 @@ h2#logintxt-fpwd,.logintxt-verify {
 }
 
 .loginbutton:hover,.submitbutton:hover {
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    /* background-image: linear-gradient(95deg,#5c6074, #2d3464); */
+    background: -webkit-linear-gradient(135deg,#ae006b, #2d3464);
+
     color: white;
 }
   
@@ -184,7 +188,8 @@ hr#line{
 }
 
 .verify-btn:hover{
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    /* background-image: linear-gradient(95deg,#5c6074, #2d3464); */
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
     color: white;
 }
 
@@ -292,9 +297,8 @@ hr#line{
 
 #button-home {
     position: sticky;
-    padding-left: 30px;
     height: 40px;
-    margin-top: 20px;
+    margin-top: 50px;
     width: 220px;
     border-radius: 30px;
     display: flex;
@@ -302,31 +306,90 @@ hr#line{
     color: white;
     border-style: none;
     box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
-    background: linear-gradient(275deg,#ae006b, #2d3464);
-    /* background-image: linear-gradient(45deg,#2d3465,#7c7e7e); */
-    /* background-color: #2d3465; */
+    background: linear-gradient(125deg,#2d3464, #ae006b);
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 90px;
+}
+
+#button-home:hover {
+    position: sticky;
+    padding-left: 30px;
+    height: 40px;
+    margin-top: 50px;
+    width: 220px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-style: none;
+    box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
+    background: linear-gradient(125deg,#2d3464, #ae006b);
     justify-content: flex-start;
     font-weight: 700;
     cursor: pointer;
-    margin-left: 85px;
+    margin-left: 90px;
+    .fa-long-arrow-alt-right{
+        opacity: 1;
+        position: absolute;
+        margin-left: -150px;
+        color: white;
+        animation: swipeLeft 1s ease-out infinite ;
+        width: 360px;
+    }
 }
 
 .fa-long-arrow-alt-right{
-    position: absolute;
-    margin-left: -150px;
-    color: white;
-    animation: swipeLeft 3s ease-in-out infinite ;
-    width: 360px;
+    opacity: 0;
 }
 
 @keyframes swipeLeft {
   0%{
-    transform: translateX(30px);
-    opacity: 0%;
-  }50% {
-    transform: translateX(50px);
+    transform: translateX(80px);
   }
   100% {
     transform: translateX(170px);
   }
 }
+
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #continue-google {
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px -2px rgb(0,0,0.1);
+    padding: 8px;
+    margin-left: 90px;
+    padding-left: 30px;
+    display: inline-flex;
+    gap: 10px;
+    padding-right: 30px;
+    align-items: center;
+    height: 15px;
+}
+
+#continue-google:hover{
+    background-color: rgb(234, 234, 234);
+}
+
+#continue-google:active{
+    color: #000;
+}
+
+p#ortag {
+    position: absolute;
+    margin-top: -13px;
+    margin-left: 175px;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+

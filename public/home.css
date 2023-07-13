@@ -3,6 +3,45 @@
     margin: 0px;
 }
 
+#suggestionfrom{
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    background-color: white;
+    margin-top: 50px;
+    width: 400px;
+    z-index: 2;
+    box-shadow: 0px 2px 8px -2px rgb(0,0,0.1);
+    border-radius: 0px 0px 10px 10px;
+}
+
+p#suggestion-location {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#suggestionto {
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    background-color: white;
+    margin-top: 120px;
+    width: 400px;
+    z-index: 2;
+    box-shadow: 0px 2px 8px -2px rgb(0,0,0.1);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.fa-building{
+    color: #2d3467;
+}
+
 #homenavbar {
     width: 200px;
     height: 100vh;
@@ -19,7 +58,9 @@
     margin-top: 28px;
 }
 body{
-    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+
     background-repeat: no-repeat;
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Philosopher', sans-serif; */
@@ -74,7 +115,7 @@ button#bookingbutton{
     align-items: center;
     margin-left: 15px;
     column-gap: 10px;
-    padding-left: 30px;
+    padding-left: 35px;
     cursor: pointer;
     color: white;   
 }
@@ -89,7 +130,7 @@ button#profilebutton{
     align-items: center;
     margin-left: 15px;
     column-gap: 10px;
-    padding-left: 30px;
+    padding-left: 35px;
     cursor: pointer;
 }
 
@@ -116,7 +157,8 @@ button#exitbutton {
     font-weight: 700;
     gap: 5px;
     font-size: 18px;
-    background-image: linear-gradient(275deg,#2d3464, #6e717a);
+    /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -128,16 +170,18 @@ button#exitbutton:hover{
 }
 
 .bookingdiv {
-    background-image: linear-gradient(95deg,#2d3465, #616575);
+    /* background-image: linear-gradient(95deg,#2d3465, #616575); */
+    background-color: #402c65;
+
     border-radius: 10px 0px 0px 10px;
 }
 
 #fromToBlock {
-    width: 550px;
+    width: 430px;
     height: 500px;
     display: inline-flex;
     flex-direction: column;
-    margin-left: 550px;
+    margin-left: 620px;
     margin-top: 90px;
     padding: 30px;
     border-radius: 10px;
@@ -148,7 +192,7 @@ button#exitbutton:hover{
 }
 
 #img-homepage-gif {
-    width: 610px;
+    width: 490px;
     height: 200px;
     z-index: 2;
     margin-top: -30px;
@@ -194,14 +238,14 @@ input#calander {
     width: 400px;
     border-radius: 5px;
     border-style: none;
-    height: 30px;
-    margin-top: 25px;
+    height: 25px;
+    margin-top: 10px;
     box-shadow: 0px 0px 6px -2px #2d3467;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     position:fixed;
-    left: 655px;
+    left: 665px;
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -214,7 +258,7 @@ input#calander:focus{
 
 input::-webkit-datetime-edit-fields-wrapper {
     position: relative;
-    left: 6%;
+    left: 15px;
     opacity: 80%;
 }
 input::-webkit-datetime-edit {
@@ -235,7 +279,9 @@ button#searchbutton {
 }
 
 button#searchbutton:hover{
-    background-image: linear-gradient(95deg,#2d3464, #696c78);
+    /* background-image: linear-gradient(95deg,#2d3464, #696c78); */
+    background: -webkit-linear-gradient(125deg,#ae006b, #2d3464);
+
     color: white;
 }
 
@@ -694,3 +740,40 @@ button#button-busdetial {
     transition: transform 0.3s ease-in-out;
 }
 
+p#days {
+    width: 180px;
+    padding: 10px;
+    border-radius: 5px;
+    height: 25px;
+    display: flex;
+    box-shadow: 0px 0px 6px -2px #2d3467;
+    align-items: center;
+}
+
+input#no-days,input#no-passenger {
+    border-style: none;
+    padding-left: 17px;
+    width: 140px;
+    outline: none;
+}
+
+#input-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: -40px;
+    align-items: center;
+}
+
+#inner-count-block {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.fa-calendar-days,.fa-person-walking-luggage,.fa-city{
+    margin-left: 5px;
+    color:#2d3467;
+}

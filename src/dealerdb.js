@@ -24,6 +24,9 @@ const dealerloginSchema = new mongoose.Schema({
     dealername:{
         type:String
     },
+    city:{
+        type:String,
+    },
     profileimage:{
         data:Buffer,
         ContentType:String,

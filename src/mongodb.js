@@ -29,6 +29,10 @@ const loginSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    flag:{
+        type:Boolean,
+        required:true,
+    },
 })
 
 const collection = new mongoose.model('collection1',loginSchema)
