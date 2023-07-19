@@ -4,11 +4,11 @@ mongoose.connect(`mongodb://0.0.0.0:27017/userdetails`,{
     useNewUrlParser: true,
     useUnifiedTopology:true,
 }).then(()=>{
-    console.log('dealer mongodb connected sucessfully');
+    console.log('BusDetails mongodb connected sucessfully');
 })
 .catch(()=>{
     console.error(Error);
-    console.log('failed to connect the dealer database');
+    console.log('failed to connect the BusDetails database');
 })
 
 const busDetailsSchema = new mongoose.Schema({
@@ -40,10 +40,10 @@ const busDetailsSchema = new mongoose.Schema({
     lighting:{
         type:String,
     },
-    busimage:{
+    busimage:[{
         data:Buffer,
         ContentType:String,
-    },
+    }],
 })
 
 const collection = new mongoose.model('Busimage',busDetailsSchema)

@@ -18,7 +18,7 @@
             <form action="/login" method="POST" id="loginform">
                 <h2 id="logintxt">USER LOGIN</h2><br>
                 <label for="uname">Email-Id</label>
-                <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="uname" required><br>
+                <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="uname" required autocomplete="off"><br>
                 
                 <label for="pwd">Password</label>
                 <input class="outline" type="password" placeholder="Enter your Password" name="password" id="pwd" required><br>
@@ -54,7 +54,7 @@
                 <h2 id="logintxt-fpwd">FORGOT PASSWORD</h2><br><br>
                 <form action="/fpass-email" method="post">
                     <label for="email">Email-Id</label>
-                    <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="email" required><br>
+                    <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="email" required autocomplete="off"><br>
                     <button type="submit" class="loginbutton" href="fpass-email">Next</i></button>
                 </form>
                 {{#if warning}}
@@ -75,11 +75,11 @@
                     <p class="p-verify">Please Enter the OTP sent to your registered email address.</p><br>
                     <form action="/verify-code" method="post">
                         <div class="otpInputs" >
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index0" maxlength="1" required/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index1" maxlength="1" required/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index2" maxlength="1" required/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index3" maxlength="1" required/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index4" maxlength="1" required/>
+                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index0" maxlength="1" required autocomplete="off"/>
+                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index1" maxlength="1" required autocomplete="off"/>
+                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index2" maxlength="1" required autocomplete="off"/>
+                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index3" maxlength="1" required autocomplete="off"/>
+                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index4" maxlength="1" required autocomplete="off"/>
                             </div>
                         <button class="verify-btn" type="submit">Verify</button>
                     </form><br>
@@ -89,7 +89,7 @@
                     {{/if}}
                     <p class="p-verify">Note* : Don't Refresh the Page</p>
                 </div>
-                <div class="dot-pos">
+                <br><div class="dot-pos">
                         <span class="dot"></span>
                         <span class="dot" style="background-color:#2d3467;"></span>
                         <span class="dot"></span>

@@ -14,6 +14,8 @@ router.get('/plandetail',dealerlogin.plandetail);
 
 router.get('/busdetail',dealerlogin.busdetail);
 
+router.post('/buspicadd',dealerlogin.addbusimage);
+
 router.post('/bus-img-details',dealerlogin.BusimageDetail);
 
 router.post('/edit-businfo',dealerlogin.editBusInfo);
@@ -25,6 +27,8 @@ router.post('/buspic-delete',dealerlogin.busImageDelete);
 router.post('/plandelete',dealerlogin.busPlanDelete);
 
 router.post('/busfull-delete',dealerlogin.busfullDeleteinfo);
+
+router.get('/bus-booking',dealerlogin.busbooked);
 
 
 

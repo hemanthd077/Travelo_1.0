@@ -25,6 +25,9 @@
             <form action="/busdetails">
                 <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails"><i class="fas fa-bus"></i> Add Bus</button>
             </form>   
+            <form action="/bus-booking">
+                <button id="bookingdetails{{#if busbooking}}active{{/if}}" href="/bus-booking"><i class="fa-solid fa-people-carry-box"></i> Booking</button>
+            </form>
             <form action="/dealer" class="exitdiv"> <br>
                 <button id="exitbutton"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button>
             </form>                                                      
@@ -47,27 +50,33 @@
                             </select>
                         </div>
                         <div id="plantitle">
-                            <p class="plantextcontent">No of Days :</p>
-                            <input class="planinputcontent" type="number" placeholder="Enter the No of Days" name="noofdays" required autocomplete="off">
+                            <p class="plantextcontent" >No of Days :</p>
+                            <input  class="planinputcontent" type="number" placeholder="Enter the No of Days" min="1" value="1" name="noofdays" onchange="adddayplanInput()" required autocomplete="off">
                             <p class="plantextcontent">Amount :</p>
-                            <input class="planinputcontent" type="number" placeholder="Enter the Amount" name="amount" required autocomplete="off">
+                            <input class="planinputcontent" type="number" placeholder="Enter the Amount in Rupee" name="amount" required autocomplete="off">
                         </div>
                         <div id="planlocation">
-                            <p class="plantextcontent">Itinerary Cover Location : <button class="addinput" onclick="addInput()">Add <i class="fas fa-plus"></i></button></p><br>
+                            <p class="plantextcontent">Itinerary's Main Spots : <button class="addinput" onclick="addspotInput()">Add <i class="fas fa-plus"></i></button></p><br>
                             <div id="input-container">
-                                <!-- Input tags will be added here -->
+                                <!-- Input tags for Main Spots -->
                             </div>
                         </div>
                         <input type="hidden" name="coverlocationcount" id="coverlocationcount">
-                    <div id="imagediv">
+                        <div id="dayplanlocation">
+                            <p class="plantextcontent">Add Day wise Plan :</p><br>
+                            <div id="input-container-dayplan">
+                                <!-- Input tags for Day wise plan -->
+                            </div>
+                        </div>
+                        <div id="imagediv">
                             <label  for="inputTag" id="">
-                                Select Itinerary <br/>
+                                Add Itinerary PDF<br/>
                                 <i class="fas fa-folder-plus fa-2x"></i>
                                 <input id="inputTag" type="file" name="planfile" required/>
                                 <br/>
                             </label>
                         </div>
-                        <button id="uploadbutton" href="/busdetailsupload">Upload</button>
+                        <button id="uploadbutton" href="/plandetailsupload">Upload</button>
                     </form>
                     <a id="target-page" href="/plandetail">Go to Itinerary <i class="fas fa-chevron-right"></i></i></a>
                     {{#if disclimer}}
@@ -174,7 +183,7 @@
                     </div>
                     
                         {{#if busdetail}}
-                            <div class="contentdivision2">    
+                            <div class="contentdivision2 planscroll">    
                                 {{#each busdetailArray}}
                                     <div id="search-div">
                                         <form action="/edit-businfo" method="post">
@@ -192,7 +201,7 @@
                                                         <span class="tooltiptext">Plan Avaliable for this Bus</span>  
                                                     {{/if}}
                                                     {{#if this.[9]}}
-                                                        <p id="plan-status-failure"><i class="fa-regular fa-circle-xmark fa-xs"></i> Plan Not Avaliable</p>
+                                                        <p id="plan-status-failure"><i class="fa-regular fa-circle-xmark fa-xs"></i> Plan Missing</p>
                                                         <span class="tooltiptext1">Plan Not Avaliable for this Bus Add plan</span>  
                                                     {{/if}}
                                                 </div>
@@ -208,16 +217,18 @@
                                         </form>
                                     </div>
                                 {{/each}}
-                                <div id="search-div-plus">
-                                    <a href="/busdetails" id="align-addnew" style="outline: none;">
-                                        <button id="btn-plus-1"><i class="fas fa-bus fa-2x"></i></button>
-                                        <p>Add Bus</p>
-                                    </a>
-                                </div>
+                                {{#if busarraylen}}
+                                    <div id="search-div-plus">
+                                        <a href="/busdetails" id="align-addnew" style="outline: none;">
+                                            <button id="btn-plus-1"><i class="fas fa-bus fa-2x"></i></button>
+                                            <p>Add Bus</p>
+                                        </a>
+                                    </div>
+                                {{/if}}
                             </div>
                             {{#if flag}}
                                 <div id="searchresultdiv1">
-                                   <i id="sademoji" class="fas fa-heart-broken fa-3x"></i>
+                                    <i id="sademoji" class="fa-regular fa-face-sad-tear fa-3x"></i>
                                     <h1 id="error">No Buses found on Your Company</h1>
                                     <h1 id="error1">Kindly Add the Buses</h1>
                                     <a id="target-page-1" href="/busdetails">Go to Add Buses <i class="fas fa-chevron-right"></i></a>
@@ -226,53 +237,65 @@
                         {{/if}}
 
                         {{#if plandetail}}
-                            <div class="contentdivision2">
-                                {{#each planArray}}
-                                    <div id="plan-module-outer">
-                                        <div id="plan-module-inner">
-                                            <p style="font-weight: 500; font-size:15px;">State : {{this.[0]}}</p>
-                                            <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
-                                            <button style="background-color: transparent;border-style:none;" onclick="openForm({{@index}})"><i id="plandelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
-                                            <form action="/plandelete" method="post">
-                                                <input id="input2" type="hidden" name="planindex">
-                                                <div id="button-update">
-                                                    <p id="sure-id">Are you Sure want to delete?</p>
-                                                    <div id="btn-yes-no">
-                                                        <a class="aunchor-close"><button type="button" class="btn cancel" onclick="closeForm()">NO</button></a>
-                                                        <button type="submit" class="btn" href="/plandelete" >YES</button>
+                                <div class="contentdivision2 planscroll">
+                                    {{#each planArray}}
+                                        <div id="plan-module-outer">
+                                            <div id="plan-module-inner">
+                                                <p style="font-weight: 500; font-size:15px;">State : {{this.[0]}}</p>
+                                                <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
+                                                <button style="background-color: transparent;border-style:none;" onclick="openForm({{@index}})"><i id="plandelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
+                                                <form action="/plandelete" method="post">
+                                                    <input id="input2" type="hidden" name="planindex">
+                                                    <div id="button-update">
+                                                        <p id="sure-id">Are you Sure want to delete?</p>
+                                                        <div id="btn-yes-no">
+                                                            <a class="aunchor-close"><button type="button" class="btn cancel" onclick="closeForm()">NO</button></a>
+                                                            <button type="submit" class="btn" href="/plandelete" >YES</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div style="display: flex;flex-direction:row;gap:40px">
+                                                <div>
+                                                    <div id="plan-features">
+                                                        <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p>
+                                                        <p><i class="fa-solid fa-location-arrow"></i> Plan Main Spots</p>
+                                                        <div id="plan-location-cover">
+                                                            {{#each this.[5]}}
+                                                                <p><i class="fa-solid fa-location-dot"></i> {{this}}</i></p>
+                                                            {{/each}}
+                                                        </div>
+                                                        <p><i class="fa-solid fa-tags"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>
+                                                    </div>
+                                                    <div>
+                                                        <iframe  id="busplan" src="{{this.[4]}}#toolbar=0"></iframe>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div id="plan-features">
-                                            <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p>
-                                            <p><i class="fa-solid fa-location-arrow"></i> Plan cover Location</p>
-                                            <div id="plan-location-cover">
-                                                {{#each this.[5]}}
-                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</i></p>
-                                                {{/each}}
+                                                <div id="plandetails-daywise">
+                                                    <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} Days Plan Details</p>
+                                                    <pre>{{this.[6]}}</pre>
+                                                </div>
                                             </div>
-                                            <p><i class="fa-solid fa-tags"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>
                                         </div>
-                                       <iframe id="busplan" src="{{this.[4]}}#toolbar=0" id="iframe11"></iframe>
+                                    {{/each}}
+                                    {{#if busplanarraylen}}
+                                        <div id="plan-module-outer-1">
+                                            <a href="/plan" id="align-addnew" style="outline: none;">
+                                                <button id="btn-plus-1"><i class="fas fa-file-pdf fa-2x"></i></button>
+                                                <p>Add Itinerary</p>
+                                            </a>
+                                        </div>
+                                    {{/if}}
+                                </div>
+
+                                {{#if flag}}
+                                    <div id="searchresultdiv1">
+                                        <i id="sademoji" class="fas fa-paper-plane fa-3x"></i>
+                                        <h1 id="error">No Itinerary found for Your Buses</h1>
+                                        <h1 id="error1">Kindly Add the Itinerary</h1>
+                                        <a id="target-page-1" href="/plan">Go to Add Itinerary <i class="fas fa-chevron-right"></i></a>
                                     </div>
-                                {{/each}}
-                                <div id="plan-module-outer-1">
-                                    <a href="/plan" id="align-addnew" style="outline: none;">
-                                        <button id="btn-plus-1"><i class="fas fa-file-pdf fa-2x"></i></button>
-                                        <p>Add Itinerary</p>
-                                    </a>
-                                </div>
-                            </div>
-                        
-                              {{#if flag}}
-                                <div id="searchresultdiv1">
-                                    <i id="sademoji" class="fas fa-paper-plane fa-3x"></i>
-                                    <h1 id="error">No Itinerary found for Your Buses</h1>
-                                    <h1 id="error1">Kindly Add the Itinerary</h1>
-                                    <a id="target-page-1" href="/plan">Go to Add Itinerary <i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            {{/if}}
+                                {{/if}}
                         {{/if}}
 
                         {{#if busimage}}
@@ -295,10 +318,11 @@
                                 </div>
                                <div class="img-result">
                                     {{#each busimg}}
-                                        <img id="search-div-1" src="data:{{this}}" alt="">
-                                        <button style="background-color: transparent;border-style:none;" onclick="openbusform({{@index}})"><i class="fas fa-trash-restore-alt fa-lg"></i></i></button>
+                                        <img id="search-div-1" src="data:{{this.[0]}}" alt="">
+                                        <button style="background-color: transparent;border-style:none;" onclick="openbusform({{@index}},'{{this.[1]}}')"><i class="fas fa-trash-restore-alt fa-lg"></i></i></button>
                                         <form action="/buspic-delete" method="post">
                                             <input id="input2" type="hidden" name="busidindex">
+                                            <input id="input3" type="hidden" name="picbusname" >
                                             <div id="button-update-bus">
                                                 <p id="sure-id">Are you Sure want to delete  ?</p>
                                                 <div id="btn-yes-no">
@@ -308,10 +332,8 @@
                                             </div>
                                         </form>
                                     {{/each}}
-                                    <form  action="/busdetailsupload" method="post" enctype="multipart/form-data">
-                                        <input  type="hidden"  name="busname" value="{{Busname}}">
-                                        <input  type="hidden"  name="seatcount" value="{{Busseat}}">
-                                        <input type="hidden" name="flag" value="1">
+                                    <form  action="/buspicadd" method="post" enctype="multipart/form-data">
+                                        <input id="valinsertnusname"  type="hidden"  name="busname" value="{{Busname}}">
                                         <div id="search-div-addimage">
                                             <label id="label-addimage" for="inputTag">
                                                 Add Image<br/>
@@ -319,7 +341,7 @@
                                                 <input id="inputTag" type="file" name="busimage" multiple required>
                                                 <br/>
                                             </label>
-                                            <button id="uploadbutton-1" href="/busdetailsupload">Upload</button>
+                                            <button id="uploadbutton-1" href="/buspicadd" >Upload</button>
                                         </div>
                                     </form>
                                </div>
@@ -399,6 +421,7 @@
 </body>
 
 <script>
+    
     function openForm(index) {
         var profilecont1 = document.getElementById("profilecontent");
 
@@ -420,6 +443,10 @@
         
     }
 
+    function assignbusname(busname){
+        document.getElementById('valinsertnusname').value = busname;
+    }
+
     function closeForm(){
         var profilecont1 = document.getElementById("profilecontent");
 
@@ -427,10 +454,11 @@
         profilecont1.style.animationDelay="1s"
     }
 
-    function openbusform(index) {
+    function openbusform(index,busname) {
         var profilecont1 = document.getElementById("profilecontent");
 
         document.getElementById('input2').value = index;
+        document.getElementById('input3').value = busname;
 
         document.getElementById("button-update-bus").style.display = "block";
         profilecont1.style.animationDelay="1s"
@@ -482,7 +510,7 @@
         document.getElementById("button-delete-bus").style.opacity="1";
 
         document.getElementById('contentdivision1').addEventListener('click', function(event) {
-            event.preventDefault();
+            event. ventDefault();
         });
         document.getElementById('nav').addEventListener('click', function(event) {
             event.preventDefault();
@@ -494,31 +522,55 @@
         document.getElementById("button-delete-bus").style.display = "none";
     }
 
-    let inputCount = 0;
-
-    function addInput() {
-      inputCount++;
-      
+    let inputCountspot = 1;
+    let cntspot=1;
+    addspotInput()
+    function addspotInput() {
+      inputCountspot++;
       const container = document.getElementById("input-container");
       const coverlocationcount = document.getElementById("coverlocationcount");
       const input = document.createElement("input");
       input.type = "text";
-      input.name = "location_" + inputCount;
-      coverlocationcount.value=inputCount;
+      input.name = "location_" + inputCountspot;
+      coverlocationcount.value=inputCountspot;
       input.setAttribute("placeholder", "Enter the Location");
+      input.setAttribute("required", "true");
+      input.setAttribute("autocomplete", "off");
       input.classList.add('planlocationinput');
       
       const deleteButton = document.createElement("button");
       deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
       deleteButton.classList.add('delete-button');
       deleteButton.onclick = function() {
-        container.removeChild(input);
-        container.removeChild(deleteButton);
+        if(cntspot>2){
+            container.removeChild(input);
+            container.removeChild(deleteButton);
+            cntspot--;
+        }
       };
-      
+      cntspot++;
       container.appendChild(input);
       container.appendChild(deleteButton);
     }
+    adddayplanInput()
+    function adddayplanInput(){
+        var noOfDays = document.querySelector('input[name="noofdays"]').value;
+        var dayPlanContainer = document.getElementById("input-container-dayplan");
 
+        // Clear the container
+        dayPlanContainer.innerHTML = "";
+
+        // Add textarea inputs based on the number of days
+        for (var i = 1; i <= noOfDays; i++) {
+            var textarea = document.createElement("textarea");
+            textarea.setAttribute("name", "dayPlan_" + i);
+            textarea.setAttribute("placeholder", "Enter Day " + i + " Plan");
+            textarea.setAttribute("required", "true");
+            textarea.classList.add('dayplantextarea');
+
+            dayPlanContainer.appendChild(textarea);
+        }
+    }
+    
 </script>
 </html>

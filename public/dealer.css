@@ -12,23 +12,23 @@ body{
     font-style: normal;
 }
 
-form#loginform {
+form#loginform, .contentBlock {
     display: inline-flex;
     flex-direction: column;
-    margin-left: 550px;
+    margin-left: 515px;
     margin-top: 145px;
     background-color: white;
     padding: 30px;
-    width: 400px;
+    width: 445px;
     height: 420px;
     border-radius: 10px;
 }
 
-.outline:focus{
+.outline:focus,.input-opt:focus,.input-pwd:focus{
     outline: none;
 }
 
-#uname, #pwd {
+#uname, #pwd,#email,#cpwd,.input-pwd{
     padding: 2%;
     height: 3vh;
     width: 97%;
@@ -39,8 +39,8 @@ form#loginform {
     box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
-button#loginbuttom {
-    margin-left: 105px;
+button#loginbutton,.submitbutton {
+    margin-left: 130px;
     width: 180px;
     height: 40px;
     background-color:white;
@@ -54,7 +54,7 @@ button#loginbuttom {
 }
 
 
-button#loginbuttom:hover{
+button#loginbutton:hover,.submitbutton:hover{
     background-image: linear-gradient(95deg,#5c6074, #2d3464);
 
     color: white;
@@ -64,8 +64,18 @@ label {
     margin-top: 25px;
 }
 
-h2#logintxt {
-    margin-left: 112px;
+h2#logintxt,.logintxt-verify {
+    display: flex;
+    justify-content: center;
+    /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464); */
+    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#logintxt-verify{
+    display: flex;
+    justify-content: center;
     /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
      */
     background-image: linear-gradient(45deg,#5c6074, #2d3464);
@@ -73,7 +83,17 @@ h2#logintxt {
     -webkit-text-fill-color: transparent;
 }
 
-h4#warning {
+#logintxt-fpwd {
+    display: flex;
+    justify-content: center;
+    /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+     */
+    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h4.warning {
     padding: 5px;
     display: flex;
     align-items: center;
@@ -105,7 +125,12 @@ h4#warning {
     justify-content: flex-start;
     font-weight: 700;
     cursor: pointer;
-    margin-left: 665px;
+    margin-left: 655px;
+}
+
+.otpInputs {
+    display: flex;
+    justify-content: center;
 }
 
 .fa-long-arrow-alt-right{
@@ -124,3 +149,73 @@ h4#warning {
     transform: translateX(170px);
   }
 }
+
+a#fpwd {
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+a#fpwd:hover{
+    color: #ae006b;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .dot-pos {
+    margin-top: 395px;
+    margin-left: 195px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    /* align-items: center;
+    justify-content: center; */
+    position: absolute;
+    z-index: 2;
+}
+.input-opt {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 5px;
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+}
+
+.verify-btn {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    border-style: none;
+    background-color: white;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+    color: #2d3467;
+    border: none;
+    margin-top: 50px;
+    margin-left: 147px;
+    border-radius: 5px;
+}
+
+.verify-btn:hover{
+    background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    color: white;
+}
+
+.p-verify {
+    display: flex;
+    justify-content: center;
+}
+

@@ -204,7 +204,7 @@ const changePassword =(async(req,res)=>{
                 console.log("User Password Updated Successfully");
             }
         })
-        res.redirect('/');
+        res.redirect('/login');
     }
     else{
         console.log("changepassword:"+detailsArray[2]);
@@ -227,7 +227,7 @@ const googleLogin = (async(req,res)=>{
                 detailsArray[0]=data.fname.toUpperCase();
                 detailsArray[1]=data.lname.toUpperCase();
                 detailsArray[2]=data.Email;
-                res.render('home')
+                res.render('home',{content:true})
             }
         }
         else{

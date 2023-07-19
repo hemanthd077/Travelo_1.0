@@ -1,6 +1,6 @@
 const busdetails = require('../src/busDetails')
 const plandetails = require('../src/planDetails')
-const Login = require('../controller/dealer');
+const Login = require('../controller/dealer')
 const dealer = require('../src/dealerdb')
 const fs = require('fs');
 const multer  = require('multer');
@@ -51,8 +51,18 @@ const plandetailsupload = async(req,res)=>{
         else{
             let str ="";
             for(let i=0;i<req.body.coverlocationcount;i++){
-                str+=req.body["location_"+(i+1)];
-                str+="-"
+                if(req.body["location_"+(i+1)]){
+                    str+=req.body["location_"+(i+1)];
+                    str+="-"
+                }
+            }
+            let dayplan="";
+            for(let i=1;i<=req.body.noofdays;i++){
+                if(req.body["dayPlan_"+i]){
+                    dayplan+="Day "+i+":\n    ";
+                    dayplan+=req.body["dayPlan_"+i];
+                    dayplan+="\n\n";
+                }
             }
             const newvalues = new plandetails({
                 id:Date.now().toString(36),
@@ -62,6 +72,7 @@ const plandetailsupload = async(req,res)=>{
                 noofdays:req.body.noofdays,
                 price:req.body.amount,
                 coverlocation:str,
+                dayplans:dayplan,
                 planfile:{
                     data:fs.readFileSync('uploads/plans/'+req.file.originalname),
                     ContentType:'file/pdf'
@@ -95,31 +106,32 @@ const busdetailsupload = (req,res)=>{
         else{
             let imageArray = files.map((file)=>{
                 return img = file;
-
             })
             const data = await busdetails.find({busname:req.body.busname});
             if(data.length<6){
-                imageArray.map((src,index)=>{
-                    const newvalues = new busdetails({
-                        id:Date.now().toString(36)+""+index,
-                        busname:req.body.busname,
-                        seatcount:req.body.seatcount,
-                        dealerid:detailsArray[0],
-                        musicsystem:req.body.soundsystem,
-                        acornonac:req.body.acornonac,
-                        seattype:req.body.seattype,
-                        waterfilter:req.body.waterfilter,
-                        lighting:req.body.lighting,
-                        busimage:{
-                            data:fs.readFileSync('uploads/busimages/'+src.filename),
-                            ContentType:'image/png'
-                        },
-                    })
-
-                    newvalues.save().then(()=>{
-                        console.log('successfully uploaded '+(index+1)+' photo')
-                    }).catch(err=>console.log(err))
+                const newvalues = new busdetails({
+                    id:Date.now().toString(36),
+                    busname: req.body.busname,
+                    seatcount: req.body.seatcount,
+                    dealerid: detailsArray[0],
+                    musicsystem: req.body.soundsystem,
+                    acornonac: req.body.acornonac,
+                    seattype: req.body.seattype,
+                    waterfilter: req.body.waterfilter,
+                    lighting: req.body.lighting,
+                    busimage: [],
                 })
+
+                imageArray.forEach((src) => {
+                    const newImage = {
+                      data: fs.readFileSync('uploads/busimages/' + src.filename),
+                      ContentType: 'image/png'
+                    }
+                    newvalues.busimage.push(newImage);
+                });
+                newvalues.save().then(()=>{
+                    console.log('successfully uploaded '+(imageArray.size)+' photo')
+                }).catch(err=>console.log(err))
                 if(req.body.flag==="1"){
                     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
                         dealername=data.dealername.toUpperCase();
@@ -127,7 +139,7 @@ const busdetailsupload = (req,res)=>{
                         await busdetails.find({busname:req.body.busname}).then(async(data1)=>{
                             for (let index = 0; index < data1.length; index++) {
                                 busid[index] = data1[index].id;
-                                busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
+                                busimg[index] = data1[index].busimage[0].ContentType+";base64,"+data1[index].busimage[0].data.toString('base64');   
                             }
                         })
                         res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname:req.body.busname,Busseat:req.body.seatcount,'busimage':true})
@@ -232,8 +244,9 @@ const busdetail = async(req,res)=>{
                     else{
                         temp[6] = "No Colour Lighting";
                     }
-
-                    temp[7] = buscontent[0].busimage.ContentType+";base64,"+buscontent[0].busimage.data.toString('base64');
+                    if(!(buscontent[0].busimage.length===0)){
+                        temp[7] = buscontent[0].busimage[0].ContentType+";base64,"+buscontent[0].busimage[0].data.toString('base64');
+                    }
                     busdetailArray[index]=temp;
                 })
             }
@@ -242,7 +255,7 @@ const busdetail = async(req,res)=>{
             res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,flag:true})
         }
         else{
-            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busdetail:true,busdetailArray,busarraylen:true,flag:false})
         }
     }).catch(err=>{
         console.log('busdetail not found!!!!'+err)
@@ -277,6 +290,8 @@ const plandetail = async(req,res)=>{
                 const pdfData = detail[index].planfile.data.toString('base64');
                 temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
                 temp[5] = coverlocation;
+                let paragraph = detail[index].dayplans;
+                temp[6] = paragraph;
                 planid[index]=detail[index].id;
                 planArray[index] = temp; 
             }
@@ -285,7 +300,7 @@ const plandetail = async(req,res)=>{
             res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,flag:true})
         }
         else{
-            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray,arrayplan:true})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray,arrayplan:true,busplanarraylen:true,flag:false})
         }
     }).catch(err=>{
         console.log('plan details not found!!!'+err)
@@ -300,12 +315,15 @@ const BusimageDetail = (async(req,res)=>{
         let Busname = req.body.busname;
         let Busseat;
         let busimg = [];
-        busid =[];
-        await busdetails.find({busname:req.body.busname}).then(async(data1)=>{
-            Busseat = data1[0].seatcount;
-            for (let index = 0; index < data1.length; index++) {
-                busid[index] = data1[index].id;
-                busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
+        busid
+        await busdetails.findOne({busname:req.body.busname}).then(async(data1)=>{
+            Busseat = data1.seatcount;
+            busid= data1.id;
+            for (let index = 0; index < data1.busimage.length; index++) {
+                temp = []
+                temp[0]= data1.busimage[index].ContentType+";base64,"+data1.busimage[index].data.toString('base64');   
+                temp[1] = Busname;
+                busimg[index] = temp;
             }
         })
         res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true})
@@ -319,7 +337,7 @@ const editBusInfo = (async(req,res)=>{
         dealername=data.dealername.toUpperCase();
         await busdetails.findOne({busname:req.body.busname}).then(async(data1)=>{
             seatCount=data1.seatcount;
-            img=data1.busimage.ContentType+";base64,"+data1.busimage.data.toString('base64');
+            img=data1.busimage[0].ContentType+";base64,"+data1.busimage[0].data.toString('base64');
         })
         res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busname:req.body.busname,seatCount,editbusinfo:true,img})
     })
@@ -363,31 +381,56 @@ const updatebusinfo = (async(req,res)=>{
 
 const busImageDelete = (async(req,res)=>{
     console.log("index:"+req.body.busidindex);
+    console.log("busname:"+req.body.picbusname);
     try {
-        let Busname;
+        let Busname = req.body.picbusname;
         let Busseat;
+        let imageid;
 
-        await busdetails.findOne({id:busid[req.body.busidindex]}).then(async(buscontent)=>{
-            Busname = buscontent.busname;
+        
+        await busdetails.findOne({busname:req.body.picbusname}).then(async(buscontent)=>{
             Busseat = buscontent.seatcount;
+            busid = buscontent._id;
+            imageid = buscontent.busimage[req.body.busidindex]._id;
         })
 
-        let result = await busdetails.deleteOne({ id: busid[req.body.busidindex]});
-        console.log("Successfully Deleted the bus Image.");
+        const updateQuery = {
+            $pull: {
+              busimage: { _id: imageid } // Use the busId to match the document and remove the specific index
+            }
+          };
+
+          busdetails.updateOne({ _id: busid }, updateQuery)
+            .then(() => {
+                console.log('Image deleted successfully');
+            })
+            .catch(err => {
+                console.log('Error:', err);
+            });
+
+        // let result = await busdetails.deleteOne({ _id: imageid});
+        // console.log("Successfully Deleted the bus Image.");
         
         await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
             dealername=data.dealername.toUpperCase();
             let busimg = [];
-            await busdetails.find({busname:Busname}).then(async(data1)=>{
-                for (let index = 0; index < data1.length; index++) {
-                    busid[index] = data1[index].id;
-                    busimg[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');   
+            busid=0;
+            await busdetails.findOne({busname:Busname}).then(async(data1)=>{
+                Busseat = data1.seatcount;
+                busid= data1.id;
+                for (let index = 0; index < data1.busimage.length; index++) {
+                    temp = []
+                    temp[0]= data1.busimage[index].ContentType+";base64,"+data1.busimage[index].data.toString('base64');   
+                    temp[1] = Busname;
+                    busimg[index] = temp;
                 }
             })
-            res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true,dealerid:data.dealerid})
+            res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true})
         }).catch(err=>{
-            console.log('Bus Image details not found!!!'+err);
+            console.log('Bus Image details not found!!!'+err)
         })
+
+        
     
     } catch (error) {
         console.log("Error while Deleteing the bus image: "+error);
@@ -417,9 +460,79 @@ const busfullDeleteinfo = (async(req,res)=>{
     } catch (error) {
         console.log("Error occur while deleting totaal businfo in plan and bus DB : "+error);
     }
-    
 })
 
+const busbooked = (async(req,res)=>{
+    res.render('dealerHome',{busbooking:true})
+})
+
+
+const addbusimage = (req,res)=>{
+        // console.log(data);
+        upload1(req,res,async(err)=>{
+            let files = req.files
+            // console.log("busname : "+req.body.busname);
+            // console.log(files);
+            if(err){
+                res.render('dealerHome',{disclimerfail:true,'res':'Image Limit is 6' , busdetails:true})
+            }
+            else{
+                let imageArray = files.map((file)=>{
+                    return img = file;
+                })
+                buspicarray = [];
+                imageArray.forEach((src,index) => {
+                    
+                    const newImage = {
+                      data: fs.readFileSync('uploads/busimages/' + src.filename),
+                      ContentType: 'image/png'
+                    }
+                    buspicarray[index]=newImage;
+                })
+                const details = await busdetails.findOne({busname:req.body.busname});
+                if(details){
+                    
+
+                    const newvalues2 ={$push:{
+                        busimage:buspicarray,
+                    }};
+                    const filter2 = {_id : details._id}
+                    const options2 = { upsert: false};  
+                    await busdetails.updateMany(filter2,newvalues2,options2,(err , collection) => {
+                        if(err){
+                            console.log("Error Occurred while updating bus information in plan database: "+err);
+                            res.redirect('/busdetail')
+                        }
+                    })
+
+                    await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
+                        dealername=data.dealername.toUpperCase();
+                        let Busname=req.body.busname;
+                        let Busseat;
+                        let busimg = [];
+                        busid
+                        await busdetails.findOne({busname:req.body.busname}).then(async(data1)=>{
+                            Busseat = data1.seatcount;
+                            busid= data1.id;
+                            for (let index = 0; index < data1.busimage.length; index++) {
+                                temp = []
+                                temp[0]= data1.busimage[index].ContentType+";base64,"+data1.busimage[index].data.toString('base64');   
+                                temp[1] = Busname;
+                                busimg[index] = temp;
+                            }
+                        })
+                        res.render('dealerHome',{dealerprofile:true,dealername,data,dealercity:data.city,value:data.profileimage.data.toString('base64'),email:detailsArray[0],busimg,Busname,Busseat,'busimage':true})
+                    }).catch(err=>{
+                        console.log('Bus Image details not found!!!'+err)
+                    })
+                    
+                }
+                else{
+                    console.log("Bus Details Not Found");
+                }
+            }
+        })
+    }
 
 module.exports = {
     plandetailsupload,
@@ -434,4 +547,6 @@ module.exports = {
     busImageDelete,
     busPlanDelete,
     busfullDeleteinfo,
+    busbooked,
+    addbusimage,
 };

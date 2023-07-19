@@ -38,10 +38,14 @@
                 <form action="/search" method="post" id="fromToBlock">
                     <img id="img-homepage-gif" src="/videos/homepage-gif.gif" alt="gif"><br>
                     <div id="input-content">
-                        <p id="fromtext"><i class="fa-solid fa-city"></i><input type="text" id="from" placeholder="From" name="source" required autocomplete="off"></p>
+                        <input type="hidden" name="fromdistrict" id="fromdistrict">
+                        <input type="hidden" name="fromstate" id="fromstate">
+                        <p id="fromtext"><i class="fa-solid fa-city"></i><input type="text" id="from" placeholder="Enter the Pick Up Location" name="source" required onchange="handleInputChange()" autocomplete="off"></p>
                         <div id="suggestionfrom"></div>
                         <button id="swapbutton"  onclick="swapInputs()" type="button"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button>
-                        <p id="totext"><i class="fa-solid fa-city"></i><input type="text" id="to" placeholder="To" name="destination" required autocomplete="off"></p>
+                        <input type="hidden" name="todistrict" id="todistrict">
+                        <input type="hidden" name="tostate" id="tostate">
+                        <p id="totext"><i class="fa-solid fa-city"></i><input type="text" id="to" placeholder="Enter the Destination (City/State/Town)" name="destination" required autocomplete="off" onchange="handleInputChange()"></p>
                         <div id="suggestionto"></div>
                         <input type="date" id="calander" name="date" required>
                         <div id="inner-count-block">
@@ -65,7 +69,7 @@
                         <form action="/search" method="post" id="swap-source-destination">
                         <div id="source-place">
                             <p>From</p>
-                            <p id="source-place-1">{{source_destination.[3]}}<input type="hidden" id="from" placeholder="From" name="source" value="{{source_destination.[1]}}" required></p>
+                            <p id="source-place-1">{{source_destination.[3]}}<input type="hidden" id="from" placeholder="From" name="source" value="{{source_destination.[1]}}"  required></p>
                         </div>
                             <button href="/search" id="swap"><i class="fa-solid fa-right-left"></i></button>
                         <div id="destination-place">
@@ -197,6 +201,7 @@
     let slideIndex = 0;
     let isRotated = false;
     let val=0;
+    let str;
     const inputfrom = document.getElementById("from");
     inputfrom.addEventListener("input", startfunfrom);
 
@@ -206,12 +211,25 @@
     showSlides();
 
     function swapInputs() {
-        var input1 = document.getElementById('from');
-        var input2 = document.getElementById('to');
-        
-        var temp = input1.value;
-        input1.value = input2.value;
-        input2.value = temp;
+        let fromdistrict = document.getElementById("fromdistrict");
+        let fromlocation = document.getElementById("from");
+        let fromstate = document.getElementById("fromstate");
+        let todistrict = document.getElementById("todistrict");
+        let tolocation = document.getElementById("to");
+        let tostate = document.getElementById("tostate");
+
+        var temp = fromdistrict.value;
+        fromdistrict.value = todistrict.value;
+        todistrict.value = temp;
+
+        temp = fromlocation.value;
+        fromlocation.value = tolocation.value;
+        tolocation.value = temp;
+
+        var temp = fromstate.value;
+        fromstate.value = tostate.value;
+        tostate.value = temp;
+
         val+=180;
         if (!isRotated) {
             rotateMe.style.transform = `rotate(${val}deg)`;
@@ -235,12 +253,12 @@
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex-1].style.display = "block";  
-        dots[slideIndex-1].className += " active";
+        dots[slideIndex-1].className += "active";
         setTimeout(showSlides, 2000);
     }
 
     //suggestion for from input tag
-    {{!-- function startfunfrom(){
+    function startfunfrom(){
       const targetElement = document.getElementById('suggestionfrom');
         var requestOptions = {
         method: 'GET',
@@ -252,8 +270,10 @@
 
           if (suggestions.length > 0) {
             const suggestionsHtml = suggestions.map((suggestion,index) => {
-              const location = suggestion.properties.formatted;
-              return `<p id="suggestion-location" onclick="assignValue(${location})><i class="fa-solid fa-building"></i> ${location}</p>`;
+              const location = suggestion.properties.formatted; 
+              district =  suggestion.properties.state_district;
+              state =  suggestion.properties.state;
+              return `<button id="suggestionfrombutton" onclick="assignValuefrom('${location}','${district}','${state}')"><p id="suggestion-location"><i class="fa-solid fa-building"></i> ${location}</p></button>`;
             }).join('');
             targetElement.innerHTML = suggestionsHtml;
           } else {
@@ -277,28 +297,65 @@
         var requestOptions = {
         method: 'GET',
       };
-      fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${inputto.value}&apiKey=da5be62269d9452c8acdd8005a75dd3f`, requestOptions)
-        .then(response => response.json()) 
-        .then(data => {
-          const suggestions = data.features;
+      if(inputto.value.length>0){
+            fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${inputto.value}&apiKey=da5be62269d9452c8acdd8005a75dd3f`, requestOptions)
+            .then(response => response.json()) 
+            .then(data => {
+            const suggestions = data.features;
+            if (suggestions.length > 0) {
+                const suggestionsHtml = suggestions.map(suggestion => {
+                const location = suggestion.properties.formatted; 
+                district =  suggestion.properties.state_district;
+                state =  suggestion.properties.state;
+                return `<button id="suggestiontobutton" onclick="assignValueTo('${location}','${district}','${state}')"><p id="suggestion-location"><i class="fa-solid fa-building"></i> ${location}</p></button>`;
+                }).join('');
+                console.log(location)
+                targetElement.innerHTML = suggestionsHtml;
+            }
+            else {
+                targetElement.innerHTML = '';
+            }
+            })
+            .catch(error => {
+            console.error('Error fetching data:', error);
+            });
+        }
+    }
 
-          if (suggestions.length > 0) {
-            const suggestionsHtml = suggestions.map(suggestion => {
-              const location = suggestion.properties.formatted;
-              return `<p id="suggestion-location"><i class="fa-solid fa-building"></i> ${location}</p>`;
-            }).join('');
-            console.log(location)
-            targetElement.innerHTML = suggestionsHtml;
-          }
-          else {
-            targetElement.innerHTML = '';
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    } --}}
+    function assignValuefrom(location,district,state) {
+        let fromdistrict = document.getElementById("fromdistrict");
+        let fromlocation = document.getElementById("from");
+        let fromstate = document.getElementById("fromstate");
+        fromstate.value = state;
+        fromdistrict.value = district;
+        from.value = location;
+        console.log("Fromlocation:"+from.value);
+        console.log("\nFromdistrict:"+fromdistrict.value);
+        console.log("\nFromstate:"+fromstate.value);
+        fromlocation.onchange();
+        const targetElement = document.getElementById('suggestionfrom');
+        targetElement.innerHTML = '';
+    }
 
+    function assignValueTo(location,district,state) {
+        let todistrict = document.getElementById("todistrict");
+        let tolocation = document.getElementById("to");
+        let tostate = document.getElementById("tostate");
+        tostate.value = state;
+        todistrict.value = district;
+        to.value = location;
+        console.log("Tolocation:"+to.value);
+        console.log("\nTodistrict:"+todistrict.value);
+        console.log("\nTostate:"+tostate.value);
+        tolocation.onchange();
+        const targetElement = document.getElementById('suggestionto');
+        targetElement.innerHTML = '';
+    }
+
+    function handleInputChange() {
+        
+    }
+    
 </script>
 
 </html>

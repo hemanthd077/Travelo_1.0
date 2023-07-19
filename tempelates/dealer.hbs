@@ -12,20 +12,131 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form action="/dealerlogin" method="POST" id="loginform">   
-        <h2 id="logintxt">DEALER LOGIN</h2>
-        <label for="Email">Dealer-Id</label>
-        <input class="outline" type="email" placeholder="Type your Dealer-Id" name="dealerid" id="uname" required>
-        
-        <label for="password">Password</label>
-        <input class="outline" type="password" placeholder="Type your Password" name="password" id="pwd" required>
-        {{#if control}}
-            <h4 id="warning">{{res}}</h4>
-        {{/if}}
-        <button type="submit" id="loginbuttom" href="/dealerlogin">Login</button>
-    </form>
-    <form action="/">
-        <button id="button-home">Select the Login <i class="fas fa-long-arrow-alt-right fa-lg"></i></button>
-    </form>
+    {{#if login}}
+        <form action="/dealerlogin" method="POST" id="loginform">   
+            <h2 id="logintxt">DEALER LOGIN</h2>
+            <label for="Email">Dealer-Id</label>
+            <input class="outline" type="email" placeholder="Type your Dealer-Id" name="dealerid" id="uname" required autocomplete="off">
+            
+            <label for="password">Password</label>
+            <input class="outline" type="password" placeholder="Type your Password" name="password" id="pwd" required>
+            <a id="fpwd" href="/dealer-forgetpassword">Forget Password ?</a>
+            {{#if control}}
+                <h4 class="warning">{{res}}</h4>
+            {{/if}}
+            <button type="submit" id="loginbutton" href="/dealerlogin">Login</button>
+        </form>
+        <form action="/">
+            <button id="button-home">Select the Login <i class="fas fa-long-arrow-alt-right fa-lg"></i></button>
+        </form>
+    {{/if}}
+
+    {{#if fpassword}}
+        <div class="contentBlock">
+            <h2 id="logintxt-fpwd">FORGOT PASSWORD</h2><br><br>
+            <form action="/fpass-email-dealer" method="post">
+                <label for="email">Email-Id</label>
+                <input class="outline" type="email" placeholder="Enter your Email-Id" name="dealerid" id="email" required autocomplete="off"><br>
+                <button type="submit" id="loginbutton" href="fpass-email">Next</i></button>
+            </form>
+            {{#if warning}}
+                <br><h4 class="warning">Email ID is Invalid or Not Found</h4>
+            {{/if}}
+            <br><div class="dot-pos">
+                <span class="dot" style="background-color: #2d3467;"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div><br>
+        </div>
+    {{/if}}
+
+    {{#if verificationCode}}
+        <div class="contentBlock">
+            <h2 id="logintxt-verify">VERIFICATION</h2><br>
+            <input type="hidden" name="emailid" value="{{email}}">
+            <p class="p-verify">Please Enter the OTP sent to your registered email address.</p><br>
+            <form action="/verify-code-dealer" method="post">
+                <div class="otpInputs" >
+                    <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index0" maxlength="1" required autocomplete="off"/>
+                    <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index1" maxlength="1" required autocomplete="off"/>
+                    <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index2" maxlength="1" required autocomplete="off"/>
+                    <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index3" maxlength="1" required autocomplete="off"/>
+                    <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index4" maxlength="1" required autocomplete="off"/>
+                    </div>
+                <button class="verify-btn" type="submit">Verify</button>
+            </form><br>
+            
+            {{#if invalid}}
+                <h4 class="warning">Code Not Matched</h4>
+            {{/if}}
+            <p class="p-verify">Note* : Don't Refresh the Page</p>
+            <div class="dot-pos">
+                    <span class="dot"></span>
+                    <span class="dot" style="background-color:#2d3467;"></span>
+                    <span class="dot"></span>
+            </div><br>
+        </div>
+    {{/if}}
+
+    {{#if changepwd}}
+        <div class="contentBlock">
+            <form action="/update-password-dealer" method="post" class="updateBlock">
+                <h2 class="logintxt-verify">CHANGE PASSWORD</h2><br>
+                <input type="hidden" name="dealerid" value="{{email}}">
+                <div id="cpwd-content">
+                    <label for="cpwd">Password</label>
+                    <input class="input-pwd" type="text" placeholder="Enter the New Password" name="cpwd" autocomplete="off"><br><br>
+                    
+                    <label for="rpwd">Re-Enter Password</label>
+                    <input class="input-pwd" type="password" placeholder="Re-Enter the Password" name="rpwd" autocomplete="off"><br>
+                </div>
+                <button class="submitbutton" type="submit" href="/update-password-dealer">Save</button>
+            </form><br>
+            {{#if invalid}}
+                <h4 class="warning">Code Not Matched</h4>
+            {{/if}}
+            <div class="dot-pos">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot" style="background-color: #2d3467;"></span>
+            </div>
+        </div>
+    {{/if}}
+
 </body>
+
+<script>
+    const otpInputs = document.querySelectorAll('.otpInputs .input-opt');
+
+    otpInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            const value = e.target.value;
+
+            if (value.length === 1) {
+                if (index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                } else {
+                    otpInputs[index].blur();
+                }
+            }
+
+            if (value === '') {
+                if (index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            const value = e.target.value;
+
+            if (e.key === 'Backspace' && value === '') {
+                if (index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            }
+        });
+    });
+</script>
+
 </html>
