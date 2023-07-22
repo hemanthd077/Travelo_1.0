@@ -5,6 +5,9 @@ const axios = require('axios');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
+require('dotenv').config();
+const TRANSPORT_USER = process.env.EMAILTRANSPORT_USER
+const TRANSPORT_PASSWORD = process.env.EMAILTRANSPORT_PASSWORD;
 
 function generate() {
     return Math.floor(Math.random() * 90000) + 10000;
@@ -16,8 +19,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure:true,
     auth: {
-      user: 'traveloindia01@gmail.com',
-      pass: 'xnxzxcsuxtidzkvk'
+        user: TRANSPORT_USER,
+        pass: TRANSPORT_PASSWORD
     },
   });
 
@@ -72,12 +75,13 @@ const fpass_nodemail=(async(req,res)=>{
         if (decodedToken && decodedToken.userId) {
             usercode = parseInt(decodedToken.userId);
         }
-
-        if (isNaN(usercode)) {
-        console.log('Invalid code');
-        } else {
         console.log('Dealer ID code :', usercode);
-        }
+
+        // if (isNaN(usercode)) {
+        // console.log('Invalid code');
+        // } else {
+        // console.log('Dealer ID code :', usercode);
+        // }
         
         const mailOptions = {
             from: 'traveloindia01@gmail.com',

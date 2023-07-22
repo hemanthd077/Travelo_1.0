@@ -9,73 +9,101 @@ function casedetective(a){
     return newGreeting = capFirstLetter + restOfGreeting; 
 }
 
+function isBusAvailable(start, end,booking) {
+    if(!(booking)){
+        return true;
+    }
+
+    const conflictingBooking = (start >= booking.startdate && start <= booking.endDate) ||(end >= booking.startdate && end <= booking.endDate) ||(start <= booking.startdate && end >= booking.endDate)
+  
+    return !conflictingBooking;
+}
+
+
+function calculateNextNthDate(startDate, n) {
+  const currentDate = new Date(startDate);
+  
+  const currentDay = currentDate.getDate();
+  
+  currentDate.setDate(currentDay + n);
+  
+  return currentDate.toDateString();
+}
+
+
 let busnamearr = [];
 let buscontent = [];
 let date;
 const getin = async(req,res)=>{
     let destination = req.body.destination.toLowerCase();
-    const data = await plandetails.find({city:destination})
     let source_destination = [];
-    source_destination[0] = req.body.source;
-    source_destination[1]= req.body.destination;
-    source_destination[2]=req.body.date;
+    source_destination[0] = req.body.fromstate;
+    source_destination[1]= req.body.fromdistrict;
+    source_destination[2] = req.body.source;
+    source_destination[3]= req.body.tostate;
+    source_destination[4] = req.body.destination;
+    source_destination[5] = req.body.tocity;
+    source_destination[6]=req.body.date;
     date=req.body.date;
-    source_destination[3] = casedetective(req.body.source);
-    source_destination[4] = casedetective(req.body.destination);
+    source_destination[7] = casedetective(req.body.source);
+    source_destination[8] = casedetective(req.body.destination);
 
+
+    let sourceCity = req.body.fromdistrict.split(' ');
+    sourceCity[0] = sourceCity[0].toLowerCase();
+    let destination_place = req.body.tocity.toLowerCase();
+    console.log("City:"+sourceCity[0]);
+    let bus_data_index=0;
     buscontent = [];
-    if(data.length>0){
-        
-        for (let ind = 0; ind < data.length; ind++) {
-            const busdata = await busdetails.find({busname:data[ind].busname});
-            let temp = [];
-            const dealer = await dealerdetails.findOne({dealerid:busdata[0].dealerid});
-            if(busdata.length>0) {
-                temp[0] = dealer.profileimage.ContentType+";base64,"+dealer.profileimage.data.toString('base64');
-                temp[1] = data[ind].busname.toUpperCase();
-                temp[2] = casedetective(req.body.source);
-                busnamearr[ind] = data[ind].busname;
-                temp[3] = casedetective(req.body.destination);
-                temp[4] = busdata[0].seatcount;
-                temp[5] = busdata[0].busimage.ContentType+";base64,"+busdata[0].busimage.data.toString('base64');
-                buscontent[ind]=temp;
-                
-            }
+    await dealerdetails.find({city:sourceCity[0]}).then(async(dealerdata)=>{
+        for(let index=0;index<dealerdata.length;index++){
+            await plandetails.find({dealerid:dealerdata[index].dealerid}).then(async(data)=>{
+                if(data){
+                    for(let ind=0;ind<data.length;ind++){
+                        console.log("id:"+data[ind].id);
+                        let cover_location=[];
+                        let str = data[ind].coverlocation.split('-');
+                        let locatoion_index=0;
+                        for(let i=0;i<str.length-1;i++){
+                            if(str[i]!='')
+                                cover_location[locatoion_index++] = str[i];
+                        }
+                        
+                        console.log("Destination:"+destination_place);
+                        for(let i=0;i<cover_location.length;i++){
+                            if( destination_place === cover_location[i]){
+                                await busdetails.findOne({id:data[ind].id}).then(async(busdata)=>{
+                                    let busStatus = await busbookingstatus.findOne({busid:busdata.id});
+                                    if(isBusAvailable(req.body.date,calculateNextNthDate(req.body.date,req.body.days),busStatus.bookings)){
+                                        let temp = [];
+                                        let dealerdata = await dealerdetails.findOne({dealerid:busdata.dealerid});
+                                        temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
+                                        temp[1] = data[ind].busname.toUpperCase();
+                                        temp[2] = casedetective(req.body.source);
+                                        busnamearr[ind] = data[ind].busname;
+                                        temp[3] = casedetective(req.body.destination);
+                                        temp[4] = busdata.seatcount;
+                                        if(busdata.busimage){
+                                            temp[5] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
+                                        }
+                                        buscontent[bus_data_index++]=temp;
+                                    }
+                                })     
+                            }
+                        }
+                    }
+                }
+            })
         }
-
-        const state = buscontent.length===0;
-        if(state)
-            return res.render('home',{'res':'No Buses Avaliable',error:true,searchresult:true})
-        let ts = Date.now();
-
-        let date_time = new Date(ts);
-        let date = (date_time.getDate()+"").padStart(2,"0");
-        let month = (date_time.getMonth() + 1+"").padStart(2, "0");
-        let year = (date_time.getFullYear()+"").padStart(4,"0");
-        const currentdate = year+"-"+month+"-"+date 
-
-        console.log('date:'+currentdate);
-        console.log('userdate:'+req.body.date);
-        const datearr = (req.body.date).split("-"); 
-
-        if(datearr[0] > year &&  datearr[2] > date){
-            res.render('home',{result:true,buscontent,'city':data.city,'currentdate':currentdate,searchresult:true,source_destination})
-        }
-        else if(year==year){
-            if(datearr[1]>month || (datearr[1]==month && datearr[2]>date)){
-                res.render('home',{result:true,buscontent,'city':data.city,currentdate,searchresult:true,source_destination})
-            }
-            else{
-                res.render('home',{'res':'No Buses Avaliable',error:true,searchresult:true,source_destination})
-            }
-        }
-        else{
-            res.render('home',{'res':'No Buses Avaliable',error:true,searchresult:true,source_destination})
-        }
+    })
+    console.log("length : "+buscontent.length);
+    if(buscontent.length===0){
+        res.render('home',{'res':'No Buses Found',error:true,searchresult:true,source_destination})
     }
     else{
-        res.render('home',{'res':'No Buses Avaliable',error:true,searchresult:true,source_destination})
+        res.render('home',{result:true,buscontent,'city':sourceCity[0],searchresult:true,source_destination})               
     }
+
 }
 
 const getImg = async(req,res)=>{

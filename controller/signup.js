@@ -5,14 +5,19 @@ const fs = require('fs')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
+require('dotenv').config();
+const TRANSPORT_USER = process.env.EMAILTRANSPORT_USER
+const TRANSPORT_PASSWORD = process.env.EMAILTRANSPORT_PASSWORD;
+
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     port: 465,
     secure:true,
     auth: {
-      user: 'traveloindia01@gmail.com',
-      pass: 'xnxzxcsuxtidzkvk'
+      user: TRANSPORT_USER,
+      pass: TRANSPORT_PASSWORD
     },
   });
 
@@ -42,14 +47,14 @@ const signup = async (req,res)=>{
             arr = [];
             arr[0] = req.body;
 
-            const payload = { userId: generate()};
-            const secretKey = 'your_valid_secret_key';
+            const payload = { userId: req.body.Email};
+            const secretKey = generate().toString();
             const options = { expiresIn: '60s' }; // Token expiration time
 
             token = jwt.sign(payload, secretKey, options);
             const decodedToken = jwt.decode(token);
             if (decodedToken && decodedToken.userId) {
-                usercode = parseInt(decodedToken.userId);
+                usercode = secretKey;
             }
 
             if (isNaN(usercode)) {
@@ -174,7 +179,7 @@ const verify = async (req,res)=>{
     console.log("verificationCode:" + verificationCode);
     console.log("usertoken:"+ usercode);
     let code = usercode.toString()
-    if(verificationCode=== code){
+    if(verificationCode === code){
         const hashedpassword = await bcrypt.hash(arr[0].password, 10);
         arr[0].password = hashedpassword.toString();
         

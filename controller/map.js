@@ -1,5 +1,8 @@
 const axios = require('axios');
 
+require('dotenv').config();
+const X_RapidAPI_Key = process.env.X_RAPIDAPI_KEY
+const X_RapidAPI_Host = process.env.X_RAPIDAPI_HOST
 
 const options = {
     method: 'GET',
@@ -9,8 +12,8 @@ const options = {
       destinations: '11.00456,76.961632'
     },
     headers: {
-      'X-RapidAPI-Key': 'd849f031bfmshb956c3a613f59b6p166679jsna7a2bb5e751e',
-      'X-RapidAPI-Host': 'trueway-matrix.p.rapidapi.com'
+      'X-RapidAPI-Key': X_RapidAPI_Key,
+      'X-RapidAPI-Host': X_RapidAPI_Host
     }
   };
 

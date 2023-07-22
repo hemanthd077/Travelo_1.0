@@ -2,6 +2,7 @@ const busdetails = require('../src/busDetails')
 const plandetails = require('../src/planDetails')
 const Login = require('../controller/dealer')
 const dealer = require('../src/dealerdb')
+const busbookingstatus = require('../src/busBookingStatusdb')
 const fs = require('fs');
 const multer  = require('multer');
 const { log } = require('console');
@@ -64,8 +65,20 @@ const plandetailsupload = async(req,res)=>{
                     dayplan+="\n\n";
                 }
             }
+
+            let id_bus;
+            await busdetails.find({dealerid:detailsArray[0]}).then((data)=>{
+                if(data){
+                    for(let i =0;i<data.length;i++){
+                        if(data[i].busname===req.body.busname){
+                            id_bus= data[i].id;
+                        }
+                    }
+                }
+            })
+
             const newvalues = new plandetails({
-                id:Date.now().toString(36),
+                id:id_bus,
                 busname:req.body.busname,
                 dealerid:detailsArray[0],
                 state:req.body.state,
@@ -108,9 +121,10 @@ const busdetailsupload = (req,res)=>{
                 return img = file;
             })
             const data = await busdetails.find({busname:req.body.busname});
+            let busid_reference = Date.now().toString(36);
             if(data.length<6){
                 const newvalues = new busdetails({
-                    id:Date.now().toString(36),
+                    id:busid_reference,
                     busname: req.body.busname,
                     seatcount: req.body.seatcount,
                     dealerid: detailsArray[0],
@@ -121,6 +135,13 @@ const busdetailsupload = (req,res)=>{
                     lighting: req.body.lighting,
                     busimage: [],
                 })
+
+                const busstatus = new busbookingstatus({
+                    busid:busid_reference,
+                })
+                busstatus.save().then(()=>{
+                    console.log('busstatus successfully uploaded ')
+                }).catch(err=>console.log(err))
 
                 imageArray.forEach((src) => {
                     const newImage = {
