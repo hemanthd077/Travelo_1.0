@@ -277,10 +277,11 @@ label{
 }
 
 .formContainer {
+    margin-top: 65px;
     padding: 20px;
     background-color: #fff;
     width: 450px;
-    height: 475px;
+    height: 350px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -372,6 +373,7 @@ label{
 
 .btn {
     display: flex;
+    margin-top: 30px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;

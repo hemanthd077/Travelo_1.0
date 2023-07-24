@@ -3,6 +3,11 @@ const app = express()
 const path = require('path')
 const hbs = require('hbs')
 const templatePath = path.join(__dirname,'../tempelates')
+var RateLimit = require('express-rate-limit');
+
+
+require('dotenv').config();
+const secret = process.env.SESSION_SECERT;
 
 app.use(express.json())
 app.set('view engine','hbs');
@@ -25,7 +30,7 @@ const session = require('express-session');
 
 
 require('../src/passport')
-app.use(session({secret:'cats'}))
+app.use(session({secret:secret}))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -39,10 +44,15 @@ app.use(dealerhomeroutes)
 app.use(maproutes)
 app.use(booking)
 
-
 app.use((req,res,next)=>{
     res.render('404')
 })
+
+var limiter = RateLimit({
+  windowMs: 1*60*1000,
+  max: 5
+});
+app.use(limiter);
 
 app.listen(8080,()=>{
     console.log('Connected to Server');

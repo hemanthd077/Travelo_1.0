@@ -33,6 +33,10 @@ const loginSchema = new mongoose.Schema({
         type:Boolean,
         required:true,
     },
+    profileimage:{
+        data:Buffer,
+        ContentType:String,
+    }
 })
 
 const collection = new mongoose.model('collection1',loginSchema)

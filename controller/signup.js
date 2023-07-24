@@ -1,6 +1,5 @@
 const validation = require('../src/mongodb')
 const bcrypt = require('bcrypt')
-const uploaddb = require('../src/uploaddb')
 const fs = require('fs')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
@@ -183,8 +182,12 @@ const verify = async (req,res)=>{
         const hashedpassword = await bcrypt.hash(arr[0].password, 10);
         arr[0].password = hashedpassword.toString();
         
-        const newvalues = new uploaddb({
-            userid:arr[0].Email,
+        const newvalues = new validation({
+            fname:arr[0].fname,
+            lname:arr[0].lname,
+            Email:arr[0].Email,
+            password:arr[0].password,
+            flag:arr[0].flag,
             profileimage:{
                 data:fs.readFileSync('public/images/user.png'),
                 ContentType:'image/png'
@@ -198,8 +201,6 @@ const verify = async (req,res)=>{
             else{
                 newvalues.save().then(()=>{
                     console.log('successfully uploaded')}).catch((err)=>console.log(err))
-        
-                validation.insertMany([arr[0]])
             
                 res.render('verify');
             }

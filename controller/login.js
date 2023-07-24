@@ -1,5 +1,4 @@
 const validation = require('../src/mongodb')
-const uploaddb = require('../src/uploaddb')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
@@ -235,38 +234,31 @@ const googleLogin = (async(req,res)=>{
 
             axios
             .get(req.user.picture, { responseType: 'arraybuffer' })
-            .then(response => {
+            .then(async(response) => {
                 const imageBuffer = Buffer.from(response.data, 'binary');
-            
-                const newvalues = new uploaddb({
-                    userid: req.user.email,
+                const hashedpassword = await bcrypt.hash(req.user.sub, 10);
+                const pwd = hashedpassword.toString();
+                const newdata = new validation({
+                    fname: req.user.given_name,
+                    lname: req.user.family_name,
+                    Email: req.user.email,
+                    password:pwd,
+                    flag:true,
                     profileimage: {
-                    data: imageBuffer,
-                    ContentType: 'image/png'
+                        data: imageBuffer,
+                        ContentType: 'image/png'
                     }
-                });
-                
-                newvalues.save().then(()=>{
-                    console.log('google login profile photo added')}).catch((err)=>console.log(err))
-            })
-            const hashedpassword = await bcrypt.hash(req.user.sub, 10);
-            const pwd = hashedpassword.toString();
-            const newdata = new validation({
-                fname: req.user.given_name,
-                lname: req.user.family_name,
-                Email: req.user.email,
-                password:pwd,
-                flag:true,
-            })
-            await newdata.save().then(()=>{
-                console.log('google login account created')}).catch((err)=>console.log(err))
-                validation.findOne({Email:req.user.email}).then(async(user)=>{
-                    detailsArray[0]=user.fname.toUpperCase();
-                    detailsArray[1]=user.lname.toUpperCase();
-                    detailsArray[2]=user.Email;
-                    res.render('home',{content:true})
-                }).catch((err)=>console.log('error in finding'))
-        }
+                })
+                await newdata.save().then(()=>{
+                    console.log('google login account created')}).catch((err)=>console.log(err))
+                    validation.findOne({Email:req.user.email}).then(async(user)=>{
+                        detailsArray[0]=user.fname.toUpperCase();
+                        detailsArray[1]=user.lname.toUpperCase();
+                        detailsArray[2]=user.Email;
+                        res.render('home',{content:true})
+                    }).catch((err)=>console.log('error in finding'))
+                })
+         }
     })
 })
 
