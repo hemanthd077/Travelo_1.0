@@ -8,10 +8,10 @@
     flex-direction: column;
     position: absolute;
     background-color: white;
-    margin-top: 50px;
+    margin-top: 83px;
     width: 420px;
     z-index: 2;
-    box-shadow: 0px 2px 8px -2px rgb(0,0,0.1);
+    box-shadow: 0px 10px 8px -2px rgb(0,0,0.1);
     border-radius: 0px 0px 5px 5px;
 }
 
@@ -44,11 +44,12 @@ p#suggestion-location {
     flex-direction: column;
     position: absolute;
     background-color: white;
-    margin-top: 110px;
+    padding-top: 5px;
+    margin-top: 179px;
     width: 420px;
     z-index: 2;
-    box-shadow: 0px 2px 8px -2px rgb(0,0,0.1);
-    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 10px 8px -2px rgb(0,0,0.1);
+    border-radius: 0px 0px 5px 5px;
 }
 
 .fa-building{
@@ -56,24 +57,27 @@ p#suggestion-location {
 }
 
 #homenavbar {
-    width: 200px;
-    height: 100vh;
-    background-color: white;
-    border-radius: 0%;
-    -webkit-border-radius: 0px 25px 25px 0px;
-    position: fixed;
+    height: 80px;
+    width: 1534px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 2px 0px 10px -2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.1px);
+    -webkit-backdrop-filter: blur(1.1px);
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 #appicon {
-    height: 80px;
-    width: 130px;
+    height: 70px;
+    width: 120px;
     margin-left: 30px;
-    margin-top: 28px;
+    margin-top: -10px;
 }
 body{
     /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
-
+    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
+    background: url("https://lh3.googleusercontent.com/drive-viewer/AITFw-wDBhRB4VWAAz9mOrPyIQsK6NsjbvZvemMubGVF1OISZ_NK_24tyPRd3It8w6pL0PAdzMbxmOQsXGN3d82vOfehXykc=s1600");
     background-repeat: no-repeat;
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Philosopher', sans-serif; */
@@ -82,11 +86,11 @@ body{
 
 #main{
     display: flex;
+    flex-direction: column;
 }
 .bookingdiv,.accountdiv,.profilediv {
     display: inline-flex;
     align-items: end;
-    margin-top: 20px;
 }
 
 
@@ -118,32 +122,27 @@ img#buspic:hover{
 }
 
 
-button#bookingbutton{
-    height: 40px;
-    width: 185px;
+button#bookingbutton {
     border-style: none;
     background-color: transparent;
     font-size: 17px;
     display: inline-flex;
     align-items: center;
-    margin-left: 15px;
     column-gap: 10px;
-    padding-left: 35px;
     cursor: pointer;
-    color: white;   
+    margin-top: 15px;
+    justify-content: center;
 }
 
 button#profilebutton{
-    height: 40px;
-    width: 185px;
     border-style: none;
     background-color: transparent;
     font-size: 17px;
+    margin-top: 15px;
     display: inline-flex;
+    margin-left: 50px;
     align-items: center;
-    margin-left: 15px;
     column-gap: 10px;
-    padding-left: 35px;
     cursor: pointer;
 }
 
@@ -155,25 +154,22 @@ img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
 }
 
 .exitdiv {
-    margin-top: 390px;
+    margin-left: 600px;
     display: flex;
-    margin-left: -10px;
 }
 
 button#exitbutton {
     margin-left: 45px;
     border-style: none;
     cursor: pointer;
-    margin-top: 20px;
     display: flex;
+    background: transparent;
     align-items: center;
     font-weight: 700;
     gap: 5px;
     font-size: 18px;
     /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
-    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+
 }
 
 button#exitbutton:hover{
@@ -184,9 +180,11 @@ button#exitbutton:hover{
 
 .bookingdiv {
     /* background-image: linear-gradient(95deg,#2d3465, #616575); */
-    background-color: #402c65;
-
-    border-radius: 10px 0px 0px 10px;
+    /* background-color: #402c65; */
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 120px;
 }
 
 #fromToBlock {
@@ -194,14 +192,30 @@ button#exitbutton:hover{
     height: 500px;
     display: inline-flex;
     flex-direction: column;
-    margin-left: 620px;
-    margin-top: 90px;
+    margin-left: 120px;
+    margin-top: 30px;
     padding: 30px;
     border-radius: 10px;
-    background-color: white;
+    /* background-color: #dadade; */
     gap: 10px;
-    margin-bottom: 95px;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.73);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.1px);
+    -webkit-backdrop-filter: blur(1.1px);
+    /* border: 1px solid rgba(0, 0, 0, 0.39); */
+}
+
+#label-content {
+    color: #FFFFFF;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 5px
+}
+
+#label-content-flex {
+    color: #FFFFFF;
+    margin-left: 115px;
+    margin-top: 5px;
 }
 
 #img-homepage-gif {
@@ -218,13 +232,14 @@ p#fromtext, p#totext {
     border-radius: 5px;
     height: 30px;
     display: flex;
+    background-color: #FFFFFF;
     box-shadow: 0px 0px 6px -2px #2d3467;
     align-items: center;
 }
 
 input#from{
     padding: 5px;
-    width: 275px;
+    width: 350px;
     border-style: none;
     margin-left: 10px;
 }
@@ -235,10 +250,9 @@ input#from:focus , input#to:focus{
 
 input#to {
     padding: 5px;
-    width: 275px;
-    margin-left: 23px;
-    border-style: none;
+    width: 350px;
     margin-left: 10px;
+    border-style: none;
 }
 
 img#city {
@@ -252,17 +266,15 @@ input#calander {
     border-radius: 5px;
     border-style: none;
     height: 25px;
-    margin-top: 10px;
     box-shadow: 0px 0px 6px -2px #2d3467;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     position:fixed;
-    left: 665px;
+    /* left: 665px; */
     width: 20px;
     height: 20px;
     cursor: pointer;
-    color: red;
 }
 
 input#calander:focus{
@@ -285,6 +297,7 @@ button#searchbutton {
     background-color: white;
     border-style: none;
     margin-top: 30px;
+    margin-left: 100px;
     border-radius: 5px;
     font-size: medium;
     cursor: pointer;
@@ -293,14 +306,14 @@ button#searchbutton {
 
 button#searchbutton:hover{
     /* background-image: linear-gradient(95deg,#2d3464, #696c78); */
-    background: -webkit-linear-gradient(125deg,#ae006b, #2d3464);
-
-    color: white;
+    background-color: #2d3467;
+    color: #FFFFFF;
 }
 
 #content{
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin-left: 100px;
 }
 
 
@@ -328,7 +341,7 @@ button#home:hover{
 
 nav#nav {
     display: inline-flex;
-    background-color: white;
+    /* background-color: white; */
     height: 50px;
     width: 475px;
     margin-left: 620px;
@@ -337,6 +350,7 @@ nav#nav {
     position: fixed;
     justify-content: center;
     box-shadow: 0px 1px 8px 1px #2d3467;
+    
 }
 
 #fetch-content-maindiv {
@@ -439,6 +453,55 @@ div#extradetaildiv:hover {
     opacity: 100%;
 }
 
+p#text-1 {
+    margin-top: 100px;
+    font-family: 'Caveat', cursive;
+    font-size: 40px;
+    font-weight: 800;
+}
+
+p#text-2 {
+    font-size: 65px;
+    width: 680px;
+    font-weight: 900;
+    color: #FFFFFF;
+    margin-top: -25px;
+    margin-left: 4px;
+}
+
+p#text-3 {
+    font-size: 67px;
+    font-weight: 900;
+    color: #2d3467;
+    margin-top: -90px;
+    margin-left: 270px;
+}
+
+p#text-4 {
+    color: #FFFFFF;
+    font-size: 70px;
+    margin-left: 575px;
+    margin-top: -100px;
+}
+
+p#text-5 {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: 100px;
+    font-weight: 600;
+}
+
+#account-follow {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: -webkit-linear-gradient(135deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 #error{
     font-size: 20px;
 }
@@ -448,7 +511,9 @@ div#extradetaildiv:hover {
 
 .profilediv:hover {
     border-radius: 10px 0px 0px 10px;
-    background-color: #dadada;
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .accountdiv:hover {
@@ -737,7 +802,6 @@ button#button-busdetial {
     position: absolute;
     margin-left: 12px;
     margin-top: 170px;
-    color: #2d3464;
     cursor: pointer;
 }
 
@@ -759,7 +823,9 @@ p#days {
     border-radius: 5px;
     height: 25px;
     display: flex;
+    background: #FFFFFF;
     box-shadow: 0px 0px 6px -2px #2d3467;
+    justify-content: center;
     align-items: center;
 }
 
@@ -774,8 +840,9 @@ input#no-days,input#no-passenger {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: -40px;
-    align-items: center;
+    margin-top: 10px;
+    margin-left: 5px;
+    align-items: flex-start;
 }
 
 #inner-count-block {
@@ -783,10 +850,13 @@ input#no-days,input#no-passenger {
     flex-direction: row;
     gap: 20px;
     justify-content: space-around;
-    margin-top: 10px;
 }
 
 .fa-calendar-days,.fa-person-walking-luggage,.fa-city{
     margin-left: 5px;
-    color:#2d3467;
+    /* color:#2d3467; */
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
 }

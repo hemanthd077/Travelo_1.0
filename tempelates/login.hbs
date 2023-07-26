@@ -13,6 +13,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
+    <img id="appicon" src="/images/homelogo.png" alt="logo">
     <div  id="block{{#if verificationCode}}active{{/if}}{{#if changepwd}}active{{/if}}{{#if fpassword}}active{{/if}}">
         {{#if login}}
             <form action="/login" method="POST" id="loginform">
@@ -21,7 +22,7 @@
                 <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="uname" required autocomplete="off"><br>
                 
                 <label for="pwd">Password</label>
-                <input class="outline" type="password" placeholder="Enter your Password" name="password" id="pwd" required><br>
+                <input class="outline" type="password" placeholder="Enter your Password" name="password" id="pwd" required autocomplete="off"><br>
                 <i class="far fa-eye" id="togglePassword"></i>
                 {{#if control}}
                         <h4 class="warning">{{res}}</h4>
@@ -102,10 +103,10 @@
                 <input type="hidden" name="emailid" value="{{email}}">
                 <div id="cpwd-content">
                     <label for="cpwd">Password</label>
-                    <input class="input-pwd" type="text" placeholder="Enter the New Password" name="cpwd"><br>
+                    <input class="input-pwd" type="text" placeholder="Enter the New Password" name="cpwd" required autocomplete="off"><br>
                     
                     <label for="rpwd">Re-Enter Password</label>
-                    <input class="input-pwd{{#if invalid}}active{{/if}}" type="password" placeholder="Re-Enter the Password" name="rpwd"><br>
+                    <input class="input-pwd{{#if invalid}}active{{/if}}" type="password" placeholder="Re-Enter the Password" name="rpwd" required autocomplete="off"><br>
                 </div>
                 <button class="submitbutton" type="submit" href="/update-password">Save</button>
             </form><br>

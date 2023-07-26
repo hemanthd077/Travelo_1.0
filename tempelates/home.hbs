@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
@@ -24,37 +25,62 @@
                     <button id="profilebutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
                 </form>
 
+                <form action="/likes-bus" class="profilediv">
+                    <button id="profilebutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Liked</button>
+                </form>
+
                 <form action="/profile"  class="profilediv">
                     <button id="profilebutton" href="/profile"><i class="fa-solid fa-user"></i> Profile</button>
                 </form>
 
                 <form action="/exit" class="exitdiv">
-                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i> Log Out</button>
+                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i>Sign Out</button>
                 </form>                                                                                                 
         </div>
 
         {{#if content}}
             <div id="content">
-                <form action="/search" method="post" id="fromToBlock">
-                    <img id="img-homepage-gif" src="/videos/homepage-gif.gif" alt="gif"><br>
-                    <div id="input-content">
-                        <input type="hidden" name="fromdistrict" id="fromdistrict">
-                        <input type="hidden" name="fromstate" id="fromstate">
-                        <p id="fromtext"><i class="fa-solid fa-city"></i><input type="text" id="from" placeholder="Enter the Pick Up Location" name="source" required onchange="handleInputChange()" autocomplete="off"></p>
-                        <div id="suggestionfrom"></div>
-                        {{!-- <button id="swapbutton"  onclick="swapInputs()" type="button"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button> --}}
-                        <input type="hidden" name="tostate" id="tostate">
-                        <input type="hidden" name="tocity" id="tocity">
-                        <p id="totext"><i class="fa-solid fa-city"></i><input type="text" id="to" placeholder="Enter the Tour (City)" name="destination" required autocomplete="off" onchange="handleInputChange()"></p>
-                        <div id="suggestionto"></div>
-                        <input type="date" id="calander" name="date" required>
-                        <div id="inner-count-block">
-                            <p id="days"><i class="fa-solid fa-calendar-days"></i><input type="number" min="0" id="no-days" placeholder="No of Days" name="days" required></p>
-                            <p id="days"><i class="fa-solid fa-person-walking-luggage"></i><input type="number" min="0" id="no-passenger" placeholder="No of Passengers" name="passenger" required></p>
-                        </div>    
-                        <button id="searchbutton" href="/search" type="submit">Search</button>
+                <div >
+                    <p id="text-1">Your Tour Bus In Click</p>
+                    <p id="text-2">BOOK YOUR RENTAL BUS ON</p>
+                    <p id="text-3">TRAVELO</p>
+                    <p id="text-4"></p><br><br>
+                    <p id="text-5">Follow us on</p>
+                    <div id="account-follow">
+                        <a href=""><i class="fa-brands fa-instagram fa-lg"></i></a>
+                        <a href=""><i class="fa-brands fa-twitter fa-lg"></i></a>
+                        <a href=""><i class="fa-brands fa-linkedin fa-lg"></i></a>
                     </div>
-                </form>
+                </div>
+                <div>
+                    <form action="/search" method="post" id="fromToBlock">
+                        {{!-- <img id="img-homepage-gif" src="/videos/homepage-gif.gif" alt="gif"><br> --}}
+                        <div id="input-content">
+                            <input type="hidden" name="fromdistrict" id="fromdistrict">
+                            <input type="hidden" name="fromstate" id="fromstate">
+                            <label id="label-content" for="from">From:</label>
+                            <p id="fromtext"><i class="fa-solid fa-city"></i><input type="text" id="from" placeholder="Enter the Pick Up Location" name="source" required onchange="handleInputChange()" autocomplete="off"></p>
+                            <div id="suggestionfrom"></div>
+                            {{!-- <button id="swapbutton"  onclick="swapInputs()" type="button"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button> --}}
+                            <input type="hidden" name="tostate" id="tostate">
+                            <input type="hidden" name="tocity" id="tocity">
+                            <label id="label-content" for="to">Tour City:</label>
+                            <p id="totext"><i class="fa-solid fa-city"></i><input type="text" id="to" placeholder="Enter the Tour (City)" name="destination" required autocomplete="off" onchange="handleInputChange()"></p>
+                            <div id="suggestionto"></div>
+                            <label id="label-content" for="calander">Date of Start:</label>
+                            <input type="date" id="calander" name="date" required>
+                            <div id="inner-count-block">
+                                <label id="label-content" for="no-days">No of Days:</label>
+                                <label id="label-content-flex" for="no-passenger">Passengers count:</label>
+                            </div>
+                            <div id="inner-count-block">
+                                <p id="days"><i class="fa-solid fa-calendar-days"></i><input type="number" min="1" id="no-days" placeholder="No of Days" name="days" required></p>
+                                <p id="days"><i class="fa-solid fa-person-walking-luggage"></i><input type="number" min="1" id="no-passenger" placeholder="No of Passengers" name="passenger" required></p>
+                            </div>    
+                            <button id="searchbutton" href="/search" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         {{/if}}
 

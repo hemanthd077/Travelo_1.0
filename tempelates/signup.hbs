@@ -12,27 +12,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
+    <img id="appicon" src="/images/homelogo.png" alt="logo">
     <div  id="block">
         <form action="/signup" method='POST' id="loginform">
            <h2 id="logintxt">USER SIGNUP</h2><br>
             <label for="fname">First Name</label><br>
-            <input class="outline" type="text" placeholder="Enter the First Name" name="fname" id="fname" maxlength="20" required>
+            <input class="outline" type="text" placeholder="Enter the First Name" name="fname" id="fname" maxlength="20" required autocomplete="off">
             <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
 
             <label for="lname">Last Name</label>
-            <input class="outline"type="text" placeholder="Enter the Last Name" name="lname" id="lname" maxlength="20" required>
+            <input class="outline"type="text" placeholder="Enter the Last Name" name="lname" id="lname" maxlength="20" required autocomplete="off">
             <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
             
             <label for="Email">Email</label>
-            <input class="outline" type="email" placeholder="Enter the Email" name="Email" id="email" required>
+            <input class="outline" type="email" placeholder="Enter the Email" name="Email" id="email" required autocomplete="off">
             <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
             
             <label for="password">Password</label>
-            <input class="outline" type="password" placeholder="Enter the Password" name="password" id="pwd" required>
+            <input class="outline" type="password" placeholder="Enter the Password" name="password" id="pwd" required autocomplete="off">
             <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
 
             <label for="confirmPassword">Confirm Password</label>
-            <input class="outline" type="password" placeholder="Re-enter the Password" name="confirmPassword" id="pwd1" required>
+            <input class="outline" type="password" placeholder="Re-enter the Password" name="confirmPassword" id="pwd1" required autocomplete="off">
             <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
             <i class="far fa-eye" id="togglePassword"></i>
 

@@ -244,6 +244,9 @@ const googleLogin = (async(req,res)=>{
                     Email: req.user.email,
                     password:pwd,
                     flag:true,
+                    phonenumber:"",
+                    address:"",
+                    gender:"",
                     profileimage: {
                         data: imageBuffer,
                         ContentType: 'image/png'

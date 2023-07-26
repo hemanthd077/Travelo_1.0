@@ -5,7 +5,8 @@
 
 body {
     /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
+    background-color: #dadade;
     background-repeat: no-repeat;
     height:92vh;
     font-family: 'Open Sans', sans-serif;
@@ -16,11 +17,18 @@ body {
 #block{
     background-color: white;
     margin-left: 550px;
-    margin-top: 60px;
     width: 400px;
     padding: 30px;
     border-radius: 10px;
     height: 73vh;
+    box-shadow: 0px 0px 5px -3px #2d3467;
+}
+
+#appicon {
+    height: 70px;
+    width: 120px;
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
 #loginform-cpwd{
@@ -30,8 +38,8 @@ body {
 }
 
 h2#logintxt {
-    margin-left: 125px;
-    background: -webkit-linear-gradient(#ae006b, #2d3464);
+    margin-left: 120px;
+    background:#2d3464;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -44,7 +52,7 @@ hr#line{
 
 button#loginbutton {
     display: flex;
-    margin-left: 162px;
+    margin-left: 172px;
     height: 25px;
     width: 55px;
     align-items: center;
@@ -66,7 +74,7 @@ button#loginbutton:hover {
 
 button#signupbutton{
     width: 20vh;
-    margin-left: 115px;
+    margin-left: 125px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;
@@ -79,8 +87,10 @@ button#signupbutton{
 
 button#signupbutton:hover {
     color: white;
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+    /* background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
+    background:#2d3464;
+
 }
 
 #fname,#lname,#pwd,#email,#pwd1{
@@ -105,7 +115,7 @@ button#signupbutton, #loginbutton {
 
 p#or {
     margin-top: 5px;
-    margin-left: 117px;
+    margin-left: 127px;
     font-size: small;
 }
 

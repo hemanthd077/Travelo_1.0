@@ -5,8 +5,8 @@
 
 body{
     /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
-
+    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
+    background-color: #dadade;
     background-repeat: no-repeat;
     height: 92vh;
     font-family: 'Open Sans', sans-serif;
@@ -17,12 +17,18 @@ body{
 #block {
     background-color: white;
     margin-left: 550px;
-    margin-top: 60px;
     width: 400px;
     padding: 30px;
     border-radius: 10px;
     height: 560px;
-    box-shadow: 0px 0px 5px -1px #7c7e7e;
+    box-shadow: 0px 0px 5px -3px #2d3467;
+}
+
+#appicon {
+    height: 70px;
+    width: 120px;
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
 button#signupbutton {
@@ -58,7 +64,7 @@ p#or {
 
 h2#logintxt {
     margin-left: 125px;
-    background: -webkit-linear-gradient(275deg,#ae006b, #2d3464);
+    background: #2d3464;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -82,7 +88,7 @@ h2#logintxt-fpwd,.logintxt-verify {
     background-color: white;
 }
 
-.outline:focus,.input-opt{
+.outline:focus,.input-opt:focus,.input-pwd:focus{
     outline: none;
 }
 
@@ -113,8 +119,8 @@ h2#logintxt-fpwd,.logintxt-verify {
 
 .loginbutton:hover,.submitbutton:hover {
     /* background-image: linear-gradient(95deg,#5c6074, #2d3464); */
-    background: -webkit-linear-gradient(135deg,#ae006b, #2d3464);
-
+    /* background: -webkit-linear-gradient(135deg,#ae006b, #2d3464); */
+    background-color: #2d3467;
     color: white;
 }
   
@@ -147,8 +153,9 @@ hr#line{
     border-style: none;
     color: white;
     background: linear-gradient(275deg,#ae006b, #2d3464);
+    /* background-color: #ae006b; */
     font-size: small;
-    width: 370px;
+    width: 390px;
     border-radius: 6px;
     border-color: black;
     margin-top: 250px;
@@ -189,8 +196,10 @@ hr#line{
 
 .verify-btn:hover{
     /* background-image: linear-gradient(95deg,#5c6074, #2d3464); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
     color: white;
+    background-color: #2d3467;
+
 }
 
 .contentBlock {
@@ -218,11 +227,11 @@ hr#line{
     margin-bottom: 20px;
   }
 
-#blockactive {
+  #blockactive {
     background-color: white;
     margin-left: 550px;
-    margin-right: 496px;
-    margin-top: 10%;
+    width: 400px;
+    margin-top: 90px;
     padding: 30px;
     height: 50vh;
     border-radius: 10px;
@@ -232,6 +241,7 @@ hr#line{
     justify-content: center;
     overflow: hidden;
     flex-direction: column;
+    align-content: center;
 }
 
 .updateBlock {
@@ -306,7 +316,7 @@ hr#line{
     color: white;
     border-style: none;
     box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
-    background: linear-gradient(125deg,#2d3464, #ae006b);
+    background: #2d3464;
     justify-content: center;
     font-weight: 700;
     cursor: pointer;
@@ -325,7 +335,8 @@ hr#line{
     color: white;
     border-style: none;
     box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
-    background: linear-gradient(125deg,#2d3464, #ae006b);
+    /* background: linear-gradient(125deg,#2d3464, #ae006b); */
+    box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
     justify-content: flex-start;
     font-weight: 700;
     cursor: pointer;

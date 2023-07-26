@@ -188,6 +188,9 @@ const verify = async (req,res)=>{
             Email:arr[0].Email,
             password:arr[0].password,
             flag:arr[0].flag,
+            phonenumber:"",
+            address:"",
+            gender:"",
             profileimage:{
                 data:fs.readFileSync('public/images/user.png'),
                 ContentType:'image/png'

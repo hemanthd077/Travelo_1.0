@@ -29,6 +29,16 @@ const loginSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    phonenumber:{
+        countrycode:String,
+        number:String,
+    },
+    address:{
+        type:String,
+    },
+    gender:{
+        type:String,
+    },
     flag:{
         type:Boolean,
         required:true,

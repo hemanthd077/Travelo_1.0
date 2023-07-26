@@ -11,12 +11,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
+    
+    {{!-- phonenumber  --}}
+    <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    
+    {{!-- crop js --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
 </head>
 <body>
     <div id="main">
         <div id="homenavbar">
                 <img id="appicon" src="/images/homelogo.png" alt="logo">
-                <form action="/home" class="bookingdiv">
+                <form action="/home" class="bookingdiv-1">
                     <button id="bookingbutton" href="/home" ><i class="fa-solid fa-house"></i> Home</button>
                 </form>
 
@@ -24,12 +36,16 @@
                     <button id="bookingbutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
                 </form>
 
+                <form action="/likes-bus" class="bookingdiv">
+                    <button id="bookingbutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Liked</button>
+                </form>
+
                 <div class="profilediv">
                     <button id="profilebutton" href="/profile"><i class="fa-solid fa-user"></i> Profile</button>
                 </div>
 
                 <form action="/exit" class="exitdiv">
-                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i> Log Out</button>
+                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i> Sign Out</button>
                 </form>                                                                                                 
         </div>
 
@@ -37,72 +53,145 @@
             <div id="contentdivision1">
                 <div id="profile">
                     <img id="profilepic" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" />
+                    <button id="image-edit-btn" onclick="openImageForm()"><i class="fa-solid fa-pen-to-square"></i></button>
                     <h4 id="username">{{fname}} {{lname}}</h4>
                 </div><br>
-                
-                <form id="photoinput" action="/photouploads" method="post" enctype="multipart/form-data">
-                    <div id="photodiv">
-                        <label for="inputimage">
-                            CHANGE IMAGE<br>
-                            <i class="fa fa-camera"></i>
-                            <input id="inputimage" type="file" name="profileimage" accept="image/png, image/jpeg" required>
-                            <span id="imagename"></span>
-                        </label>
-                    </div>
-                    <button id="savebutton" type="submit">Save</button>
-                </form>
-                
+                <div id="profile-content-button">
+                    <form action="">
+                        <button id="personalinfo-button{{#if personalinfo}}active{{/if}}"><i class="fa-solid fa-user"></i> PERSONAL INFO</button>
+                    </form>
+
+                    <form action="">
+                        <button id="accountdetails-button"><i class="fa-solid fa-id-card-clip"></i> ACCOUNT DEATAILS</button>
+                    </form>
+
+                </div>
             </div>
 
             <div id="contentdivision2">
-                <div id="personalinfo">
-                    <h1 id="title">Personal Information<h1>
-                    <p>Manage your personal Information, including your name and email address where you can contacted</p>
-                </div>
+                {{#if personalinfo}}
+                    <div id="personalinfo">
+                        <h1 id="title">Personal Information<h1>
+                        <p>Manage your personal Information, including your name and email address where you can contacted</p>
+                    </div>
 
-                <div id="usercontent">
-                    <div id="fname">
-                        <h2>First Name</h2>
-                        <div class="name-replace">
-                            <h4 id="firstname">{{fname}}</h4>
-                            <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                    <div id="usercontent">
+                        <div id="fname">
+                            <h2>First Name</h2>
+                            <div class="name-replace">
+                                <h4 id="firstname">{{fname}}</h4>
+                                <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="lname">
+                            <h2>Last Name</h2>
+                            <div class="name-replace">
+                                <h4 id="lastname">{{lname}}</h4>
+                                <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="gender">
+                            <h2>Gender</h2>
+                            <div class="name-replace">
+                                <h4 id="gender-detail">{{gender}}</h4>
+                                <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="phonenumber">
+                            <h2>Phone Number</h2>
+                            <div class="name-replace">
+                                <h4 id="number">+{{countrycode}} {{phonenumber}}</h4>
+                                <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="address">
+                            <h2>Address</h2>
+                            <div class="name-replace">
+                                <p id="number">{{address}}</p>
+                                <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
+                            </div>
                         </div>
                     </div>
-
-                    <div id="lname">
-                        <h2>Last Name</h2>
-                        <div class="name-replace">
-                            <h4 id="lastname">{{lname}}</h4>
-                            <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
-                        </div>
+                    <div id="edit-button-div">
+                        <button class="edit-personalinfo" onclick="openForm()"><i class="fa-regular fa-pen-to-square"></i> Edit Info</button>
                     </div>
-
-                    <div id="mail">
-                        <h2>Email-Id</h2>
-                        <h4 id="email">{{email}}</h4>
-                    </div>
-                </div>
+                {{/if}}
             </div>
         </div>
         <div class="formPopup popupForm-outclick" id="popupForm">
-            <form action="/updateinfo" class="formContainer" method="post">
+            <form action="/updateinfo" class="formContainer" method="post" >
                 <p id="update-title">UPDATE INFO</p>
                 <input type="hidden" name="email" value="{{email}}">
-                <label for="fname-update">First Name</label>
-                <input class="outline" type="text" value="{{fname}}" name="fname" id="fname-update" maxlength="20" autocomplete="off"><br>
                 
-                <label for="lname-update">Last Name</label>
-                <input class="outline" type="text" value="{{lname}}" name="lname" id="lname-update" maxlength="20" autocomplete="off"><br>
-                
+                <div style="display: flex;flex-direction:column;">
+                        <label for="fname-update">First Name</label>
+                    <input class="outline" type="text" value="{{fname}}" name="fname" id="fname-update" maxlength="20" autocomplete="off"><br>
+                </div>
+                <div style="display: flex;flex-direction:column;">
+                    <label for="lname-update">Last Name</label>
+                    <input class="outline" type="text" value="{{lname}}" name="lname" id="lname-update" maxlength="20" autocomplete="off"><br>
+                </div>
+
+                <div  style="display: flex;flex-direction:row;gap:20px">
+                    <div style="display: flex;flex-direction:column;">
+                        <label for="gender-update">Gender</label>
+                        <select class="outline-1" name="gender" id="gender-update">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <div  style="display: flex;flex-direction:column;">
+                        <label id="number-label" for="number-update">Phone Number</label>
+                        <input type="hidden" id="number-countrycode-update" name="countrycode">
+                        <input class="outline-2" type="tel" value="{{phonenumber}}" name="phonenumber" id="number-update" maxlength="10" autocomplete="off" onchange="process(event)">
+                    </div>
+                </div><br>
+
+                <label for="address-update">Address</label>
+                <textarea name="address" id="address-update" cols="30" rows="10" style="width: 372px; height: 149px;" >{{address}}</textarea>
                 <div id="button-update">
                     <a href="/profile" class="aunchor-close"><button type="button" class="btn cancel">Close</button></a>
                     <button type="submit" class="btn" href="/updateinfo" >Update</button>
                 </div>
             </form>
         </div>
+
+        <div class="formPopup popupForm-outclick" id="popupForm-image">
+            <form id="photoinput" action="/photouploads" class="formContainer" method="post" enctype="multipart/form-data">
+                <p id="update-title">CHANGE IMAGE</p>
+                <div id="profile-visiblelity">
+                    <img id="profilepic-1" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" />
+                </div>
+                <main class="page">
+                    <div class="box-2">
+                        <div class="result"></div>
+                    </div>
+
+                    <div class="box">
+                        <div class="options hide">
+                            <input type="hidden" class="img-w" value="300" min="100" max="1200" />
+                        </div>
+                         <button class="btn save hide" id="savebutton" type="submit" href="/photouploads">Save</button>
+                    </div>
+                </main>
+                <div id="photodiv">
+                    <label for="inputimage">
+                        CHANGE IMAGE 
+                        <i class="fa fa-camera"></i>
+                        <input id="inputimage" type="file" name="profileimage" accept="image/png, image/jpeg" required>
+                        <span id="imagename"></span>
+                    </label>
+                </div>
+            </form>
+        </div>
+
     </div>
 </body>
-</html>
 <script>
     function openForm() {
         var profilecont = document.getElementById("profilecontent");
@@ -111,29 +200,105 @@
         profilecont.style.opacity="0.5"
         profilecont.style.animationDelay="1s"
 
-        document.getElementById('bookingbutton').addEventListener('click', function(event) {
-            {{!-- const element = document.getElementsByClassName("formContainer");
-            element.classList.add("flash-animation-formContainer"); --}}
-            event.preventDefault();
-        });
         document.getElementById('exitbutton').addEventListener('click', function(event) {
             event.preventDefault();
         });
-        document.getElementById('photoinput').addEventListener('click', function(event) {
+        {{!-- document.getElementById('photoinput').addEventListener('click', function(event) {
             event.preventDefault();
         });
         document.getElementsByClassName('update-button').addEventListener('click', function(event) {
             event.preventDefault();
-        });
+        }); --}}
         
     }
- 
-    var plan = document.getElementById("photodiv");
-    plan.addEventListener("input", function() {
-        if (plan.value !== "") {
-            document.getElementById("photodiv").style.color = "red";
-        } else {
-            document.getElementById("photodiv").style.color = "#2d3467";
+
+    function openImageForm() {
+        var profilecont = document.getElementById("profilecontent");
+
+        document.getElementById("popupForm-image").style.display = "block";
+        profilecont.style.opacity="0.5"
+        profilecont.style.animationDelay="1s"
+    }
+    
+    const phoneInputField = document.getElementById('number-update');
+   const phoneInput = window.intlTelInput(phoneInputField, {
+        preferredCountries: ["in"],
+        utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+
+    function process(event) {
+        event.preventDefault();
+
+        const phoneNumber = phoneInput.getNumber();
+        const countryData = phoneInput.getSelectedCountryData();
+
+        const countryCode = countryData.dialCode;
+        const phoneNumberWithoutCountryCode = phoneNumber.slice(countryCode.length+1);
+
+        console.log('Country Code:', countryCode);
+        console.log('Phone Number:', phoneNumberWithoutCountryCode);
+
+        const number = document.getElementById("number-update");
+        const code = document.getElementById("number-countrycode-update");
+        number.value = phoneNumberWithoutCountryCode;
+        code.value = countryCode;
+    }
+
+
+    //Profile crop using crop js
+
+    let result = document.querySelector('.result'),
+    img_w = document.querySelector('.img-w'),
+    options = document.querySelector('.options'),
+    save = document.querySelector('.save'),
+    upload = document.querySelector('#inputimage'),
+    cropper = '';
+
+    upload.addEventListener('change', e => {
+    if (e.target.files.length) {
+        const profilevisible = document.getElementById("profile-visiblelity");
+        profilevisible.style.display="none";
+        const reader = new FileReader();
+        reader.onload = e => {
+        if (e.target.result) {
+            let img = document.createElement('img');
+            img.id = 'image';
+            img.src = e.target.result;
+            result.innerHTML = '';
+            result.appendChild(img);
+            save.classList.remove('hide');
+            options.classList.remove('hide');
+            cropper = new Cropper(img);
         }
-    })
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+    });
+
+    
+
+    save.addEventListener('mouseover', e => {
+        {{!-- e.preventDefault(); --}}
+        let croppedCanvas = cropper.getCroppedCanvas({
+             width: img_w.value 
+        });
+    
+        croppedCanvas.toBlob(blob => {
+            let croppedFile = new File([blob], 'cropped_image.png', {
+                type: 'image/png'
+            });
+        
+            let fileInputCropped = document.getElementById('inputimage');
+        
+            let dataTransfer = new DataTransfer();
+            dataTransfer.items.add(croppedFile);
+        
+            fileInputCropped.files = dataTransfer.files;
+            console.log("hello:"+croppedFile)
+        }, 'image/png');
+    });
+
 </script>
+
+</html>

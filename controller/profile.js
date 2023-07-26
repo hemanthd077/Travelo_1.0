@@ -53,16 +53,25 @@ const profile = async(req,res)=>{
     await userdb.findOne({Email:detailsArray[2]}).then(async(data)=>{
         detailsArray[0] = casedetective(data.fname);
         detailsArray[1] = casedetective(data.lname);
-        res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],data,value:data.profileimage.data.toString('base64'),'control':true})
+        res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],'gender':data.gender,'phonenumber':data.phonenumber.number,'countrycode':data.phonenumber.countrycode,'address':data.address,data,value:data.profileimage.data.toString('base64'),'control':true,'personalinfo':true})
     }).catch(err=>{
       console.log('image not inserted yet...:'+err)
-      res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],'control':true})
+      res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],'gender':data.gender,'phonenumber':data.phonenumber.number,'countrycode':data.phonenumber.countrycode,'address':data.address,'control':true,'personalinfo':true})
     })
 }
 
 const infoUpdate = async(req,res)=>{
     await userdb.findOne({Email:req.body.email}).then(async(data)=>{
-        const newvalues ={$set:{fname:req.body.fname,lname:req.body.lname}};
+        const newvalues ={$set:{
+            fname:req.body.fname,
+            lname:req.body.lname,
+            address:req.body.address,
+            phonenumber:{
+                countrycode:req.body.countrycode,
+                number:req.body.phonenumber,
+            },
+            gender:req.body.gender,
+        }};
         const filter = {_id : data._id}
         const options = { upsert: false };           
         await userdb.updateOne(filter,newvalues,options,(err , collection) => {
