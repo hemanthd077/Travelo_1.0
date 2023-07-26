@@ -155,8 +155,8 @@
                 <label for="address-update">Address</label>
                 <textarea name="address" id="address-update" cols="30" rows="10" style="width: 372px; height: 149px;" >{{address}}</textarea>
                 <div id="button-update">
-                    <a href="/profile" class="aunchor-close"><button type="button" class="btn cancel">Close</button></a>
-                    <button type="submit" class="btn" href="/updateinfo" >Update</button>
+                    <a href="/profile" class="aunchor-close"><button type="button" class="btn-1 cancel">Close</button></a>
+                    <button type="submit" class="btn-1" href="/updateinfo" >Update</button>
                 </div>
             </form>
         </div>
@@ -168,8 +168,8 @@
                     <img id="profilepic-1" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" />
                 </div>
                 <main class="page">
-                    <div class="box-2">
-                        <div class="result"></div>
+                    <div class="box-2" style="width: 200px; height: 200px;">
+                        <div class="result" style="width: 200px; height: 200px;"></div>
                     </div>
 
                     <div class="box">
@@ -259,17 +259,28 @@
     if (e.target.files.length) {
         const profilevisible = document.getElementById("profile-visiblelity");
         profilevisible.style.display="none";
+
+        const photodiv = document.getElementById("photodiv");
+        photodiv.style.marginTop = "450px";
+        photodiv.style.position = "absolute";
+
+
         const reader = new FileReader();
         reader.onload = e => {
         if (e.target.result) {
             let img = document.createElement('img');
+            
             img.id = 'image';
             img.src = e.target.result;
             result.innerHTML = '';
             result.appendChild(img);
             save.classList.remove('hide');
             options.classList.remove('hide');
-            cropper = new Cropper(img);
+            cropper = new Cropper(img, {
+                aspectRatio: 1/1,  
+                autoCropArea: 0.8,  
+                
+            });
         }
         };
         reader.readAsDataURL(e.target.files[0]);
