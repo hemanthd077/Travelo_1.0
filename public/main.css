@@ -15,6 +15,8 @@ body {
     font-style: normal;
 }
 
+
+
 #appicon {
     height: 70px;
     width: 120px;
@@ -68,7 +70,8 @@ button#dealer,button#user{
 }
 
 button#dealer:hover,button#user:hover{
-    background-image: linear-gradient(45deg,#5c6074, #2d3464);
+    background: #2d3467;
+    /* background-image: linear-gradient(45deg,#5c6074, #2d3464); */
     /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
 
     color: white;

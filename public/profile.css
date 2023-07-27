@@ -42,7 +42,7 @@ body{
     flex-direction: column;
 }
 
-.bookingdiv,.accountdiv,.profilediv {
+.bookingdiv,.profilediv {
     display: inline-flex;
     align-items: end;
 }
@@ -88,7 +88,7 @@ img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
 }
 
 button#exitbutton {
-    margin-left: 45px;
+    margin-left: 70px;
     border-style: none;
     cursor: pointer;
     display: flex;
@@ -101,7 +101,7 @@ button#exitbutton {
 
 }
 
-button#exitbutton:hover{
+button#exitbutton:hover,#bookingbutton:hover{
     background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -150,9 +150,52 @@ h4{
     font-weight: 500;
 }
 
-#fname, #lname, #mail,#phonenumber {
+#fname, #lname,#phonenumber {
     padding: 15px;
     width: 350px;
+    height: 50px;
+    /* background-color: #dadade; */
+    border-radius: 5px;
+    display: flex;
+    box-shadow: 0px 1px 5px 0px #2d3467;
+    color: #2d3467;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#cpassword {
+    position: absolute;
+    margin-top: 40px;
+    display: flex;
+    text-decoration: none;
+    margin-left: 454px;
+    width: 145px;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#cpassword:active{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h3#gender-detail {
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+input#password-detail-input {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #2d3467;
+}
+
+#email,#password {
+    padding: 15px;
+    width: 600px;
     height: 50px;
     /* background-color: #dadade; */
     border-radius: 5px;
@@ -295,6 +338,10 @@ img#profilepic-1 {
     gap: 20px;
 }
 
+#file-upload-button{
+    cursor: pointer;
+}
+
 #personalinfo-button,#accountdetails-button{
     padding: 5px;
     background-color: transparent;
@@ -303,7 +350,7 @@ img#profilepic-1 {
     display: flex;
     gap: 10px;
     align-items: center;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #personalinfo-buttonactive,#accountdetails-buttonactive{
@@ -311,7 +358,7 @@ img#profilepic-1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     border-style: none;
-    font-size: 15px;
+    font-size: 17px;
     cursor: pointer;
 }
 
@@ -341,19 +388,33 @@ form#photoinput {
 }
 
 button#savebutton {
+    margin-top: -75px;
+    position: absolute;
+    width: 132px;
+    font-size: 18px;
+    height: 33px;
+    border-radius: 5px;
+    border-style: hidden;
+    cursor: pointer;
+    margin-left: 80px;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+}
+
+
+button#savebutton-1 {
     margin-top: -100px;
     position: absolute;
     width: 132px;
     font-size: 18px;
-    height: 35px;
+    height: 33px;
     border-radius: 5px;
     border-style: hidden;
     cursor: pointer;
-    margin-left: 40px;
-    box-shadow: 0px 1px 5px 0px #2d3467;
+    margin-left: 65px;
+    box-shadow: 0px 1px 5px -1px #2d3467;
 }
 
-button#savebutton:hover,#photodiv:hover{
+button#savebutton:hover,#photodiv:hover,button#savebutton-1:hover{
     /* background-image: linear-gradient(95deg, #2d3464, #6e717a); */
     background:  #2d3464;
     color: white;
@@ -364,10 +425,16 @@ button#savebutton:hover,#photodiv:hover{
     padding: 2%;
     border-radius: 5px;
     width: 190px;
-    background: #2d3467;
+    margin-left: 160px;
+    background-color: #dadade;
     margin-top: 260px;
+    cursor: pointer;
     position: absolute;
-    color: #FFFFFF;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+}
+
+div#photodiv-1 {
+    margin-left: -480px;
 }
 
 #inputimage {
@@ -446,10 +513,11 @@ label{
 }
 
 .formContainer-image {
+    margin-top: 140px;
     padding: 20px;
     background-color: #fff;
     width: 375px;
-    max-height: 550px;
+    height: 300px;
     margin-left: -50px;
     border-radius: 10px;
     display: flex;
@@ -457,22 +525,17 @@ label{
     box-shadow: 0px 0px 5px -1px #2d3467;
 }
 
-.formContainer-removeElement{
-    margin-top: 175px;
-}
-
-/* .formContainer-image {
+.formContainer-image-crop {
+    display:none;
     margin-top: 10px;
     padding: 20px;
     background-color: #fff;
     width: 375px;
-    height: 550px;
+    height: 500px;
     margin-left: -50px;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
     box-shadow: 0px 0px 5px -1px #2d3467;
-} */
+}
 
 .flash-animation-formContainer{
     animation: flash 0.2s;
@@ -679,8 +742,30 @@ svg#svg-temp {
 	display: none;
 }
 
-img {
+/* img {
 	width: 100%;
       height: 100%;
       object-fit: cover;
+} */
+
+#active-statusactive {
+    height: 30px;
+    position: absolute;
+    width: 4px;
+    /* background-color: #2d3467; */
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    margin-top: -27px;
+    margin-left: 224px;
+    border-radius: 2px 0px 0px 2px;
+}
+
+#active-statusactive1{
+    height: 30px;
+    position: absolute;
+    width: 4px;
+    /* background-color: #2d3467; */
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    margin-top: -27px;
+    margin-left: 222px;
+    border-radius: 2px 0px 0px 2px;
 }

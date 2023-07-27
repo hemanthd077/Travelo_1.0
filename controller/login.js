@@ -37,7 +37,7 @@ const login = async(req,res)=>{
             else{
                 const validpassword = await bcrypt.compare(req.body.password,data.password)
                 if(validpassword){
-                    res.render('home',{content:true})
+                    res.redirect('/home');
                 }
                 else{
                     res.status(400).render('login',{'res':'Invalid Password','control':true,login:true})
@@ -217,16 +217,16 @@ const googleLogin = (async(req,res)=>{
     // console.log(req.user);
     // res.write(JSON.stringify(req.user));
 
-    validation.findOne({Email : req.user.email}).then(async(data)=>{
-        if(data){
-            if(data.flag===false){
+    validation.findOne({Email : req.user.email}).then(async(data1)=>{
+        if(data1){
+            if(data1.flag===false){
                 res.render('login',{'res':'User Account Already Exist.Try with other E mail-id','control':true,login:true})
             }
             else{
-                detailsArray[0]=data.fname.toUpperCase();
-                detailsArray[1]=data.lname.toUpperCase();
-                detailsArray[2]=data.Email;
-                res.render('home',{content:true})
+                detailsArray[0]=data1.fname.toUpperCase();
+                detailsArray[1]=data1.lname.toUpperCase();
+                detailsArray[2]=data1.Email;
+                res.render('home',{content:true,data:data1,value:data1.profileimage.data.toString('base64')})
             }
         }
         else{
@@ -258,7 +258,7 @@ const googleLogin = (async(req,res)=>{
                         detailsArray[0]=user.fname.toUpperCase();
                         detailsArray[1]=user.lname.toUpperCase();
                         detailsArray[2]=user.Email;
-                        res.render('home',{content:true})
+                        res.render('home',{content:true,data:user,value:user.profileimage.data.toString('base64')})
                     }).catch((err)=>console.log('error in finding'))
                 })
          }

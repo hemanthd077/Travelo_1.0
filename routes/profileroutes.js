@@ -9,6 +9,8 @@ router.get('/exit',(req,res)=>{
     res.render('login')
 })
 
+router.get('/accountdetails',photouploads.accountdetails);
+
 router.post('/photouploads',photouploads.profileupload)
 
 router.post('/updateinfo',photouploads.infoUpdate)

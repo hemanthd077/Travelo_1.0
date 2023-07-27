@@ -1,0 +1,189 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    background-repeat: no-repeat;
+    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
+    background-color: #dadade;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Philosopher', sans-serif; */
+    font-style: normal;
+}
+
+#homenavbar {
+    height: 80px;
+    width: 1534px;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    background-color: #dadade;
+    /* box-shadow: 2px 0px 10px -2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.1px);
+    -webkit-backdrop-filter: blur(1.1px); */
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+#fetch-content-maindiv{
+    padding-bottom: 20px;
+}
+
+#main{
+    display: flex;
+    flex-direction: column;
+}
+
+#appicon {
+    height: 70px;
+    width: 120px;
+    margin-left: 30px;
+    margin-top: -10px;
+}
+
+.bookingdiv-1{
+    margin-left: 70px;
+}
+
+button#bookingbutton{
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    margin-top: 15px;
+    display: inline-flex;
+    margin-left: 50px;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+.bookingdiv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadade;
+}
+
+.bookingdiv,.profilediv {
+    display: inline-flex;
+    align-items: end;
+}
+
+.profilediv {
+    /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    margin-left: 50px;
+}
+
+.bookingdiv:hover,.profilediv:hover,.bookingdiv-1:hover{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+button#profilebutton {
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+button#exitbutton {
+    margin-left: 70px;
+    border-style: none;
+    cursor: pointer;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    font-weight: 700;
+    gap: 5px;
+    font-size: 18px;
+    /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
+}
+
+button#exitbutton:hover{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.exitdiv {
+    margin-left: 600px;
+    display: flex;
+}
+
+div.mainblock {
+    display: flex;
+    padding-left: 50px;
+    gap: 10px;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+#search-div {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    width: 1360px;
+    margin-top: 5px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px -2px #2d3467;
+}
+
+::-webkit-scrollbar{
+    display: none;
+  } 
+
+#busimg {
+    width: 400px;
+    height: 210px;
+    border-radius: 5px;
+}
+
+.div-control {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.div-control-1 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    margin-left: 40px;
+    margin-top:30px
+}
+
+div#searchresultdiv {
+    margin-left: 20px;
+}
+
+.fa-star{
+    color: #ae006b;
+}
+
+#div-size-control {
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+    color: #2d3467;
+    gap: 10px;
+}
+
+#dealercompanyname{
+    margin-left: 40px;
+    font-weight: 500;
+    font-size: 12px;
+}

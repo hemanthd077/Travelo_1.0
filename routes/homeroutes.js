@@ -1,10 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const booking = require("../controller/home")
+const booking = require("../controller/home");
+const { login } = require('../controller/login');
 
-router.get('/home',(req,res)=>{
-    res.render('home',{content:true})
-})
+router.get('/home',booking.homepage)
 
 router.get('/exit',(req,res)=>{
     res.redirect('/login')

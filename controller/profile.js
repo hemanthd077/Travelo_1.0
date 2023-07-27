@@ -5,6 +5,7 @@ const userdb = require('../src/mongodb');
 const { log } = require('console');
 const bcrypt = require('bcrypt')
 let alert = require('alert'); 
+const async = require('hbs/lib/async');
 
 function casedetective(a){
     let capFirstLetter = a[0].toUpperCase();
@@ -60,6 +61,18 @@ const profile = async(req,res)=>{
     })
 }
 
+const accountdetails = async(req,res)=>{
+    await userdb.findOne({Email:detailsArray[2]}).then(async(data)=>{
+        const password = await bcrypt.hash(data.password, 10);
+        let flag = data.flag;
+        flag = !flag;
+        res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],'password':password,data,value:data.profileimage.data.toString('base64'),'control':true,'accountdetails':true,'flag':flag})
+    }).catch(err=>{
+      console.log('image not inserted yet...:'+err)
+      res.render('profile',{'fname':detailsArray[0],'lname':detailsArray[1],'email':detailsArray[2],'control':true,'accountdetails':true,'flag':flag})
+    })
+}
+
 const infoUpdate = async(req,res)=>{
     await userdb.findOne({Email:req.body.email}).then(async(data)=>{
         const newvalues ={$set:{
@@ -90,4 +103,5 @@ module.exports = {
     profileupload,
     profile,
     infoUpdate,
+    accountdetails,
   };

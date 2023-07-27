@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Result</title>
+    <link rel="stylesheet" href="/homeresult.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div id="main">
+        <div id="homenavbar">
+                <img id="appicon" src="/images/homelogo.png" alt="logo">
+                <form action="/home" class="bookingdiv-1">
+                    <button id="bookingbutton" href="/home" ><i class="fa-solid fa-house"></i> Home</button>
+                </form>
+
+                <form action="/booking"  class="bookingdiv">
+                    <button id="bookingbutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
+                </form>
+
+                <form action="/likes-bus" class="bookingdiv">
+                    <button id="bookingbutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Liked</button>
+                </form>
+
+                <form action="/profile"  class="profilediv">
+                    <button id="profilebutton" href="/profile"><i class="fa-solid fa-user"></i> Profile</button>
+                </form>
+
+                <form action="/exit" class="exitdiv">
+                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i> Sign Out</button>
+                </form>                                                                                                 
+        </div>
+        <div class="mainblock">
+            {{#if searchresult}}
+                <nav id="nav{{#if image}}image{{/if}}{{#if detailplan}}image{{/if}}">
+                    <p>{{length}} Planes in {{source_destination.[4]}}</p>
+                    {{#if source_destination}}
+                        <div id="swap-source-destination">
+                        <div id="source-place">
+                            <p>From</p>
+                            <p id="source-place-1">{{source_destination.[2]}}<input type="hidden" id="from" placeholder="From" name="source" value="{{source_destination.[1]}}"  required></p>
+                        </div>
+                            <p  id="swap"><i class="fa-solid fa-person-walking-arrow-right fa-lg"></i></p>
+                        <div id="destination-place">
+                            <p>To</p>
+                            <p id="destination-place-1">{{source_destination.[4]}}<input type="hidden" id="to" placeholder="To" name="destination" value="{{source_destination.[0]}}" required></p>
+                        </div>
+                            <input type="hidden" id="calander" name="date" value="{{source_destination.[2]}}" required>
+                        </div>
+                    {{/if}}
+                </nav>
+            {{/if}}
+
+            {{#if result}}
+                <div id="fetch-content-maindiv">
+                    {{#each buscontent}}
+                            <div id="search-div">
+                                <img id="busimg" src="data:{{this.[9]}}" alt="buspic">
+                                <div id="searchresultdiv">
+                                    <div class="div-control">
+                                        <img style="width: 30px; height:30px;border-radius:50px" src="data:{{this.[0]}}" alt="dealerpic">
+                                        <p style="font-weight: 500; font-size:20px;">{{this.[1]}}</p>
+                                    </div>
+                                    <p id="dealercompanyname">{{this.[2]}}</p>
+                                    <p style="margin-top: 10px;margin-left:40px">Plan covers</p>
+                                    <div id="div-size-control">
+                                        {{#each this.[3]}}
+                                            <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                        {{/each}}
+                                    </div>
+                                    <div class="div-control-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <p>4.0</p>
+                                    </div>
+                                    <p style="font-weight: 500; font-size:15px;">{{this.[4]}} Seat</p>
+                                    <div>
+                                        {{#if this.[5]}}
+                                            <p><i class="fa-solid fa-radio"></i> Music System</p>
+                                        {{/if}}
+
+                                        {{#if this.[6]}}
+                                            <p>
+                                                <svg width="20" height="20" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="IconChangeColor"> <path d="M22 3.6V11H2V3.6C2 3.26863 2.26863 3 2.6 3H21.4C21.7314 3 22 3.26863 22 3.6Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M18 7H19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M2 11L2.78969 13.5844C3.04668 14.4255 3.82294 15 4.70239 15H6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M22 11L21.2103 13.5844C20.9533 14.4255 20.1771 15 19.2976 15H18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M9.5 14.5C9.5 14.5 9.5 21.5 6 21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M14.5 14.5C14.5 14.5 14.5 21.5 18 21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M12 14.5V21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> </svg> <p>AC</p>
+                                            </p>
+                                        {{else}}
+                                            <p><i class="fa-solid fa-fan"></i> Non Ac</p>
+                                        {{/if}}
+
+                                        {{#if this.[7]}}
+                                        <p> Seater</p>
+                                        {{else}}
+                                        <p> Semi Sleeper</p>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                                <div id="buttons">
+                                    <form action="/busimg" method="post">
+                                        <input type="hidden" name="source" value={{this.[2]}}>
+                                        <input type="hidden" name="destination" value={{this.[3]}}>
+                                        <input type="hidden" name="busid" value={{@index}}>
+                                        <button type="submit" id="buspic-buttons" href="/busimg"><i class="fa fa-bus" aria-hidden="true"></i> Bus Image</button>
+                                    </form>
+                                    <form action="/busplan" method="post">
+                                    <input type="hidden" name="source" value={{this.[2]}}>
+                                        <input type="hidden" name="destination" value={{this.[3]}}>
+                                        <input type="hidden" name="planid" value={{@index}}>
+                                        <button type="submit" id="plan" href="/busplan"><i class="fa fa-file" aria-hidden="true"></i> Itinerary</button>
+                                    </form>
+                                </div>
+                            </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+
+            {{#if error}}
+                <div id="searchresultdiv1">
+                    <i id="sademoji" class="fa fa-frown fa-3x" aria-hidden="true" ></i>
+                    <h1 id="error">{{res}}</h1>
+                    <h1 id="error1">Do check Other Routes</h1>
+                </div><br>
+            {{/if}}
+
+            {{#if image}}
+                <div id="bus-img">
+                    <div id="outer-photo-block">
+                        <div id="busdetail">
+                            {{#if totalDetail}}
+                                <form action="/search" method="post">
+                                    <input type="hidden" id="from" placeholder="From" name="source" value="{{totalDetail.[1]}}" required>
+                                    <input type="hidden" id="to" placeholder="To" name="destination" value="{{totalDetail.[2]}}" required>
+                                    <input type="hidden" id="calander" name="date" value="{{date}}" required>
+                                    <button type="submit" id="button-busdetial" >
+                                        <div class="bus-name">
+                                            <p style="font-weight: 500; font-size:18px;"><img src="/images/bus.png" alt="seats" style="height: 15px;width: 15px;">  {{totalDetail.[0]}}</p>
+                                        </div>
+                                        <div class="place-name">
+                                            <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[1]}}</p>
+                                        </div>
+                                        <div class="arrow-right">
+                                            <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
+                                        </div>
+                                        <div class="place-name">
+                                            <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[2]}}</p>
+                                        </div>
+                                        <div class="seat-count">
+                                            <p style="font-weight: 500; font-size:18px;">{{totalDetail.[3]}}seater</p>
+                                        </div>
+                                    </button>
+                                </form>
+                            {{/if}}
+                        </div><br>
+                        {{#each imagecontent}}
+                            <div class="mySlides fade">
+                                <img src="data:{{this}}" style="width: 1040px;height: 480px;" alt="Bus Image" />
+                            </div>
+                        {{/each}}
+
+                        <br><div id="dot">
+                            {{#each imagecontent}}
+                                <div style="text-align:center">
+                                    <span class="dot"></span> 
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            
+            {{#if detailplan}}
+                <div id="fetch-content-maindiv">
+                    <div id="plandetail">
+                        {{#if totalDetail}}
+                        <form action="/search" method="post">
+                                <input type="hidden" id="from" placeholder="From" name="source" value="{{totalDetail.[1]}}" required>
+                                <input type="hidden" id="to" placeholder="To" name="destination" value="{{totalDetail.[2]}}" required>
+                                <input type="hidden" id="calander" name="date" value="{{date}}" required>
+                                <button type="submit" id="button-busdetial-plan" >
+                                    <p style="font-weight: 500; font-size:20px;"><img src="/images/bus.png" alt="seats" style="height: 20px;width: 25px;">  {{totalDetail.[0]}}</p>
+                                    <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[1]}}</p>
+                                    <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
+                                    <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[2]}}</p>
+                                    <p style="font-weight: 500; font-size:20px;">{{totalDetail.[3]}}seater</p>
+                                </button>
+                            </form>
+                        {{/if}}
+                    </div><br>
+                    <iframe id="planfile" src="{{planpdf}}" frameborder="0"  title="{{totalDetail.[1]}}-{{totalDetail.[2]}}"></iframe>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

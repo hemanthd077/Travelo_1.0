@@ -27,6 +27,10 @@ router.get('/forgot-password',(req,res)=>{
     res.render('login',{fpassword:true})
 })
 
+router.get('/change-password',(req,res)=>{
+    res.render('login',{cpassword:true})
+})
+
 router.get('/login',(req,res)=>{
     res.render('login',{login:true})
 })

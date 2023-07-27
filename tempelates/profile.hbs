@@ -57,12 +57,14 @@
                     <h4 id="username">{{fname}} {{lname}}</h4>
                 </div><br>
                 <div id="profile-content-button">
-                    <form action="">
+                    <form action="/profile">
                         <button id="personalinfo-button{{#if personalinfo}}active{{/if}}"><i class="fa-solid fa-user"></i> PERSONAL INFO</button>
+                        <div id="active-status{{#if personalinfo}}active{{/if}}" ></div>
                     </form>
 
-                    <form action="">
-                        <button id="accountdetails-button"><i class="fa-solid fa-id-card-clip"></i> ACCOUNT DEATAILS</button>
+                    <form action="/accountdetails">
+                        <button id="accountdetails-button{{#if accountdetails}}active{{/if}}"><i class="fa-solid fa-id-card-clip"></i> ACCOUNT INFO</button>
+                        <div id="active-status{{#if accountdetails}}active1{{/if}}" ></div>
                     </form>
 
                 </div>
@@ -72,7 +74,7 @@
                 {{#if personalinfo}}
                     <div id="personalinfo">
                         <h1 id="title">Personal Information<h1>
-                        <p>Manage your personal Information, including your name and email address where you can contacted</p>
+                        <p>Manage your personal Information, including your name, mobile number and address where you can contacted</p>
                     </div>
 
                     <div id="usercontent">
@@ -103,7 +105,7 @@
                         <div id="phonenumber">
                             <h2>Phone Number</h2>
                             <div class="name-replace">
-                                <h4 id="number">+{{countrycode}} {{phonenumber}}</h4>
+                                <h4 id="number">{{phonenumber}}</h4>
                                 <button class="update-button" onclick="openForm()"><i class="fas fa-edit"></i></button>
                             </div>
                         </div>
@@ -118,6 +120,31 @@
                     </div>
                     <div id="edit-button-div">
                         <button class="edit-personalinfo" onclick="openForm()"><i class="fa-regular fa-pen-to-square"></i> Edit Info</button>
+                    </div>
+                {{/if}}
+
+                {{#if accountdetails}}
+                    <div id="personalinfo">
+                        <h1 id="title">Account Details<h1>
+                        <p>Manage your Account Information, including your name and email address where you can contacted</p>
+                    </div>
+                    <div id="usercontent">
+                        <div id="email">
+                            <h3 id="gender-detail">Email</h3>
+                            <div class="name-replace">
+                                <h5 id="email-detail">{{email}}</h5>
+                            </div>
+                        </div>
+
+                        <div id="password">
+                            <h3 id="gender-detail">Password</h3>
+                            <div class="name-replace">
+                                <input id="password-detail-input" type="password" value="zxcvbzx" disabled>
+                            </div>
+                            {{#if flag}}
+                                <a id="cpassword" href="/change-password">Change password?</a>
+                            {{/if}}
+                        </div>
                     </div>
                 {{/if}}
             </div>
@@ -148,7 +175,7 @@
                     <div  style="display: flex;flex-direction:column;">
                         <label id="number-label" for="number-update">Phone Number</label>
                         <input type="hidden" id="number-countrycode-update" name="countrycode">
-                        <input class="outline-2" type="tel" value="{{phonenumber}}" name="phonenumber" id="number-update" maxlength="10" autocomplete="off" onchange="process(event)">
+                        <input class="outline-2" type="tel" value="{{countrycode}}{{phonenumber}}" name="phonenumber" id="number-update"  onchange="process(event)">
                     </div>
                 </div><br>
 
@@ -162,14 +189,14 @@
         </div>
 
         <div class="formPopup popupForm-outclick" id="popupForm-image">
-            <form id="photoinput" action="/photouploads" class="formContainer" method="post" enctype="multipart/form-data">
+            <form id="photoinput" action="/photouploads" class="formContainer-image" method="post" enctype="multipart/form-data">
                 <p id="update-title">CHANGE IMAGE</p>
                 <div id="profile-visiblelity">
                     <img id="profilepic-1" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" />
                 </div>
                 <main class="page">
-                    <div class="box-2" style="width: 200px; height: 200px;">
-                        <div class="result" style="width: 200px; height: 200px;"></div>
+                    <div class="box-2" style="width: 270px; height: 270px;margin-top:60;">
+                        <div class="result" style="width: 270px; height: 270px;"></div>
                     </div>
 
                     <div class="box">
@@ -179,14 +206,18 @@
                          <button class="btn save hide" id="savebutton" type="submit" href="/photouploads">Save</button>
                     </div>
                 </main>
+                <div id="photodiv-1">
+                    <a href="/profile"><button type="button" id="savebutton-1" class="align-backbutton">Close</button></a>
+                </div>
                 <div id="photodiv">
                     <label for="inputimage">
-                        CHANGE IMAGE 
+                        SELECT IMAGE 
                         <i class="fa fa-camera"></i>
                         <input id="inputimage" type="file" name="profileimage" accept="image/png, image/jpeg" required>
                         <span id="imagename"></span>
                     </label>
                 </div>
+                
             </form>
         </div>
 
@@ -228,7 +259,7 @@
    });
 
     function process(event) {
-        event.preventDefault();
+        {{!-- event.preventDefault(); --}}
 
         const phoneNumber = phoneInput.getNumber();
         const countryData = phoneInput.getSelectedCountryData();
@@ -264,6 +295,11 @@
         photodiv.style.marginTop = "450px";
         photodiv.style.position = "absolute";
 
+        const closebutton = document.getElementById("savebutton-1")
+        closebutton.style.marginTop = "-50px";
+
+        const formContainerimagecrop = document.getElementById("photoinput")
+        formContainerimagecrop.classList.add('formContainer-image-crop');
 
         const reader = new FileReader();
         reader.onload = e => {

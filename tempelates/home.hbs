@@ -32,6 +32,9 @@
                 <form action="/profile"  class="profilediv">
                     <button id="profilebutton" href="/profile"><i class="fa-solid fa-user"></i> Profile</button>
                 </form>
+                <form action="/profile"  class="profilediv">
+                    <button id="profilebutton" href="/profile"><img id="profilepic-2" src="data:{{data.profileimage.ContentType}};base64,{{value}}" alt="Profile Image" /></button>
+                </form>
 
                 <form action="/exit" class="exitdiv">
                     <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i>Sign Out</button>
@@ -83,140 +86,6 @@
                 </div>
             </div>
         {{/if}}
-
-        <div class="mainblock">
-            {{#if searchresult}}
-                <nav id="nav{{#if image}}image{{/if}}{{#if detailplan}}image{{/if}}">
-                    <form action="/home">
-                        <button id="home{{#if home}}active{{/if}}" href="/home">Home</button>
-                    </form>
-
-                    {{#if source_destination}}
-                        <div id="swap-source-destination">
-                        <div id="source-place">
-                            <p>From</p>
-                            <p id="source-place-1">{{source_destination.[2]}}<input type="hidden" id="from" placeholder="From" name="source" value="{{source_destination.[1]}}"  required></p>
-                        </div>
-                            <p  id="swap"><i class="fa-solid fa-person-walking-arrow-right fa-lg"></i></p>
-                        <div id="destination-place">
-                            <p>To</p>
-                            <p id="destination-place-1">{{source_destination.[4]}}<input type="hidden" id="to" placeholder="To" name="destination" value="{{source_destination.[0]}}" required></p>
-                        </div>
-                            <input type="hidden" id="calander" name="date" value="{{source_destination.[2]}}" required>
-                            
-                        </div>
-                    {{/if}}
-                </nav>
-            {{/if}}
-
-            {{#if result}}
-                <div id="fetch-content-maindiv">
-                    {{#each buscontent}}
-                            <div id="search-div">
-                                <div id="searchresultdiv">
-                                    <img style="width: 30px; height:30px;border-radius:50px" src="data:{{this.[0]}}" alt="dealerpic">
-                                    <p style="font-weight: 500; font-size:15px;">{{this.[1]}}</p>
-                                    <p style="font-weight: 500; font-size:15px;">{{this.[2]}}</p>
-                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                    <p style="font-weight: 500; font-size:15px;">{{this.[3]}}</p>
-                                    <p style="font-weight: 500; font-size:15px;">{{this.[4]}} Seat</p>
-                                </div>
-                                <img id="busimg" src="data:{{this.[5]}}" alt="buspic">
-                                <div id="buttons">
-                                    <form action="/busimg" method="post">
-                                        <input type="hidden" name="source" value={{this.[2]}}>
-                                        <input type="hidden" name="destination" value={{this.[3]}}>
-                                        <input type="hidden" name="busid" value={{@index}}>
-                                        <button type="submit" id="buspic-buttons" href="/busimg"><i class="fa fa-bus" aria-hidden="true"></i> Bus Image</button>
-                                    </form>
-                                    <form action="/busplan" method="post">
-                                    <input type="hidden" name="source" value={{this.[2]}}>
-                                        <input type="hidden" name="destination" value={{this.[3]}}>
-                                        <input type="hidden" name="planid" value={{@index}}>
-                                        <button type="submit" id="plan" href="/busplan"><i class="fa fa-file" aria-hidden="true"></i> Itinerary</button>
-                                    </form>
-                                </div>
-                            </div>
-                    {{/each}}
-                </div>
-            {{/if}}
-
-            {{#if error}}
-                <div id="searchresultdiv1">
-                    <i id="sademoji" class="fa fa-frown fa-3x" aria-hidden="true" ></i>
-                    <h1 id="error">{{res}}</h1>
-                    <h1 id="error1">Do check Other Routes</h1>
-                </div><br>
-            {{/if}}
-
-            {{#if image}}
-                <div id="bus-img">
-                    <div id="outer-photo-block">
-                        <div id="busdetail">
-                            {{#if totalDetail}}
-                                <form action="/search" method="post">
-                                    <input type="hidden" id="from" placeholder="From" name="source" value="{{totalDetail.[1]}}" required>
-                                    <input type="hidden" id="to" placeholder="To" name="destination" value="{{totalDetail.[2]}}" required>
-                                    <input type="hidden" id="calander" name="date" value="{{date}}" required>
-                                    <button type="submit" id="button-busdetial" >
-                                        <div class="bus-name">
-                                            <p style="font-weight: 500; font-size:18px;"><img src="/images/bus.png" alt="seats" style="height: 15px;width: 15px;">  {{totalDetail.[0]}}</p>
-                                        </div>
-                                        <div class="place-name">
-                                            <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[1]}}</p>
-                                        </div>
-                                        <div class="arrow-right">
-                                            <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
-                                        </div>
-                                        <div class="place-name">
-                                            <p style="font-weight: 500; font-size:18px; color:#7b014c;">{{totalDetail.[2]}}</p>
-                                        </div>
-                                        <div class="seat-count">
-                                            <p style="font-weight: 500; font-size:18px;">{{totalDetail.[3]}}seater</p>
-                                        </div>
-                                    </button>
-                                </form>
-                            {{/if}}
-                        </div><br>
-                        {{#each imagecontent}}
-                            <div class="mySlides fade">
-                                <img src="data:{{this}}" style="width: 1040px;height: 480px;" alt="Bus Image" />
-                            </div>
-                        {{/each}}
-
-                        <br><div id="dot">
-                            {{#each imagecontent}}
-                                <div style="text-align:center">
-                                    <span class="dot"></span> 
-                                </div>
-                            {{/each}}
-                        </div>
-                    </div>
-                </div>
-            {{/if}}
-            
-            {{#if detailplan}}
-                <div id="fetch-content-maindiv">
-                    <div id="plandetail">
-                        {{#if totalDetail}}
-                        <form action="/search" method="post">
-                                <input type="hidden" id="from" placeholder="From" name="source" value="{{totalDetail.[1]}}" required>
-                                <input type="hidden" id="to" placeholder="To" name="destination" value="{{totalDetail.[2]}}" required>
-                                <input type="hidden" id="calander" name="date" value="{{date}}" required>
-                                <button type="submit" id="button-busdetial-plan" >
-                                    <p style="font-weight: 500; font-size:20px;"><img src="/images/bus.png" alt="seats" style="height: 20px;width: 25px;">  {{totalDetail.[0]}}</p>
-                                    <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[1]}}</p>
-                                    <i style="color:#2d3467" class="fa fa-long-arrow-right fa-2x" aria-hidden="true" ></i>
-                                    <p style="font-weight: 500; font-size:20px; color:#7b014c;">{{totalDetail.[2]}}</p>
-                                    <p style="font-weight: 500; font-size:20px;">{{totalDetail.[3]}}seater</p>
-                                </button>
-                            </form>
-                        {{/if}}
-                    </div><br>
-                    <iframe id="planfile" src="{{planpdf}}" frameborder="0"  title="{{totalDetail.[1]}}-{{totalDetail.[2]}}"></iframe>
-                </div>
-            {{/if}}
-        </div>
     </div>
 </body>
 

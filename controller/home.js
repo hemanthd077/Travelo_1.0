@@ -1,7 +1,13 @@
 const plandetails = require('../src/planDetails')
 const busdetails = require('../src/busDetails')
 const dealerdetails = require('../src/dealerdb');
-const busbookingstatus = require('../src/busBookingStatusdb')
+const busbookingstatus = require('../src/busBookingStatusdb');
+const async = require('hbs/lib/async');
+const Login = require('../controller/login');
+const validation = require('../src/mongodb')
+
+
+const detailsArray = Login.mail();
 
 function casedetective(a){
     let capFirstLetter = a[0].toUpperCase();
@@ -79,12 +85,37 @@ const getin = async(req,res)=>{
                                         let dealerdata = await dealerdetails.findOne({dealerid:busdata.dealerid});
                                         temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
                                         temp[1] = data[ind].busname.toUpperCase();
-                                        temp[2] = casedetective(req.body.source);
+                                        temp[2] = dealerdata.dealername;
                                         busnamearr[ind] = data[ind].busname;
-                                        temp[3] = casedetective(req.body.destination);
+                                        
+                                        temp[3] = cover_location;
                                         temp[4] = busdata.seatcount;
+                                        if(busdata.musicsystem==='yes'){
+                                            temp[5]=true;
+                                        }
+                                        else{
+                                            temp[5]=false;
+                                        }
+                                        if(busdata.acornonac==='ac'){
+                                            temp[6]=true;
+                                        }
+                                        else{
+                                            temp[6]=false;
+                                        }
+                                        if(busdata.seattype==='seater'){
+                                            temp[7]=true;
+                                        }
+                                        else{
+                                            temp[7]=false;
+                                        }
+                                        if(busdata.lighting==='yes'){
+                                            temp[8]=true;
+                                        }
+                                        else{
+                                            temp[8]=false;
+                                        }
                                         if(busdata.busimage){
-                                            temp[5] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
+                                            temp[9] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
                                         }
                                         buscontent[bus_data_index++]=temp;
                                     }
@@ -98,10 +129,10 @@ const getin = async(req,res)=>{
     })
     console.log("length : "+buscontent.length);
     if(buscontent.length===0){
-        res.render('home',{'res':'No Buses Found',error:true,searchresult:true,source_destination})
+        res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination})
     }
     else{
-        res.render('home',{result:true,buscontent,'city':sourceCity[0],searchresult:true,source_destination})               
+        res.render('homeresult',{result:true,buscontent,'city':sourceCity[0],searchresult:true,source_destination,'length':buscontent.length})               
     }
 
 }
@@ -119,7 +150,7 @@ const getImg = async(req,res)=>{
             imagecontent[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');
         }
     } 
-    res.render('home',{searchresult:true,image:true,imagecontent,totalDetail,date});
+    res.render('homeresult',{searchresult:true,image:true,imagecontent,totalDetail,date});
 }
 
 const getplan = async(req,res)=>{
@@ -134,11 +165,18 @@ const getplan = async(req,res)=>{
         const pdfData = data2.planfile.data.toString('base64');
         planpdf = `data:application/pdf;base64,${pdfData.toString('base64')}`;
     })
-    res.render('home',{detailplan:true,planpdf,totalDetail,searchresult:true,date});
+    res.render('homeresult',{detailplan:true,planpdf,totalDetail,searchresult:true,date});
+}
+
+const homepage = async(req,res)=>{
+    validation.findOne({Email:detailsArray[2]}).then(async(user)=>{
+        res.render('home',{content:true,data:user,value:user.profileimage.data.toString('base64')})
+    }).catch((err)=>console.log('error in finding'+err))
 }
 
 module.exports = {
     getin,
     getImg,
     getplan,
+    homepage,
 }
