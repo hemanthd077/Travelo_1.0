@@ -1,8 +1,7 @@
 [build]
-    publish = "site"
-    functions = "functions"
+    publish = "public"
+    functions = "src"
 [functions]
-    [functions.hello]
         included_files = ["templates/*.hbs"]
 [[redirects]]
     from = "/"
