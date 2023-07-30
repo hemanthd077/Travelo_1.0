@@ -127,6 +127,23 @@
                                 <option value="semisleeper">SEMI SLEEPER</option>
                             </select>
                         </div>
+                        <div id="busname">
+                            <p class="textcontent">Entertainment System : </p>
+                            <select name="entertainsystem" class="textinput-select" required>
+                                <option value="yes">NO</option>
+                                <option value="yes">YES</option>
+                            </select>
+                            <p class="textcontent">Lagguage Storage : </p>
+                            <select name="lagguagestorage" class="textinput-select" required>
+                                <option value="no">NO</option>
+                                <option value="yes">YES</option>
+                            </select>
+                            <p class="textcontent">Wifi Connectivity: </p>
+                            <select name="wifi" class="textinput-select" required>
+                                <option value="no">NO</option>
+                                <option value="yes">YES</option>
+                            </select>
+                        </div>
                         <div id="imagediv">
                             <label  for="inputTag">
                                 Select Images<br/>
@@ -209,6 +226,9 @@
                                                 <p><i class="fa-solid fa-radio"></i> {{this.[4]}}</p>
                                                 <p><i class="fa-solid fa-glass-water-droplet"></i> {{this.[5]}}</p>
                                                 <p><i class="fa-regular fa-lightbulb"></i> {{this.[6]}}</p>
+                                                <p><i class="fa-solid fa-tv fa-sm"></i> {{this.[12]}}</p>
+                                                <p><i class="fa-solid fa-wifi fa-sm"></i> {{this.[10]}}</p>
+                                                <p><i class="fa-solid fa-suitcase-rolling"></i> {{this.[11]}}</p>
                                             </div>
                                         </form>
                                         <form action="/bus-img-details" method="post">
@@ -273,7 +293,10 @@
                                                 </div>
                                                 <div id="plandetails-daywise">
                                                     <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} Days Plan Details</p>
-                                                    <pre>{{this.[6]}}</pre>
+                                                    {{#each this.[6]}}
+                                                        <p>{{this.[0]}}</p>
+                                                        <pre>{{this.[1]}}</pre><br>
+                                                    {{/each}}
                                                 </div>
                                             </div>
                                         </div>
@@ -338,7 +361,7 @@
                                             <label id="label-addimage" for="inputTag">
                                                 Add Image<br/>
                                                 <i class="fas fa-camera-retro fa-2x"></i>
-                                                <input id="inputTag" type="file" name="busimage" multiple required>
+                                                <input id="inputTag" type="file" name="busimage" accept="image/png, image/jpeg" multiple required>
                                                 <br/>
                                             </label>
                                             <button id="uploadbutton-1" href="/buspicadd" >Upload</button>

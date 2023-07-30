@@ -191,9 +191,9 @@ div#busdetails {
     padding: 10px;
     background-color: white;
     margin-left: 170px;
-    margin-top: 40px;
+    margin-top: 20px;
     width: 1000px;
-    height: 640px;
+    height: 680px;
     border-radius: 10px;
     font-size: medium;
 }
@@ -671,9 +671,8 @@ label{
     background-color: white;
     padding: 15px;
     border-radius: 5px;
-    height: 362px;
+    height: 442px;
     width: 425px;
-    /* margin-top: 15px; */
     box-shadow: 0px 2px 5px -1px #2d3467;
 }
 
@@ -1300,7 +1299,6 @@ pre{
     font-size:15px;
     font-family: 'Open Sans', sans-serif;
     margin-top: 20px;
-    height: 400px;
     overflow: scroll;
     overflow-x: hidden;
     font-weight: 600;
@@ -1321,14 +1319,24 @@ pre{
     background-color: white;
     padding: 15px;
     border-radius: 5px;
-    height: 359px;
+    height: 442px;
     width: 425px;
     display: flex;
     box-shadow: 0px 0px 5px -1px #2d3467;
     justify-content: center;
 
 }
-.fa-couch,.fa-fan,.fa-radio,.fa-glass-water-droplet,.fa-lightbulb,.fa-tags,.fa-calendar-day,.fa-location-arrow{
+.fa-couch,
+.fa-fan,
+.fa-radio,
+.fa-glass-water-droplet,
+.fa-lightbulb,
+.fa-tags,
+.fa-calendar-day,
+.fa-location-arrow,
+.fa-wifi,
+.fa-suitcase-rolling,
+.fa-tv{
     width: 25px;
 }
 

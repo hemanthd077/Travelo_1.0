@@ -4,6 +4,7 @@ const path = require('path')
 const hbs = require('hbs')
 const templatePath = path.join(__dirname,'../tempelates')
 var RateLimit = require('express-rate-limit');
+import serverless from 'serverless-http';
 
 
 require('dotenv').config();
@@ -57,3 +58,6 @@ app.use(limiter);
 app.listen(8080,()=>{
     console.log('Connected to Server');
 })
+
+
+export const handler = serverless(app);

@@ -57,14 +57,6 @@ const plandetailsupload = async(req,res)=>{
                     str+="-"
                 }
             }
-            let dayplan="";
-            for(let i=1;i<=req.body.noofdays;i++){
-                if(req.body["dayPlan_"+i]){
-                    dayplan+="Day "+i+":\n    ";
-                    dayplan+=req.body["dayPlan_"+i];
-                    dayplan+="\n\n";
-                }
-            }
 
             let id_bus;
             await busdetails.find({dealerid:detailsArray[0]}).then((data)=>{
@@ -85,12 +77,21 @@ const plandetailsupload = async(req,res)=>{
                 noofdays:req.body.noofdays,
                 price:req.body.amount,
                 coverlocation:str,
-                dayplans:dayplan,
+                dayplans:[],
                 planfile:{
                     data:fs.readFileSync('uploads/plans/'+req.file.originalname),
                     ContentType:'file/pdf'
                 },
             })
+
+            for(let i=1;i<=req.body.noofdays;i++){
+                const newPlan = {
+                    day:"Day "+i,
+                    content:req.body["dayPlan_"+i],
+                }
+                newvalues.dayplans.push(newPlan);
+            }
+
             let busname=[];
             await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(data)=>{
                 for (let index = 0; index < data.length; index++) {
@@ -133,6 +134,13 @@ const busdetailsupload = (req,res)=>{
                     seattype: req.body.seattype,
                     waterfilter: req.body.waterfilter,
                     lighting: req.body.lighting,
+                    wifi:req.body.wifi,
+                    lagguagestorage:req.body.lagguagestorage,
+                    entertainsystem:req.body.entertainsystem,
+                    rating:{
+                        currentrating:"0",
+                        count:"0",
+                    },
                     busimage: [],
                 })
 
@@ -268,6 +276,24 @@ const busdetail = async(req,res)=>{
                     if(!(buscontent[0].busimage.length===0)){
                         temp[7] = buscontent[0].busimage[0].ContentType+";base64,"+buscontent[0].busimage[0].data.toString('base64');
                     }
+                    if(buscontent[0].wifi==="yes"){
+                        temp[10] = "Wifi Connectivity Avaliable";
+                    }
+                    else{
+                        temp[10] = "No Wifi Connectivity";
+                    }
+                    if(buscontent[0].lagguagestorage==="yes"){
+                        temp[11] = "Laggage Storage Avaliable";
+                    }
+                    else{
+                        temp[11] = "No Laggage Storage";
+                    }
+                    if(buscontent[0].entertainsystem==="yes"){
+                        temp[12] = "Entertainment System Installed";
+                    }
+                    else{
+                        temp[12] = "No Entertainment System";
+                    }
                     busdetailArray[index]=temp;
                 })
             }
@@ -288,35 +314,47 @@ const busdetail = async(req,res)=>{
 let planid =[];
 
 const plandetail = async(req,res)=>{
+    let planArray=[];
+    let coverlocation = [];
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
-        dealername=data.dealername.toUpperCase();
-        let planArray=[];
-        planid=[];
-        let coverlocation = [];
-        await plandetails.find({dealerid:detailsArray[0]}).then(async(detail)=>{
-            for (let index = 0; index < detail.length; index++) {
-                let temp = [];
-                coverlocation = [];
-                let ind=0;
-                temp[0] = detail[index].state.toUpperCase();
-                temp[1] = detail[index].busname.toUpperCase();
-                temp[2] = detail[index].noofdays;
-                temp[3] = detail[index].price;
-                let str = detail[index].coverlocation.split("-");
-                for(let i=0;i<str.length-1;i++){
-                    if(str[i]!="undefined")
-                    coverlocation[ind++] = str[i];
+        if(data){
+            console.log("data:"+data);
+            dealername=data.dealername.toUpperCase();
+            planid=[];
+            await plandetails.find({dealerid:detailsArray[0]}).then(async(detail)=>{
+                console.log("detail:"+detail)
+                if(detail){
+                    for (let index = 0; index < detail.length; index++) {
+                        let temp = [];
+                        coverlocation = [];
+                        let ind=0;
+                        temp[0] = detail[index].state.toUpperCase();
+                        temp[1] = detail[index].busname.toUpperCase();
+                        temp[2] = detail[index].noofdays;
+                        temp[3] = detail[index].price;
+                        let str = detail[index].coverlocation.split("-");
+                        for(let i=0;i<str.length-1;i++){
+                            if(str[i]!="undefined")
+                            coverlocation[ind++] = str[i];
+                        }
+                        //pdf data convert from bufferdata to dataURL
+                        const pdfData = detail[index].planfile.data.toString('base64');
+                        temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+                        temp[5] = coverlocation;
+                        planData = [];
+                        for(let i=0;i<detail[index].dayplans.length;i++){
+                            dummy = [];
+                            dummy[0] = detail[index].dayplans[i].day; 
+                            dummy[1] = detail[index].dayplans[i].content;
+                            planData[i]=dummy
+                        }
+                        temp[6] = planData;
+                        planid[index]=detail[index].id;
+                        planArray[index] = temp;
+                    } 
                 }
-                //pdf data convert from bufferdata to dataURL
-                const pdfData = detail[index].planfile.data.toString('base64');
-                temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
-                temp[5] = coverlocation;
-                let paragraph = detail[index].dayplans;
-                temp[6] = paragraph;
-                planid[index]=detail[index].id;
-                planArray[index] = temp; 
-            }
-        })
+            })
+        }
         if(planArray.length===0){
             res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,flag:true})
         }

@@ -39,6 +39,19 @@ const busDetailsSchema = new mongoose.Schema({
     lighting:{
         type:String,
     },
+    rating:{
+        currentrating:String,
+        count:String,
+    },
+    wifi:{
+        type:String,
+    },
+    lagguagestorage:{
+        type:String,
+    },
+    entertainsystem:{
+        type:String,
+    },
     busimage:[{
         data:Buffer,
         ContentType:String,

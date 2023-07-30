@@ -37,12 +37,13 @@ function calculateNextNthDate(startDate, n) {
 }
 
 
-let busnamearr = [];
+let busidarr = [];
 let buscontent = [];
 let date;
+let source_destination = [];
 const getin = async(req,res)=>{
     let destination = req.body.destination.toLowerCase();
-    let source_destination = [];
+    source_destination = [];
     source_destination[0] = req.body.fromstate;
     source_destination[1]= req.body.fromdistrict;
     source_destination[2] = req.body.source;
@@ -61,6 +62,8 @@ const getin = async(req,res)=>{
     console.log("City:"+sourceCity[0]);
     let bus_data_index=0;
     buscontent = [];
+    busidarr = [];
+    let idIndex=0;
     await dealerdetails.find({city:sourceCity[0]}).then(async(dealerdata)=>{
         for(let index=0;index<dealerdata.length;index++){
             await plandetails.find({dealerid:dealerdata[index].dealerid}).then(async(data)=>{
@@ -86,7 +89,7 @@ const getin = async(req,res)=>{
                                         temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
                                         temp[1] = data[ind].busname.toUpperCase();
                                         temp[2] = dealerdata.dealername;
-                                        busnamearr[ind] = data[ind].busname;
+                                        busidarr[idIndex++] = busdata.id;
                                         
                                         temp[3] = cover_location;
                                         temp[4] = busdata.seatcount;
@@ -114,8 +117,36 @@ const getin = async(req,res)=>{
                                         else{
                                             temp[8]=false;
                                         }
+                                        if(busdata.waterfilter==='yes'){
+                                            temp[9]=true;
+                                        }
+                                        else{
+                                            temp[9]=false;
+                                        }
+                                        let busAmount = Number(data[ind].price)+((Number(data[ind].price)*5)/100);
+                                        temp[10]=busAmount;
+                                        temp[11] = (busAmount*30)/100;
                                         if(busdata.busimage){
-                                            temp[9] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
+                                            temp[12] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
+                                        }
+                                        temp[13]=Number(busdata.rating.currentrating);
+                                        if(busdata.wifi==='yes'){
+                                            temp[14]=true;
+                                        }
+                                        else{
+                                            temp[14]=false;
+                                        }
+                                        if(busdata.lagguagestorage==='yes'){
+                                            temp[15]=true;
+                                        }
+                                        else{
+                                            temp[15]=false;
+                                        }
+                                        if(busdata.entertainsystem==='yes'){
+                                            temp[16]=true;
+                                        }
+                                        else{
+                                            temp[16]=false;
                                         }
                                         buscontent[bus_data_index++]=temp;
                                     }
@@ -124,12 +155,15 @@ const getin = async(req,res)=>{
                         }
                     }
                 }
+                else{
+                    res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
+                }
             })
         }
     })
     console.log("length : "+buscontent.length);
     if(buscontent.length===0){
-        res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination})
+        res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
     }
     else{
         res.render('homeresult',{result:true,buscontent,'city':sourceCity[0],searchresult:true,source_destination,'length':buscontent.length})               
@@ -137,35 +171,39 @@ const getin = async(req,res)=>{
 
 }
 
-const getImg = async(req,res)=>{
+const getBusData = async(req,res)=>{
     let imagecontent = [];
-    let totalDetail = [];
-    totalDetail[1] = req.body.source;
-    totalDetail[2] = req.body.destination;
-    const data1 = await busdetails.find({busname:busnamearr[req.body.busid]})
-    totalDetail[0] = data1[0].busname;
-    totalDetail[3] = data1[0].seatcount;
-    if(data1.length>0){
-        for (let index = 0; index < data1.length; index++) {
-            imagecontent[index] = data1[index].busimage.ContentType+";base64,"+data1[index].busimage.data.toString('base64');
+    planDataArray = []
+    await plandetails.findOne({id:busidarr[req.body.busid]}).then(async(detail)=>{
+        if(detail){
+            for(let i=0;i<detail.dayplans.length;i++){
+                dummy = [];
+                dummy[0] = detail.dayplans[i].day; 
+                dummy[1] = detail.dayplans[i].content;
+                planDataArray[i]=dummy
+            }
         }
-    } 
-    res.render('homeresult',{searchresult:true,image:true,imagecontent,totalDetail,date});
-}
-
-const getplan = async(req,res)=>{
-    let planpdf;
-    let totalDetail = [];
-    totalDetail[1] = req.body.source;
-    totalDetail[2] = req.body.destination;
-    const data1 = await busdetails.find({busname:busnamearr[req.body.planid]})
-    totalDetail[0] = data1[0].busname;
-    totalDetail[3] = data1[0].seatcount;
-    await plandetails.findOne({busname:busnamearr[req.body.planid]}).then(async(data2)=>{
-        const pdfData = data2.planfile.data.toString('base64');
-        planpdf = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+        //plan pdf code
+        // const pdfData = data2.planfile.data.toString('base64');
+        // planpdf = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+    }).catch(e=>{
+        console.log("Error Occured while fetching plan in getBusData: "+e);
     })
-    res.render('homeresult',{detailplan:true,planpdf,totalDetail,searchresult:true,date});
+    let busdata = buscontent[req.body.busid];
+    busdata[12]="";//clear the bus image
+    await busdetails.findOne({id:busidarr[req.body.busid]}).then(async(data1)=>{
+        if(data1){
+            for (let index = 0; index < data1.busimage.length; index++) {
+                imagecontent[index] = data1.busimage[index].ContentType+";base64,"+data1.busimage[index].data.toString('base64');
+            }
+            res.render('homeresult',{searchresult:true,busContent:true,imagecontent,headerdata:source_destination,busdata:buscontent[req.body.busid],planDataArray});
+        }
+        else{
+            res.render('homeresult',{searchresult:true,busContent:true,source_destination,planDataArray});
+        }
+    }).catch(e=>{
+        console.log("Error Occur while finding image at user singel bus detail fetching")
+    })
 }
 
 const homepage = async(req,res)=>{
@@ -176,7 +214,6 @@ const homepage = async(req,res)=>{
 
 module.exports = {
     getin,
-    getImg,
-    getplan,
+    getBusData,
     homepage,
 }

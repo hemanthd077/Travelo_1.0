@@ -93,7 +93,6 @@
 
     const rotateButton = document.getElementById('swapbutton');
      const rotateMe = document.getElementById('swapicon');
-    let slideIndex = 0;
     let isRotated = false;
     let val=0;
     let str;
@@ -135,22 +134,6 @@
         }
     }
 
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}    
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";  
-        dots[slideIndex-1].className += "active";
-        setTimeout(showSlides, 2000);
-    }
 
     //suggestion for from input tag
     function startfunfrom(){

@@ -15,7 +15,6 @@ mongoose.connect(`mongodb://0.0.0.0:27017/userdetails`,{
 const planDetailsSchema = new mongoose.Schema({
     id:{
         type:String,
-        unique : true,
     },
     dealerid:{
         type:String,
@@ -41,9 +40,10 @@ const planDetailsSchema = new mongoose.Schema({
         type:String,
         required : true,
     },
-    dayplans:{
-        type:String,
-    },
+    dayplans:[{
+        day:String,
+        content:String,
+    }],
     planfile:{
         data:Buffer,
         ContentType:String,
