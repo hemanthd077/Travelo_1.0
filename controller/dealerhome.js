@@ -6,6 +6,7 @@ const busbookingstatus = require('../src/busBookingStatusdb')
 const fs = require('fs');
 const multer  = require('multer');
 const { log } = require('console');
+const async = require('hbs/lib/async')
 
 let detailsArray = Login.dealermail();
 
@@ -27,6 +28,15 @@ const storage1 = multer.diskStorage({
     },
 })
 
+const storage3 = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null,"uploads/planimages/");
+    },
+    filename: function (req, file, cb) {
+       return cb(null,file.originalname)
+    },
+})
+
 const storage2 = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null,"uploads/plans/");
@@ -40,14 +50,19 @@ const upload = multer({storage:storage}).single('profileimage')
 
 const upload1 = multer({storage:storage1}).array("busimage",6);
 
-const upload2 = multer({storage:storage2}).single('planfile');
+let upload3 = multer({storage:storage3}).array(`locationimage`,15);
+
+
+// const upload2 = multer({storage:storage2}).single('planfile');
+
+
 
 
 
 const plandetailsupload = async(req,res)=>{
-    upload2(req,res,async(err)=>{
+    upload3(req,res,async(err)=>{
         if(err){
-            console.log(err);
+            console.log("Error in upload3 file not working: "+err);
         }
         else{
             let str ="";
@@ -78,10 +93,7 @@ const plandetailsupload = async(req,res)=>{
                 price:req.body.amount,
                 coverlocation:str,
                 dayplans:[],
-                planfile:{
-                    data:fs.readFileSync('uploads/plans/'+req.file.originalname),
-                    ContentType:'file/pdf'
-                },
+                imageclips:[],
             })
 
             for(let i=1;i<=req.body.noofdays;i++){
@@ -91,6 +103,18 @@ const plandetailsupload = async(req,res)=>{
                 }
                 newvalues.dayplans.push(newPlan);
             }
+
+            let planimage = req.files;
+            let imageArray = planimage.map((file)=>{
+                return img = file;
+            })
+            imageArray.forEach((src) => {
+                const newImage = {
+                  data: fs.readFileSync('uploads/planimages/' + src.filename),
+                  ContentType: 'image/png'
+                }
+                newvalues.imageclips.push(newImage);
+            });
 
             let busname=[];
             await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(data)=>{
@@ -106,9 +130,9 @@ const plandetailsupload = async(req,res)=>{
             })
             
             res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , plan:true,busname})
+
         }
     })
-
 }
 
 const busdetailsupload = (req,res)=>{
@@ -318,11 +342,9 @@ const plandetail = async(req,res)=>{
     let coverlocation = [];
     await dealer.findOne({dealerid:detailsArray[0]}).then(async(data)=>{
         if(data){
-            console.log("data:"+data);
             dealername=data.dealername.toUpperCase();
             planid=[];
             await plandetails.find({dealerid:detailsArray[0]}).then(async(detail)=>{
-                console.log("detail:"+detail)
                 if(detail){
                     for (let index = 0; index < detail.length; index++) {
                         let temp = [];
@@ -337,9 +359,14 @@ const plandetail = async(req,res)=>{
                             if(str[i]!="undefined")
                             coverlocation[ind++] = str[i];
                         }
-                        //pdf data convert from bufferdata to dataURL
-                        const pdfData = detail[index].planfile.data.toString('base64');
-                        temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
+                        dummy = [];
+                        for(let i =0;i<detail[index].imageclips.length;i++){
+                            dummy[i] = detail[index].imageclips[i].ContentType+";base64,"+detail[index].imageclips[i].data.toString('base64');
+                        }
+                        temp[4] = dummy;
+                        // //pdf data convert from bufferdata to dataURL
+                        // const pdfData = detail[index].planfile.data.toString('base64');
+                        // temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
                         temp[5] = coverlocation;
                         planData = [];
                         for(let i=0;i<detail[index].dayplans.length;i++){

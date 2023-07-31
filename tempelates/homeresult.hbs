@@ -211,6 +211,25 @@
                         </div>
                     </div>
                     <div id="bus-plan-data">
+                        <div id="outer-photo-block">
+                            {{#each busdata.[17]}}
+                                <div class="mySlides fade" id="bus-img-detail">
+                                    <img id="bus-image" src="data:{{this}}"  alt="Bus Image" />
+                                </div>
+                            {{/each}}
+
+                            <br><div id="dot">
+                                {{#each busdata.[17]}}
+                                    <div style="text-align:center">
+                                        <span class="dot"></span> 
+                                    </div>
+                                {{/each}}
+                            </div>
+                            <div id="prevNextButton">
+                                <button class="prev-button" onclick="prevSlide()"><i class="fa-solid fa-angle-left fa-2x"></i></button>
+                                <button class="next-button" onclick="nextSlide()"><i class="fa-solid fa-angle-right fa-2x"></i></button>
+                            </div>
+                        </div>
                         {{#each planDataArray}}
                             <div class="div-control-plan">
                                 <div class="day-header">
@@ -221,6 +240,10 @@
                                 </div>
                             </div>
                         {{/each}}
+                        <div id="pay-footer">
+                            <p class="pay-footer-txt">Total Amount to Pay : <i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[10]}}</p>
+                            <button id="bookamount-button"><p>Book at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
+                        </div>
                     </div>
                 </div>
             {{/if}}

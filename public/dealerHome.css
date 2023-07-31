@@ -253,6 +253,15 @@ div#imagediv {
 input#inputTag{
     display: none;
 }
+input#inputTag-image {
+    position: relative;
+    z-index: 2;
+    padding: 5px;
+    margin-top: -33px;
+    width: 130px;
+    opacity: 0%;
+    cursor: pointer;
+}
 label{
     cursor:pointer;
 }
@@ -334,7 +343,7 @@ div#planlocation {
     background-color: #dadada;
     padding: 15px;
     margin-left: 30px;
-    height: 310px;
+    height: 400px;
     border-radius: 5px;
     width: 905px;
     margin-top: 20px;
@@ -536,15 +545,14 @@ button#savebutton:hover,#photodiv:hover{
     margin-left: 10px;
 }
 
-#inputimage{
+#inputimage {
     opacity: 0%;
     height: 40px;
-    width: 108px;
+    width: 119px;
     position: absolute;
-    margin-left: -62px;
-    margin-top: -21px;
     cursor: pointer;
 }
+
 label{
     cursor:pointer;
 }
@@ -855,6 +863,8 @@ label{
 
 .dayplantextarea {
     resize: none;
+    margin-top: 15px;
+    border-radius: 0px 0px 5px 5px;
     box-shadow: 0px 0px 5px -3px rgb(0,0,0.1);
 }
 
@@ -1415,4 +1425,111 @@ button#uploadbutton-1 {
     display: flex;
     box-shadow: 0px 0px 5px -1px #2d3467;
     justify-content: center;
+}
+
+.day-plan-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #2d3467;
+    border-radius: 5px;
+    color: #FFFFFF;
+    height: 287px;
+}
+
+label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p#Daytext {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: -5px;
+}
+
+
+.mySlides{
+    box-shadow: 0px 1px 5px 3px #2d3464;
+}
+
+.mySlides.fade {
+    width: 450px;
+    height: 260px;
+    border-radius: 5px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+#dot {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-top: -50px;
+    justify-content: center;
+    width: 600px;
+}
+
+.active {
+    background: linear-gradient(95deg,#ae006b, #2d3464);
+  }
+
+  #prevNextButton {
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    margin-top: -180px;
+    justify-content: space-between;
+    width: 450px;
+}
+
+.prev-button {
+    background: #00000099;
+    color: #FFFFFF;
+    width: 27px;
+    height: 53px;
+    padding: 10px;
+    border: none;
+    display: flex;
+    border-radius: 0px 10px 10px 0px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.next-button {
+    background: #00000099;
+    color: #FFFFFF;
+    width: 27px;
+    height: 53px;
+    padding: 10px;
+    border: none;
+    display: flex;
+    border-radius: 10px 0px 0px 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.next-button:hover,.prev-button:hover{
+    background-color: #dadade99;
+    color: #000000;
+}
+
+#bus-image {
+    width: 450px;
+    height: 260px;
+    border-radius: 5px 5px 0px 0px;
 }

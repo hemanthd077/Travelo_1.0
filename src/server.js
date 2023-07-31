@@ -1,9 +1,9 @@
 const express = require('express')
-const serverless = require('serverless-http') ;
 const app = express()
 const path = require('path')
 const hbs = require('hbs')
 const templatePath = path.join(__dirname,'../tempelates')
+var RateLimit = require('express-rate-limit');
 
 
 require('dotenv').config();

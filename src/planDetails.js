@@ -44,10 +44,10 @@ const planDetailsSchema = new mongoose.Schema({
         day:String,
         content:String,
     }],
-    planfile:{
+    imageclips:[{
         data:Buffer,
         ContentType:String,
-    },
+    }],
 })
 
 const collection = new mongoose.model('plandoc',planDetailsSchema)

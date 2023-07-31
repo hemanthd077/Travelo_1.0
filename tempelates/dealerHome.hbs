@@ -70,10 +70,9 @@
                         </div>
                         <div id="imagediv">
                             <label  for="inputTag" id="">
-                                Add Itinerary PDF<br/>
-                                <i class="fas fa-folder-plus fa-2x"></i>
-                                <input id="inputTag" type="file" name="planfile" accept="application/pdf" required/>
-                                <br/>
+                                Add Tour Spot Images
+                                <i class="fa-regular fa-image fa-2x"></i>
+                                <input id="inputTag" type="file" name="locationimage" accept="image/png,image/jpeg" multiple required/>
                             </label>
                         </div>
                         <button id="uploadbutton" href="/plandetailsupload">Upload</button>
@@ -146,11 +145,11 @@
                         </div>
                         <div id="imagediv">
                             <label  for="inputTag">
-                                Select Images<br/>
+                              Select Images<br/>
                                 <i class="fa fa-2x fa-camera"></i>
                                 <input id="inputTag" type="file" name="busimage" accept="image/png, image/jpeg" multiple required>
                                 <br/>
-                            </label>
+                            </label>  
                         </div>
                         <input type="hidden" name="flag" id="0">
                         <button id="uploadbutton" href="/busdetailsupload">Upload</button>
@@ -275,7 +274,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div style="display: flex;flex-direction:row;gap:40px">
+                                            <div style="display: flex;flex-direction:row;gap:20px">
                                                 <div>
                                                     <div id="plan-features">
                                                         <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p>
@@ -286,9 +285,25 @@
                                                             {{/each}}
                                                         </div>
                                                         <p><i class="fa-solid fa-tags"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>
-                                                    </div>
-                                                    <div>
-                                                        <iframe  id="busplan" src="{{this.[4]}}#toolbar=0"></iframe>
+                                                    </div><br><br>
+                                                    <div id="outer-photo-block">
+                                                        {{#each this.[4]}}
+                                                            <div class="mySlides fade" id="bus-img-detail">
+                                                                <img id="bus-image" src="data:{{this}}"  alt="Bus Image" />
+                                                            </div>
+                                                        {{/each}}
+
+                                                        <br><div id="dot">
+                                                            {{#each imagecontent}}
+                                                                <div style="text-align:center">
+                                                                    <span class="dot"></span> 
+                                                                </div>
+                                                            {{/each}}
+                                                        </div>
+                                                        <div id="prevNextButton">
+                                                            <button class="prev-button" onclick="prevSlide()"><i class="fa-solid fa-angle-left fa-2x"></i></button>
+                                                            <button class="next-button" onclick="nextSlide()"><i class="fa-solid fa-angle-right fa-2x"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div id="plandetails-daywise">
@@ -428,7 +443,6 @@
                                                 </div>
                                             </div>
                                             
-                                            
                                         </div>
                                         <div id="image-edit-div">
                                             <img  id="buspic-edit" src="data:{{img}}" alt="Bus Image">
@@ -463,11 +477,13 @@
         document.getElementsById('plandelete').addEventListener('click', function(event) {
             event.preventDefault();
         });
+        return;
         
     }
 
     function assignbusname(busname){
         document.getElementById('valinsertnusname').value = busname;
+        return;
     }
 
     function closeForm(){
@@ -475,6 +491,7 @@
 
         document.getElementById("button-update").style.display = "none";
         profilecont1.style.animationDelay="1s"
+        return;
     }
 
     function openbusform(index,busname) {
@@ -493,10 +510,11 @@
         document.getElementById('nav').addEventListener('click', function(event) {
             event.preventDefault();
         });
+        return 
     }
-
     function closebusForm(){
         document.getElementById("button-update-bus").style.display = "none";
+        return;
     }
 
     function validateForm() {
@@ -507,13 +525,14 @@
         }
     }
 
-    var plan = document.getElementById("inputTag");
+    {{!-- var plan = document.getElementById("inputTag");
     plan.addEventListener("input", function() {
         if (plan.value !== "") {
             document.getElementById("imagediv").style.color = "red";
         } else {
             document.getElementById("imagediv").style.color = "#2d3467";
         }
+        return;
     })
 
     var plan = document.getElementById("inputTag");
@@ -523,7 +542,8 @@
         } else {
             document.getElementById("label-addimage").style.color = "#2d3467";
         }
-    })
+        return;
+    }) --}}
 
     function openDeletebusform(){
         var profilecont1 = document.getElementById("profilecontent");
@@ -533,67 +553,129 @@
         document.getElementById("button-delete-bus").style.opacity="1";
 
         document.getElementById('contentdivision1').addEventListener('click', function(event) {
-            event. ventDefault();
+            event.preventDefault();
         });
         document.getElementById('nav').addEventListener('click', function(event) {
             event.preventDefault();
         });
         document.getElementsByClassName('contentdivision2').style.overflow="hidden";
+        return
     }
 
     function closeDeletebusForm(){
         document.getElementById("button-delete-bus").style.display = "none";
+        return;
     }
 
     let inputCountspot = 1;
     let cntspot=1;
     addspotInput()
     function addspotInput() {
-      inputCountspot++;
-      const container = document.getElementById("input-container");
-      const coverlocationcount = document.getElementById("coverlocationcount");
-      const input = document.createElement("input");
-      input.type = "text";
-      input.name = "location_" + inputCountspot;
-      coverlocationcount.value=inputCountspot;
-      input.setAttribute("placeholder", "Enter the Location");
-      input.setAttribute("required", "true");
-      input.setAttribute("autocomplete", "off");
-      input.classList.add('planlocationinput');
-      
-      const deleteButton = document.createElement("button");
-      deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
-      deleteButton.classList.add('delete-button');
-      deleteButton.onclick = function() {
-        if(cntspot>2){
-            container.removeChild(input);
-            container.removeChild(deleteButton);
-            cntspot--;
-        }
-      };
-      cntspot++;
-      container.appendChild(input);
-      container.appendChild(deleteButton);
+      try{
+        inputCountspot++;
+        const container = document.getElementById("input-container");
+        const coverlocationcount = document.getElementById("coverlocationcount");
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "location_" + inputCountspot;
+        coverlocationcount.value=inputCountspot;
+        input.setAttribute("placeholder", "Enter the Location");
+        input.setAttribute("required", "true");
+        input.setAttribute("autocomplete", "off");
+        input.classList.add('planlocationinput');
+        
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
+        deleteButton.classList.add('delete-button');
+        deleteButton.onclick = function() {
+            if(cntspot>2){
+                container.removeChild(input);
+                container.removeChild(deleteButton);
+                cntspot--;
+            }
+        };
+        cntspot++;
+        container.appendChild(input);
+        container.appendChild(deleteButton);
+      }catch{
+        return
+      }
     }
     adddayplanInput()
     function adddayplanInput(){
-        var noOfDays = document.querySelector('input[name="noofdays"]').value;
-        var dayPlanContainer = document.getElementById("input-container-dayplan");
+        try{
+            var noOfDays = document.querySelector('input[name="noofdays"]').value;
+            var dayPlanContainer = document.getElementById("input-container-dayplan");
 
-        // Clear the container
-        dayPlanContainer.innerHTML = "";
+            // Clear the container
+            dayPlanContainer.innerHTML = "";
+            // Add textarea inputs based on the number of days
+            for (var i = 1; i <= noOfDays; i++) {
+                var divContainer = document.createElement("div");
+                divContainer.classList.add('day-plan-detail');
 
-        // Add textarea inputs based on the number of days
-        for (var i = 1; i <= noOfDays; i++) {
-            var textarea = document.createElement("textarea");
-            textarea.setAttribute("name", "dayPlan_" + i);
-            textarea.setAttribute("placeholder", "Enter Day " + i + " Plan");
-            textarea.setAttribute("required", "true");
-            textarea.classList.add('dayplantextarea');
-
-            dayPlanContainer.appendChild(textarea);
+                var textarea = document.createElement("textarea");
+                textarea.setAttribute("name", "dayPlan_" + i);
+                textarea.setAttribute("placeholder", "Enter Day " + i + " Plan");
+                textarea.setAttribute("required", "true");
+                textarea.classList.add('dayplantextarea');
+                var daycontenttxt = document.createElement("p");
+                daycontenttxt.setAttribute("id", "Daytext");
+                daycontenttxt.textContent = `Day ${i}`;
+                divContainer.appendChild(daycontenttxt);
+                divContainer.appendChild(textarea);
+                dayPlanContainer.appendChild(divContainer);
+            }
+        }
+        catch{
+            return;
         }
     }
-    
+
+    const activeDiv = document.getElementById('bus-img-detail');
+    function checkDivActiveStatus() {
+        if (activeDiv.classList.contains('mySlides')) {
+            showSlides();
+        }
+    }
+
+    slideIndex=1;
+    showSlides()
+    function showSlides() {
+        try{
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+
+            if (slideIndex < 1) {
+                slideIndex = slides.length;
+            } else if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].classList.add("active");
+        }
+        catch{
+            return;
+        }
+    }
+
+    function prevSlide() {
+        slideIndex--;
+        showSlides();
+    }
+
+    function nextSlide() {
+        slideIndex++;
+        showSlides();
+    }
 </script>
 </html>

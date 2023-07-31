@@ -64,111 +64,123 @@ const getin = async(req,res)=>{
     buscontent = [];
     busidarr = [];
     let idIndex=0;
-    await dealerdetails.find({city:sourceCity[0]}).then(async(dealerdata)=>{
-        for(let index=0;index<dealerdata.length;index++){
-            await plandetails.find({dealerid:dealerdata[index].dealerid}).then(async(data)=>{
-                if(data){
-                    for(let ind=0;ind<data.length;ind++){
-                        console.log("id:"+data[ind].id);
-                        let cover_location=[];
-                        let str = data[ind].coverlocation.split('-');
-                        let locatoion_index=0;
-                        for(let i=0;i<str.length-1;i++){
-                            if(str[i]!='')
-                                cover_location[locatoion_index++] = str[i];
-                        }
-                        
-                        console.log("Destination:"+destination_place);
-                        for(let i=0;i<cover_location.length;i++){
-                            if( destination_place === cover_location[i]){
-                                await busdetails.findOne({id:data[ind].id}).then(async(busdata)=>{
-                                    let busStatus = await busbookingstatus.findOne({busid:busdata.id});
-                                    if(isBusAvailable(req.body.date,calculateNextNthDate(req.body.date,req.body.days),busStatus.bookings)){
-                                        let temp = [];
-                                        let dealerdata = await dealerdetails.findOne({dealerid:busdata.dealerid});
-                                        temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
-                                        temp[1] = data[ind].busname.toUpperCase();
-                                        temp[2] = dealerdata.dealername;
-                                        busidarr[idIndex++] = busdata.id;
-                                        
-                                        temp[3] = cover_location;
-                                        temp[4] = busdata.seatcount;
-                                        if(busdata.musicsystem==='yes'){
-                                            temp[5]=true;
-                                        }
-                                        else{
-                                            temp[5]=false;
-                                        }
-                                        if(busdata.acornonac==='ac'){
-                                            temp[6]=true;
-                                        }
-                                        else{
-                                            temp[6]=false;
-                                        }
-                                        if(busdata.seattype==='seater'){
-                                            temp[7]=true;
-                                        }
-                                        else{
-                                            temp[7]=false;
-                                        }
-                                        if(busdata.lighting==='yes'){
-                                            temp[8]=true;
-                                        }
-                                        else{
-                                            temp[8]=false;
-                                        }
-                                        if(busdata.waterfilter==='yes'){
-                                            temp[9]=true;
-                                        }
-                                        else{
-                                            temp[9]=false;
-                                        }
-                                        let busAmount = Number(data[ind].price)+((Number(data[ind].price)*5)/100);
-                                        temp[10]=busAmount;
-                                        temp[11] = (busAmount*30)/100;
-                                        if(busdata.busimage){
-                                            temp[12] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
-                                        }
-                                        temp[13]=Number(busdata.rating.currentrating);
-                                        if(busdata.wifi==='yes'){
-                                            temp[14]=true;
-                                        }
-                                        else{
-                                            temp[14]=false;
-                                        }
-                                        if(busdata.lagguagestorage==='yes'){
-                                            temp[15]=true;
-                                        }
-                                        else{
-                                            temp[15]=false;
-                                        }
-                                        if(busdata.entertainsystem==='yes'){
-                                            temp[16]=true;
-                                        }
-                                        else{
-                                            temp[16]=false;
-                                        }
-                                        buscontent[bus_data_index++]=temp;
-                                    }
-                                })     
-                            }
-                        }
-                    }
-                }
-                else{
-                    res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
-                }
-            })
-        }
-    })
-    console.log("length : "+buscontent.length);
-    if(buscontent.length===0){
+    var varDate = new Date(req.body.date); 
+    var today = new Date();
+    if(today>=varDate){
         res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
     }
     else{
-        res.render('homeresult',{result:true,buscontent,'city':sourceCity[0],searchresult:true,source_destination,'length':buscontent.length})               
+        await dealerdetails.find({city:sourceCity[0]}).then(async(dealerdata)=>{
+            for(let index=0;index<dealerdata.length;index++){
+                await plandetails.find({dealerid:dealerdata[index].dealerid}).then(async(data)=>{
+                    if(data){
+                        for(let ind=0;ind<data.length;ind++){
+                            console.log("id:"+data[ind].id);
+                            let cover_location=[];
+                            let str = data[ind].coverlocation.split('-');
+                            let locatoion_index=0;
+                            for(let i=0;i<str.length-1;i++){
+                                if(str[i]!='')
+                                    cover_location[locatoion_index++] = str[i];
+                            }
+                            
+                            console.log("Destination:"+destination_place);
+                            for(let i=0;i<cover_location.length;i++){
+                                if( destination_place === cover_location[i]){
+                                    await busdetails.findOne({id:data[ind].id}).then(async(busdata)=>{
+                                        let busStatus = await busbookingstatus.findOne({busid:busdata.id});
+                                        if(isBusAvailable(req.body.date,calculateNextNthDate(req.body.date,req.body.days),busStatus.bookings)){
+                                            let temp = [];
+                                            let dealerdata = await dealerdetails.findOne({dealerid:busdata.dealerid});
+                                            temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
+                                            temp[1] = data[ind].busname.toUpperCase();
+                                            temp[2] = dealerdata.dealername;
+                                            busidarr[idIndex++] = busdata.id;
+                                            
+                                            temp[3] = cover_location;
+                                            temp[4] = busdata.seatcount;
+                                            if(busdata.musicsystem==='yes'){
+                                                temp[5]=true;
+                                            }
+                                            else{
+                                                temp[5]=false;
+                                            }
+                                            if(busdata.acornonac==='ac'){
+                                                temp[6]=true;
+                                            }
+                                            else{
+                                                temp[6]=false;
+                                            }
+                                            if(busdata.seattype==='seater'){
+                                                temp[7]=true;
+                                            }
+                                            else{
+                                                temp[7]=false;
+                                            }
+                                            if(busdata.lighting==='yes'){
+                                                temp[8]=true;
+                                            }
+                                            else{
+                                                temp[8]=false;
+                                            }
+                                            if(busdata.waterfilter==='yes'){
+                                                temp[9]=true;
+                                            }
+                                            else{
+                                                temp[9]=false;
+                                            }
+                                            let busAmount = Number(data[ind].price)+((Number(data[ind].price)*5)/100);
+                                            temp[10]=busAmount;
+                                            temp[11] = (busAmount*30)/100;
+                                            if(busdata.busimage){
+                                                temp[12] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
+                                            }
+                                            temp[13]=Number(busdata.rating.currentrating);
+                                            if(busdata.wifi==='yes'){
+                                                temp[14]=true;
+                                            }
+                                            else{
+                                                temp[14]=false;
+                                            }
+                                            if(busdata.lagguagestorage==='yes'){
+                                                temp[15]=true;
+                                            }
+                                            else{
+                                                temp[15]=false;
+                                            }
+                                            if(busdata.entertainsystem==='yes'){
+                                                temp[16]=true;
+                                            }
+                                            else{
+                                                temp[16]=false;
+                                            }
+                                            dummy = [];
+                                            for(let i =0;i<data[ind].imageclips.length;i++){
+                                                dummy[i] = data[ind].imageclips[i].ContentType+";base64,"+data[ind].imageclips[i].data.toString('base64');
+                                            }
+                                            temp[17] = dummy;
+                                            buscontent[bus_data_index++]=temp;
+                                        }
+                                    })     
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
+                    }
+                })
+            }
+        })
+        console.log("length : "+buscontent.length);
+        if(buscontent.length===0){
+            res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
+        }
+        else{
+            res.render('homeresult',{result:true,buscontent,'city':sourceCity[0],searchresult:true,source_destination,'length':buscontent.length})               
+        }
+    
     }
-
 }
 
 const getBusData = async(req,res)=>{
