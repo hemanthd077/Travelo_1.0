@@ -41,12 +41,12 @@ const planDetailsSchema = new mongoose.Schema({
         required : true,
     },
     dayplans:[{
+        imageclips:[{
+            data:Buffer,
+            ContentType:String,
+        }],
         day:String,
         content:String,
-    }],
-    imageclips:[{
-        data:Buffer,
-        ContentType:String,
     }],
 })
 

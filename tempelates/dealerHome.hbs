@@ -37,7 +37,7 @@
 
             {{#if plan}} 
                 <div id="plan">
-                    <form action="/plandetailsupload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    <form action="/plandetailsupload" method="post" enctype="multipart/form-data">
                         <div id="plantitle">
                             <p class="plantextcontent">State :</p>
                             <input class="planinputcontent" type="text" placeholder="Enter the Itinerary State" name="state" required autocomplete="off">
@@ -67,13 +67,6 @@
                             <div id="input-container-dayplan">
                                 <!-- Input tags for Day wise plan -->
                             </div>
-                        </div>
-                        <div id="imagediv">
-                            <label  for="inputTag" id="">
-                                Add Tour Spot Images
-                                <i class="fa-regular fa-image fa-2x"></i>
-                                <input id="inputTag" type="file" name="locationimage" accept="image/png,image/jpeg" multiple required/>
-                            </label>
                         </div>
                         <button id="uploadbutton" href="/plandetailsupload">Upload</button>
                     </form>
@@ -274,43 +267,46 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div style="display: flex;flex-direction:row;gap:20px">
+                                            <div style="display: flex;flex-direction:column;gap:20px">
                                                 <div>
                                                     <div id="plan-features">
-                                                        <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p>
-                                                        <p><i class="fa-solid fa-location-arrow"></i> Plan Main Spots</p>
-                                                        <div id="plan-location-cover">
-                                                            {{#each this.[5]}}
-                                                                <p><i class="fa-solid fa-location-dot"></i> {{this}}</i></p>
-                                                            {{/each}}
+                                                        <div>
+                                                            <input id="dayCountid" type="hidden" value="{{this.[2]}}">
+                                                            <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p><br>
+                                                            <p style="font-size: 20px;"><i class="fa-solid fa-tags fa-lg"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>                                                       
                                                         </div>
-                                                        <p><i class="fa-solid fa-tags"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>
-                                                    </div><br><br>
-                                                    <div id="outer-photo-block">
-                                                        {{#each this.[4]}}
-                                                            <div class="mySlides fade" id="bus-img-detail">
-                                                                <img id="bus-image" src="data:{{this}}"  alt="Bus Image" />
+                                                        <div style="display: flex;flex-direction:row">
+                                                            <p><i class="fa-solid fa-location-arrow"></i> Plan Main Spots</p>
+                                                            <div id="plan-location-cover">
+                                                                {{#each this.[5]}}
+                                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</i></p>
+                                                                {{/each}}
                                                             </div>
-                                                        {{/each}}
-
-                                                        <br><div id="dot">
-                                                            {{#each imagecontent}}
-                                                                <div style="text-align:center">
-                                                                    <span class="dot"></span> 
-                                                                </div>
-                                                            {{/each}}
-                                                        </div>
-                                                        <div id="prevNextButton">
-                                                            <button class="prev-button" onclick="prevSlide()"><i class="fa-solid fa-angle-left fa-2x"></i></button>
-                                                            <button class="next-button" onclick="nextSlide()"><i class="fa-solid fa-angle-right fa-2x"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="plandetails-daywise">
-                                                    <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} Days Plan Details</p>
-                                                    {{#each this.[6]}}
-                                                        <p>{{this.[0]}}</p>
-                                                        <pre>{{this.[1]}}</pre><br>
+
+                                                <div id="daywise-plan-detail">
+                                                    {{#each this.[6] as |outerItem outerIndex|}}
+                                                        <div id="plandetails-daywise">
+                                                            <p id="day-header">{{this.[0]}}</p>
+                                                            <div>
+                                                                <div id="outer-photo-block">
+                                                                    {{#each this.[2] as |inneritem innerIndex|}}
+                                                                        <div class="mySlides{{outerIndex}} fade mySlides" id="bus-img-detail">
+                                                                            <img id="bus-image" src="data:{{this}}"  alt="Bus Image" />
+                                                                        </div>
+                                                                    {{/each}}
+                                                                    <div id="prevNextButton">
+                                                                        <button class="prev-button" onclick="prevSlide({{@index}})"><i class="fa-solid fa-angle-left fa-2x"></i></button>
+                                                                        <button class="next-button" onclick="nextSlide({{@index}})"><i class="fa-solid fa-angle-right fa-2x"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <pre>{{this.[1]}}</pre><br>
+                                                            </div>
+                                                        </div>
                                                     {{/each}}
                                                 </div>
                                             </div>
@@ -622,8 +618,29 @@
                 var daycontenttxt = document.createElement("p");
                 daycontenttxt.setAttribute("id", "Daytext");
                 daycontenttxt.textContent = `Day ${i}`;
+
+                const label = document.createElement('label');
+                label.setAttribute('for', 'inputTag');
+                label.textContent = 'Add Spot Images';
+
+                const icon = document.createElement('i');
+                icon.classList.add('fa-regular', 'fa-image');
+
+                label.appendChild(icon);
+
+                const input = document.createElement('input');
+                input.setAttribute('class', 'inputTag');
+                input.setAttribute('type', 'file');
+                input.setAttribute('name', 'locationimage_'+i);
+                input.setAttribute('accept', 'image/png,image/jpeg');
+                input.setAttribute('multiple', 'multiple');
+                input.setAttribute('required', 'required');
+                label.appendChild(input);
+
                 divContainer.appendChild(daycontenttxt);
                 divContainer.appendChild(textarea);
+                divContainer.appendChild(label);
+
                 dayPlanContainer.appendChild(divContainer);
             }
         }
@@ -632,50 +649,68 @@
         }
     }
 
-    const activeDiv = document.getElementById('bus-img-detail');
+    {{!-- const activeDiv = document.getElementById('bus-img-detail');
     function checkDivActiveStatus() {
         if (activeDiv.classList.contains('mySlides')) {
             showSlides();
         }
-    }
+    } --}}
 
-    slideIndex=1;
-    showSlides()
-    function showSlides() {
-        try{
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
+    
 
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
+    // JavaScript code to handle slideshow
+let slideIndex = [];
 
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.remove("active");
-            }
+function showSlide(indexValue) {
+    
+    try{
+        const slides = document.getElementsByClassName("mySlides"+indexValue);
 
-            if (slideIndex < 1) {
-                slideIndex = slides.length;
-            } else if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].classList.add("active");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
-        catch{
-            return;
+
+        if (slideIndex[indexValue] < 1) {
+            slideIndex[indexValue] = slides.length;
+        } else if (slideIndex[indexValue] > slides.length) {
+            slideIndex[indexValue] = 1;
         }
-    }
 
-    function prevSlide() {
-        slideIndex--;
-        showSlides();
+        slides[slideIndex[indexValue] - 1].style.display = "block";
+        dots[slideIndex[indexValue] - 1].classList.add("active");
     }
+    catch{
+        return
+    }
+}
 
-    function nextSlide() {
-        slideIndex++;
-        showSlides();
+function prevSlide(ind) {
+    slideIndex[ind]--;
+    showSlide(ind);
+}
+
+function nextSlide(ind) {
+    slideIndex[ind]++;
+    showSlide(ind);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    try{
+        const dayCountid = document.getElementById("dayCountid").value;
+        slideIndex = Array.from({ length: dayCountid }, () => 1);
+        for(let i=0;i<dayCountid;i++){
+            showSlide(i);   
+        }
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+
+        prevButton.addEventListener("click", prevSlide);
+        nextButton.addEventListener("click", nextSlide);
     }
+    catch{
+        return
+    }
+});
+
 </script>
 </html>

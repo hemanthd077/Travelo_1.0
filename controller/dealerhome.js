@@ -44,15 +44,16 @@ const storage2 = multer.diskStorage({
     filename: function (req, file, cb) {
        return cb(null,file.originalname)
     },
+    fieldname:function (req, file, cb) {
+        return cb(null,file.fieldname)
+     },
 })
 
 const upload = multer({storage:storage}).single('profileimage')
 
 const upload1 = multer({storage:storage1}).array("busimage",6);
 
-let upload3 = multer({storage:storage3}).array(`locationimage`,15);
-
-
+let upload3 = multer({storage:storage3}).any()
 // const upload2 = multer({storage:storage2}).single('planfile');
 
 
@@ -61,7 +62,7 @@ let upload3 = multer({storage:storage3}).array(`locationimage`,15);
 
 const plandetailsupload = async(req,res)=>{
     upload3(req,res,async(err)=>{
-        if(err){
+        if (err instanceof multer.MulterError) {
             console.log("Error in upload3 file not working: "+err);
         }
         else{
@@ -93,28 +94,27 @@ const plandetailsupload = async(req,res)=>{
                 price:req.body.amount,
                 coverlocation:str,
                 dayplans:[],
-                imageclips:[],
             })
 
             for(let i=1;i<=req.body.noofdays;i++){
                 const newPlan = {
+                    imageclips:[],
                     day:"Day "+i,
                     content:req.body["dayPlan_"+i],
                 }
+                let planimage = req.files.filter(file => file.fieldname === `locationimage_${i}`)
+                let imageArray = planimage.map((file)=>{
+                    return img = file;
+                })
+                imageArray.forEach((src) => {
+                    const newImage = {
+                    data: fs.readFileSync('uploads/planimages/' + src.filename),
+                    ContentType: 'image/png'
+                    }
+                    newPlan.imageclips.push(newImage);
+                });
                 newvalues.dayplans.push(newPlan);
             }
-
-            let planimage = req.files;
-            let imageArray = planimage.map((file)=>{
-                return img = file;
-            })
-            imageArray.forEach((src) => {
-                const newImage = {
-                  data: fs.readFileSync('uploads/planimages/' + src.filename),
-                  ContentType: 'image/png'
-                }
-                newvalues.imageclips.push(newImage);
-            });
 
             let busname=[];
             await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(data)=>{
@@ -359,23 +359,26 @@ const plandetail = async(req,res)=>{
                             if(str[i]!="undefined")
                             coverlocation[ind++] = str[i];
                         }
-                        dummy = [];
-                        for(let i =0;i<detail[index].imageclips.length;i++){
-                            dummy[i] = detail[index].imageclips[i].ContentType+";base64,"+detail[index].imageclips[i].data.toString('base64');
-                        }
-                        temp[4] = dummy;
+                        
                         // //pdf data convert from bufferdata to dataURL
                         // const pdfData = detail[index].planfile.data.toString('base64');
                         // temp[4] = `data:application/pdf;base64,${pdfData.toString('base64')}`;
                         temp[5] = coverlocation;
                         planData = [];
+                        spotImage = []
                         for(let i=0;i<detail[index].dayplans.length;i++){
                             dummy = [];
                             dummy[0] = detail[index].dayplans[i].day; 
                             dummy[1] = detail[index].dayplans[i].content;
+                            imageStorage  = [];
+                            for(let j =0;j<detail[index].dayplans[i].imageclips.length;j++){
+                                imageStorage[j] = detail[index].dayplans[i].imageclips[j].ContentType+";base64,"+detail[index].dayplans[i].imageclips[j].data.toString('base64');
+                            }
+                            dummy[2]= imageStorage;
                             planData[i]=dummy
                         }
-                        temp[6] = planData;
+                        temp[4] = spotImage;  // null
+                        temp[6] = planData; 
                         planid[index]=detail[index].id;
                         planArray[index] = temp;
                     } 
