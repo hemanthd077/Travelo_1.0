@@ -164,10 +164,6 @@
                                     </div>
                                 {{/each}}
                             </div>
-                            <div id="prevNextButton">
-                                <button class="prev-button" onclick="prevSlide()"><i class="fa-solid fa-angle-left fa-2x"></i></button>
-                                <button class="next-button" onclick="nextSlide()"><i class="fa-solid fa-angle-right fa-2x"></i></button>
-                            </div>
                         </div>
                         <div id="bus-feature-data">
                             <div class="div-control-rating">
@@ -207,33 +203,26 @@
                                 {{#if busdata.[16]}}
                                     <p><i class="fa-solid fa-tv"></i> <strong>Entertainment System:</strong> TV screens for in-bus entertainment</p>
                                 {{/if}}
+                                <input id="dayCountid" type="hidden" value="{{busdata.[17]}}">
                             </div>
                         </div>
                     </div>
                     <div id="bus-plan-data">
-                        <div id="outer-photo-block">
-                            {{#each busdata.[17]}}
-                                <div class="mySlides fade" id="bus-img-detail">
-                                    <img id="bus-image" src="data:{{this}}"  alt="Bus Image" />
-                                </div>
-                            {{/each}}
-
-                            <br><div id="dot">
-                                {{#each busdata.[17]}}
-                                    <div style="text-align:center">
-                                        <span class="dot"></span> 
-                                    </div>
-                                {{/each}}
-                            </div>
-                            <div id="prevNextButton">
-                                <button class="prev-button" onclick="prevSlide()"><i class="fa-solid fa-angle-left fa-2x"></i></button>
-                                <button class="next-button" onclick="nextSlide()"><i class="fa-solid fa-angle-right fa-2x"></i></button>
-                            </div>
-                        </div>
-                        {{#each planDataArray}}
+                        {{#each planDataArray as |outerItem outerIndex|}}
                             <div class="div-control-plan">
                                 <div class="day-header">
                                     <p>{{this.[0]}}</p>
+                                </div>
+                                <div>
+                                    {{#each this.[2]}}
+                                        <div class="mySlidesspot{{outerIndex}} fadespot mySlidesspot" id="bus-img-detail">
+                                            <img id="spot-image" src="data:{{this}}"  alt="spot Image" />
+                                        </div>
+                                    {{/each}}
+                                    <div id="prevNextButton">
+                                        <button class="prev-button" onclick="prevSlide({{@index}})"><i class="fa-solid fa-angle-left fa-2x"></i></button>
+                                        <button class="next-button" onclick="nextSlide({{@index}})"><i class="fa-solid fa-angle-right fa-2x"></i></button>
+                                    </div>
                                 </div>
                                 <div>
                                     <p>{{this.[1]}}</p>
@@ -252,25 +241,80 @@
 </body>
 <script>
 
+    //javascript code for prev and next od day spot images
+
+    let slideIndexarr = [];
+
+    function showSlide(indexValue) {
+        
+        try{
+            const spotslides = document.getElementsByClassName("mySlidesspot"+indexValue);
+
+            for (let i = 0; i < spotslides.length; i++) {
+                spotslides[i].style.display = "none";
+            }
+
+            if (slideIndexarr[indexValue] < 1) {
+                slideIndexarr[indexValue] = spotslides.length;
+            } else if (slideIndexarr[indexValue] > spotslides.length) {
+                slideIndexarr[indexValue] = 1;
+            }
+
+            spotslides[slideIndexarr[indexValue] - 1].style.display = "block";
+        }
+        catch{
+            return
+        }
+    }
+
+    function prevSlide(ind) {
+        slideIndexarr[ind]--;
+        showSlide(ind);
+    }
+
+    function nextSlide(ind) {
+        slideIndexarr[ind]++;
+        showSlide(ind);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        try{
+            const dayCountid = document.getElementById("dayCountid").value;
+            slideIndexarr = Array.from({ length: dayCountid }, () => 1);
+            console.log(slideIndexarr)
+            console.log(dayCountid+"asdgsfhdgjfhg")
+            for(let i=0;i<dayCountid;i++){
+                showSlide(i);   
+            }
+            const prevButton = document.querySelector(".prev-button");
+            const nextButton = document.querySelector(".next-button");
+
+            prevButton.addEventListener("click", prevSlide);
+            nextButton.addEventListener("click", nextSlide);
+        }
+        catch(e){
+            console.log(e)
+            return
+        }
+    });
+
+    //auto slide the bus images
     let slideIndex = 1;
     const activeDiv = document.getElementById('bus-img-detail');
 
     function checkDivActiveStatus() {
         if (activeDiv.classList.contains('mySlides')) {
-            showSlides();
-        }
+                showSlides();
+            }
     }
 
-
-    function showSlides() {
+function showSlides() {
+    try{
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("dot");
 
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
-        }
-
-        for (let i = 0; i < dots.length; i++) {
             dots[i].classList.remove("active");
         }
 
@@ -282,18 +326,19 @@
 
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].classList.add("active");
-    }
-
-    function prevSlide() {
-        slideIndex--;
-        showSlides();
-    }
-
-    function nextSlide() {
         slideIndex++;
-        showSlides();
     }
-     checkDivActiveStatus();
+    catch{
+        return
+    }
+}
+
+checkDivActiveStatus();
+
+setInterval(showSlides, 3000);
+
+
+
 
 </script>
 </html>

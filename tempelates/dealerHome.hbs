@@ -255,7 +255,7 @@
                                             <div id="plan-module-inner">
                                                 <p style="font-weight: 500; font-size:15px;">State : {{this.[0]}}</p>
                                                 <p style="font-weight: 500; font-size:15px;">Bus Name : {{this.[1]}}</p>
-                                                <button style="background-color: transparent;border-style:none;" onclick="openForm({{@index}})"><i id="plandelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
+                                                <button style="background-color: transparent;border-style:none;" onclick="openForm({{@index}})" id="plandelete"><i class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
                                                 <form action="/plandelete" method="post">
                                                     <input id="input2" type="hidden" name="planindex">
                                                     <div id="button-update">
@@ -304,7 +304,7 @@
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <pre>{{this.[1]}}</pre><br>
+                                                                <p id="daywise-content-detail">{{this.[1]}}</p><br>
                                                             </div>
                                                         </div>
                                                     {{/each}}
@@ -338,17 +338,6 @@
                                     <p style="font-weight: 500;font-size: 18px;display: flex;gap: 5px;justify-content: center;align-items: baseline;margin-left:30px" id="busname"><i class="fas fa-bus"></i> Bus Name : {{Busname}}</p>
                                     <p style="font-weight: 500;font-size: 18px;display: flex;gap: 5px;justify-content: center;align-items: baseline; margin-left:100px" id="seats"><i class="fas fa-couch"></i>Seats: {{Busseat}}</p>
                                     <button id="btn-delete-total" style="background-color: transparent;border-style:none;margin-left:400px" onclick="openDeletebusform()" ><i id="busdelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
-                                    <form action="/busfull-delete" method="post">
-                                        <input type="hidden" name="busname" value="{{Busname}}">
-                                        <div id="button-delete-bus">
-                                            <p id="sure-id">Are you Sure want to delete?</p>
-                                            <p style="display: flex;align-items: center;font-size: small;justify-content: center;}">NOTE: it will delete both itinerary and bus details</p>
-                                            <div id="btn-yes-no">
-                                                <a class="aunchor-close"><button type="button" class="btn cancel" onclick="closeDeletebusForm()">NO</button></a>
-                                                <button type="submit" class="btn" href="/busfull-delete" >YES</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                                <div class="img-result">
                                     {{#each busimg}}
@@ -454,25 +443,17 @@
 </body>
 
 <script>
-    
     function openForm(index) {
         var profilecont1 = document.getElementById("profilecontent");
+
+        {{!-- const planscroll = document.getElementsByClassName('planscroll');
+        planscroll.style.overflow = 'hidden'; --}}
 
         document.getElementById('input2').value = index;
 
         document.getElementById("button-update").style.display = "block";
         profilecont1.style.animationDelay="1s"
         document.getElementById("button-update").style.opacity="1";
-
-        document.getElementById('contentdivision1').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementById('nav').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementsById('plandelete').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
         return;
         
     }
@@ -501,9 +482,6 @@
         document.getElementById("button-update-bus").style.opacity="1";
 
         document.getElementById('contentdivision1').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-        document.getElementById('nav').addEventListener('click', function(event) {
             event.preventDefault();
         });
         return 
@@ -551,9 +529,7 @@
         document.getElementById('contentdivision1').addEventListener('click', function(event) {
             event.preventDefault();
         });
-        document.getElementById('nav').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
+     
         document.getElementsByClassName('contentdivision2').style.overflow="hidden";
         return
     }
@@ -658,7 +634,7 @@
 
     
 
-    // JavaScript code to handle slideshow
+    // JavaScript code to prev and next of the image
 let slideIndex = [];
 
 function showSlide(indexValue) {

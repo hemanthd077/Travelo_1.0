@@ -154,11 +154,7 @@ const getin = async(req,res)=>{
                                             else{
                                                 temp[16]=false;
                                             }
-                                            dummy = [];
-                                            for(let i =0;i<data[ind].imageclips.length;i++){
-                                                dummy[i] = data[ind].imageclips[i].ContentType+";base64,"+data[ind].imageclips[i].data.toString('base64');
-                                            }
-                                            temp[17] = dummy;
+                                            temp[17] = data[ind].noofdays;
                                             buscontent[bus_data_index++]=temp;
                                         }
                                     })     
@@ -192,6 +188,11 @@ const getBusData = async(req,res)=>{
                 dummy = [];
                 dummy[0] = detail.dayplans[i].day; 
                 dummy[1] = detail.dayplans[i].content;
+                spotimages = [];
+                for(let y =0;y<detail.dayplans[i].imageclips.length;y++){
+                    spotimages[y] = detail.dayplans[i].imageclips[y].ContentType+";base64,"+detail.dayplans[i].imageclips[y].data.toString('base64');
+                }
+                dummy[2] = spotimages;
                 planDataArray[i]=dummy
             }
         }
@@ -202,7 +203,6 @@ const getBusData = async(req,res)=>{
         console.log("Error Occured while fetching plan in getBusData: "+e);
     })
     let busdata = buscontent[req.body.busid];
-    busdata[12]="";//clear the bus image
     await busdetails.findOne({id:busidarr[req.body.busid]}).then(async(data1)=>{
         if(data1){
             for (let index = 0; index < data1.busimage.length; index++) {

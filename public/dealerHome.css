@@ -558,7 +558,7 @@ label{
 }
 
 .planscroll{
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -1313,13 +1313,15 @@ a#target-page-1 {
     -webkit-text-fill-color: transparent;
 }
 
-pre {
+#daywise-content-detail {
     font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     overflow-x: hidden;
     font-weight: 600;
     margin-top: 120px;
     padding: 10px;
+    overflow-wrap: break-word;
+    width: 410px;
 }
 
 #search-div-plus {

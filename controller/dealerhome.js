@@ -86,6 +86,7 @@ const plandetailsupload = async(req,res)=>{
             })
 
             const newvalues = new plandetails({
+                planId:detailsArray[0]+""+Date.now(),
                 id:id_bus,
                 busname:req.body.busname,
                 dealerid:detailsArray[0],
