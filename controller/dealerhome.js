@@ -67,9 +67,9 @@ const plandetailsupload = async(req,res)=>{
         }
         else{
             let str ="";
-            for(let i=0;i<req.body.coverlocationcount;i++){
-                if(req.body["location_"+(i+1)]){
-                    str+=req.body["location_"+(i+1)];
+            for(let i=0;i<req.body.noofdays;i++){
+                if(req.body["mainspot_"+(i+1)]){
+                    str+=req.body["mainspot_"+(i+1)];
                     str+="-"
                 }
             }
@@ -100,6 +100,7 @@ const plandetailsupload = async(req,res)=>{
             for(let i=1;i<=req.body.noofdays;i++){
                 const newPlan = {
                     imageclips:[],
+                    mainspot:req.body["mainspot_"+i],
                     day:"Day "+i,
                     content:req.body["dayPlan_"+i],
                 }
@@ -118,19 +119,19 @@ const plandetailsupload = async(req,res)=>{
             }
 
             let busname=[];
-            await busdetails.distinct("busname",{dealerid:detailsArray[0]}).then(async(data)=>{
+            await busdetails.find({dealerid:detailsArray[0]}).then(async(data)=>{
                 for (let index = 0; index < data.length; index++) {
-                    busname[index] = data[index];
+                    busname[index] = data[index].busname;
                 }
             })
             newvalues.save().then(()=>{
-                console.log('successfully file uploaded ')
+                console.log('successfully plan data uploaded ')
+                res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , plan:true,busname})
             }).catch(err=>{
-                console.log(err)
+                console.log("Error Occur in Uploading plan data : "+err)
                 res.render('dealerHome',{disclimerfail:true,'res':'Upload Failed' , plan:true,busname})
             })
             
-            res.render('dealerHome',{disclimer:true,'res':'Sucessfully uploaded' , plan:true,busname})
 
         }
     })
@@ -376,8 +377,9 @@ const plandetail = async(req,res)=>{
                                 imageStorage[j] = detail[index].dayplans[i].imageclips[j].ContentType+";base64,"+detail[index].dayplans[i].imageclips[j].data.toString('base64');
                             }
                             dummy[2]= imageStorage;
+                            dummy[3] = detail[index].dayplans[i].mainspot;
                             planData[i]=dummy
-                        }
+                        } 
                         temp[4] = spotImage;  // null
                         temp[6] = planData; 
                         planid[index]=detail[index].id;
@@ -390,7 +392,7 @@ const plandetail = async(req,res)=>{
             res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,flag:true})
         }
         else{
-            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray,arrayplan:true,busplanarraylen:true,flag:false})
+            res.render('dealerHome',{dealerprofile:true,dealername,dealercity:data.city,data,value:data.profileimage.data.toString('base64'),email:detailsArray[0],plandetail:true,planArray,'length':planArray.length,arrayplan:true,busplanarraylen:true,flag:false})
         }
     }).catch(err=>{
         console.log('plan details not found!!!'+err)
@@ -529,7 +531,7 @@ const busImageDelete = (async(req,res)=>{
 
 const busPlanDelete = (async(req,res)=>{
     try {
-        let result = await plandetails.deleteOne({ id: planid[req.body.planindex]});
+        let result = await plandetails.deleteMany({ id: planid[req.body.planindex]});
         console.log("Successfully Deleted the Selected Plan.");
         res.redirect('/plandetail');
     } catch (error) {

@@ -8,6 +8,7 @@
     flex-direction: column;
     position: absolute;
     background-color: white;
+    color: #2d3467;
     margin-top: 83px;
     width: 420px;
     z-index: 4;
@@ -35,6 +36,10 @@ p#suggestion-location {
     cursor: pointer;
 }
 
+.fa-building{
+    color: #2d3467;
+}
+
 #suggestionfrombutton, #suggestiontobutton {
     border-style: none;
     background: transparent;
@@ -57,10 +62,6 @@ p#suggestion-location {
     z-index: 4;
     /* box-shadow: 0px 10px 8px -2px rgb(0,0,0.1); */
     border-radius: 0px 0px 5px 5px;
-}
-
-.fa-building{
-    color: #2d3467;
 }
 
 #homenavbar {
@@ -134,11 +135,9 @@ button#bookingbutton {
     background-color: transparent;
     font-size: 17px;
     display: inline-flex;
-    align-items: center;
     column-gap: 10px;
     cursor: pointer;
     margin-top: 15px;
-    justify-content: center;
 }
 
 button#profilebutton{
@@ -148,7 +147,6 @@ button#profilebutton{
     margin-top: 15px;
     display: inline-flex;
     margin-left: 50px;
-    align-items: center;
     column-gap: 10px;
     cursor: pointer;
 }

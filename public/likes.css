@@ -1,0 +1,165 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    background-repeat: no-repeat;
+    background-color: #dadade;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+}
+
+#homenavbar {
+    height: 80px;
+    width: 1534px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 2px 0px 10px -2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.1px);
+    -webkit-backdrop-filter: blur(1.1px);
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+#main{
+    display: flex;
+    flex-direction: column;
+}
+
+#appicon {
+    height: 70px;
+    width: 120px;
+    margin-left: 30px;
+    margin-top: -10px;
+}
+
+.bookingdiv-1{
+    margin-left: 70px;
+}
+
+.bookingdiv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadada;
+}
+
+.bookingdiv,.profilediv {
+    display: inline-flex;
+    align-items: end;
+}
+
+button#bookingbutton {
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    margin-top: 15px;
+    display: inline-flex;
+    margin-left: 50px;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+button#profilebutton {
+    border-style: none;
+    background-color: transparent;
+    font-size: 17px;
+    display: inline-flex;
+    column-gap: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.exitdiv {
+    margin-left: 600px;
+    display: flex;
+}
+
+button#exitbutton {
+    margin-left: 70px;
+    border-style: none;
+    cursor: pointer;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    font-weight: 700;
+    gap: 5px;
+    font-size: 18px;
+}
+
+button#exitbutton:hover,#bookingbutton:hover{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.profilediv {
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 50px;
+}
+
+#content-block{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+#inner-content-block{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #ffffff;
+    width: 1400px;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+img#busimage {
+    width: 400px;
+    height: 210px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px -2px #2d3467;
+}
+
+img#dealerimage{
+    width: 30px;
+    height:30px;
+    border-radius:50px;
+}
+
+#busdata-block{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#wishlistheader{
+    background: linear-gradient(0deg,#dadade,#2d3467);
+    padding: 17px;
+    height: 45px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0px 0px 10px 10px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#header-content{
+    font-size: 33px;
+    margin-left: 40px;
+    font-weight: 300;
+}
+
+#packages-content{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

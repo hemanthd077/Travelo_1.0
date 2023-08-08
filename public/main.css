@@ -19,29 +19,31 @@ body {
 
 #appicon {
     height: 70px;
-    width: 120px;
-    margin-left: 132px;
+    width: 125px;
+    margin-left: 137px;
     margin-top: -10px;
 }
 
 #content {
     width: 400px;
     height: 250px;
-    background-color: #FFFFFF;
     padding: 30px;
     border-radius: 10px;
+    animation: fadedown 2s ease-in-out;
+    background-color: #FFFFFF;
     box-shadow: 0px 0px 10px -3px #2d3467;
 }
 
 p {
     display: flex;
     justify-content: center;
-    font-weight: bolder;
-    font-size: 30px;
-    /* margin-top: 70px; */
-    background: -webkit-linear-gradient(45deg,#5c6074, #ae006b);
+    font-weight: 500;
+    font-size: 25px;
+    margin-top: 30px;
+    /* background: -webkit-linear-gradient(45deg,#5c6074, #ae006b);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+    color: #2d3467;
 }
 
 div#logo-container {
@@ -55,7 +57,7 @@ div#logo-container {
     flex-direction: row;
     gap: 30px;
     justify-content: center;
-    margin-top: 35px;
+    margin-top: 10px;
     align-items: center;
 }
 
@@ -77,3 +79,31 @@ button#dealer:hover,button#user:hover{
     color: white;
 }
 
+
+.tranmission{
+    animation-name: dragup;
+    animation-duration: 0.6s;
+    animation-delay: 2.5s; 
+    animation-fill-mode: ease-in;
+}
+
+@keyframes dragup {
+    0%{
+        margin-top: -100px;
+    }
+    100% {
+        margin-top: -199px;
+        width: 125px;
+    }
+  }
+
+
+  @keyframes fadedown {
+    0%{
+        background-color: #dadade;
+    }
+    100% {
+        background-color: #FFFFFF;
+
+    }
+  }

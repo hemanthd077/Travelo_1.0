@@ -46,7 +46,10 @@ const loginSchema = new mongoose.Schema({
     profileimage:{
         data:Buffer,
         ContentType:String,
-    }
+    },
+    likedbus:[{
+        busid:String,
+    }],
 })
 
 const collection = new mongoose.model('collection1',loginSchema)

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Liked Buses</title>
+    <link rel="icon" href="/images/logowhite.svg">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="/likes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
+   
+</head>
+<body>
+    <div id="main">
+        <div id="homenavbar">
+                <img id="appicon" src="/images/homelogo.png" alt="logo">
+                <form action="/home" class="bookingdiv-1">
+                    <button id="bookingbutton" href="/home" ><i class="fa-solid fa-house"></i> Home</button>
+                </form>
+
+                <form action="/booking"  class="bookingdiv">
+                    <button id="bookingbutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
+                </form>
+
+                <div class="profilediv">
+                    <button id="profilebutton"><i class="fa-solid fa-heart"></i> Wishlist</button>
+                </div>
+
+                <form action="/profile" class="bookingdiv">
+                    <button id="bookingbutton" href="/profile"><i class="fa-solid fa-user"></i> Profile</button>
+                </form>
+
+                <form action="/exit" class="exitdiv">
+                    <button id="exitbutton"><i class="fas fa-sign-out-alt fa-lg"></i> Sign Out</button>
+                </form>                                                                                                 
+        </div>
+        <div id="wishlistheader">
+            <p id="header-content">{{length}} buses Added in Wishlist</p>
+        </div>
+        <div id="content-block">
+            {{#each busdataarr}}
+                <div id="inner-content-block">
+                    <img id="busimage" src="data:{{this.[10]}}" alt="">
+                    <div >
+                        <div id="busdata-block">
+                            <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                            <div>
+                                <p>{{this.[1]}}</p>
+                                <p>{{this.[2]}}</p>
+                            </div>
+                        </div>
+                        <p>{{this.[3]}}</p>
+                        <div id="packages-content">
+                            {{#each this.[4]}}
+                                <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                            {{/each}}
+                        </div>
+                        <p>{{this.[5]}}</p>
+                        <p>{{this.[6]}}</p>
+                        <p>{{this.[7]}}</p>
+                        <p>{{this.[8]}}</p>
+                        <p>{{this.[9]}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</body>
+</html>

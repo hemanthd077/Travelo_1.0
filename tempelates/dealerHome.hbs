@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dealer Home</title>
+    <link rel="icon" href="/images/logowhite.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/dealerHome.css">
@@ -36,12 +37,41 @@
         <div id="content">
 
             {{#if plan}} 
-                <div id="plan">
+                <div id="plan" class="{{#if disclimer}}scrollclass{{/if}}{{#if disclimerfail}}scrollclass{{/if}}">
                     <form action="/plandetailsupload" method="post" enctype="multipart/form-data">
                         <div id="plantitle">
-                            <p class="plantextcontent">State :</p>
-                            <input class="planinputcontent" type="text" placeholder="Enter the Itinerary State" name="state" required autocomplete="off">
-                            
+                            <label for="textcontent1" class="text-input">State : </label>
+                            <select name="state" class="textcontent1 textinput" id="verify-value" required>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+
                             <label for="textcontent1" class="text-input">Bus Name : </label>
                             <select name="busname" class="textcontent1 textinput" id="verify-value" required>
                                 {{#each busname}}
@@ -55,20 +85,13 @@
                             <p class="plantextcontent">Amount :</p>
                             <input class="planinputcontent" type="number" placeholder="Enter the Amount in Rupee" name="amount" required autocomplete="off">
                         </div>
-                        <div id="planlocation">
-                            <p class="plantextcontent">Itinerary's Main Spots : <button class="addinput" onclick="addspotInput()">Add <i class="fas fa-plus"></i></button></p><br>
-                            <div id="input-container">
-                                <!-- Input tags for Main Spots -->
-                            </div>
-                        </div>
-                        <input type="hidden" name="coverlocationcount" id="coverlocationcount">
                         <div id="dayplanlocation">
                             <p class="plantextcontent">Add Day wise Plan :</p><br>
                             <div id="input-container-dayplan">
                                 <!-- Input tags for Day wise plan -->
                             </div>
                         </div>
-                        <button id="uploadbutton" href="/plandetailsupload">Upload</button>
+                        <button id="uploadbutton" href="/plandetailsupload" >Upload</button>
                     </form>
                     <a id="target-page" href="/plandetail">Go to Itinerary <i class="fas fa-chevron-right"></i></i></a>
                     {{#if disclimer}}
@@ -249,8 +272,9 @@
                         {{/if}}
 
                         {{#if plandetail}}
+                                <input type="hidden" id="totalplancount" value="{{length}}">
                                 <div class="contentdivision2 planscroll">
-                                    {{#each planArray}}
+                                    {{#each planArray as |outerItem outerIndex|}}
                                         <div id="plan-module-outer">
                                             <div id="plan-module-inner">
                                                 <p style="font-weight: 500; font-size:15px;">State : {{this.[0]}}</p>
@@ -271,7 +295,7 @@
                                                 <div>
                                                     <div id="plan-features">
                                                         <div>
-                                                            <input id="dayCountid" type="hidden" value="{{this.[2]}}">
+                                                            <input id="dayCountid{{outerIndex}}" type="hidden" value="{{this.[2]}}">
                                                             <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p><br>
                                                             <p style="font-size: 20px;"><i class="fa-solid fa-tags fa-lg"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>                                                       
                                                         </div>
@@ -287,19 +311,19 @@
                                                 </div>
 
                                                 <div id="daywise-plan-detail">
-                                                    {{#each this.[6] as |outerItem outerIndex|}}
+                                                    {{#each this.[6] as |inneritem innerIndex|}}
                                                         <div id="plandetails-daywise">
-                                                            <p id="day-header">{{this.[0]}}</p>
+                                                            <p id="day-header">{{this.[0]}} - {{this.[3]}}</p>
                                                             <div>
                                                                 <div id="outer-photo-block">
-                                                                    {{#each this.[2] as |inneritem innerIndex|}}
-                                                                        <div class="mySlides{{outerIndex}} fade mySlides" id="bus-img-detail">
+                                                                    {{#each this.[2] }}
+                                                                        <div class="mySlides{{outerIndex}}{{innerIndex}} fade mySlides" id="bus-img-detail">
                                                                             <img id="bus-image" src="data:{{this}}"  alt="Bus Image" />
                                                                         </div>
                                                                     {{/each}}
                                                                     <div id="prevNextButton">
-                                                                        <button class="prev-button" onclick="prevSlide({{@index}})"><i class="fa-solid fa-angle-left fa-2x"></i></button>
-                                                                        <button class="next-button" onclick="nextSlide({{@index}})"><i class="fa-solid fa-angle-right fa-2x"></i></button>
+                                                                        <button class="prev-button" onclick="prevSlide({{outerIndex}},{{innerIndex}})"><i class="fa-solid fa-angle-left fa-2x"></i></button>
+                                                                        <button class="next-button" onclick="nextSlide({{outerIndex}},{{innerIndex}})"><i class="fa-solid fa-angle-right fa-2x"></i></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -443,6 +467,21 @@
 </body>
 
 <script>
+
+    try{
+        const divsWithActiveClass = document.getElementById('plan');
+        if (divsWithActiveClass.classList.contains('scrollclass')) {
+            scrollToTop();
+        }
+    }
+    catch{
+        
+    }
+    function scrollToTop() {
+        const plan = document.getElementById("plan");
+        plan.scrollTop = plan.scrollHeight;
+    };
+
     function openForm(index) {
         var profilecont1 = document.getElementById("profilecontent");
 
@@ -539,40 +578,6 @@
         return;
     }
 
-    let inputCountspot = 1;
-    let cntspot=1;
-    addspotInput()
-    function addspotInput() {
-      try{
-        inputCountspot++;
-        const container = document.getElementById("input-container");
-        const coverlocationcount = document.getElementById("coverlocationcount");
-        const input = document.createElement("input");
-        input.type = "text";
-        input.name = "location_" + inputCountspot;
-        coverlocationcount.value=inputCountspot;
-        input.setAttribute("placeholder", "Enter the Location");
-        input.setAttribute("required", "true");
-        input.setAttribute("autocomplete", "off");
-        input.classList.add('planlocationinput');
-        
-        const deleteButton = document.createElement("button");
-        deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
-        deleteButton.classList.add('delete-button');
-        deleteButton.onclick = function() {
-            if(cntspot>2){
-                container.removeChild(input);
-                container.removeChild(deleteButton);
-                cntspot--;
-            }
-        };
-        cntspot++;
-        container.appendChild(input);
-        container.appendChild(deleteButton);
-      }catch{
-        return
-      }
-    }
     adddayplanInput()
     function adddayplanInput(){
         try{
@@ -584,6 +589,9 @@
             // Add textarea inputs based on the number of days
             for (var i = 1; i <= noOfDays; i++) {
                 var divContainer = document.createElement("div");
+                var suggestiondivContainer = document.createElement("div");
+                suggestiondivContainer.setAttribute('id',`suggestiondivContainer_${i}`);
+                suggestiondivContainer.classList.add('suggestionfrom');
                 divContainer.classList.add('day-plan-detail');
 
                 var textarea = document.createElement("textarea");
@@ -591,12 +599,18 @@
                 textarea.setAttribute("placeholder", "Enter Day " + i + " Plan");
                 textarea.setAttribute("required", "true");
                 textarea.classList.add('dayplantextarea');
-                var daycontenttxt = document.createElement("p");
-                daycontenttxt.setAttribute("id", "Daytext");
-                daycontenttxt.textContent = `Day ${i}`;
+                var daycontenttxt = document.createElement("input");
+                daycontenttxt.setAttribute("id", "mainspot_"+i);
+                daycontenttxt.setAttribute('oninput',`startfunspot(${i})`);
+                daycontenttxt.setAttribute('onchange',`handleInputChange()`)
+                daycontenttxt.setAttribute("class", "mainspotfocus");
+                daycontenttxt.setAttribute("type", "text");
+                daycontenttxt.setAttribute("name", "mainspot_"+i);
+                daycontenttxt.setAttribute("placeholder", "Day " + i + " Spot city/Town");
 
                 const label = document.createElement('label');
                 label.setAttribute('for', 'inputTag');
+                label.setAttribute('id','slotimageadd');
                 label.textContent = 'Add Spot Images';
 
                 const icon = document.createElement('i');
@@ -614,6 +628,7 @@
                 label.appendChild(input);
 
                 divContainer.appendChild(daycontenttxt);
+                divContainer.appendChild(suggestiondivContainer);
                 divContainer.appendChild(textarea);
                 divContainer.appendChild(label);
 
@@ -623,6 +638,48 @@
         catch{
             return;
         }
+    }
+
+    function startfunspot(index){
+        const spotinput = document.getElementById('mainspot_'+index);
+        const targetElement = document.getElementById(`suggestiondivContainer_${index}`);
+
+        var requestOptions = {
+            method: 'GET',
+        };
+        if(spotinput.value){
+            fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${spotinput.value}&apiKey=da5be62269d9452c8acdd8005a75dd3f`, requestOptions)
+            .then(response => response.json()) 
+            .then(data => {
+            const suggestions = data.features;
+            if(suggestions.length > 0){
+                for(let i=0;i<suggestions.length;i++){
+                    district =  suggestions[0].properties.city;
+                    state =  suggestions[0].properties.state;
+
+
+                    if(district)
+                        targetElement.innerHTML = `<button id="suggestionbutton" onclick="assignValue('${district}',${index})"><p id="suggestion-location"><i class="fa-solid fa-building"></i> ${district} ${state}</p></button>`;
+                    else
+                        targetElement.innerHTML = `<button id="suggestionbutton" ><p id="suggestion-location"><i class="fa-solid fa-building"></i>Location Not Found...</p></button>`;
+                }
+            }
+            else {
+                targetElement.innerHTML = '';
+            }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+    }
+
+    function assignValue(district,index){
+        const spotinput = document.getElementById('mainspot_'+index);
+        spotinput.value = district;
+        spotinput.onchange();
+        const targetElement = document.getElementById(`suggestiondivContainer_${index}`);
+        targetElement.innerHTML = '';
     }
 
     {{!-- const activeDiv = document.getElementById('bus-img-detail');
@@ -637,45 +694,57 @@
     // JavaScript code to prev and next of the image
 let slideIndex = [];
 
-function showSlide(indexValue) {
+function showSlide(indexValue,indexValue2) {
     
     try{
-        const slides = document.getElementsByClassName("mySlides"+indexValue);
+        const slides = document.getElementsByClassName("mySlides"+indexValue+""+indexValue2);
 
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
 
-        if (slideIndex[indexValue] < 1) {
-            slideIndex[indexValue] = slides.length;
-        } else if (slideIndex[indexValue] > slides.length) {
-            slideIndex[indexValue] = 1;
+        if (slideIndex[indexValue][indexValue2] < 1) {
+            slideIndex[indexValue][indexValue2] = slides.length;
+        } else if (slideIndex[indexValue][indexValue2] > slides.length) {
+            slideIndex[indexValue][indexValue2] = 1;
         }
 
-        slides[slideIndex[indexValue] - 1].style.display = "block";
-        dots[slideIndex[indexValue] - 1].classList.add("active");
+        slides[slideIndex[indexValue][indexValue2] - 1].style.display = "block";
+        dots[slideIndex[indexValue][indexValue2] - 1].classList.add("active");
     }
     catch{
         return
     }
 }
 
-function prevSlide(ind) {
-    slideIndex[ind]--;
-    showSlide(ind);
+function prevSlide(indx,indy) {
+    slideIndex[indx][indy]--;
+    showSlide(indx,indy);
 }
 
-function nextSlide(ind) {
-    slideIndex[ind]++;
-    showSlide(ind);
+function nextSlide(indx,indy) {
+    slideIndex[indx][indy]++;
+    showSlide(indx,indy);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     try{
-        const dayCountid = document.getElementById("dayCountid").value;
-        slideIndex = Array.from({ length: dayCountid }, () => 1);
-        for(let i=0;i<dayCountid;i++){
-            showSlide(i);   
+        const totalplancount = document.getElementById("totalplancount").value;
+        slideIndex = [];
+        for(let i=0;i<totalplancount;i++){
+            let dayCountid = document.getElementById(`dayCountid${i}`).value;
+            temp = [];
+            for(let j=0;j<dayCountid;j++){
+                temp[j] = 1;
+            }
+            slideIndex[i]=temp;
+        }
+        console.log(slideIndex)
+        for(let i=0;i<totalplancount;i++){
+            let dayCountid = document.getElementById(`dayCountid${i}`).value;
+            for(let j=0;j<dayCountid;j++){
+                showSlide(i,j);   
+            }
         }
         const prevButton = document.querySelector(".prev-button");
         const nextButton = document.querySelector(".next-button");
@@ -683,10 +752,15 @@ document.addEventListener("DOMContentLoaded", function () {
         prevButton.addEventListener("click", prevSlide);
         nextButton.addEventListener("click", nextSlide);
     }
-    catch{
+    catch(e){
+        console.log(e)
         return
     }
 });
+
+    function handleInputChange() {
+            
+    }
 
 </script>
 </html>

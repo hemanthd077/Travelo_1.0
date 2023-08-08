@@ -5,12 +5,9 @@
 
 body{
     background-repeat: no-repeat;
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
     background-color: #dadade;
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
 }
 
@@ -56,21 +53,19 @@ button#profilebutton {
     background-color: transparent;
     font-size: 17px;
     display: inline-flex;
-    align-items: center;
     column-gap: 10px;
     cursor: pointer;
     margin-top: 15px;
     justify-content: center;
 }
 
-button#bookingbutton{
+button#bookingbutton {
     border-style: none;
     background-color: transparent;
     font-size: 17px;
     margin-top: 15px;
     display: inline-flex;
     margin-left: 50px;
-    align-items: center;
     column-gap: 10px;
     cursor: pointer;
 }

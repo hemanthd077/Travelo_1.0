@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRAVELO</title>
-  <link rel="stylesheet" href="/main.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logowhite.svg">
+    <title>TRAVELO</title>
+    <link rel="icon" href="/images/logowhite.svg">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="logo-container">
-    <img style="margin-top: -100px; width:250px" src="/images/homelogo.png" style="width: 300px;" alt="Logo">
+    <img id="mainbiglogo" class="tranmission" style="margin-top: -100px; width:250px" src="/images/homelogo.png" style="width: 300px;" alt="Logo">
   </div>
    
   <div id="content" style="display: none;">
@@ -33,8 +35,7 @@
     setTimeout(function() {
       document.getElementById("logo-container").style.display = "none";
       document.getElementById("content").style.display = "block";
-      {{!-- document.querySelector("body").style.backgroundImage = "linear-gradient(to right, "+"#7c7e7e,#2d3465"+")"; --}}
-    }, 1500);
+    }, 3000);
   });
 </script>
 

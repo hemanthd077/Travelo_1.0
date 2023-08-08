@@ -16,9 +16,12 @@ const planDetailsSchema = new mongoose.Schema({
     planId:{
         type:String,
         unique:true,
+        required:true,
     },
     id:{
         type:String,
+        unique: false,
+        required:true,
     },
     dealerid:{
         type:String,
@@ -49,6 +52,7 @@ const planDetailsSchema = new mongoose.Schema({
             data:Buffer,
             ContentType:String,
         }],
+        mainspot:String,
         day:String,
         content:String,
     }],

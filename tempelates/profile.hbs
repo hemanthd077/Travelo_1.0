@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="icon" href="/images/logowhite.svg">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -37,7 +38,7 @@
                 </form>
 
                 <form action="/likes-bus" class="bookingdiv">
-                    <button id="bookingbutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Liked</button>
+                    <button id="bookingbutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Wishlist</button>
                 </form>
 
                 <div class="profilediv">
@@ -290,7 +291,6 @@
     if (e.target.files.length) {
         const profilevisible = document.getElementById("profile-visiblelity");
         profilevisible.style.display="none";
-
         const photodiv = document.getElementById("photodiv");
         photodiv.style.marginTop = "450px";
         photodiv.style.position = "absolute";

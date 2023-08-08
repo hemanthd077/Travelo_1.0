@@ -4,7 +4,8 @@
 }
 
 body{
-    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+    background-color: #dadade;
     background-repeat: no-repeat;
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
@@ -15,13 +16,19 @@ body{
 form#loginform, .contentBlock {
     display: inline-flex;
     flex-direction: column;
-    margin-left: 515px;
-    margin-top: 145px;
+    margin-top: 50px;
     background-color: white;
     padding: 30px;
-    width: 445px;
+    width: 400px;
     height: 420px;
-    border-radius: 10px;
+    border-radius: 5px;
+}
+
+#total-Main-div,#login-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .outline:focus,.input-opt:focus,.input-pwd:focus{
@@ -40,7 +47,6 @@ form#loginform, .contentBlock {
 }
 
 button#loginbutton,.submitbutton {
-    margin-left: 130px;
     width: 180px;
     height: 40px;
     background-color:white;
@@ -55,8 +61,7 @@ button#loginbutton,.submitbutton {
 
 
 button#loginbutton:hover,.submitbutton:hover{
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
-
+    background-color: #2d3467;
     color: white;
 }
 
@@ -67,30 +72,19 @@ label {
 h2#logintxt,.logintxt-verify {
     display: flex;
     justify-content: center;
-    /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464); */
-    background-image: linear-gradient(45deg,#5c6074, #2d3464);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #2d3467;
 }
 
 #logintxt-verify{
     display: flex;
     justify-content: center;
-    /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
-     */
-    background-image: linear-gradient(45deg,#5c6074, #2d3464);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #2d3467;
 }
 
 #logintxt-fpwd {
     display: flex;
     justify-content: center;
-    /* background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
-     */
-    background-image: linear-gradient(45deg,#5c6074, #2d3464);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #2d3467;
 }
 
 h4.warning {
@@ -100,8 +94,7 @@ h4.warning {
     border-style:none;
     margin-top: 15px;
     color: white;
-    /* background: linear-gradient(275deg,#ae006b, #2d3464); */
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    background-color: #2d3467;
     font-size: small;
     border-radius: 5px;
     justify-content: center;
@@ -119,13 +112,10 @@ h4.warning {
     color: white;
     border-style: none;
     box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
-    /* background: linear-gradient(275deg,#ae006b, #2d3464); */
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
-    /* background-color: #2d3465; */
+    background: #2d3467;
     justify-content: flex-start;
     font-weight: 700;
     cursor: pointer;
-    margin-left: 655px;
 }
 
 .otpInputs {
@@ -174,12 +164,10 @@ a#fpwd:hover{
 
   .dot-pos {
     margin-top: 395px;
-    margin-left: 195px;
+    margin-left: 175px;
     display: flex;
     flex-direction: row;
     gap: 5px;
-    /* align-items: center;
-    justify-content: center; */
     position: absolute;
     z-index: 2;
 }
@@ -205,12 +193,12 @@ a#fpwd:hover{
     color: #2d3467;
     border: none;
     margin-top: 50px;
-    margin-left: 147px;
     border-radius: 5px;
 }
 
 .verify-btn:hover{
-    background-image: linear-gradient(95deg,#5c6074, #2d3464);
+    /* background-image: linear-gradient(95deg,#5c6074, #2d3464); */
+    background-color: #2d3467;
     color: white;
 }
 

@@ -58,12 +58,14 @@ const getin = async(req,res)=>{
 
     let sourceCity = req.body.fromdistrict.split(' ');
     sourceCity[0] = sourceCity[0].toLowerCase();
-    let destination_place = req.body.tocity.toLowerCase();
+    let destination_place = req.body.tocity;
     console.log("City:"+sourceCity[0]);
     let bus_data_index=0;
     buscontent = [];
     busidarr = [];
+    planidarr = [];
     let idIndex=0;
+    let idIndex1=0;
     var varDate = new Date(req.body.date); 
     var today = new Date();
     if(today>=varDate){
@@ -95,7 +97,6 @@ const getin = async(req,res)=>{
                                             temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
                                             temp[1] = data[ind].busname.toUpperCase();
                                             temp[2] = dealerdata.dealername;
-                                            busidarr[idIndex++] = busdata.id;
                                             
                                             temp[3] = cover_location;
                                             temp[4] = busdata.seatcount;
@@ -155,6 +156,17 @@ const getin = async(req,res)=>{
                                                 temp[16]=false;
                                             }
                                             temp[17] = data[ind].noofdays;
+                                            temp[18] = busdata.id;
+                                            temp[19] = false;
+                                            planidarr[idIndex++] = data[ind]._id;
+                                            busidarr[idIndex1++] = busdata.id;
+                                            const userdata = await validation.findOne({Email:detailsArray[2]}); 
+                                            for(let i =0;i<userdata.likedbus.length;i++){
+                                                if(userdata.likedbus[i].busid===temp[18]){
+                                                    temp[19] = true;
+                                                    break;
+                                                }
+                                            }
                                             buscontent[bus_data_index++]=temp;
                                         }
                                     })     
@@ -182,12 +194,13 @@ const getin = async(req,res)=>{
 const getBusData = async(req,res)=>{
     let imagecontent = [];
     planDataArray = []
-    await plandetails.findOne({id:busidarr[req.body.busid]}).then(async(detail)=>{
+    await plandetails.findOne({_id:planidarr[req.body.busid]}).then(async(detail)=>{
         if(detail){
             for(let i=0;i<detail.dayplans.length;i++){
                 dummy = [];
                 dummy[0] = detail.dayplans[i].day; 
                 dummy[1] = detail.dayplans[i].content;
+                dummy[3] = casedetective(detail.dayplans[i].mainspot);
                 spotimages = [];
                 for(let y =0;y<detail.dayplans[i].imageclips.length;y++){
                     spotimages[y] = detail.dayplans[i].imageclips[y].ContentType+";base64,"+detail.dayplans[i].imageclips[y].data.toString('base64');
@@ -224,8 +237,68 @@ const homepage = async(req,res)=>{
     }).catch((err)=>console.log('error in finding'+err))
 }
 
+const toggleheart = (async (req, res) => {
+    const itemId = req.params.itemId;
+    try {
+      const item = await validation.findOne({Email:detailsArray[2]})
+      if (!item) {
+        return res.status(404).json({ message: 'Item not found' });
+      }
+      else{
+        let flag=false;
+        let tempid ='';
+        for(let i=0;i<item.likedbus.length;i++){
+            if(item.likedbus[i].busid===itemId){
+                tempid = item.likedbus[i]._id;
+                flag=true;
+                break;
+            }
+        }
+
+        if(flag){
+            const filter = { Email : detailsArray[2] };
+            const options2 = { upsert: false};  
+            const update = {
+                $pull: {
+                    likedbus: { busid: itemId },
+                },
+            };
+            const result = await validation.updateOne(filter, update,options2);
+            if(result){
+                console.log('Disliked the busid '+ itemId);
+                res.json({ isLiked: "Unlike"});
+            }
+            else{
+                console.log("Error while deleting busid in user Database");
+            }
+        }
+        else{
+            const newvalues ={$push:{
+                likedbus:{
+                    busid : itemId,
+                },
+            }};
+            const filter2 = {Email : detailsArray[2]}
+            const options2 = { upsert: false};  
+            await validation.updateOne(filter2,newvalues,options2,(err , collection) => {
+                if(err){
+                    console.log("Error Occurred while updating busid for likes"+err);
+                    res.redirect('/busdetail')
+                }
+            })
+            res.json({ isLiked: "Like"});
+        }
+      }
+    } catch (error) {
+        console.log(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
+
 module.exports = {
     getin,
     getBusData,
     homepage,
+    toggleheart,
 }

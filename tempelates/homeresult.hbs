@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Result</title>
+    <link rel="icon" href="/images/logowhite.svg">
     <link rel="stylesheet" href="/homeresult.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -25,7 +26,7 @@
                 </form>
 
                 <form action="/likes-bus" class="bookingdiv">
-                    <button id="bookingbutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Liked</button>
+                    <button id="bookingbutton" href="/likes-bus"><i class="fa-solid fa-heart"></i> Wishlist</button>
                 </form>
 
                 <form action="/profile"  class="profilediv">
@@ -131,7 +132,11 @@
                                     <button id="bookamount-button"><p>Book at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{this.[11]}}</p></button>
                                 </div>
                                 <div id="busamount-div-heart">
-                                    <button id="heart-button"><i  class="fa-regular fa-heart fa-lg"></i></button>
+                                    {{#if this.[19]}}
+                                    <button id="heart-button" onclick="likebutton('{{this.[18]}}',{{@index}})"><i id="toggleheart_{{@index}}"  class="fa-solid fa-heart fa-lg"></i></button>
+                                    {{else}}
+                                    <button id="heart-button" onclick="likebutton('{{this.[18]}}',{{@index}})"><i id="toggleheart_{{@index}}"  class="fa-regular fa-heart fa-lg"></i></button>
+                                    {{/if}}
                                 </div>
                                 
                             </div>
@@ -211,7 +216,7 @@
                         {{#each planDataArray as |outerItem outerIndex|}}
                             <div class="div-control-plan">
                                 <div class="day-header">
-                                    <p>{{this.[0]}}</p>
+                                    <p>{{this.[0]}} - {{this.[3]}}</p>
                                 </div>
                                 <div>
                                     {{#each this.[2]}}
@@ -231,8 +236,12 @@
                         {{/each}}
                         <div id="pay-footer">
                             <p class="pay-footer-txt">Total Amount to Pay : <i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[10]}}</p>
-                            <button id="bookamount-button"><p>Book at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
+                            <div style="display: flex;flex-direction:column;gap:10px">
+                                <button id="bookamount-button"><p>Book Now at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
+                                <p style="font-size: 13px;">Remaning Pay On pickup</p>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             {{/if}}
@@ -240,6 +249,31 @@
     </div>
 </body>
 <script>
+
+    async function likebutton(id,index){
+        try {
+            const response = await fetch(`/toggle-like/${id}`, {
+                method: 'POST',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if(data.isLiked ==="Like"){
+                    let togglePassword = document.getElementById(`toggleheart_${index}`);
+                    togglePassword.classList.remove('fa-regular');
+                    togglePassword.classList.add('fa-solid');
+                }
+                else{
+                    let togglePassword = document.getElementById(`toggleheart_${index}`);
+                    togglePassword.classList.remove('fa-solid');
+                    togglePassword.classList.add('fa-regular');
+                }
+            }
+        } catch (error) {
+            console.error('Error toggling like:', error);
+        }
+        
+    }
 
     //javascript code for prev and next od day spot images
 
@@ -293,7 +327,6 @@
             nextButton.addEventListener("click", nextSlide);
         }
         catch(e){
-            console.log(e)
             return
         }
     });
@@ -303,9 +336,14 @@
     const activeDiv = document.getElementById('bus-img-detail');
 
     function checkDivActiveStatus() {
-        if (activeDiv.classList.contains('mySlides')) {
+        try{
+            if (activeDiv.classList.contains('mySlides')) {
                 showSlides();
             }
+        }
+        catch{
+            return;
+        }
     }
 
 function showSlides() {
