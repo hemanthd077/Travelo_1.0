@@ -3,149 +3,179 @@
     margin: 0px;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body{
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
+    background-repeat: no-repeat;
+    background-color: #dadade;
+    height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+}
+
+#homenavbar {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 2px 0px 10px -2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.1px);
+    -webkit-backdrop-filter: blur(1.1px);
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.bookingdiv:hover {
+    border-radius: 10px 0px 0px 10px;
+    background-color: #dadada;
+}
+#appicon {
+    height: 70px;
+    width: 120px;
+    margin-left: 30px;
+    margin-top: -10px;
 }
 
 #main{
     display: flex;
+    flex-direction: column;
 }
-.bookingdiv,.accountdiv,.profilediv {
+
+.bookingdiv,.profilediv {
     display: inline-flex;
     align-items: end;
-    margin-top: 20px;
 }
 
-button#bookingbutton{
-    height: 40px;
-    width: 185px;
+.bookingdiv-1{
+    margin-left: 70px;
+}
+
+button#profilebutton {
     border-style: none;
     background-color: transparent;
     font-size: 17px;
     display: inline-flex;
-    align-items: center;
-    margin-left: 15px;
     column-gap: 10px;
-    padding-left: 35px;
     cursor: pointer;
-    color: white;   
+    margin-top: 15px;
+    justify-content: center;
 }
 
-button#profilebutton{
-    height: 40px;
-    width: 185px;
+button#bookingbutton,button#bookingbuttonactive{
     border-style: none;
     background-color: transparent;
     font-size: 17px;
+    margin-top: 15px;
     display: inline-flex;
-    align-items: center;
-    margin-left: 15px;
+    margin-left: 50px;
     column-gap: 10px;
-    padding-left: 35px;
     cursor: pointer;
 }
 
-.bookingdiv {
-    /* background-image: linear-gradient(95deg,#2d3465, #616575); */
-    background-color: #402c65;
-
-    border-radius: 10px 0px 0px 10px;
+.profilediv {
+    margin-left: 50px;
 }
 
-.profilediv:hover {
-    border-radius: 10px 0px 0px 10px;
-    background-color: #dadada;
-}
-
-img#bookingimg ,img#accountimg , img#profileimg,img#exitimg{
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
+#bookingdivactive{
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .exitdiv {
-    margin-top: 390px;
+    margin-left: 600px;
     display: flex;
-    margin-left: -10px;
 }
 
 button#exitbutton {
-    margin-left: 45px;
+    margin-left: 70px;
     border-style: none;
     cursor: pointer;
-    margin-top: 20px;
     display: flex;
+    background: transparent;
     align-items: center;
     font-weight: 700;
     gap: 5px;
     font-size: 18px;
     /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
+
+}
+
+button#exitbutton:hover,#bookingbutton:hover,.profilediv:hover{
     background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-button#exitbutton:hover{
-    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
-#homenavbar {
-    width: 200px;
-    height: 100vh;
-    background-color: white;
-    border-radius: 0%;
-    -webkit-border-radius: 0px 25px 25px 0px;
-    /* position: fixed; */
-}
-
-#appicon {
-    height: 80px;
-    width: 130px;
-    margin-left: 30px;
-    margin-top: 28px;
-}
-
-div#inner-block-first {
-    margin-left: 500px;
-    background-color: white;
-    padding: 10px;
-    width: 300px;
-    height: 30px;
-    border-radius: 0px 0px 10px 10px;
+#profilecontent{
     display: flex;
-    justify-content: center;
-    gap: 70px;
-    align-items: center;
+    flex-direction: row;
+    gap: 20px;
 }
 
-div#inner-block-second {
-    margin-left: 95px;
-    background-color: white;
-    margin-top: 30px;
-    padding: 20px;
-    width: 1106px;
-    height: 590px;
-    border-radius: 10px;
-}
-
-div#innerblock{
+#booking-header-div {
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    max-height: 75px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    margin-top: 250px;
+    row-gap: 30px;
+    box-shadow: 0px 0px 5px -2px #2d3467;
 }
 
-#detailbuttonbooking,#detailbuttoncompleted{
-    border-style: none;
-    background-color: transparent;
-    font-size: 16px;
+.bookinnerheader{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    column-gap:10px;
     cursor: pointer;
 }
 
-#detailbuttonbookingactive,#detailbuttoncompletedactive{
-    color: #ae006b;
+.hoverheader{
+    display: none;
+}
+
+#booking-header-div:hover{
+    .hoverheader{
+        display: block;
+        animation: wiperight 1s;
+        animation-iteration-count: 1;
+    }
+}
+
+@keyframes wiperight{
+    0% { 
+        opacity: 0%;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 100%;
+        transform: translateX(0);
+    }
+}
+
+.bookinnercontent{
+    display: flex;
+    flex-direction: column;
+    gap: 300px;
+    padding: 20px;
+    max-height: 617px;
+    max-width: 1300px;
+    overflow: scroll;
+}
+
+#bookingtitleheader {
+    background: linear-gradient(0deg,#dadade,#2d3467);
+    padding: 17px;
+    height: 45px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0px 0px 10px 10px;
 }

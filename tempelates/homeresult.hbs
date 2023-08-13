@@ -129,7 +129,7 @@
                                 </div>
                                 <div id="busamount-div">
                                     <button id="totalamount-button"><p>Total Amount<br><i class="fa-solid fa-indian-rupee-sign"></i> {{this.[10]}}</p></button>
-                                    <button id="bookamount-button"><p>Book at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{this.[11]}}</p></button>
+                                    <button id="bookamount-button-1"><p>Pre Book at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{this.[11]}}</p></button>
                                 </div>
                                 <div id="busamount-div-heart">
                                     {{#if this.[19]}}
@@ -235,9 +235,11 @@
                             </div>
                         {{/each}}
                         <div id="pay-footer">
+                            <input type="hidden" id="planid-payment" value="{{busdata.[20]}}">
+                            <input type="hidden" id="plan-amount-payment" value="{{busdata.[11]}}">
                             <p class="pay-footer-txt">Total Amount to Pay : <i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[10]}}</p>
-                            <div style="display: flex;flex-direction:column;gap:10px">
-                                <button id="bookamount-button"><p>Book Now at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
+                            <div style="display: flex;flex-direction:column;gap:10px;align-items:center">
+                                <button id="bookamount-button"><p>Pre Book Now at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
                                 <p style="font-size: 13px;">Remaning Pay On pickup</p>
                             </div>
                         </div>
@@ -315,8 +317,6 @@
         try{
             const dayCountid = document.getElementById("dayCountid").value;
             slideIndexarr = Array.from({ length: dayCountid }, () => 1);
-            console.log(slideIndexarr)
-            console.log(dayCountid+"asdgsfhdgjfhg")
             for(let i=0;i<dayCountid;i++){
                 showSlide(i);   
             }
@@ -379,4 +379,78 @@ setInterval(showSlides, 3000);
 
 
 </script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+
+        document.getElementById('bookamount-button').onclick = async function(e){
+            e.preventDefault();
+
+            const planid_payment = document.getElementById("planid-payment").value;
+            const planAmount = document.getElementById("plan-amount-payment").value;
+
+            let response= await fetch(`/payment/${planid_payment}`, {
+                method: 'POST',
+            });
+
+            let orderdata = await response.json()
+            if(orderdata.success){
+                var options = {
+                    "key": "rzp_test_wQgiCkxy1ggt9B",
+                    "amount": 100*100,
+                    "currency": "INR",
+                    "name": "Travelo India", 
+                    "description": "Test Transaction",
+                    "image": "https://lh3.googleusercontent.com/drive-viewer/AITFw-xREwv9B_wu_5uRpIy4qgWUkPuuK6MaxFaLT4mwonCYu1_YhA7PtldfCNGtJQD-88rN6j0fHK5cJTv6ILBpKGoboz19HA=s2560",
+                    "order_id": orderdata.id,
+                    "handler":async function (response){
+                        await fetch(`/paymentstatus/${response.razorpay_payment_id}`, {
+                            method: 'POST',
+                        }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = '/booking';
+                            } else {
+                                window.location.href = '/error';
+                            }
+                        })
+                    },  
+                    "notes": {
+                        "address": "Razorpay Corporate Office"
+                    },
+                    "theme": {
+                        "color": "#2d3467"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+
+                rzp1.on('payment.failed',async function (response){
+                    const errorDetails = response.error;
+                    const paymentId = errorDetails.metadata.payment_id; 
+                    await fetch(`/paymentstatus/${paymentId}`, {
+                        method: 'POST',
+                    })
+                    
+                    {{!-- .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = '/booking';
+                        } else {
+                            window.location.href = '/error';
+                        }
+                    }) --}}
+                });
+
+                rzp1.open();
+            }
+            else{
+                window.location.href = '/404'; 
+            }
+            
+        }
+        
+        
+    
+    </script>
+
 </html>

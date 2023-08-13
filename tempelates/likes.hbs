@@ -7,7 +7,7 @@
     <link rel="icon" href="/images/logowhite.svg">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/likes.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
@@ -38,35 +38,113 @@
                 </form>                                                                                                 
         </div>
         <div id="wishlistheader">
-            <p id="header-content">{{length}} buses Added in Wishlist</p>
+            {{#if length}}
+                <p id="header-content">{{length}} Bus Added in Wishlist</p>
+            {{else}}
+                <p id="header-content">0 Bus Added in Wishlist</p>
+            {{/if}}
         </div>
         <div id="content-block">
-            {{#each busdataarr}}
-                <div id="inner-content-block">
-                    <img id="busimage" src="data:{{this.[10]}}" alt="">
-                    <div >
-                        <div id="busdata-block">
-                            <img id="dealerimage" src="data:{{this.[0]}}" alt="">
-                            <div>
-                                <p>{{this.[1]}}</p>
-                                <p>{{this.[2]}}</p>
+            {{#if length}}
+                {{#each busdataarr}}
+                    <div id="inner-content-block">
+                        <img id="busimage" src="data:{{this.[10]}}" alt="">
+                        <div >
+                            <div id="busdata-block">
+                                <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                                <div>
+                                    <p id="busname">{{this.[1]}}</p>
+                                    <p id="companyname">{{this.[2]}}</p>
+                                </div>
+                                <div id="seatcount">
+                                    <p>{{this.[3]}} Seats</p>
+                                </div>
+                                <div>
+                                    {{#if this.[6]}}
+                                        <p class="acdata"><svg width="20" height="25" stroke-width="1.5"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="IconChangeColor"> <path d="M22 3.6V11H2V3.6C2 3.26863 2.26863 3 2.6 3H21.4C21.7314 3 22 3.26863 22 3.6Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M18 7H19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M2 11L2.78969 13.5844C3.04668 14.4255 3.82294 15 4.70239 15H6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M22 11L21.2103 13.5844C20.9533 14.4255 20.1771 15 19.2976 15H18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M9.5 14.5C9.5 14.5 9.5 21.5 6 21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M14.5 14.5C14.5 14.5 14.5 21.5 18 21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M12 14.5V21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> </svg> AC</p>
+                                    {{else}}
+                                        <p class="acdata"><svg width="20" height="25" stroke-width="1.5"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="IconChangeColor"> <path d="M22 3.6V11H2V3.6C2 3.26863 2.26863 3 2.6 3H21.4C21.7314 3 22 3.26863 22 3.6Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M18 7H19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M2 11L2.78969 13.5844C3.04668 14.4255 3.82294 15 4.70239 15H6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M22 11L21.2103 13.5844C20.9533 14.4255 20.1771 15 19.2976 15H18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M9.5 14.5C9.5 14.5 9.5 21.5 6 21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M14.5 14.5C14.5 14.5 14.5 21.5 18 21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> <path d="M12 14.5V21.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" id="mainIconPathAttribute"></path> </svg> Non AC</p>        
+                                    {{/if}}
+                                </div>
+                                {{#if this.[12]}}
+                                    <button id="heart-status-button" onclick="likebutton('{{this.[11]}}','{{@index}}')"><i class="fa-solid fa-heart fa-lg" id="toggleheart_{{@index}}"></i></button>
+                                {{else}}
+                                    <button id="heart-status-button" onclick="likebutton('{{this.[11]}}','{{@index}}')"><i class="fa-regular fa-heart fa-lg" id="toggleheart_{{@index}}"></i></button>
+                                {{/if}}
+                            </div><br>
+                            <div id="feature-div">
+                                {{#if this.[5]}}
+                                    <p><i class="fa-solid fa-radio"></i> Audio System</p>
+                                {{/if}}
+                                {{#if this.[7]}}
+                                    <p><i class="fa-solid fa-couch"></i> Seater</p>
+                                {{else}}
+                                    <p><i class="fa-solid fa-couch"></i> Semi Sleeper</p>
+                                {{/if}}
+                                {{#if this.[8]}}
+                                    <p><i class="fa-solid fa-lightbulb"></i> DJ Lighting</p>
+                                {{/if}}
+                                {{#if this.[9]}}
+                                    <p><i class="fa-solid fa-glass-water-droplet"></i> Purifier</p>
+                                {{/if}}
+                                {{#if this.[13]}}
+                                    <p><i class="fa-solid fa-wifi"></i> Wifi Connectivity</p>
+                                {{/if}}
+                                {{#if this.[14]}}
+                                    <p><i class="fa-solid fa-suitcase-rolling"></i> Lagguage Storage</p>
+                                {{/if}}
+                                {{#if this.[15]}}
+                                    <p><i class="fa-solid fa-tv"></i> Entertainment System</p>
+                                {{/if}}
+                            </div>
+                            <div id="packages-content">
+                                {{#if this.[4]}}
+                                    <p id="package-title">Package Avaliable</p>
+                                    <div id="feature-data-block">
+                                        {{#each this.[4]}}
+                                            <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                        {{/each}}
+                                    </div>
+                                {{else}}
+                                    <p id="package-title">Currently No Package Avaliable, Check Later</p>
+                                {{/if}}
                             </div>
                         </div>
-                        <p>{{this.[3]}}</p>
-                        <div id="packages-content">
-                            {{#each this.[4]}}
-                                <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
-                            {{/each}}
-                        </div>
-                        <p>{{this.[5]}}</p>
-                        <p>{{this.[6]}}</p>
-                        <p>{{this.[7]}}</p>
-                        <p>{{this.[8]}}</p>
-                        <p>{{this.[9]}}</p>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            {{else}}
+                <a href="/home" id="homereference">
+                    <i class="fa-solid fa-face-grin-wink fa-2x"></i>
+                    <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Add Favorite Bus to Your  Wishlist <i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
+                </a>
+            {{/if}}
         </div>
     </div>
 </body>
+<script>
+     async function likebutton(id,index){
+        try {
+            const response = await fetch(`/toggle-like/${id}`, {
+                method: 'POST',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if(data.isLiked ==="Like"){
+                    let togglePassword = document.getElementById(`toggleheart_${index}`);
+                    togglePassword.classList.remove('fa-regular');
+                    togglePassword.classList.add('fa-solid');
+                }
+                else{
+                    let togglePassword = document.getElementById(`toggleheart_${index}`);
+                    togglePassword.classList.remove('fa-solid');
+                    togglePassword.classList.add('fa-regular');
+                }
+            }
+        } catch (error) {
+            console.error('Error toggling like:', error);
+        }
+        
+    }
+</script>
 </html>

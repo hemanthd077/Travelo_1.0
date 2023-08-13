@@ -3,11 +3,13 @@ const userDb = require('../src/mongodb');
 const Login = require('../controller/login');
 const busdb = require('../src/busDetails');
 const dealerdetails = require('../src/dealerdb');
-const plandetails = require('../src/planDetails')
+const plandetails = require('../src/planDetails');
+const validation = require('../src/mongodb');
 
 const detailsArray = Login.mail();
 
-
+let busidarr = [];
+let busidindex=0;
 const likebuses = (async(req,res)=>{
     let busdataarr = [];
     await userDb.findOne({Email:detailsArray[2]}).then(async(data)=>{
@@ -71,6 +73,26 @@ const likebuses = (async(req,res)=>{
                         }
                         if(busdata.busimage){
                             temp[10] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
+                        }
+                        temp[11] = busdata.id;
+                        temp[12] = true;
+                        if(busdata.wifi==='yes'){
+                            temp[13]=true;
+                        }
+                        else{
+                            temp[13]=false;
+                        }
+                        if(busdata.lagguagestorage==='yes'){
+                            temp[14]=true;
+                        }
+                        else{
+                            temp[14]=false;
+                        }
+                        if(busdata.entertainsystem==='yes'){
+                            temp[15]=true;
+                        }
+                        else{
+                            temp[15]=false;
                         }
                         busdataarr[i] = temp
                     }

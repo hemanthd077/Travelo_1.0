@@ -338,7 +338,7 @@ nav#nav,nav#navcontent {
     box-shadow: 0px -1px 5px -2px #2d3467;
 }
 
-#bookamount-button{
+#bookamount-button,#bookamount-button-1{
     border:none;
     border-radius: 5px;
     padding: 5px;
@@ -350,7 +350,7 @@ nav#nav,nav#navcontent {
     box-shadow: 0px -1px 5px -2px #2d3467;
 }
 
-#bookamount-button:hover{
+#bookamount-button:hover,#bookamount-button-1:hover{
     background-color: #dadade;
     /* background: linear-gradient(180deg,#dadade,#2d3467); */
     color: #000000;

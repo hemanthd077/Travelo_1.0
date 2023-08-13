@@ -9,6 +9,9 @@ const validation = require('../src/mongodb')
 
 const detailsArray = Login.mail();
 
+let SearchData = [];
+
+
 function casedetective(a){
     let capFirstLetter = a[0].toUpperCase();
     let restOfGreeting = a.slice(1).toLowerCase();
@@ -16,26 +19,31 @@ function casedetective(a){
 }
 
 function isBusAvailable(start, end,booking) {
-    if(!(booking)){
+    if(booking.length===0){
         return true;
     }
-
-    const conflictingBooking = (start >= booking.startdate && start <= booking.endDate) ||(end >= booking.startdate && end <= booking.endDate) ||(start <= booking.startdate && end >= booking.endDate)
-  
-    return !conflictingBooking;
+    else{
+        for(let i=0;i<booking.length;i++){
+            if(start <= booking[i].endDate && booking[i].startdate  <= end){
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
-
-function calculateNextNthDate(startDate, n) {
-  const currentDate = new Date(startDate);
-  
-  const currentDay = currentDate.getDate();
-  
-  currentDate.setDate(currentDay + n);
-  
-  return currentDate.toDateString();
+function calculateNextNthDate(startDateStr, n) {
+    n-=1;
+    const startDate = new Date(startDateStr);
+    const nextDate = new Date(startDate);
+    nextDate.setDate(startDate.getDate() + n);
+    const nextDateStr = nextDate.toISOString().split('T')[0];
+    return nextDateStr;
 }
 
+function canAccommodatePassengers(seatCapacity, numberOfPassengers) {
+    return seatCapacity >= numberOfPassengers;
+}
 
 let busidarr = [];
 let buscontent = [];
@@ -51,6 +59,8 @@ const getin = async(req,res)=>{
     source_destination[4] = req.body.destination;
     source_destination[5] = req.body.tocity;
     source_destination[6]=req.body.date;
+    SearchData[0] = req.body.date;
+    SearchData[1] = req.body.days;
     date=req.body.date;
     source_destination[7] = casedetective(req.body.source);
     source_destination[8] = casedetective(req.body.destination);
@@ -59,7 +69,6 @@ const getin = async(req,res)=>{
     let sourceCity = req.body.fromdistrict.split(' ');
     sourceCity[0] = sourceCity[0].toLowerCase();
     let destination_place = req.body.tocity;
-    console.log("City:"+sourceCity[0]);
     let bus_data_index=0;
     buscontent = [];
     busidarr = [];
@@ -77,7 +86,6 @@ const getin = async(req,res)=>{
                 await plandetails.find({dealerid:dealerdata[index].dealerid}).then(async(data)=>{
                     if(data){
                         for(let ind=0;ind<data.length;ind++){
-                            console.log("id:"+data[ind].id);
                             let cover_location=[];
                             let str = data[ind].coverlocation.split('-');
                             let locatoion_index=0;
@@ -86,12 +94,11 @@ const getin = async(req,res)=>{
                                     cover_location[locatoion_index++] = str[i];
                             }
                             
-                            console.log("Destination:"+destination_place);
                             for(let i=0;i<cover_location.length;i++){
                                 if( destination_place === cover_location[i]){
                                     await busdetails.findOne({id:data[ind].id}).then(async(busdata)=>{
                                         let busStatus = await busbookingstatus.findOne({busid:busdata.id});
-                                        if(isBusAvailable(req.body.date,calculateNextNthDate(req.body.date,req.body.days),busStatus.bookings)){
+                                        if(isBusAvailable(req.body.date,calculateNextNthDate(req.body.date,req.body.days),busStatus.bookings) && (Number(req.body.days) === Number(data[ind].noofdays)) && canAccommodatePassengers(busdata.seatcount,req.body.passenger)){
                                             let temp = [];
                                             let dealerdata = await dealerdetails.findOne({dealerid:busdata.dealerid});
                                             temp[0] = dealerdata.profileimage.ContentType+";base64,"+dealerdata.profileimage.data.toString('base64');
@@ -180,7 +187,6 @@ const getin = async(req,res)=>{
                 })
             }
         })
-        console.log("length : "+buscontent.length);
         if(buscontent.length===0){
             res.render('homeresult',{'res':'No Buses Found',error:true,searchresult:true,source_destination,'length':buscontent.length})
         }
@@ -194,6 +200,7 @@ const getin = async(req,res)=>{
 const getBusData = async(req,res)=>{
     let imagecontent = [];
     planDataArray = []
+    let busdata = buscontent[req.body.busid];
     await plandetails.findOne({_id:planidarr[req.body.busid]}).then(async(detail)=>{
         if(detail){
             for(let i=0;i<detail.dayplans.length;i++){
@@ -208,6 +215,7 @@ const getBusData = async(req,res)=>{
                 dummy[2] = spotimages;
                 planDataArray[i]=dummy
             }
+            busdata[20] = detail.planId;
         }
         //plan pdf code
         // const pdfData = data2.planfile.data.toString('base64');
@@ -215,13 +223,12 @@ const getBusData = async(req,res)=>{
     }).catch(e=>{
         console.log("Error Occured while fetching plan in getBusData: "+e);
     })
-    let busdata = buscontent[req.body.busid];
     await busdetails.findOne({id:busidarr[req.body.busid]}).then(async(data1)=>{
         if(data1){
             for (let index = 0; index < data1.busimage.length; index++) {
                 imagecontent[index] = data1.busimage[index].ContentType+";base64,"+data1.busimage[index].data.toString('base64');
             }
-            res.render('homeresult',{searchresult:true,busContent:true,imagecontent,headerdata:source_destination,busdata:buscontent[req.body.busid],planDataArray});
+            res.render('homeresult',{searchresult:true,busContent:true,imagecontent,headerdata:source_destination,busdata,planDataArray});
         }
         else{
             res.render('homeresult',{searchresult:true,busContent:true,source_destination,planDataArray});
@@ -295,10 +302,15 @@ const toggleheart = (async (req, res) => {
     }
   });
 
+function userSearchdata() {
+    return SearchData;
+}
+
 
 module.exports = {
     getin,
     getBusData,
     homepage,
     toggleheart,
+    userSearchdata,
 }

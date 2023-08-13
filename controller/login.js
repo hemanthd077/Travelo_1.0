@@ -7,14 +7,18 @@ const fs = require('fs');
 const axios = require('axios');
 const mime = require('mime');
 
+require('dotenv').config();
+const TRANSPORT_USER = process.env.EMAILTRANSPORT_USER
+const TRANSPORT_PASSWORD = process.env.EMAILTRANSPORT_PASSWORD;
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     port: 465,
     secure:true,
     auth: {
-      user: 'traveloindia01@gmail.com',
-      pass: 'xnxzxcsuxtidzkvk'
+      user: TRANSPORT_USER,
+      pass: TRANSPORT_PASSWORD,
     },
   });
 
@@ -82,7 +86,7 @@ const fpass_nodemail=(async(req,res)=>{
         }
         
         const mailOptions = {
-            from: 'traveloindia01@gmail.com',
+            from: TRANSPORT_USER,
             to: data.Email,
             subject: 'verification code',
             html:`<!DOCTYPE html> 
