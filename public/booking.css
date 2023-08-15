@@ -19,11 +19,12 @@ body{
     height: 80px;
     display: flex;
     flex-direction: row;
+    background-color: #dadade;
     box-shadow: 2px 0px 10px -2px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(1.1px);
-    -webkit-backdrop-filter: blur(1.1px);
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     align-items: center;
+    position: fixed;
+    z-index: 2;
 }
 
 .bookingdiv:hover {
@@ -98,8 +99,7 @@ button#exitbutton {
     font-weight: 700;
     gap: 5px;
     font-size: 18px;
-    /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
-
+    padding-right: 16px;
 }
 
 button#exitbutton:hover,#bookingbutton:hover,.profilediv:hover{
@@ -111,32 +111,53 @@ button#exitbutton:hover,#bookingbutton:hover,.profilediv:hover{
 
 #profilecontent{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
 }
 
 #booking-header-div {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    max-height: 75px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    margin-left: 20px;
-    margin-top: 250px;
-    row-gap: 30px;
-    box-shadow: 0px 0px 5px -2px #2d3467;
+    flex-direction: row;
+    padding: 17px;
+    height: 45px;
+    background: linear-gradient(0deg,#dadade,#2d3467);
+    column-gap: 15px;
+    font-size: 20px;
+    padding-left: 70px;
+    margin-top: 80px;
+    position: fixed;
+    z-index: 2;
+    width: 1450px;
 }
 
-.bookinnerheader{
+.bookinnerheader1, .bookinnerheader2,.bookinnerheader3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px 5px 0px 0px;
+    margin-bottom: -18px;
+}
+
+/* .bookinnerheader1,.bookinnerheader2{
     display:flex;
     flex-direction:row;
     align-items: center;
     column-gap:10px;
     cursor: pointer;
-}
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 20px;
+} */
 
-.hoverheader{
+/* .hoverheader{
     display: none;
 }
 
@@ -157,16 +178,12 @@ button#exitbutton:hover,#bookingbutton:hover,.profilediv:hover{
         opacity: 100%;
         transform: translateX(0);
     }
-}
+} */
 
-.bookinnercontent{
+.bookinnercontent {
     display: flex;
     flex-direction: column;
-    gap: 300px;
     padding: 20px;
-    max-height: 617px;
-    max-width: 1300px;
-    overflow: scroll;
 }
 
 #bookingtitleheader {
@@ -178,4 +195,308 @@ button#exitbutton:hover,#bookingbutton:hover,.profilediv:hover{
     flex-direction: row;
     align-items: center;
     border-radius: 0px 0px 10px 10px;
+}
+
+.bookinnerheader:hover{
+    color: #FFFFFF;
+}
+
+.hoverheaderactive,.fa-clipboard-list,.fa-clipboard-check{
+    /* color: #FFFFFF; */
+}
+
+img#busimage {
+    width: 400px;
+    height: 210px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px -2px #2d3467;
+}
+
+#inner-content-block{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 1370px;
+    border-radius: 5px;
+    padding: 15px;
+    margin-left: 50px;
+    box-shadow: 0px 1px 5px -2px #2d3467;
+}
+
+div#booking-content-div-1,#booking-content-div-2,#booking-content-div-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 160px;
+}
+
+#inner-buscontent{
+    display: flex;
+    flex-direction: row;
+}
+
+img#dealerimage{
+    width: 30px;
+    height:30px;
+    border-radius:50px;
+}
+
+p#busname {
+    font-size: 22px;
+    color: #2d3467;
+}
+
+p#companyname {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.statusheadercolor {
+    height: 5px;
+    background-color: #2d3467;
+    margin-top: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.statusheadercolorfail {
+    height: 5px;
+    background-color: #ae006b;
+    margin-top: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.buscontent-main-div {
+    display: flex;
+    flex-direction: row;
+}
+
+div#buscontent-owner-name {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.SEdate{
+    font-size: 15px;
+    font-weight: 600;
+    color: #00000070;
+}
+
+#datediv-outer {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    position: absolute;
+    margin-left: 525px;
+}
+
+.SEdate-content {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2d3467;
+}
+
+button.status-button-success {
+    position: absolute;
+    margin-left: 305px;
+    width: 140px;
+    height: 25px;
+    border-radius: 30px;
+    border: none;
+    background: #2d3467;
+    color: #FFFFFF;
+}
+
+button.status-button-fail {
+    position: absolute;
+    margin-left: 305px;
+    width: 140px;
+    height: 25px;
+    border-radius: 30px;
+    border: none;
+    background: #ae006b;
+    color: #FFFFFF;
+}
+
+.location-content {
+    margin-left: 60px;
+    margin-top: 15px;
+}
+
+.location-content-1 {
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.pickupdrop-header{
+    color: #2d3467;
+    font-weight: 700;
+}
+
+.pickupdrop-content{
+    width: 450px;
+    word-wrap: break-word; 
+    font-size: 14px;
+}
+
+#cover-location-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 15px;
+}
+
+.fa-location-dot{
+    color: #ae006b;
+}
+
+#status-days {
+    display: flex;
+    font-size: 17px;
+    width: 190px;
+    border-radius: 5px;
+    font-weight: 400;
+    position: absolute;
+    padding: 2px;
+    color: #FFFFFF;
+    margin-left: 310px;
+    background: #2d3467;
+    justify-content: center;
+}
+
+.order-detail-content{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 30px;
+}
+
+.bookingcontent-id {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-left: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.bookingcontent-date {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-left: 300px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 10px;
+    width: 210px;
+    position: absolute;
+}
+
+.paidammount-content {
+    position: absolute;
+    margin-left: 665px;
+    display: flex;
+    height: 32px;
+    width: 118px;
+    border: none;
+    border-radius: 5px;
+    background: #dadade;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+    font-weight: 500;
+}
+
+.paidammount-content-complete {
+    position: absolute;
+    margin-left: 745px;
+    display: flex;
+    height: 32px;
+    width: 190px;
+    border: none;
+    border-radius: 5px;
+    background: #dadade;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+    font-weight: 500;
+    justify-content: center;
+}
+
+.balanceamount-content {
+    position: absolute;
+    margin-left: 802px;
+    display: flex;
+    width: 140px;
+    border: none;
+    border-radius: 5px;
+    background: #2d3467;
+    flex-direction: column;
+    align-items: center;
+    color: #FFFFFF;
+    padding: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+}
+
+.balanceamount-content:hover{
+    color: #000000;
+    background-color: #dadade;
+}
+
+.bookinnerheaderactive {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    color: #2d3467;
+    box-shadow: 0px 0px 5px -2px #2d3467;
+    margin-bottom: -10px;
+}
+
+.warning-content {
+    font-size: 19px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 250px;
+}
+
+#homereference{
+    text-decoration: none;
+}
+
+#homereference:focus{
+    color: #2d3467;
+}
+
+.rigtharrowicon{
+    margin-top: 10px;
+}
+
+#days-staus-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 15px;
 }

@@ -22,6 +22,9 @@ const OrderSchema = new mongoose.Schema({
     todate:{
         type : String
     },
+    pickup:{
+        type:String,
+    }
 })
 
 const collection = new mongoose.model('OrderData',OrderSchema)

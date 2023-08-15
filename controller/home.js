@@ -61,6 +61,7 @@ const getin = async(req,res)=>{
     source_destination[6]=req.body.date;
     SearchData[0] = req.body.date;
     SearchData[1] = req.body.days;
+    SearchData[2] = req.body.source;
     date=req.body.date;
     source_destination[7] = casedetective(req.body.source);
     source_destination[8] = casedetective(req.body.destination);

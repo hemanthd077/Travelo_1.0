@@ -62,6 +62,7 @@
                         <div id="input-content">
                             <input type="hidden" name="fromdistrict" id="fromdistrict">
                             <input type="hidden" name="fromstate" id="fromstate">
+                            <input type="hidden" name="latlon" id="latlon">
                             <label id="label-content" for="from">From:</label>
                             <p id="fromtext"><i class="fa-solid fa-city"></i><input type="text" id="from" placeholder="Enter the Pick Up Location" name="source" required onchange="handleInputChange()" autocomplete="off"></p>
                             <div id="suggestionfrom"></div>
@@ -152,7 +153,8 @@
               const location = suggestion.properties.formatted; 
               district =  suggestion.properties.state_district;
               state =  suggestion.properties.state;
-              return `<button id="suggestionfrombutton" onclick="assignValuefrom('${location}','${district}','${state}')"><p id="suggestion-location"><i class="fa-solid fa-building"></i> ${location}</p></button>`;
+              latlong = suggestion.properties.lat+","+suggestion.properties.lon;
+              return `<button id="suggestionfrombutton" onclick="assignValuefrom('${location}','${district}','${state}','${latlong}')"><p id="suggestion-location"><i class="fa-solid fa-building"></i> ${location}</p></button>`;
             }).join('');
             targetElement.innerHTML = suggestionsHtml;
           } else {
@@ -202,16 +204,19 @@
         }
     }
 
-    function assignValuefrom(location,district,state) {
+    function assignValuefrom(location,district,state,latlon) {
         let fromdistrict = document.getElementById("fromdistrict");
         let fromlocation = document.getElementById("from");
         let fromstate = document.getElementById("fromstate");
+        let latlong = document.getElementById("latlon");
+        latlong.value = latlon;
         fromstate.value = state;
         fromdistrict.value = district;
         from.value = location;
         console.log("Fromlocation:"+from.value);
         console.log("\nFromdistrict:"+fromdistrict.value);
         console.log("\nFromstate:"+fromstate.value);
+        console.log("\nlatlon :"+latlong.value);
         fromlocation.onchange();
         const targetElement = document.getElementById('suggestionfrom');
         targetElement.innerHTML = '';
