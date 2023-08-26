@@ -146,7 +146,7 @@ const signup = async (req,res)=>{
                                 <tr style="display: flex;align-items: center;">
                                     <h1>Email Verification</h1>
                                     <p> Please verify your email address by clicking the below</p> 
-                                    <button><a style="color: #FFFFFF" href="http://localhost:8080/verify?code=${usercode}">Click Here</a></button> 
+                                    <button><a style="color: #FFFFFF" href="https://wild-gray-buffalo-hose.cyclic.cloud/verify?code=${usercode}">Click Here</a></button> 
                                     <p>If you did not request this verification link, you can safely ignore this email.If you have any questions or need further assistance, please contact our support team at <a href="mailto:traveloindia01@gmail.com">TraveloIndia</a>.</p> 
                                     <p class="footer"> This email is automatically generated. Please do not reply to this message. </p>
                                     <p style="text-align: center;color: #777;font-size: 11px;font-weight: 600;">&#169; Copyrighted 2023 </p>
