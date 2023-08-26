@@ -3,17 +3,20 @@
     padding: 0%;
 }
 
-body{
+body {
     background-color: #dadade;
     background-repeat: no-repeat;
-    height: 92vh;
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
 }
 
 #block {
-    background-color: white;
-    margin-left: 550px;
+    background-color: #ffffff;
     width: 400px;
     padding: 30px;
     border-radius: 10px;
@@ -24,7 +27,10 @@ body{
 #appicon {
     height: 70px;
     width: 120px;
-    margin-left: 30px;
+    display: flex;
+    left: 30px;
+    top: 0px;
+    position: absolute;
 }
 
 button#signupbutton {
@@ -84,10 +90,14 @@ h2#logintxt-fpwd,.logintxt-verify {
     outline: none;
 }
 
+.align-eye {
+    margin-left: 2px;
+}
+
 .loginbutton{
     width: 26vh;
     margin-left: 100px;
-    margin-top: 65px;
+    margin-top: 90px;
     font-size: medium;
     height: 5vh;
     border-radius: 5px;
@@ -120,7 +130,7 @@ hr#line{
 }
 
 #fpwd {
-    margin-left: 280px;
+    margin-left: 290px;
     margin-right: 2px;
     font-size: small;
     cursor: pointer;
@@ -235,9 +245,9 @@ hr#line{
 
   #blockactive {
     background-color: white;
-    margin-left: 550px;
+    /* margin-left: 550px; */
     width: 400px;
-    margin-top: 90px;
+    /* margin-top: 90px; */
     padding: 30px;
     height: 50vh;
     border-radius: 10px;
@@ -303,12 +313,17 @@ hr#line{
     flex-direction: column;
 }
 
-.fa-eye {
-    margin-left: 365px;
-    position: absolute;
-    margin-top: 183px;
+i#togglePassword {
+    margin-left: 360px;
+    margin-top: -48px;
     cursor: pointer;
-    opacity: 70%;
+    
+}
+
+.fa-eye-slash,.fa-eye{
+    background: -webkit-linear-gradient(95deg,#7b014c, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #button-home {

@@ -3,14 +3,24 @@
     margin: 0px;
 }
 
-body{
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
+body {
     background-color: #dadade;
     background-repeat: no-repeat;
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.appicon{
+    width: 120px;
+    height: 70px;
+    position: absolute;
+    left: 30px;
+    top: 0px;
 }
 
 form#loginform, .contentBlock {
@@ -22,6 +32,7 @@ form#loginform, .contentBlock {
     width: 400px;
     height: 420px;
     border-radius: 5px;
+    box-shadow: 0px 0px 5px -2px #2d3467;
 }
 
 #total-Main-div,#login-div{

@@ -1,0 +1,23 @@
+const mongoose = require('mongoose');
+
+const managerstatus = new mongoose.Schema({
+    manager:{
+        type:String,
+        required : true,
+    },
+    managerid:{
+        type:String,
+    },
+    dealerid:{
+        type:String,
+    },
+    bookings:[{
+        startdate:String,
+        endDate:String,
+    }]
+})
+
+
+const collection = new mongoose.model('BusBookingStatus',managerstatus)
+
+module.exports = collection;

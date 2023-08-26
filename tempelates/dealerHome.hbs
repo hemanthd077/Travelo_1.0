@@ -20,24 +20,27 @@
             <form action="/busdetail">
                 <button id="profile{{#if dealerprofile}}active{{/if}}"><i class="far fa-id-card"></i> Home</button>
             </form>
-            <form action="/plan">
-                <button id="plan{{#if plan}}active{{/if}}" href="/plan"><i class="fas fa-clipboard-list"></i> Add Itinerary</button>
-            </form>
             <form action="/busdetails">
                 <button id="busdetails{{#if busdetails}}active{{/if}}" href="/busdetails"><i class="fas fa-bus"></i> Add Bus</button>
-            </form>   
+            </form>  
+            <form action="/plan">
+                <button id="plan{{#if plan}}active{{/if}}" href="/plan"><i class="fas fa-clipboard-list"></i> Add Itinerary</button>
+            </form> 
             <form action="/bus-booking">
                 <button id="bookingdetails{{#if busbooking}}active{{/if}}" href="/bus-booking"><i class="fa-solid fa-people-carry-box"></i> Booking</button>
             </form>
+            <form action="/manager">
+                <button id="managerdetails{{#if managerdetail}}active{{/if}}" href="/manager"><i class="fa-solid fa-people-roof"></i> Manager</button>
+            </form>
             <form action="/dealer" class="exitdiv"> <br>
-                <button id="exitbutton"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button>
+                <button id="exitbutton"><i class="fa-solid fa-door-open"></i> Log out</button>
             </form>                                                      
         </div>
             
         <div id="content">
 
             {{#if plan}} 
-                <div id="plan" class="{{#if disclimer}}scrollclass{{/if}}{{#if disclimerfail}}scrollclass{{/if}}">
+                <div id="plan" >
                     <form action="/plandetailsupload" method="post" enctype="multipart/form-data">
                         <div id="plantitle">
                             <label for="textcontent1" class="text-input">State : </label>
@@ -168,7 +171,7 @@
                             </label>  
                         </div>
                         <input type="hidden" name="flag" id="0">
-                        <button id="uploadbutton" href="/busdetailsupload">Upload</button>
+                        <button id="uploadbutton-busdata" href="/busdetailsupload">Upload</button>
                     </form>
                     <a id="target-page" href="/busdetail">Go to Buses <i class="fas fa-chevron-right"></i></a>
                     <p class="disclimer">NOTE : IMAGE ACCEPT ONLY JPEG OR PNG</p>
@@ -188,6 +191,7 @@
                             <img id="profilepic" src="data:{{type.ContentType}};base64,{{value}}" alt="Profile Image" />
                             <h4 id="username">{{dealername}}</h4>
                             <p id="username">{{dealercity}}</p>
+                            <p id="contactnumber"><i class="fa-solid fa-phone fa-xs"></i> {{contactno}}</p>
                         </div><br>
                         
                         <form id="photoinput" action="/dealerprofile" method="post" enctype="multipart/form-data">
@@ -294,13 +298,13 @@
                                             <div style="display: flex;flex-direction:column;gap:20px">
                                                 <div>
                                                     <div id="plan-features">
-                                                        <div>
+                                                        <div class="plan_data_detail">
                                                             <input id="dayCountid{{outerIndex}}" type="hidden" value="{{this.[2]}}">
-                                                            <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p><br>
-                                                            <p style="font-size: 20px;"><i class="fa-solid fa-tags fa-lg"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>                                                       
+                                                            <p><i class="fa-solid fa-calendar-day"></i> {{this.[2]}} days Plan or Itinerary</p>
+                                                            <p style="font-size: 20px;"><i class="fa-solid fa-tags"></i> Plan Amount :  <i class="fa-solid fa-indian-rupee-sign"></i>{{this.[3]}}</p>                                                       
                                                         </div>
-                                                        <div style="display: flex;flex-direction:row">
-                                                            <p><i class="fa-solid fa-location-arrow"></i> Plan Main Spots</p>
+                                                        <div class="plan_data_detail_spot">
+                                                            <p><i class="fa-solid fa-location-arrow"></i> Plan Main Spots :</p>
                                                             <div id="plan-location-cover">
                                                                 {{#each this.[5]}}
                                                                     <p><i class="fa-solid fa-location-dot"></i> {{this}}</i></p>
@@ -462,25 +466,392 @@
                         {{/if}}
                 </div>          
             {{/if}}
+            {{#if busbooking}}
+                <div id="profilecontent">
+                    <div id="booking-header-div">
+                        <div class="buttonbooking-result">
+                           <button type="button" id="bookinnerheader1" class="bookinnerheader1" onclick="activestatus('1','2')">
+                                <p ><i class="fa-solid fa-clipboard-list"></i></p>
+                                <p class="hoverheader{{#if upcoming}}active{{/if}}">Upcoming Tours</p>
+                            </button>
+                            <button type="button" id="bookinnerheader2" class="bookinnerheader2"  onclick="activestatus('2','1')">
+                                <p ><i class="fa-solid fa-clipboard-check"></i></p>
+                                <p class="hoverheader{{#if completed}}active{{/if}}">Completed Tours</p>
+                            </button>
+                        </div>
+                        <button type="button" onclick="wipedown()" id="wipe-button"><i id="wipeicon-arrow" class="fa-solid fa-angle-down fa-2x"></i></button>
+                    </div>
+                    <div class="bookinnercontent">
+                        <div id="booking-content-div-1">
+                            {{#if upcoming}}
+                                {{#each upcomingTour}}
+                                    <div id="inner-content-block">
+                                        <div>
+                                            <div>
+                                                {{#if this.[12]}}
+                                                    <div class="statusheadercolor"> </div>
+                                                {{/if}}
+                                            </div>
+                                            <div id="inner-buscontent">
+                                                <img id="busimage" src="data:{{this.[3]}}" alt="">
+                                                <div style="display: flex;flex-direction:column;">
+                                                    <div class="buscontent-main-div">
+                                                        <div id="buscontent-owner-name">
+                                                            <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                                                            <div>
+                                                                <p id="busname">{{this.[2]}}</p>
+                                                                <p id="companyname">{{this.[1]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        {{#if this.[12]}}
+                                                            <p id="status-days"><i id="days-staus-icon" class="fa-solid fa-map-location-dot fa-xs"></i> {{this.[13]}}</p>
+                                                        {{/if}}
+                                                        <div id="datediv-outer">
+                                                            <div>
+                                                                <p class="SEdate">Start Date</p>
+                                                                <p class="SEdate-content">{{this.[6]}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="SEdate">End Date</p>
+                                                                <p class="SEdate-content">{{this.[7]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div id="datediv-outer">
+                                                            {{#if this.[12]}}
+                                                                <button class="status-button-success" >Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
+                                                            {{/if}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="buscontent-main-div">
+                                                        <div class="location-content">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
+                                                            <p class="pickupdrop-content">{{this.[8]}}</p>
+                                                        </div>
+                                                        <div class="location-content-1">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
+                                                            <div id="cover-location-content">
+                                                                {{#each this.[9]}}
+                                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {{#if this.[12]}}
+                                                        <div>
+                                                            sfdghfgjjhdfs
+                                                        </div>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="order-detail-content">
+                                                <div class="bookingcontent-id">
+                                                    <p>Booking Id : </p>
+                                                    <p>{{this.[4]}}</p>
+                                                </div>
+                                                <div class="bookingcontent-date">
+                                                    <p>Booked at : </p>
+                                                    <p>{{this.[5]}}</p>
+                                                </div>
+                                                <div style="display: flex;justify-content: flex-end;">
+                                                    <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex;justify-content: flex-end;margin-right: 100px;gap: 25px;">
+                                                <div class="paidammount-content">
+                                                    <p>Payment Done</p>
+                                                    <p>{{this.[10]}}</p>
+                                                </div>
+                                                <button type="button" class="balanceamount-content">
+                                                    <p>Balance Payment</p>
+                                                    <p>{{this.[11]}}</p>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            {{/if}}
+                            {{#if upcomingwarning}}
+                                <div class="warning-content">
+                                    <i class="fa-solid fa-map-location-dot fa-2xl"></i>
+                                    <p id="notfountcompleted">Currently, there are no bookings to display</p>
+                                    <a href="/home" id="homereference">
+                                        <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
+                                    </a>
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div id="booking-content-div-2">
+                            {{#if completed}}
+                                {{#each completedTour}}
+                                    <div id="inner-content-block">
+                                        <div>
+                                            {{#if this.[12]}}
+                                                <div class="statusheadercolorcompleted"> </div>
+                                            {{/if}}
+                                        </div>
+                                        <div id="inner-buscontent">
+                                            <img id="busimage" src="data:{{this.[3]}}" alt="">
+                                            <div style="display: flex;flex-direction:column;">
+                                                <div class="buscontent-main-div">
+                                                    <div id="buscontent-owner-name">
+                                                        <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                                                        <div>
+                                                            <p id="busname">{{this.[2]}}</p>
+                                                            <p id="companyname">{{this.[1]}}</p>
+                                                        </div>
+                                                    </div>
+                                                    {{#if this.[12]}}
+                                                        <p id="status-days" style="background-color: #2aa544;"><i id="days-staus-icon" class="fa-solid fa-map-location-dot fa-xs"></i> {{this.[13]}}</p>
+                                                    {{/if}}
+                                                    <div id="datediv-outer">
+                                                        <div>
+                                                            <p class="SEdate">Start Date</p>
+                                                            <p class="SEdate-content">{{this.[6]}}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p class="SEdate">End Date</p>
+                                                            <p class="SEdate-content">{{this.[7]}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div id="datediv-outer">
+                                                        {{#if this.[12]}}
+                                                            <button class="status-button-success " style="background-color: #2aa544;">Payment Completed<i class="fa-solid fa-check fa-xs"></i></button>
+                                                        {{/if}}
+                                                    </div>
+                                                </div>
+                                                <div class="buscontent-main-div">
+                                                    <div class="location-content">
+                                                        <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
+                                                        <p class="pickupdrop-content">{{this.[8]}}</p>
+                                                    </div>
+                                                    <div class="location-content-1">
+                                                        <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
+                                                        <div id="cover-location-content">
+                                                            {{#each this.[9]}}
+                                                                <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                                            {{/each}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{#if this.[12]}}
+                                                    <div class="order-detail-content">
+                                                        <div class="bookingcontent-id">
+                                                            <p>Booking Id : </p>
+                                                            <p>{{this.[4]}}</p>
+                                                        </div>
+                                                        <div class="bookingcontent-date">
+                                                            <p>Booked at : </p>
+                                                            <p>{{this.[5]}}</p>
+                                                        </div>
+                                                        <div>
+                                                        <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
+                                                        </div>
+                                                        <div class="paidammount-content-complete">
+                                                            <p>Total Payment : </p>
+                                                            <p>{{this.[14]}}</p>
+                                                        </div>
+                                                    </div>
+                                            {{/if}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/each}} 
+                            {{/if}}
+                            {{#if completedwarning}}
+                                <div class="warning-content">
+                                    <i style="color: #2d3467; margin-bottom:20px" class="fa-solid fa-map-location-dot fa-2xl"></i>
+                                    <p style="color: #2d3467;">No booking history to Show</p>
+                                    <a href="/home" id="homereference">
+                                        <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
+                                    </a>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+            {{/if}}
+            {{#if managerdetail}}
+                <div class="manager-outer-div">
+                    <div class="manager-inner-div1">
+                        <form id="addmanager" action="/add-manager" method="post">
+                            <p class="addmanger-header">Add Manager</p>
+                            <div class="inner-addmager-div">
+                                <label for="Mname">Name</label>
+                                <input id="Mname" name="name" type="text" placeholder="Enter the Manager Name" autocomplete="off" required>
+                            </div>
+                            <div class="inner-addmager-div-gender">
+                                <label for="gender">Gender</label>
+                                <select name="gender" id="gender" autocomplete="off" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="inner-addmager-div">
+                                <label for="contactno">Contact No</label>
+                                <input id="contactno" type="tel" name="contactno" placeholder="Enter the Contact Number" pattern="[0-9]{10}"  autocomplete="off" required>
+                            </div>
+                            <div class="inner-addmager-div">
+                                <label for="emailid">Email id</label>
+                                <input id="emailid" type="email" name="emailid" placeholder="Enter the Contact Number" autocomplete="off" required>
+                            </div>
+                            <div class="inner-addmager-div">
+                                <label for="password">Set Password</label>
+                                <input id="password" type="password" name="password" placeholder="Enter the Password" autocomplete="off" required>
+                                <i class="far fa-eye" id="togglePassword"></i>
+                            </div><br>
+                            <button id="addmanager-button" href="/add-manager" type="submit">Add</button>
+                        </form>
+                    </div>
+                    {{#if managerdata}}
+                        <div class="manager-inner-div2">
+                            {{#each managerarr}}
+                                <div class="managerdiv-outer">
+                                    <div class="managerdiv-inner1">
+                                        <img class="manager-profile" src="data:{{this.[4]}}" alt="">
+                                        <div class="manager-content-div">
+                                            <div class="manager-header-info">
+                                                <div>
+                                                    <p class="managername-txt">{{this.[0]}}</p>
+                                                    <p class="manager-companyname">{{this.[5]}}</p>
+                                                </div>
+                                                <p class="txt-personal-phone"><i class="fa-solid fa-phone"></i> {{this.[2]}}</p>
+                                                <p class="manager-gender"><i class="fa-solid fa-person"></i> {{this.[1]}}</p>
+                                                <div>
+                                                    <form action="/delete-manager"  method="post">
+                                                        <input type="hidden" value="{{@index}}" name="Managerindex">
+                                                        <button class="manager-delete-btn" href="/delete-manager"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div><br>
+                                            <div class="manager-personal-info">
+                                                <p  class="txt-personal-info"><i class="fa-solid fa-envelope"></i> {{this.[3]}}</p>
+                                                <form action="/request-managermail" method="post">
+                                                    <input type="hidden" value="{{@index}}" name="Managerindex">
+                                                    <button class="mail-requset-atag" href="/request-managermail" >
+                                                        <i class="fa-solid fa-lock"></i>
+                                                        <p>Request Password To Mail</p>
+                                                        <i class="fa-solid fa-angle-right"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    {{#if notfoundwarning}}
+                        <div class="manager-inner-div3">
+                            <i class="fa-solid fa-user-doctor fa-2x"></i>
+                            <p>Manager Not Yet Added</p>
+                        </div>
+                    {{/if}}
+                </div>
+            {{/if}}
         </div>
     </div>
 </body>
 
 <script>
-
+    let arrow_tag=0;
     try{
-        const divsWithActiveClass = document.getElementById('plan');
-        if (divsWithActiveClass.classList.contains('scrollclass')) {
-            scrollToTop();
+        activestatus('1','2');
+        function activestatus(id1,id2){
+            const element1 = document.getElementById(`bookinnerheader${id1}`);
+            if(element1){
+                element1.classList.remove(`bookinnerheader${id1}`);
+                element1.classList.add('bookinnerheaderactive');
+            }
+            const element1div = document.getElementById(`booking-content-div-${id1}`);
+            if(element1div){
+                element1div.style.display="block";
+            }
+
+            const element2 = document.getElementById("bookinnerheader"+id2);
+            if(element2){
+                element2.classList.remove(`bookinnerheaderactive`);
+                element2.classList.add(`bookinnerheader${id2}`);
+            }
+            const element2div = document.getElementById(`booking-content-div-${id2}`);
+            if(element2div){
+                element2div.style.display="none";
+            }
+            wipedown();
+            return
         }
     }
-    catch{
-        
+    catch(e){
+        console.log(e);
     }
-    function scrollToTop() {
-        const plan = document.getElementById("plan");
-        plan.scrollTop = plan.scrollHeight;
-    };
+
+
+    function wipedown(){
+         if(arrow_tag===0){
+            let toggleicon = document.getElementById(`wipeicon-arrow`);
+            toggleicon.classList.remove('fa-angle-down');
+            toggleicon.classList.add('fa-angle-up');
+            let divlink = document.getElementById(`booking-header-div`);
+            divlink.classList.remove('wipe-up-arrow');
+            divlink.classList.add('wipe-down-arrow');
+            divlink.style.marginTop="-20px";
+            arrow_tag=1;
+        }
+        else{
+            let toggleicon = document.getElementById(`wipeicon-arrow`);
+            toggleicon.classList.remove('fa-angle-up');
+            toggleicon.classList.add('fa-angle-down');
+            let divlink = document.getElementById(`booking-header-div`);
+            divlink.classList.remove('wipe-down-arrow');
+            divlink.style.marginTop="-75px";
+            divlink.classList.add('wipe-up-arrow');
+            arrow_tag=0;
+        }
+    }
+
+    try{
+        let countdown = 30;
+
+        const timerElement = document.getElementById('timer');
+
+        function updateTimerDisplay() {
+            timerElement.textContent = countdown;
+        }
+
+        function startCountdown() {
+            updateTimerDisplay(); 
+
+            const countdownInterval = setInterval(() => {
+                countdown--;
+
+                if (countdown < 0) {
+                    clearInterval(countdownInterval); // Stop the countdown
+                    timerElement.textContent = "Time's up!";
+                } else {
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+        startCountdown();
+    }
+    catch(e){
+        console.log(e)
+    }
+
+    try{
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+            this.classList.add('align-eye');
+        });
+    }
+    catch(e){
+        console.log(e)
+    }
 
     function openForm(index) {
         var profilecont1 = document.getElementById("profilecontent");

@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://0.0.0.0:27017/userdetails`,{
-    useNewUrlParser: true,
-    useUnifiedTopology:true,
-}).then(()=>{
-    console.log('Payment mongodb connected sucessfully');
-})
-.catch(()=>{
-    console.error(Error);
-    console.log('failed to connect the Payment database');
-})
-
 const PaymentSchema = new mongoose.Schema({
     paymentid:{
         type : String,

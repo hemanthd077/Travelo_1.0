@@ -121,6 +121,9 @@
                                                     <p>Booked at : </p>
                                                     <p>{{this.[5]}}</p>
                                                 </div>
+                                                <div>
+                                                <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
+                                                </div>
                                                 <div class="paidammount-content">
                                                     <p>Payment Done</p>
                                                     <p>{{this.[10]}}</p>
@@ -139,7 +142,7 @@
                     {{#if upcomingwarning}}
                         <div class="warning-content">
                             <i class="fa-solid fa-map-location-dot fa-2xl"></i>
-                            <p>Currently, there are no bookings to display</p>
+                            <p id="notfountcompleted">Currently, there are no bookings to display</p>
                             <a href="/home" id="homereference">
                                 <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
                             </a>
@@ -212,6 +215,9 @@
                                                 <div class="bookingcontent-date">
                                                     <p>Booked at : </p>
                                                     <p>{{this.[5]}}</p>
+                                                </div>
+                                                <div>
+                                                <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
                                                 </div>
                                                 <div class="paidammount-content-complete">
                                                     <p>Total Payment : </p>

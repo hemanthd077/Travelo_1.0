@@ -35,7 +35,7 @@ router.get('/login',(req,res)=>{
     res.render('login',{login:true})
 })
 
-router.post('/login',isLoggedIn,Login.login)
+router.post('/login',Login.login)
 
 router.post('/fpass-email',Login.fpass_nodemail)
 

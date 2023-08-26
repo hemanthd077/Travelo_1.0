@@ -5,6 +5,25 @@ const hbs = require('hbs')
 const templatePath = path.join(__dirname,'../tempelates')
 var RateLimit = require('express-rate-limit');
 
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+
+const monogourl = process.env.MONGO_URL
+const monogoport = process.env.PORT
+
+
+mongoose.connect(monogourl,{
+    useNewUrlParser: true,
+    useUnifiedTopology:true,
+}).then(()=>{
+    console.log('mongodb connected sucessfully');   ``
+})
+.catch(()=>{
+    console.error(Error);
+    console.log('failed to connect the database');
+})
+
 
 require('dotenv').config();
 const secret = process.env.SESSION_SECERT;
@@ -50,13 +69,13 @@ app.use((req,res,next)=>{
     res.render('404')
 })
 
-var limiter = RateLimit({
-  windowMs: 1*60*1000,
-  max: 5
-});
-app.use(limiter);
+// var limiter = RateLimit({
+//   windowMs: 1*60*1000,
+//   max: 5
+// });
+// app.use(limiter);
 
-app.listen(8080,()=>{
+app.listen(monogoport,()=>{
     console.log('Connected to Server');
 })
 

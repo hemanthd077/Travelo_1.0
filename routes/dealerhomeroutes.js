@@ -30,7 +30,13 @@ router.post('/busfull-delete',dealerlogin.busfullDeleteinfo);
 
 router.get('/bus-booking',dealerlogin.busbooked);
 
+router.get('/manager',dealerlogin.manager);
 
+router.post('/add-manager',dealerlogin.addManager);
+
+router.post('/delete-manager',dealerlogin.deletemanager);
+
+router.post('/request-managermail',dealerlogin.requestmanagermail);
 
 
 module.exports=router;

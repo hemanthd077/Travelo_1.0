@@ -5,11 +5,10 @@
 
 body{
     /* background-color: #009ba9; */
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3467);
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+    background-color: #dadade;
 }
 
 video {
@@ -23,7 +22,7 @@ div#block-1{
     display: flex;
     flex-direction: column;
     width: 320px;
-    height: 745px;
+    height: 735px;
     align-items: center;
     background-color: white;
     /* border-radius: 0px 25px 25px 0px; */
@@ -52,7 +51,9 @@ div#block-1{
     padding-left: 30px;
     font-weight: 600;
     font-size: 14px;
-    color: #7b014c;
+    background-image: linear-gradient(45deg, #7c7e7e, #2d3465);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #main_block{
@@ -61,8 +62,8 @@ div#block-1{
 }
 
 div#block-2 {
-    width: 1216px;
-    height: 745px;
+    width: 1199px;
+    height: 735px;
     /* background-color: #009ba9; */
 }
 
@@ -79,9 +80,8 @@ div#block-2 {
 }
 
 #button:hover{
-    /* background-image: linear-gradient(45deg,#5c6074, #2d3464); */
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464);
-    color: white;
+    background-color: #2d3467;
+    color: #ffffff;
 }
 
 #img-applogo {
@@ -119,7 +119,13 @@ div#block-2 {
 
   #app-name{
     font-size: 90px;
-    background: url('https://img.freepik.com/free-photo/beautiful-cliff-landscape_23-2150540397.jpg?t=st=1688111917~exp=1688112517~hmac=59a0b6642eacf3c1dfc34600cff313292ad14e7821a5f3b048aa1b8a4c38124e&w=1380');
+    background: url('../images/activatepage.avif');
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .thankstxt{
+    background: url('../images/activatepage.avif');
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

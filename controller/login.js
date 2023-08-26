@@ -220,7 +220,6 @@ const changePassword =(async(req,res)=>{
 const googleLogin = (async(req,res)=>{
     // console.log(req.user);
     // res.write(JSON.stringify(req.user));
-
     validation.findOne({Email : req.user.email}).then(async(data1)=>{
         if(data1){
             if(data1.flag===false){

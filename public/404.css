@@ -1,86 +1,198 @@
-*{
-    
-    padding: 0px;
-    margin: 0px;
+/* colors */
+:root {
+  --blue: #2d3467;
+  --pink: #fdabaf;
+  --pink-light: #ffe0e6;
+  --lightblue:#2d346799;
+  --white: #ffffff;
 }
 
-body{
-  font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
-    font-style: normal;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
-#heading{
-    font-size: 200px;
-    margin-top: -100px;
-    background: url('https://lh3.googleusercontent.com/drive-viewer/AITFw-xxzgefyaSc3pMLyw8yZ3HZbMxpuczK8XYJotZZMY1xJQd8PF56yZiXZWQtwAFZNdQJlsqzCvXg4kCaNYQplvdFsWIg=s2560');
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bolder;
+html {
+  font-size: 62.5%;
 }
 
-#content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 260px;
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
+  color: var(--blue);
 }
 
-#button-home{
-  padding-left: 10px;
-  height: 35px;
-  margin-top: 140px;
-  width: 220px;
-  border-radius: 50px;
+a {
+  text-decoration: none;
+}
+
+.center {
+  height: 100%;
   display: flex;
   align-items: center;
-  color: white;
-  border-style: none;
-  background: -webkit-linear-gradient(95deg,#ae006b, #2d3464); 
-  box-shadow: 0px 0px 5px 0px rgb(0,0,0.1);
   justify-content: center;
-  font-weight: 700;
-  cursor: pointer;
+  flex-direction: column;
 }
 
-#button-home:hover {
-    padding-left: 30px;
-    height: 35px;
-    margin-top: 140px;
-    width: 220px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    color: white;
-    border-style: none;
-    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
-    box-shadow: 0px 0px 5px 0px rgb(0,0,0.1);
-    justify-content: flex-start;
-    font-weight: 700;
-    cursor: pointer;
-    .fa-long-arrow-alt-right{
-      position: absolute;
-      opacity: 1;
-      margin-left: -150px;
-      color: white;
-      animation: swipeLeft 1s ease-out infinite ;
-      width: 360px;
-  }
-    
+.error {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
 }
 
-.fa-long-arrow-alt-right{
-      opacity: 0;
+.number {
+  font-weight: 900;
+  font-size: 15rem;
+  line-height: 1;
+  color: #2d3467;
 }
 
+.illustration {
+  position: relative;
+  width: 12.2rem;
+  margin: 0 2.1rem;
+}
 
+.circle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 12.2rem;
+  height: 11.4rem;
+  border-radius: 50%;
+  background-color: var(--blue);
+}
 
-@keyframes swipeLeft {
-  0%{
-    transform: translateX(80px);
+.clip {
+  position: absolute;
+  bottom: 0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  width: 12.5rem;
+  height: 13rem;
+  border-radius: 0 0 50% 50%;
+}
+
+.paper {
+  position: absolute;
+  bottom: -0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 9.2rem;
+  height: 12.4rem;
+  border: 0.3rem solid var(--blue);
+  background-color: var(--white);
+  border-radius: 0.8rem;
+}
+
+.paper::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  right: -0.7rem;
+  width: 1.4rem;
+  height: 1rem;
+  background-color: var(--white);
+  border-bottom: 0.3rem solid var(--blue);
+  transform: rotate(45deg);
+}
+
+.face {
+  position: relative;
+  margin-top: 2.3rem;
+}
+
+.eyes {
+  position: absolute;
+  top: 0;
+  left: 2.4rem;
+  width: 4.6rem;
+  height: 0.8rem;
+}
+
+.eye {
+  position: absolute;
+  bottom: 0;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--blue);
+  animation-name: eye;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.eye-left {
+  left: 0;
+}
+
+.eye-right {
+  right: 0;
+}
+
+@keyframes eye {
+  0%, 100% {
+    height: 0.8rem;
   }
-  100% {
-    transform: translateX(170px);
+  50%, 54% {
+    height: 0.8rem;
   }
+  52% {
+    height: 0.1rem;
+  }
+}
+
+.rosyCheeks {
+  position: absolute;
+  top: 1.6rem;
+  width: 1rem;
+  height: 0.2rem;
+  border-radius: 50%;
+  background-color: var(--pink);
+}
+
+.rosyCheeks-left {
+  left: 1.4rem;
+}
+
+.rosyCheeks-right {
+  right: 1.4rem;
+}
+
+.mouth {
+  position: absolute;
+  top: 3.1rem;
+  left: 50%;
+  width: 1.6rem;
+  height: 0.2rem;
+  border-radius: 0.1rem;
+  transform: translateX(-50%);
+  background-color: var(--blue); 
+}
+
+.text {
+  margin-top: 1rem;
+  font-weight: 300;
+  color: var(--blue);
+}
+
+.button {
+  margin-top: 4rem;
+  padding: 1.2rem 5rem;
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 5px;
+  border-color: #2d3467;
+  border-style: solid;
+}
+
+.button:hover {
+  color: #2d3467;
+  background: transparent;
+  border-color: #2d3467;
+  border-style: solid;
 }

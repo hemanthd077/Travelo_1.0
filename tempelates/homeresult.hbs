@@ -72,6 +72,31 @@
             {{/if}}
 
             {{#if result}}
+                <div class="content-container activeanimation">
+                    <div class="card">
+                        <div class="header">
+                                <div class="logo-container"></div>
+                                <div class="text-line" style="width: 80%;"></div>
+                        </div>
+                        <div class="text-line" style="width: 50%;"></div>
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                                <div class="logo-container"></div>
+                                <div class="text-line" style="width: 80%;"></div>
+                        </div>
+                        <div class="text-line" style="width: 30%;"></div>
+                        <div class="text-line" style="width: 50%;"></div>
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                                <div class="logo-container"></div>
+                                <div class="text-line" style="width: 80%;"></div>
+
+                        </div>
+                        <div class="text-line" style="width: 50%;"></div>
+                    </div>
+                </div>
                 <div id="fetch-content-maindiv">
                     {{#each buscontent}}
                             <div id="search-div">
@@ -93,7 +118,7 @@
                                     <p style="margin-top: 10px;margin-left:40px">Package Highlights</p>
                                     <div id="div-size-control">
                                         {{#each this.[3]}}
-                                            <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                            <p><i  class="fa-solid fa-location-dot"></i> {{this}}</p>
                                         {{/each}}
                                     </div>
                                     <div class="div-control-1">
@@ -153,6 +178,31 @@
             {{/if}}
 
             {{#if busContent}}
+                <div class="content-container activeanimation">
+                    <div class="card">
+                        <div class="header">
+                                <div class="logo-container"></div>
+                                <div class="text-line" style="width: 80%;"></div>
+                        </div>
+                        <div class="text-line" style="width: 50%;"></div>
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                                <div class="logo-container"></div>
+                                <div class="text-line" style="width: 80%;"></div>
+                        </div>
+                        <div class="text-line" style="width: 30%;"></div>
+                        <div class="text-line" style="width: 50%;"></div>
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                                <div class="logo-container"></div>
+                                <div class="text-line" style="width: 80%;"></div>
+
+                        </div>
+                        <div class="text-line" style="width: 50%;"></div>
+                    </div>
+                </div>
                 <div id="outer-bus-data">
                     <div id="bus-img">
                         <div id="outer-photo-block">
@@ -251,6 +301,32 @@
     </div>
 </body>
 <script>
+
+
+
+    function loadAnimationsearch(){
+        try{
+            const contentcontainer = document.querySelector(".content-container");
+            setTimeout(function(){
+                    contentcontainer.style.display = "none";
+                    document.getElementById("fetch-content-maindiv").style.display = "flex";
+                },2000);
+        }catch(e){
+            console.log("loadanimationError : "+e);
+        }
+    }
+
+    function loadAnimationcontent(){
+        try{
+            const contentcontainer = document.querySelector(".content-container");
+            setTimeout(function(){
+                    contentcontainer.style.display = "none";
+                    document.getElementById("outer-bus-data").style.display = "flex";
+                },2000);
+        }catch(e){
+            console.log("loadanimationError : "+e);
+        }
+    }
 
     async function likebutton(id,index){
         try {
@@ -371,6 +447,8 @@ function showSlides() {
     }
 }
 
+loadAnimationsearch();
+loadAnimationcontent();
 checkDivActiveStatus();
 
 setInterval(showSlides, 3000);
@@ -379,7 +457,6 @@ setInterval(showSlides, 3000);
 
 
 </script>
-
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
 

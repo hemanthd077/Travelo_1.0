@@ -33,7 +33,6 @@ function isBusAvailable(start, end,booking) {
 }
 
 function calculateNextNthDate(startDateStr, n) {
-    n-=1;
     const startDate = new Date(startDateStr);
     const nextDate = new Date(startDate);
     nextDate.setDate(startDate.getDate() + n);

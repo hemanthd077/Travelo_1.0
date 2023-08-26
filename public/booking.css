@@ -221,6 +221,9 @@ img#busimage {
     padding: 15px;
     margin-left: 50px;
     box-shadow: 0px 1px 5px -2px #2d3467;
+    .fa-map-location-dot{
+        color: #ffffff;
+    }
 }
 
 div#booking-content-div-1,#booking-content-div-2,#booking-content-div-3 {
@@ -474,6 +477,15 @@ button.status-button-fail {
     margin-bottom: -10px;
 }
 
+#notfountcompleted{
+    margin-top: 20px;
+    color: #2d3467;
+}
+
+.fa-map-location-dot{
+    color: #2d3467;
+  }
+
 .warning-content {
     font-size: 19px;
     display: flex;
@@ -499,4 +511,18 @@ button.status-button-fail {
     align-items: center;
     margin-right: 10px;
     font-size: 15px;
+}
+
+a#receipt_generate {
+    background: #2d3467;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    margin-left: 305px;
+    height: 28px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
 }
