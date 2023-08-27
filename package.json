@@ -23,7 +23,7 @@
     "express-session": "^1.17.3",
     "google-auth-library": "^8.9.0",
     "hbs": "^4.2.0",
-    "jimp": "^0.3.5",
+    "jimp": "^0.3.11",
     "jsonwebtoken": "^9.0.0",
     "mime": "^3.0.0",
     "moment": "^2.29.4",
