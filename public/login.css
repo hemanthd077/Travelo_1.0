@@ -4,7 +4,8 @@
 }
 
 body {
-    background-color: #dadade;
+    /* background-color: #dadade; */
+    
     background-repeat: no-repeat;
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
@@ -13,17 +14,43 @@ body {
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    user-select: none;
+}
+
+.innerlogincontent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #block {
     background-color: #ffffff;
-    width: 400px;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 5px;
     height: 560px;
-    box-shadow: 0px 0px 5px -3px #2d3467;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 100px;
+    padding-right: 80px;
+    /* box-shadow: 0px 0px 5px -3px #2d3467; */
 }
 
+.img-login-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-quotes {
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    color: #2d3467;
+    overflow-wrap: break-word;
+    width: 500px;
+}
 #appicon {
     height: 70px;
     width: 120px;
@@ -82,7 +109,7 @@ h2#logintxt-fpwd,.logintxt-verify {
     border-style: hidden;
     font-size:small;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px -1px #2d3467;
+    box-shadow: 0px 1px 5px -2px #2d3467;
     background-color: white;
 }
 
@@ -104,7 +131,7 @@ h2#logintxt-fpwd,.logintxt-verify {
     background-color:white;
     border-style: hidden;
     cursor: pointer;
-    box-shadow: 0px 0px 5px -1px #2d3467;
+    box-shadow: 0px 1px 5px -2px #2d3467;
 }
 
 .submitbutton{
@@ -116,7 +143,7 @@ h2#logintxt-fpwd,.logintxt-verify {
     background-color:white;
     border-style: hidden;
     cursor: pointer;
-    box-shadow: 0px 0px 5px -1px #2d3467;
+    box-shadow: 0px 1px 5px -1px #2d3467;
 }
 
 .loginbutton:hover,.submitbutton:hover {
@@ -194,7 +221,7 @@ hr#line{
     margin: 0 5px;
     border-radius: 5px;
     border-style: none;
-    box-shadow: 0px 0px 5px -1px #2d3467;
+    box-shadow: 0px 1px 5px -2px #2d3467;
 }
 
 .verify-btn {
@@ -204,7 +231,7 @@ hr#line{
     cursor: pointer;
     border-style: none;
     background-color: white;
-    box-shadow: 0px 0px 5px -1px #2d3467;
+    box-shadow: 0px 1px 5px -2px #2d3467;
     color: #2d3467;
     border: none;
     margin-top: 35px;
@@ -251,7 +278,7 @@ hr#line{
     padding: 30px;
     height: 50vh;
     border-radius: 10px;
-    box-shadow: 0px 0px 5px -1px #7c7e7e;
+    box-shadow: 0px 1px 5px -2px #7c7e7e;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,7 +321,7 @@ hr#line{
     margin: 0 5px;
     border-radius: 5px;
     border-style: none;
-    box-shadow: 0px 0px 5px -1px #ae006b;
+    box-shadow: 0px 1px 5px -2px #ae006b;
 }
 
 .input-pwdactive {
@@ -305,7 +332,7 @@ hr#line{
     border-style: hidden;
     font-size: small;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px -1px #ae006b;
+    box-shadow: 0px 1px 5px -2px #ae006b;
 }
 
 #cpwd-content{
@@ -336,7 +363,7 @@ i#togglePassword {
     align-items: center;
     color: white;
     border-style: none;
-    box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
+    box-shadow: 0px 1px 5px -2px rgb(0,0,0.1);
     background: #2d3464;
     justify-content: center;
     font-weight: 700;
@@ -355,7 +382,7 @@ i#togglePassword {
     align-items: center;
     color: white;
     border-style: none;
-    box-shadow: 0px 0px 5px -1px rgb(0,0,0.1);
+    box-shadow: 0px 1px 5px -2px rgb(0,0,0.1);
     justify-content: flex-start;
     font-weight: 700;
     cursor: pointer;
@@ -395,7 +422,7 @@ i#togglePassword {
     text-decoration: none;
     font-size: 12px;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px -2px rgb(0,0,0.1);
+    box-shadow: 0px 1px 5px -2px #2d3467;
     padding: 8px;
     margin-left: 90px;
     padding-left: 30px;

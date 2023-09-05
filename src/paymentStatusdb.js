@@ -23,15 +23,39 @@ const PaymentSchema = new mongoose.Schema({
     status:{
         type : String,
     },
+    Managerflag:{
+        type : Boolean,
+    },
     amount:{
         type : String,
     },
     balenceamount:{
-        type : String
+        type : String,
     },
     dateAndTime:{
-        type : String
-    }
+        type : String,
+    },
+    malecount : {
+        type : String,
+    },
+    femalecount :{
+        type : String,
+    },
+    fname :{
+        type : String,
+    },
+    lname :{
+        type : String,
+    },
+    phonenumber : {
+        type : String,
+    },
+    vegcount : {
+        type : String,
+    },
+    nonvegcount :{
+        type : String,
+    },
 })
 
 const collection = new mongoose.model('paymentDB',PaymentSchema)

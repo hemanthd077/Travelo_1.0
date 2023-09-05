@@ -15,128 +15,158 @@
 </head>
 <body>
     <img id="appicon" src="/images/homelogo.png" alt="logo">
-    <div  id="block{{#if verificationCode}}active{{/if}}{{#if changepwd}}active{{/if}}{{#if fpassword}}active{{/if}}{{#if cpassword}}active{{/if}}">
+    <div  id="block">
         {{#if login}}
-            <form action="/login" method="POST" id="loginform">
-                <h2 id="logintxt">USER LOGIN</h2><br>
-                <label for="uname">Email-Id</label>
-                <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="uname" required autocomplete="off"><br>
+            <div class="img-login-page">
+                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
+            </div>
+            <div >
+                <form action="/login" method="POST" id="loginform">
+                    <h2 id="logintxt">USER LOGIN</h2><br>
+                    <label for="uname">Email-Id</label>
+                    <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="uname" required autocomplete="off"><br>
+                    
+                    <label for="pwd">Password</label>
+                    <input class="outline" type="password" placeholder="Enter your Password" name="password" id="pwd" required autocomplete="off"><br>
+                    <i class="far fa-eye" id="togglePassword"></i>
+                    {{#if control}}
+                            <h4 class="warning-1">{{res}}</h4>
+                    {{/if}}
+
+                    <button type="submit" class="loginbutton" href="/login">Login</button>
+                    
+                    <p id="or">Create an Account</p>
+                </form>
+
+                <form action="/forgot-password">
+                        <button id="fpwd" href="/forgot-password" >Forget Password?</button>
+                </form>
+
+                <form action="/signup">
+                    <button id="signupbutton" href="/signup" >Signup</button>
+                </form><br>
+
+                <hr style="display:flex:flex-direction:column;width:70%;margin-left:60px">
+                <p id="ortag">OR</p><br>
                 
-                <label for="pwd">Password</label>
-                <input class="outline" type="password" placeholder="Enter your Password" name="password" id="pwd" required autocomplete="off"><br>
-                <i class="far fa-eye" id="togglePassword"></i>
-                {{#if control}}
-                        <h4 class="warning-1">{{res}}</h4>
-                {{/if}}
+            <a id="continue-google" href="/google" ><i class="fab fa-google fa-2x"></i> Continue With Google</a>
 
-                <button type="submit" class="loginbutton" href="/login">Login</button>
-                
-                <p id="or">Create an Account</p>
-            </form>
-
-            <form action="/forgot-password">
-                    <button id="fpwd" href="/forgot-password" >Forget Password?</button>
-            </form>
-
-            <form action="/signup">
-                <button id="signupbutton" href="/signup" >Signup</button>
-            </form><br>
-
-            <hr style="display:flex:flex-direction:column;width:70%;margin-left:60px">
-            <p id="ortag">OR</p><br>
-            
-           <a id="continue-google" href="/google" ><i class="fab fa-google fa-2x"></i> Continue With Google</a>
-
-            <form action="/">
-                <button id="button-home">Select the Login <i class="fas fa-long-arrow-alt-right fa-lg"></i></button>
-            </form>
+                <form action="/">
+                    <button id="button-home">Select Login Type<i class="fas fa-long-arrow-alt-right fa-lg"></i></button>
+                </form>
+            </div>
         {{/if}}
         {{#if fpassword}}
-            <div class="contentBlock">
-                <h2 id="logintxt-fpwd">FORGOT PASSWORD</h2><br><br>
-                <form action="/fpass-email" method="post">
-                    <label for="email">Email-Id</label>
-                    <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="email" required autocomplete="off"><br>
-                    <button type="submit" class="loginbutton" href="fpass-email">Next</i></button>
-                </form>
-                {{#if warning}}
-                    <br><h4 class="warning">Email ID is Invalid or Not Found</h4>
-                {{/if}}
+            <div class="img-login-page">
+                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
             </div>
-            <br><div class="dot-pos">
-                <span class="dot" style="background-color: #2d3467;"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div><br>
+            <div class="innerlogincontent">
+                <div class="contentBlock">
+                    <h2 id="logintxt-fpwd">FORGOT PASSWORD</h2><br><br>
+                    <form action="/fpass-email" method="post">
+                        <label for="email">Email-Id</label>
+                        <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="email" required autocomplete="off"><br>
+                        <button type="submit" class="loginbutton" href="fpass-email">Next</i></button>
+                    </form>
+                    {{#if warning}}
+                        <br><h4 class="warning">Email ID is Invalid or Not Found</h4>
+                    {{/if}}
+                </div>
+                <br><div class="dot-pos">
+                    <span class="dot" style="background-color: #2d3467;"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div><br>
+            </div>
         {{/if}}
 
         {{#if cpassword}}
-            <div class="contentBlock">
-                <h2 id="logintxt-fpwd">CHANGE PASSWORD</h2><br><br>
-                <form action="/fpass-email" method="post">
-                    <label for="email">Email-Id</label>
-                    <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="email" required autocomplete="off"><br>
-                    <button type="submit" class="loginbutton" href="fpass-email">Next</i></button>
-                </form>
-                {{#if warning}}
-                    <br><h4 class="warning">Email ID is Invalid or Not Found</h4>
-                {{/if}}
+            <div class="img-login-page">
+                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
             </div>
-            <br><div class="dot-pos">
-                <span class="dot" style="background-color: #2d3467;"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div><br>
+            <div class="innerlogincontent">
+                <div class="contentBlock">
+                    <h2 id="logintxt-fpwd">CHANGE PASSWORD</h2><br><br>
+                    <form action="/fpass-email" method="post">
+                        <label for="email">Email-Id</label>
+                        <input class="outline" type="email" placeholder="Enter your Email-Id" name="Email" id="email" required autocomplete="off"><br>
+                        <button type="submit" class="loginbutton" href="fpass-email">Next</i></button>
+                    </form>
+                    {{#if warning}}
+                        <br><h4 class="warning">Email ID is Invalid or Not Found</h4>
+                    {{/if}}
+                </div>
+                <br><div class="dot-pos">
+                    <span class="dot" style="background-color: #2d3467;"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div><br>
+            </div>
         {{/if}}
 
         {{#if verificationCode}}
-                <div class="contentBlock">
-                    <h2 class="logintxt-verify">VERIFICATION</h2><br>
-                    <input type="hidden" name="emailid" value="{{email}}">
-                    <p class="p-verify">Please Enter the OTP sent to your registered email address.</p><br>
-                    <form action="/verify-code" method="post">
-                        <div class="otpInputs" >
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index0" maxlength="1" required autocomplete="off"/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index1" maxlength="1" required autocomplete="off"/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index2" maxlength="1" required autocomplete="off"/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index3" maxlength="1" required autocomplete="off"/>
-                            <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index4" maxlength="1" required autocomplete="off"/>
-                            </div>
-                        <button class="verify-btn" type="submit">Verify</button>
-                    </form><br>
-                    
-                    {{#if invalid}}
-                        <h4 class="warning">Code Not Matched</h4>
-                    {{/if}}
-                    <p class="p-verify">Note* : Don't Refresh the Page</p>
+                <div class="img-login-page">
+                    <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                    <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
                 </div>
-                <br><div class="dot-pos">
-                        <span class="dot"></span>
-                        <span class="dot" style="background-color:#2d3467;"></span>
-                        <span class="dot"></span>
-                </div><br>
+                <div class="innerlogincontent">
+                    <div class="contentBlock">
+                        <h2 class="logintxt-verify">VERIFICATION</h2><br>
+                        <input type="hidden" name="emailid" value="{{email}}">
+                        <p class="p-verify">Please Enter the OTP sent to your registered email address.</p><br>
+                        <form action="/verify-code" method="post">
+                            <div class="otpInputs" >
+                                <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index0" maxlength="1" required autocomplete="off"/>
+                                <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index1" maxlength="1" required autocomplete="off"/>
+                                <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index2" maxlength="1" required autocomplete="off"/>
+                                <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index3" maxlength="1" required autocomplete="off"/>
+                                <input class="input-opt {{#if invalid}}invalidcode{{/if}}" type="text" name="index4" maxlength="1" required autocomplete="off"/>
+                                </div>
+                            <button class="verify-btn" type="submit">Verify</button>
+                        </form><br>
+                        
+                        {{#if invalid}}
+                            <h4 class="warning">Code Not Matched</h4>
+                        {{/if}}
+                        <p class="p-verify">Note* : Don't Refresh the Page</p>
+                    </div>
+                    <br><div class="dot-pos">
+                            <span class="dot"></span>
+                            <span class="dot" style="background-color:#2d3467;"></span>
+                            <span class="dot"></span>
+                    </div><br>
+                </div>
         {{/if}}
 
         {{#if changepwd}}
-            <form action="/update-password" method="post" class="updateBlock">
-                <h2 class="logintxt-verify">CHANGE PASSWORD</h2><br>
-                <input type="hidden" name="emailid" value="{{email}}">
-                <div id="cpwd-content">
-                    <label for="cpwd">Password</label>
-                    <input class="input-pwd" type="text" placeholder="Enter the New Password" name="cpwd" required autocomplete="off"><br>
-                    
-                    <label for="rpwd">Re-Enter Password</label>
-                    <input class="input-pwd{{#if invalid}}active{{/if}}" type="password" placeholder="Re-Enter the Password" name="rpwd" required autocomplete="off"><br>
+            <div class="img-login-page">
+                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
+            </div>
+            <div class="innerlogincontent">
+                <form action="/update-password" method="post" class="updateBlock">
+                    <h2 class="logintxt-verify">CHANGE PASSWORD</h2><br>
+                    <input type="hidden" name="emailid" value="{{email}}">
+                    <div id="cpwd-content">
+                        <label for="cpwd">Password</label>
+                        <input class="input-pwd" type="text" placeholder="Enter the New Password" name="cpwd" required autocomplete="off"><br>
+                        
+                        <label for="rpwd">Re-Enter Password</label>
+                        <input class="input-pwd{{#if invalid}}active{{/if}}" type="password" placeholder="Re-Enter the Password" name="rpwd" required autocomplete="off"><br>
+                    </div>
+                    <button class="submitbutton" type="submit" href="/update-password">Save</button>
+                </form><br>
+                {{#if invalid}}
+                            <h4 class="warning">Code Not Matched</h4>
+                {{/if}}
+                <div class="dot-pos">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot" style="background-color: #2d3467;"></span>
                 </div>
-                <button class="submitbutton" type="submit" href="/update-password">Save</button>
-            </form><br>
-            {{#if invalid}}
-                        <h4 class="warning">Code Not Matched</h4>
-            {{/if}}
-            <div class="dot-pos">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot" style="background-color: #2d3467;"></span>
             </div>
         {{/if}}
     </div>

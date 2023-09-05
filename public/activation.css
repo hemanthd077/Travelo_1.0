@@ -4,11 +4,10 @@
 }
 
 body{
-    /* background-color: #009ba9; */
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
     background-color: #dadade;
+    user-select: none;
 }
 
 video {

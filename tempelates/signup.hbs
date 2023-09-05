@@ -15,41 +15,46 @@
 <body>
     <img id="appicon" src="/images/homelogo.png" alt="logo">
     <div  id="block">
-        <form action="/signup" method='POST' id="loginform">
-           <h2 id="logintxt">USER SIGNUP</h2><br>
-            <label for="fname">First Name</label><br>
-            <input class="outline" type="text" placeholder="Enter the First Name" name="fname" id="fname" maxlength="20" required autocomplete="off">
-            <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
+        <div class="img-login-page">
+            <img class="bgimage-signup" src="/images/login-bg.jpg" alt="">
+        </div>
+        <div class="inner-formdiv">
+            <form action="/signup" method='POST' id="loginform">
+                <h2 id="logintxt">USER SIGNUP</h2><br>
+                    <label for="fname">First Name</label><br>
+                    <input class="outline" type="text" placeholder="Enter the First Name" name="fname" id="fname" maxlength="20" required autocomplete="off">
+                    <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
 
-            <label for="lname">Last Name</label>
-            <input class="outline"type="text" placeholder="Enter the Last Name" name="lname" id="lname" maxlength="20" required autocomplete="off">
-            <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
-            
-            <label for="Email">Email</label>
-            <input class="outline" type="email" placeholder="Enter the Email" name="Email" id="email" required autocomplete="off">
-            <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
-            
-            <label for="password">Password</label>
-            <input class="outline" type="password" placeholder="Enter the Password" name="password" id="pwd" required autocomplete="off">
-            <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
+                    <label for="lname">Last Name</label><br>
+                    <input class="outline"type="text" placeholder="Enter the Last Name" name="lname" id="lname" maxlength="20" required autocomplete="off">
+                    <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
+                    
+                    <label for="Email">Email</label><br>
+                    <input class="outline" type="email" placeholder="Enter the Email" name="Email" id="email" required autocomplete="off">
+                    <hr id="line"style="width:97%;text-align:left;margin-left:0"><br>
+                    
+                    <label for="password">Password</label><br>
+                    <input class="outline" type="password" placeholder="Enter the Password" name="password" id="pwd" required autocomplete="off">
+                    <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
 
-            <label for="confirmPassword">Confirm Password</label>
-            <input class="outline" type="password" placeholder="Re-enter the Password" name="confirmPassword" id="pwd1" required autocomplete="off">
-            <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
-            <i class="far fa-eye" id="togglePassword"></i>
+                    <label for="confirmPassword">Confirm Password</label><br>
+                    <input class="outline" type="password" placeholder="Re-enter the Password" name="confirmPassword" id="pwd1" required autocomplete="off">
+                    <hr id="line" style="width:97%;text-align:left;margin-left:0;"><br>
+                    <i class="far fa-eye" id="togglePassword"></i>
 
-            
-            {{#if control}}
-                    <h4 id="warning">{{res}}</h4>
-            {{/if}}
+                    
+                    {{#if control}}
+                            <h4 id="warning">{{res}}</h4>
+                    {{/if}}
 
-            <br><button type="submit" id="signupbutton" href="/signup">Sign Up</button>   
-            
-           <br><p id="or">Already have an account</p>
-        </form>
-        <form action="/login">
-            <button id="loginbutton" href="/login">Login</button>
-        </form>
+                    <br><button type="submit" id="signupbutton" href="/signup">Sign Up</button>   
+                    
+                <br><p id="or">Already have an account</p>
+                </form>
+                <form action="/login">
+                    <button id="loginbutton" href="/login">Login</button>
+                </form>
+        </div>
     </div>
 </body>
 

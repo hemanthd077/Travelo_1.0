@@ -289,11 +289,63 @@
                             <input type="hidden" id="plan-amount-payment" value="{{busdata.[11]}}">
                             <p class="pay-footer-txt">Total Amount to Pay : <i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[10]}}</p>
                             <div style="display: flex;flex-direction:column;gap:10px;align-items:center">
-                                <button id="bookamount-button"><p>Pre Book Now at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
-                                <p style="font-size: 13px;">Remaning Pay On pickup</p>
+                                <button id="popupButton" class="paybutton"><p>Pre Book Now at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
+                                <p style="font-size: 13px;">Balance Pay On pickup</p>
                             </div>
                         </div>
-                        
+                        <div id="popupContainer" class="popup">
+                            <div class="payment-popup-main">
+                                <h2 style="color: #2d3467;">Booking Details</h2>
+                                <div class="inner-paymentdetails-personal">
+                                    <div class="innerinfo-div">
+                                        <label for="bookingfname">First Name</label>
+                                        <input class="input-userdata-payment-name" type="text" name="fname" id="bookingfname" value="{{userdetails.[0]}}" required placeholder="Enter the First Name">
+                                    </div>
+                                    <div class="innerinfo-div">
+                                        <label for="bookinglname">Last Name</label>
+                                        <input class="input-userdata-payment-name" type="text" name="lname" id="bookinglname" value="{{userdetails.[1]}}" required placeholder="Enter the Last Name">
+                                    </div>
+                                </div>
+                                <div class="inner-paymentdetails-personal">
+                                    <div class="innerinfo-div">
+                                        <label for="bookingphonenumber">Phone Number</label>
+                                        <input class="input-userdata-payment"type="tel" name="pnumber" id="bookingphonenumber" required placeholder="Enter the Mobile Number" value="{{userdetails.[2]}}">
+                                    </div>
+                                </div>
+                                <div class="inner-paymentdetails-personal">
+                                    <div class="innerinfo-div">
+                                        <label for="bookingbookingmalecount">Male Count</label>
+                                        <input class="gendercount-payment" type="number" name="malecount" min="0" id="bookingmalecount" placeholder="Enter the Male Count" required>
+                                    </div>
+                                    <div class="innerinfo-div">
+                                        <label for="bookingfemalecount">Female Count</label>
+                                        <input class="gendercount-payment" type="number" name="femalecount" min="0" id="bookingfemalecount" placeholder="Enter the Female Count" required>
+                                    </div>
+                                </div>
+                                <div class="inner-paymentdetails-personal">
+                                    <div class="innerinfo-div">
+                                        <label for="bookingvegcount">Veg Count</label>
+                                        <input class="gendercount-payment" type="text" name="vegcount" id="bookingvegcount" min="0" placeholder="Enter the Veg Count">
+                                    </div>
+                                    <div class="innerinfo-div">
+                                        <label for="bookingnonvegcount">Non-Veg Count</label>
+                                        <input class="gendercount-payment" type="text" name="nonvegcount" id="bookingnonvegcount" min="0" placeholder="Enter the Non-Veg Count">
+                                    </div>
+                                </div>
+                                <div class="innerinfo-balence">
+                                    <div class="innerinfo-balence-content">
+                                        <p>Total Amount : <i class="fa-solid fa-indian-rupee-sign"></i>{{busdata.[10]}}</p>
+                                    </div>
+                                    <p><i class="fa-solid fa-indian-rupee-sign"></i>{{busdata.[21]}} Settle the Balance Amount upon pickup</p>
+                                </div>
+                                <div class="button-popup-payment">
+                                    <button id="closeButton" class="paybutton-personalinfo-cancel">Cancel</button>
+                                    <button id="bookamount-button" class="paybutton-personalinfo" type="submit">Pre Book Now at <i class="fa-solid fa-indian-rupee-sign"></i>{{busdata.[11]}}</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             {{/if}}
@@ -301,8 +353,22 @@
     </div>
 </body>
 <script>
+    try{
+        const popupButton = document.getElementById("popupButton");
+        const popupContainer = document.getElementById("popupContainer");
+        const closeButton = document.getElementById("closeButton");
 
+        popupButton.addEventListener("click", function () {
+            popupContainer.style.display = "flex";
+        });
 
+        closeButton.addEventListener("click", function () {
+            popupContainer.style.display = "none";
+        });
+    }
+    catch(e){
+        console.log(e)
+    }
 
     function loadAnimationsearch(){
         try{
@@ -469,61 +535,69 @@ setInterval(showSlides, 3000);
             let response= await fetch(`/payment/${planid_payment}`, {
                 method: 'POST',
             });
+            const fname = document.getElementById("bookingfname").value;
+            const lname = document.getElementById("bookinglname").value;
+            const phonenumber = document.getElementById("bookingphonenumber").value;
+            const malecount = document.getElementById("bookingmalecount").value;
+            const femalecount = document.getElementById("bookingfemalecount").value;
+            const vegcount = document.getElementById("bookingvegcount").value;
+            const nonvegcount = document.getElementById("bookingnonvegcount").value;
 
-            let orderdata = await response.json()
-            if(orderdata.success){
-                var options = {
-                    "key": "rzp_test_wQgiCkxy1ggt9B",
-                    "amount": 100*100,
-                    "currency": "INR",
-                    "name": "Travelo India", 
-                    "description": "Test Transaction",
-                    "image": "https://lh3.googleusercontent.com/drive-viewer/AITFw-xREwv9B_wu_5uRpIy4qgWUkPuuK6MaxFaLT4mwonCYu1_YhA7PtldfCNGtJQD-88rN6j0fHK5cJTv6ILBpKGoboz19HA=s2560",
-                    "order_id": orderdata.id,
-                    "handler":async function (response){
-                        await fetch(`/paymentstatus/${response.razorpay_payment_id}`, {
+            if(fname!="" && lname!="" && phonenumber!="" && malecount!="" && femalecount!="" && vegcount!="" && nonvegcount!=""){
+                let orderdata = await response.json()
+                if(orderdata.success){
+                    var options = {
+                        "key": "rzp_test_wQgiCkxy1ggt9B",
+                        "amount": 100*100,
+                        "currency": "INR",
+                        "name": "Travelo India", 
+                        "description": "Test Transaction",
+                        "image": "https://lh3.googleusercontent.com/drive-viewer/AITFw-xREwv9B_wu_5uRpIy4qgWUkPuuK6MaxFaLT4mwonCYu1_YhA7PtldfCNGtJQD-88rN6j0fHK5cJTv6ILBpKGoboz19HA=s2560",
+                        "order_id": orderdata.id,
+                        "handler":async function (response){
+                            await fetch(`/paymentstatus?paymentid=${response.razorpay_payment_id}&fname=${fname}&lname=${lname}&phonenumber=${phonenumber}&malecount=${malecount}&femalecount=${femalecount}&vegcount=${vegcount}&nonvegcount=${nonvegcount}`, {
+                                method: 'POST',
+                            }).then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    window.location.href = '/booking';
+                                } else {
+                                    window.location.href = '/error';
+                                }
+                            })
+                        },  
+                        "notes": {
+                            "address": "Razorpay Corporate Office"
+                        },
+                        "theme": {
+                            "color": "#2d3467"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+
+                    rzp1.on('payment.failed',async function (response){
+                        const errorDetails = response.error;
+                        const paymentId = errorDetails.metadata.payment_id; 
+                        await fetch(`/paymentstatus/${paymentId}`, {
                             method: 'POST',
-                        }).then(response => response.json())
+                        })
+                        
+                        {{!-- .then(response => response.json())
                         .then(data => {
                             if (data.success) {
                                 window.location.href = '/booking';
                             } else {
                                 window.location.href = '/error';
                             }
-                        })
-                    },  
-                    "notes": {
-                        "address": "Razorpay Corporate Office"
-                    },
-                    "theme": {
-                        "color": "#2d3467"
-                    }
-                };
-                var rzp1 = new Razorpay(options);
+                        }) --}}
+                    });
 
-                rzp1.on('payment.failed',async function (response){
-                    const errorDetails = response.error;
-                    const paymentId = errorDetails.metadata.payment_id; 
-                    await fetch(`/paymentstatus/${paymentId}`, {
-                        method: 'POST',
-                    })
-                    
-                    {{!-- .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            window.location.href = '/booking';
-                        } else {
-                            window.location.href = '/error';
-                        }
-                    }) --}}
-                });
-
-                rzp1.open();
+                    rzp1.open();
+                }
+                else{
+                    window.location.href = '/404'; 
+                }
             }
-            else{
-                window.location.href = '/404'; 
-            }
-            
         }
         
         

@@ -38,5 +38,7 @@ router.post('/delete-manager',dealerlogin.deletemanager);
 
 router.post('/request-managermail',dealerlogin.requestmanagermail);
 
+router.post('/assignwork',dealerlogin.assignwork);
+
 
 module.exports=router;

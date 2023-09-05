@@ -8,8 +8,8 @@ body{
     flex-direction:column;
     margin-top:100px;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+    user-select: none;
 }
 
 video{

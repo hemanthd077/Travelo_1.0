@@ -4,31 +4,63 @@
 }
 
 body {
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
-    background-color: #dadade;
+    background: linear-gradient(#ffffff,#e0f4f9);
     background-repeat: no-repeat;
-    height:92vh;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+    height: 100vh;
+    display: flex;
+    user-select: none;
+    justify-content: center;
+    align-items: center;
 }
 
-#block{
-    background-color: white;
-    margin-left: 550px;
-    width: 400px;
+
+
+#block {
+    /* width: 400px; */
     padding: 30px;
-    border-radius: 10px;
-    height: 73vh;
-    box-shadow: 0px 0px 5px -3px #2d3467;
+    border-radius: 5px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    padding-right: 70px;
+    display: flex;
+    gap: 100px;
+    flex-direction: row;
+    /* box-shadow: 0px 0px 5px -3px #2d3467; */
 }
+
+.login-quotes {
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 50px;
+    margin-top: -35px;
+    color: #2d3467;
+    overflow-wrap: break-word;
+    width: 500px;
+}
+
+.bgimage-signup{
+    width: 700px;
+    height: 500px;
+    position: absolute;
+    margin-left: -30px;
+    margin-top: 86px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.inner-formdiv{
+    margin-left: 600px;
+}
+
 
 #appicon {
     height: 70px;
     width: 120px;
-    margin-left: 30px;
-    /* margin-top: 10px; */
+    top: 0px;
+    left: 30px;
+    position: absolute;
 }
 
 #loginform-cpwd{
@@ -82,20 +114,18 @@ button#signupbutton{
     border-style: hidden;
     cursor: pointer;
     margin-top: 10px;
-    box-shadow: 0px 0px 5px -1px #2d3467;
+    box-shadow: 0px 1px 5px -2px #2d3467;
 }
 
 button#signupbutton:hover {
     color: white;
-    /* background-image: linear-gradient(95deg,#5c6074, #2d3464);
-    background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
     background:#2d3464;
 
 }
 
 #fname,#lname,#pwd,#email,#pwd1{
     height: 3vh;
-    width: 93%;
+    width: 380px;
     margin-top: 5px;
     border-style: hidden;
     font-size: small;

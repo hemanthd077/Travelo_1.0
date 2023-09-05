@@ -10,9 +10,9 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
-    background-color: #dadade;
+    /* background-color: #dadade; */
     font-style: normal;
+    user-select: none;
 }
 
 
@@ -20,29 +20,29 @@ body {
 #appicon {
     height: 70px;
     width: 125px;
-    margin-left: 137px;
-    margin-top: -10px;
+    position: absolute;
+    top: 0;
+    left: 30px;
 }
 
 #content {
-    width: 400px;
-    height: 250px;
     padding: 30px;
     border-radius: 10px;
-    animation: fadedown 2s ease-in-out;
     background-color: #FFFFFF;
-    box-shadow: 0px 0px 10px -3px #2d3467;
+    /* box-shadow: 0px 0px 10px -3px #2d3467; */
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    padding-right: 80px;
+    padding-left: 10px;
 }
 
-p {
+.home-header {
     display: flex;
     justify-content: center;
     font-weight: 500;
     font-size: 25px;
     margin-top: 30px;
-    /* background: -webkit-linear-gradient(45deg,#5c6074, #ae006b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
     color: #2d3467;
 }
 
@@ -55,55 +55,67 @@ div#logo-container {
 #user-dealer-nav {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 60px;
     justify-content: center;
     margin-top: 10px;
     align-items: center;
 }
 
 button#dealer,button#user{
-    width: 150px;
-    height: 40px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px -1px rgb(0, 0, 0.1);
-    border-style: none;
+    background-color: transparent;
+    border:none;
     cursor: pointer;
-    font-size: 16px;
 }
 
-button#dealer:hover,button#user:hover{
-    background: #2d3467;
-    /* background-image: linear-gradient(45deg,#5c6074, #2d3464); */
-    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
-
-    color: white;
+.circle:hover{
+    transition: 0.5s;
+    transform: scale(1.2);
+    color: white;    
 }
 
+.fa-user-tie{
+    color: black;
+}
+
+.image-icon-button{
+    border-radius: 50px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
 
 .tranmission{
-    animation-name: dragup;
+    animation-name: fadedown;
     animation-duration: 0.6s;
-    animation-delay: 2.5s; 
+    animation-delay: 1.5s; 
     animation-fill-mode: ease-in;
 }
 
-@keyframes dragup {
+  @keyframes fadedown {
     0%{
-        margin-top: -100px;
+        opacity: 1;
     }
     100% {
-        margin-top: -199px;
-        width: 125px;
+        opacity: 0;
     }
   }
 
 
-  @keyframes fadedown {
-    0%{
-        background-color: #dadade;
-    }
-    100% {
-        background-color: #FFFFFF;
+  .main-bg-img{
+    width: 500px;
+  }
 
-    }
+
+  .inner-log-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }

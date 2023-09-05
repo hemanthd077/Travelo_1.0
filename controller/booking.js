@@ -111,7 +111,14 @@ const prepayment = (async(req,res)=>{
 })
 
 const paymentstatus = (async(req,res)=>{
-    let paymentId = req.params.paymentid+"";
+    let paymentId = req.query.paymentid;
+    let fname = req.query.fname;
+    let lname = req.query.lname;
+    let malecount = req.query.malecount;
+    let femalecount = req.query.femalecount;
+    let phonenumber = req.query.phonenumber
+    let vegcount = req.query.vegcount;
+    let nonvegcount = req.query.nonvegcount;
     await instance.payments.fetch(paymentId).then(async(paymentdata) => {
         // fetch success
         if(paymentdata.status ==='authorized'){
@@ -126,9 +133,17 @@ const paymentstatus = (async(req,res)=>{
                     planid : tourplanarr[1],
                     dealerid:tourplanarr[3],
                     status : capturedata.status,
+                    Managerflag : 0,
                     amount : capturedata.amount/100,
                     balenceamount : balenceamount,
                     dateAndTime : new Date().toLocaleString(),
+                    malecount : malecount,
+                    femalecount :femalecount,
+                    fname :fname,
+                    lname :lname,
+                    phonenumber : phonenumber,
+                    vegcount : vegcount,
+                    nonvegcount : nonvegcount,
                 })
 
                 let Fromdate = searchdata[0];
@@ -260,9 +275,22 @@ const bookingdata = (async(req,res)=>{
                             if(temp[12]){
                                 if(checkDateStatus(orderdata.todate)){
                                     completedTour[completedTourIndex++] = temp;
-                
                                 }
                                 else{
+                                    temp[15] = false;
+                                    for (let indexr = 0; indexr < dealerdata.manager.length; indexr++) {
+                                        for (let indexc = 0; indexc < dealerdata.manager[indexr].bookings.length; indexc++) {
+                                            if(dealerdata.manager[indexr].bookings[indexc].orderid === paymentdata[paymentindex].orderid){
+                                                temp[15] = true;
+                                                let dummy =[];
+                                                dummy[0] = dealerdata.manager[indexr].mname;
+                                                dummy[1] = dealerdata.manager[indexr].mcontactno;
+                                                dummy[2] = dealerdata.manager[indexr].mgender;
+                                                temp[16] = dummy 
+                                                break;
+                                            }
+                                        }
+                                    }
                                     upcomingTour[upcomingTourIndex++] = temp;
                                 }
                             }

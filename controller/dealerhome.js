@@ -12,8 +12,35 @@ const paymentstatusdb = require('../src/paymentStatusdb')
 const orderdatadb = require('../src/orderDatadb');
 const dealerdetails = require('../src/dealerdb');
 const userdb = require('../src/mongodb');
-const puppeteer = require('puppeteer');
 const moment = require('moment');
+
+function isManagerAvailable(start, end,booking) {
+    if(booking.length===0){
+        return true;
+    }
+    else{
+        for(let i=0;i<booking.length;i++){
+            if(start <= booking[i].endDate && booking[i].startdate <= end){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+function isManagerAssigned(start, end,busid,booking) {
+    if(booking.length===0){
+        return false;
+    }
+    else{
+        for(let i=0;i<booking.length;i++){
+            if(end === booking[i].endDate && booking[i].startdate == start && booking[i].busid ===busid){
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
 
 require('dotenv').config();
@@ -631,6 +658,8 @@ const busfullDeleteinfo = (async(req,res)=>{
     }
 })
 
+let AssignManagerdata = [];
+
 const busbooked = (async(req,res)=>{
     let upcomingTour = [];
     let upcomingTourIndex = 0;
@@ -670,9 +699,42 @@ const busbooked = (async(req,res)=>{
                             if(temp[12]){
                                 if(checkDateStatus(orderdata.todate)){
                                     completedTour[completedTourIndex++] = temp;
-                
                                 }
                                 else{
+                                    let managerAvailabedata =[];
+                                    let managerAvailabedataindex=0;
+                                    AssignManagerdata = [];
+                                    for(let availind=0;availind<dealerdata.manager.length;availind++){
+                                        if(isManagerAvailable(orderdata.fromdate.replace('/','-'),orderdata.todate.replace('/','-'),dealerdata.manager[availind].bookings)){
+                                            let dummy =[]
+                                            dummy[0] =dealerdata.manager[availind].mname;
+                                            dummy[1] =managerAvailabedataindex;
+                                            managerAvailabedata[managerAvailabedataindex]=dummy;
+                                            dummy=[];
+                                            dummy[0] = dealerdata.manager[availind].memail;
+                                            dummy[1] = buscontentdata.id;
+                                            dummy[2] =dealerdata.manager[availind].mname;
+                                            dummy[3] = dealerdata.manager[availind].mcontactno;
+                                            dummy[4] = orderdata.fromdate.replace('/','-');
+                                            dummy[5] = orderdata.todate.replace('/','-');
+                                            dummy[6] = paymentdata[paymentindex].paymentid;
+                                            dummy[7] = paymentdata[paymentindex].orderid;
+                                            AssignManagerdata[managerAvailabedataindex++] = dummy;
+                                        }
+                                        else if(isManagerAssigned(orderdata.fromdate.replace('/','-'),orderdata.todate.replace('/','-'),buscontentdata.id,dealerdata.manager[availind].bookings)){
+                                            let dummy =[];
+                                            dummy[0] = dealerdata.manager[availind].mname;
+                                            dummy[1] = dealerdata.manager[availind].mcontactno;
+                                            dummy[2] = dealerdata.manager[availind].mgender;
+                                            temp[17] = dummy
+                                        }
+                                    }
+                                    temp[15] = managerAvailabedata;
+                                    temp[16] =!(paymentdata[paymentindex].Managerflag)
+                                    
+                                    if(temp[16]){
+                                        temp[17] =[]
+                                    }
                                     upcomingTour[upcomingTourIndex++] = temp;
                                 }
                             }
@@ -800,6 +862,7 @@ const addManager = (async(req,res)=>{
         mcontactno:req.body.contactno,
         memail:req.body.emailid,
         mpassword:req.body.password,
+        bookings:[],
         mprofileimage:{
             data:fs.readFileSync('public/images/user.png'),
             ContentType:'image/png'
@@ -1110,6 +1173,47 @@ const requestmanagermail = (async(req,res)=>{
     });
 })
 
+const assignwork = (async(req,res)=>{
+    let Mdata = AssignManagerdata[req.body.managerassignindex];
+    try{
+        const newvalues2 = {
+            $push: {
+              'manager.$.bookings': {
+                startdate:Mdata[4],
+                endDate:Mdata[5],
+                orderid:Mdata[7],
+                busid:Mdata[1],  
+              },
+            },
+          };
+      
+          const filter2 = {
+            'dealerid': detailsArray[0],
+            'manager.memail':Mdata[0], 
+          };
+      
+          const options2 = { upsert: false };
+          await dealerdetails.updateMany(filter2, newvalues2, options2);
+          
+          console.log('Manager Assigning successfully');
+
+          const paymentfilter = {
+            'paymentid':Mdata[6]
+          };
+          const paymentupdatavalue = {
+            $set: {
+                Managerflag:true
+            },
+          };
+          await paymentstatusdb.updateMany(paymentfilter, paymentupdatavalue, options2);
+          res.redirect('/bus-booking')
+    }catch(err){
+      console.error('Manager Assigning Failed', err);
+      res.render('404');
+    }
+})
+
+
 module.exports = {
     plandetailsupload,
     busdetailsupload,
@@ -1129,4 +1233,5 @@ module.exports = {
     addManager,
     deletemanager,
     requestmanagermail,
+    assignwork,
 };

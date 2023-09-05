@@ -5,13 +5,11 @@
 
 body{
     background-repeat: no-repeat;
-    /* background-image: linear-gradient(45deg, #7c7e7e, #2d3465); */
-    /* background: -webkit-linear-gradient(145deg,#ae006b, #2d3464); */
     background-color: #dadade;
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+    user-select: none;
 }
 
 #homenavbar {
@@ -388,7 +386,7 @@ nav#nav,nav#navcontent {
     box-shadow: 0px -1px 5px -2px #2d3467;
 }
 
-#bookamount-button,#bookamount-button-1{
+#bookamount-button,#bookamount-button-1,.paybutton{
     border:none;
     border-radius: 5px;
     padding: 5px;
@@ -396,7 +394,6 @@ nav#nav,nav#navcontent {
     background-color: #2d3467;
     color: #FFFFFF;
     cursor: pointer;
-    z-index: 2;
     box-shadow: 0px -1px 5px -2px #2d3467;
 }
 
@@ -516,6 +513,7 @@ div#searchresultdiv1 {
     background: transparent;
     cursor: pointer;
     border-style: none;
+    z-index: 1;
 }
 
 #busamount-div-heart {
@@ -746,4 +744,113 @@ img#spot-image{
 
 .fa-heart{
     cursor: pointer;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    margin-top: 80px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+}
+
+.payment-popup-main {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 25px;
+    padding: 25px;
+    height: 560px;
+    margin-top: 25px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 5px -2px #ffffff;
+}
+input.input-userdata-payment {
+    height: 30px;
+    padding: 5px;
+    width: 472px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+    border: none;
+}
+input.input-userdata-payment-name {
+    height: 30px;
+    padding: 5px;
+    width: 216px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+    border: none;
+}
+input.gendercount-payment {
+    height: 30px;
+    padding: 5px;
+    width: 216px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+}
+.inner-paymentdetails-personal{
+    display: flex;
+    gap: 30px;
+}
+input.gendercount-payment:focus,input.input-userdata-payment:focus,input.input-userdata-payment-name:focus{
+    outline: none;
+}
+.innerinfo-div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+h2{
+    text-align: center;
+}
+.paybutton-personalinfo{
+    border-radius: 5px;
+    background-color: #2d3467;
+    color: #ffffff;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+}
+.paybutton-personalinfo-cancel{
+    border-radius: 5px;
+    color: #2d3467;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    width: 150px;
+    box-shadow: 0px 1px 5px -1px #2d3467;
+}
+.paybutton-personalinfo:hover,.paybutton-personalinfo-cancel:hover{
+    background-color: #2d346770;
+    color: #2d3467;
+}
+.innerinfo-balence{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    font-size: 15px;
+}
+.button-popup-payment{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.innerinfo-balence-content{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    width: 480px;
+    color: #ae006b;
+    font-weight: 600;
+
 }

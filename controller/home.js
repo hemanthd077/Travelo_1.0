@@ -32,12 +32,11 @@ function isBusAvailable(start, end,booking) {
     }
 }
 
-function calculateNextNthDate(startDateStr, n) {
-    const startDate = new Date(startDateStr);
-    const nextDate = new Date(startDate);
-    nextDate.setDate(startDate.getDate() + n);
-    const nextDateStr = nextDate.toISOString().split('T')[0];
-    return nextDateStr;
+function calculateNextNthDate(startDate, n) {
+    n = Number(n);    
+    const currentDate = new Date(startDate);
+    currentDate.setDate(currentDate.getDate() + n);
+    return currentDate.toISOString().split('T')[0];
 }
 
 function canAccommodatePassengers(seatCapacity, numberOfPassengers) {
@@ -174,6 +173,7 @@ const getin = async(req,res)=>{
                                                     break;
                                                 }
                                             }
+                                            temp[21] = temp[10]-temp[11]
                                             buscontent[bus_data_index++]=temp;
                                         }
                                     })     
@@ -201,6 +201,11 @@ const getBusData = async(req,res)=>{
     let imagecontent = [];
     planDataArray = []
     let busdata = buscontent[req.body.busid];
+    let userdetails = []
+    let userdata = await validation.findOne({Email:detailsArray[2]});
+    userdetails[0] = casedetective(userdata.fname);
+    userdetails[1] = casedetective(userdata.lname);
+    userdetails[2] = userdata.phonenumber.number;
     await plandetails.findOne({_id:planidarr[req.body.busid]}).then(async(detail)=>{
         if(detail){
             for(let i=0;i<detail.dayplans.length;i++){
@@ -228,10 +233,10 @@ const getBusData = async(req,res)=>{
             for (let index = 0; index < data1.busimage.length; index++) {
                 imagecontent[index] = data1.busimage[index].ContentType+";base64,"+data1.busimage[index].data.toString('base64');
             }
-            res.render('homeresult',{searchresult:true,busContent:true,imagecontent,headerdata:source_destination,busdata,planDataArray});
+            res.render('homeresult',{searchresult:true,busContent:true,userdetails,imagecontent,headerdata:source_destination,busdata,planDataArray});
         }
         else{
-            res.render('homeresult',{searchresult:true,busContent:true,source_destination,planDataArray});
+            res.render('homeresult',{searchresult:true,busContent:true,userdetails,source_destination,planDataArray});
         }
     }).catch(e=>{
         console.log("Error Occur while finding image at user singel bus detail fetching")

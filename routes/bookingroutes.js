@@ -8,7 +8,7 @@ router.get('/booking',userbooking.bookingdata);
 
 router.post('/payment/:planid',userbooking.prepayment);
 
-router.post('/paymentstatus/:paymentid',userbooking.paymentstatus);
+router.post('/paymentstatus',userbooking.paymentstatus);
 
 router.get('/generate-pdf/:orderid',userbooking.downloadpdf);
 

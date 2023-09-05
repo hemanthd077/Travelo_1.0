@@ -29,6 +29,12 @@ const dealerloginSchema = new mongoose.Schema({
         mcontactno:String,
         memail:String,
         mpassword:String,
+        bookings:[{
+            startdate:String,
+            endDate:String,
+            orderid:String,
+            busid:String,
+        }],
         mprofileimage:{
             data:Buffer,
             ContentType:String,

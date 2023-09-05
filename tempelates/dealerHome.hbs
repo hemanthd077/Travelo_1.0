@@ -185,7 +185,7 @@
             {{/if}}
 
             {{#if dealerprofile}}
-                <div id="profilecontent">
+                <div id="profilecontent-1">
                     <div id="contentdivision1">
                         <div id="profile">
                             <img id="profilepic" src="data:{{type.ContentType}};base64,{{value}}" alt="Profile Image" />
@@ -219,7 +219,7 @@
                     </div>
                     
                         {{#if busdetail}}
-                            <div class="contentdivision2 planscroll">    
+                            <div style="gap: 35px;" class="contentdivision2busimage planscroll">    
                                 {{#each busdetailArray}}
                                     <div id="search-div">
                                         <form action="/edit-businfo" method="post">
@@ -361,11 +361,11 @@
                         {{/if}}
 
                         {{#if busimage}}
-                            <div class="contentdivision2">
+                            <div class="contentdivision2busimage">
                                 <div class="bus-content">
                                     <p style="font-weight: 500;font-size: 18px;display: flex;gap: 5px;justify-content: center;align-items: baseline;margin-left:30px" id="busname"><i class="fas fa-bus"></i> Bus Name : {{Busname}}</p>
                                     <p style="font-weight: 500;font-size: 18px;display: flex;gap: 5px;justify-content: center;align-items: baseline; margin-left:100px" id="seats"><i class="fas fa-couch"></i>Seats: {{Busseat}}</p>
-                                    <button id="btn-delete-total" style="background-color: transparent;border-style:none;margin-left:400px" onclick="openDeletebusform()" ><i id="busdelete" class="fa fa-trash-alt fa-2x" aria-hidden="true"></i></button>
+                                    <button id="btn-delete-total" style="background-color: transparent;border-style:none;margin-left:400px" onclick="openDeletebusform()" ><i id="busdelete" class="fa fa-trash-alt fa-lg" aria-hidden="true"></i></button>
                                 </div>
                                <div class="img-result">
                                     {{#each busimg}}
@@ -536,16 +536,42 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                {{#if this.[12]}}
-                                                        <div>
-                                                            sfdghfgjjhdfs
+                                                    {{#if this.[16]}}
+                                                        <form class="mangerassigndiv" action="/assignwork" method="post">
+                                                            <label for="managerassign">Manager</label>
+                                                            <div>
+                                                                <select name="managerassignindex" id="managerassign" required>
+                                                                    {{#each this.[15]}}
+                                                                        <option value="{{this.[1]}}">{{this.[0]}}</option>
+                                                                    {{/each}}
+                                                                </select>
+                                                                <button class="assign-submit-btn" href="/assignwork">Assign</button>
+                                                            </div>
+                                                            <p class="manager-disclimer">*note : Once Assigned Can't changed*</p>
+                                                        </form>
+                                                    {{else}}
+                                                        <br><div class="manager-outer-class">
+                                                            <p class="outer-managerheader-title"><i class="fa-solid fa-user-tie"></i> Manager Assigned</p>
+                                                            <div class="manager-inner-class">
+                                                                <div class="inner-managercontent-namediv">
+                                                                    <p class="managerheader-title">Name</p>
+                                                                    <p><i class="fa-solid fa-seedling fa-xs"></i> {{this.[17].[0]}}</p>
+                                                                </div>
+                                                                <div class="inner-managercontent-div">
+                                                                    <p class="managerheader-title">Contact No</p>
+                                                                    <p><i class="fa-solid fa-phone fa-xs"></i> {{this.[17].[1]}}</p>
+                                                                </div>
+                                                                <div class="inner-managercontent-div">
+                                                                    <p class="managerheader-title">Gender</p>
+                                                                    <p><i class="fa-solid fa-venus-mars fa-xs"></i> {{this.[17].[2]}}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     {{/if}}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="order-detail-content">
+                                        <div class="order-detail-content">
                                                 <div class="bookingcontent-id">
                                                     <p>Booking Id : </p>
                                                     <p>{{this.[4]}}</p>
@@ -557,28 +583,24 @@
                                                 <div style="display: flex;justify-content: flex-end;">
                                                     <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
                                                 </div>
-                                            </div>
-                                            <div style="display: flex;justify-content: flex-end;margin-right: 100px;gap: 25px;">
-                                                <div class="paidammount-content">
-                                                    <p>Payment Done</p>
-                                                    <p>{{this.[10]}}</p>
+                                                <div style="display: flex;justify-content: flex-end;gap: 25px;">
+                                                    <div class="paidammount-content">
+                                                        <p>Payment Done</p>
+                                                        <p>{{this.[10]}}</p>
+                                                    </div>
+                                                    <button type="button" class="balanceamount-content">
+                                                        <p>Balance Payment</p>
+                                                        <p>{{this.[11]}}</p>
+                                                    </button>
                                                 </div>
-                                                <button type="button" class="balanceamount-content">
-                                                    <p>Balance Payment</p>
-                                                    <p>{{this.[11]}}</p>
-                                                </button>
                                             </div>
-                                        </div>
                                     </div>
                                 {{/each}}
                             {{/if}}
                             {{#if upcomingwarning}}
                                 <div class="warning-content">
-                                    <i class="fa-solid fa-map-location-dot fa-2xl"></i>
-                                    <p id="notfountcompleted">Currently, there are no bookings to display</p>
-                                    <a href="/home" id="homereference">
-                                        <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
-                                    </a>
+                                    <img src="/images/booking-dealer-bg.jpg" style="width: 500px;" alt="img">
+                                    <p class="warning-notfoundtxt">Currently, there are no bookings to display</p>
                                 </div>
                             {{/if}}
                         </div>
@@ -636,23 +658,20 @@
                                                     </div>
                                                 </div>
                                             {{#if this.[12]}}
-                                                    <div class="order-detail-content">
-                                                        <div class="bookingcontent-id">
-                                                            <p>Booking Id : </p>
-                                                            <p>{{this.[4]}}</p>
-                                                        </div>
-                                                        <div class="bookingcontent-date">
-                                                            <p>Booked at : </p>
-                                                            <p>{{this.[5]}}</p>
-                                                        </div>
-                                                        <div>
-                                                        <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
-                                                        </div>
-                                                        <div class="paidammount-content-complete">
-                                                            <p>Total Payment : </p>
-                                                            <p>{{this.[14]}}</p>
-                                                        </div>
+                                                <div class="order-detail-content-completed">
+                                                    <div class="bookingcontent-id">
+                                                        <p>Booking Id : </p>
+                                                        <p>{{this.[4]}}</p>
                                                     </div>
+                                                    <div class="bookingcontent-date">
+                                                        <p>Booked at : </p>
+                                                        <p>{{this.[5]}}</p>
+                                                    </div>
+                                                    <a id="receipt_generate_completed" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
+                                                    <div class="paidammount-content-complete">
+                                                        <p>Total Payment : {{this.[14]}}</p>
+                                                    </div>
+                                                </div>
                                             {{/if}}
                                             </div>
                                         </div>
@@ -661,11 +680,8 @@
                             {{/if}}
                             {{#if completedwarning}}
                                 <div class="warning-content">
-                                    <i style="color: #2d3467; margin-bottom:20px" class="fa-solid fa-map-location-dot fa-2xl"></i>
-                                    <p style="color: #2d3467;">No booking history to Show</p>
-                                    <a href="/home" id="homereference">
-                                        <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
-                                    </a>
+                                    <img src="/images/booking-dealer-bg-1.jpg" style="width: 500px;" alt="img">
+                                    <p class="warning-notfoundtxt">No completed tours or activities are available for display at this time.</p>
                                 </div>
                             {{/if}}
                         </div>
