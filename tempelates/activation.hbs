@@ -16,6 +16,10 @@
     
     <div id="main_block">
         <div id="block-1">
+            <div class="ear-piece-div">
+                <div class="camera-div"></div>
+                <div class="camera-div"></div>
+            </div>
             <img id="img-applogo" src="/images/homelogo.png" alt="">
             <p id="p-content">Please check your Email to verify your Account.</p>
             <p id="disclimer-openmail">Click Below to Open Email</p><br>
@@ -23,6 +27,7 @@
             <br><a href="https://mail.google.com/mail/u/0/"><button id="button">Email</button></a>
         </div>
         <div id="block-2">
+            <img id="img-bg" src="/images/activation-bg-1.svg" style="width:600px" alt="">
             <div id="content-over-video">
                 <p class="thankstxt">THANKS FOR CHOOSING</p>
                 <p id="app-name">TRAVELO BOOKING</p>
@@ -30,4 +35,10 @@
         </div>
     </div>
 </body>
+<script>
+    document.getElementById('img-applogo').setAttribute('draggable', false);
+    document.getElementById('img-bg').setAttribute('draggable', false);
+    document.getElementById('down-arrow-img').setAttribute('draggable', false);
+
+</script>
 </html>

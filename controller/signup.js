@@ -110,29 +110,34 @@ const signup = async (req,res)=>{
                             font-weight: bold;
                         }
                         button {
-                        width: 120px;
-                        height: 30px;
-                        color: white;
-                        background: #007bff;
-                        border-radius: 5px;
-                        border-style: none;
-                        cursor: pointer;
-                        font-size: 15px;
-                    }
-                    a{
-                        text-decoration: none;
-                        color:white;
-                    }
+                            width: 120px;
+                            height: 30px;
+                            color: white;
+                            background: #007bff;
+                            border-radius: 5px;
+                            border-style: none;
+                            cursor: pointer;
+                            font-size: 15px;
+                        }
+                        a{
+                            text-decoration: none;
+                            color:white;
+                        }
 
-                    button:hover{
-                        background-color: #0056b3;
-                        color:white;
-                    }
+                        button:hover{
+                            background-color: #0056b3;
+                            color:white;
+                        }
                         .footer {
                             text-align: center;
                             color: #777;
                             font-size: 14px;
                             margin-top: 20px;
+                        } 
+                        h3,.content-p {
+                            z-index: 2;
+                            text-align: center;
+                            position: relative;
                         } 
                         </style> 
                     </head>
@@ -145,8 +150,8 @@ const signup = async (req,res)=>{
                                 </tr>
                                 <tr style="display: flex;align-items: center;">
                                     <h1>Email Verification</h1>
-                                    <p> Please verify your email address by clicking the below</p> 
-                                    <button><a style="color: #FFFFFF" href="http://localhost:8080/verify?code=${usercode}">Click Here</a></button> 
+                                    <p class="content-p"> Please verify your email address by clicking below</p> 
+                                    <h3><button><a style="color: #FFFFFF" href="http://localhost:8080/verify?code=${usercode}">Click Here</a></button></h3> 
                                     <p>If you did not request this verification link, you can safely ignore this email.If you have any questions or need further assistance, please contact our support team at <a href="mailto:traveloindia01@gmail.com">TraveloIndia</a>.</p> 
                                     <p class="footer"> This email is automatically generated. Please do not reply to this message. </p>
                                     <p style="text-align: center;color: #777;font-size: 11px;font-weight: 600;">&#169; Copyrighted 2023 </p>

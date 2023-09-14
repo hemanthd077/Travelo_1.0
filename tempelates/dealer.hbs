@@ -19,7 +19,7 @@
     <div id="total-Main-div">
         {{#if login}}
             <div  id="loginform-outer">
-                <img src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
+                <img class="img-bg" src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
                 <div>
                     <form action="/dealerlogin" method="POST" id="loginform">   
                         <h2 id="logintxt">AGENCY LOGIN</h2>
@@ -45,7 +45,7 @@
 
         {{#if fpassword}}
             <div  id="loginform-outer">
-                <img src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
+                <img class="img-bg" src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
                 <div class="contentBlock">
                     <h2 id="logintxt-fpwd">FORGOT PASSWORD</h2><br><br>
                     <form action="/fpass-email-dealer" method="post">
@@ -69,7 +69,7 @@
 
         {{#if verificationCode}}
             <div  id="loginform-outer">
-                <img src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
+                <img class="img-bg" src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
                 <div class="contentBlock">
                     <h2 id="logintxt-verify">VERIFICATION</h2><br>
                     <input type="hidden" name="emailid" value="{{email}}">
@@ -102,7 +102,7 @@
 
         {{#if changepwd}}
             <div  id="loginform-outer">
-                <img src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
+                <img class="img-bg" src="/images/dealerlogin-bg-1.svg" style="width: 500px;" alt="">
                 <div class="contentBlock">
                     <form action="/update-password-dealer" method="post" class="updateBlock">
                         <h2 class="logintxt-verify">CHANGE PASSWORD</h2><br>
@@ -133,6 +133,15 @@
 </body>
 
 <script>
+
+    try{
+        document.querySelector('.img-bg').setAttribute('draggable', false);
+        document.querySelector('.appicon').setAttribute('draggable', false);
+    }
+    catch(e){
+        console.log(e);
+    }
+
     const otpInputs = document.querySelectorAll('.otpInputs .input-opt');
 
     otpInputs.forEach((input, index) => {

@@ -7,6 +7,7 @@
     <title>User Login</title>
     <link rel="icon" href="/images/logowhite.svg">
     <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +19,7 @@
     <div  id="block">
         {{#if login}}
             <div class="img-login-page">
-                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <img id="image-icon" src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
                 <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
             </div>
             <div >
@@ -34,7 +35,7 @@
                             <h4 class="warning-1">{{res}}</h4>
                     {{/if}}
 
-                    <button type="submit" class="loginbutton" href="/login">Login</button>
+                    <button id="submit-btn-control" type="submit" class="loginbutton" href="/login"><p class="spin-load-animation"><i class="fa-solid fa-spinner fa-spin-pulse"></i></p> <p class="submit-btn-content">Login</p></button>
                     
                     <p id="or">Create an Account</p>
                 </form>
@@ -59,7 +60,7 @@
         {{/if}}
         {{#if fpassword}}
             <div class="img-login-page">
-                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <img id="image-icon" src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
                 <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
             </div>
             <div class="innerlogincontent">
@@ -84,7 +85,7 @@
 
         {{#if cpassword}}
             <div class="img-login-page">
-                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <img id="image-icon" src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
                 <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
             </div>
             <div class="innerlogincontent">
@@ -109,7 +110,7 @@
 
         {{#if verificationCode}}
                 <div class="img-login-page">
-                    <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                    <img id="image-icon" src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
                     <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
                 </div>
                 <div class="innerlogincontent">
@@ -143,7 +144,7 @@
 
         {{#if changepwd}}
             <div class="img-login-page">
-                <img src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
+                <img  id="image-icon" src="/images/userlogin-bg-1.svg" style="width: 650px;height:500px" alt="">
                 <p class="login-quotes">Welcome to the Travelo family!<br>We're excited to have you as part of our community.</p>
             </div>
             <div class="innerlogincontent">
@@ -173,6 +174,31 @@
 </body>
 
 <script>
+
+    try{
+        document.getElementById('submit-btn-control').addEventListener('click', function (e) {
+            if(document.getElementById('submit-btn-control').value != null && document.getElementById('submit-btn-control').value !=null){
+                document.querySelector('.spin-load-animation').style.display ='block'
+                document.querySelector('.submit-btn-content').style.display='none';
+            }
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+
+    try{
+      document.querySelector('#image-icon').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
+  try{
+      document.querySelector('#appicon').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
 
     const otpInputs = document.querySelectorAll('.otpInputs .input-opt');
 

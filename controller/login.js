@@ -147,7 +147,7 @@ const fpass_nodemail=(async(req,res)=>{
                     <div class="container">
                         <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
                             <tr>
-                                <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AFGJ81ohz6q6b-L-4vqvsvgkNZ6I2AD6Igskizea3c3e4bwj76ph5U0dulnF9tclQQuSsgM4x1S-x8UcrXgYu7yky1G4f65qLQ=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td>
+                                <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AITFw-xDFqJWr-vKyyle-8NrIGubwPsc2z-zhM9hkGD_PHkAi7pbP5UIM6TciN3KblpIYZVrfS7jxKUfqDinz3yB3Z3JJV0AXw=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td>
                             </tr>
                         </table>
                         <h1>Email Verification</h1>

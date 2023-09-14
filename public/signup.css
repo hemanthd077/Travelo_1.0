@@ -181,3 +181,13 @@ h4#warning {
     margin-left: 350px;
     opacity: 70%;
 }
+
+#signupbutton:hover {
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
+#signupbutton:not(:hover) {
+    transform: scale(1);
+    transition: 0.5s;
+  }

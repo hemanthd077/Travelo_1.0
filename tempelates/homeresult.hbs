@@ -22,7 +22,7 @@
                 </form>
 
                 <form action="/booking"  class="bookingdiv">
-                    <button id="bookingbutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
+                    <button id="bookingbutton" href="/booking"><i class="fa-solid fa-bus-simple"></i> Booking</button>
                 </form>
 
                 <form action="/likes-bus" class="bookingdiv">
@@ -222,9 +222,11 @@
                         </div>
                         <div id="bus-feature-data">
                             <div class="div-control-rating">
-                                <p style="margin-top: 5px;">Rating : </p>
-                                <i data-star="{{busdata.[13]}}"></i>
-                                <p style="margin-top: 7px;">{{busdata.[13]}}</p>
+                                <p class="rating-num">{{busdata.[13]}}/5</p>
+                                <div class="rowFlex">
+                                    <p style="margin-top: 5px;">Rating : </p>
+                                    <i data-star="{{busdata.[13]}}"></i><br>
+                                </div>
                             </div>
                             <div class="div-control-features">
                                 <strong id="feature-header">Bus Features</strong>
@@ -261,6 +263,64 @@
                                 <input id="dayCountid" type="hidden" value="{{busdata.[17]}}">
                             </div>
                         </div>
+
+                        <br><br><br>
+                        <div class="div-control-features termsandcondition">
+                            <h3 style="color: #ae006b;">Term's & Conditions</h3>
+                            <div>
+                                <h4 class="tc-subheader">ROLE OF TRAVELO</h4>
+                                <ul class="ul-block">
+                                    <li><span>Travelo only provides a technology platform that connects intending travelers with bus operators. It doesn't operate any bus or offer the service of transportation to the User. travelo also doesn't act as an agent of any bus operator in the process of providing the above-mentioned technology platform services.</span></li>
+                                    <li><span>The bus booking voucher which travelo issues to a User is solely based on the information provided or updated by the bus operator regarding the seat availability.</span></li>
+                                    <li><span>The amenities, services, routes, fares, schedule, bus type, seat availability and any other details pertaining to the bus service are provided by the respective bus operator and travelo has no control over such information provided by the bus operator.</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="tc-subheader">LIMITATION OF LIABILITY OF TRAVELO</h4>
+                                <ul class="ul-block">
+                                    <span>As a technology platform to enable transactions between the bus operators and the Users, travelo shall not be responsible for the operations of the bus operator including, but not limited to the following:</span>
+                                    <li><span>Timely departure or arrival of the bus,The conduct of bus operator's employees, representatives or agents</span></li>
+                                    <li><span>The condition of the bus, seats etc. not being up to the customer's expectation or as per the description provided by the bus operato</span></li>
+                                    <li><span>Cancellation of the trip due to any reasons</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="tc-subheader">CANCELLATION OF TICKET</h4>
+                                <ul class="ul-block">
+                                    <li><span>Cancellation of bus can be done either through the User's login in the travelo's website or by calling on the customer care number</span></li>
+                                    <li><span>Any cancellation is subject to such cancellation charges as mentioned.</span></li>
+                                    <li><span>Bookings can only be cancelled through the app or the website,offline cancellations are not permitted.</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="tc-subheader">MISCELLANEOUS</h4>
+                                <ul class="ul-block">
+                                    <li><span>The bus operator shall solely be liable for compliance of all laws including but not limited to the Motor Vehicle Act its Rules, applicable regulations, guidelines or directions enacted or issued by the Central Government or relevant State Governments.</span></li>
+                                    <li><span>Any prosecution arising out of the contravention of such laws, rules, regulations, guidelines including directives on fare control from respective RTO's or directions including but not limited to fines or penalties shall be borne by the bus operator.</span></li>
+                                    <li><span>The User agrees to take up any grievance resulting from cancellation or any deficiency in services due to any action of the enforcement agencies arising with the bus operator.</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="tc-subheader">TERMINATION </h4>
+                                <ul class="ul-block">
+                                    <li><span>We reserve the right to terminate or suspend user accounts or access to the app at our discretion, without prior notice.</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="tc-subheader">AMENDMENTS TO TERMS</h4>
+                                <ul class="ul-block">
+                                    <li><span>We may update these Terms and Conditions from time to time.</span></li>
+                                    <li><span>Users are responsible for reviewing these terms periodically to stay informed of any changes.</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="tc-subheader">INTELLECTUAL PROPERTY</h4>
+                                <ul class="ul-block">
+                                    <li><span>The app and its content, including logos, trademarks, and text, are protected by copyright and other intellectual property laws.</span></li>
+                                    <li><span>Users must not use or reproduce these materials without permission.</span></li>
+                                </ul>
+                            </div>
+                        </div><br><br>
                     </div>
                     <div id="bus-plan-data">
                         {{#each planDataArray as |outerItem outerIndex|}}
@@ -292,6 +352,10 @@
                                 <button id="popupButton" class="paybutton"><p>Pre Book Now at<br><i class="fa-solid fa-indian-rupee-sign"></i> {{busdata.[11]}}</p></button>
                                 <p style="font-size: 13px;">Balance Pay On pickup</p>
                             </div>
+                        </div>
+                        <br>
+                        <div class="div-control-plan">
+                            <h3>Reviews</h3>
                         </div>
                         <div id="popupContainer" class="popup">
                             <div class="payment-popup-main">
@@ -342,7 +406,6 @@
                                     <button id="closeButton" class="paybutton-personalinfo-cancel">Cancel</button>
                                     <button id="bookamount-button" class="paybutton-personalinfo" type="submit">Pre Book Now at <i class="fa-solid fa-indian-rupee-sign"></i>{{busdata.[11]}}</button>
                                 </div>
-                                
                             </div>
                         </div>
 

@@ -91,6 +91,7 @@ body{
     font-family: 'Open Sans', sans-serif;
     /* font-family: 'Philosopher', sans-serif; */
     font-style: normal;
+    user-select: none;
 }
 
 #main{
@@ -173,8 +174,6 @@ button#exitbutton {
     font-weight: 700;
     gap: 5px;
     font-size: 18px;
-    /* background-image: linear-gradient(275deg,#2d3464, #6e717a); */
-
 }
 
 button#exitbutton:hover{
@@ -184,8 +183,6 @@ button#exitbutton:hover{
 }
 
 .bookingdiv {
-    /* background-image: linear-gradient(95deg,#2d3465, #616575); */
-    /* background-color: #402c65; */
     background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -194,20 +191,18 @@ button#exitbutton:hover{
 
 #fromToBlock {
     width: 430px;
-    height: 500px;
+    height: 470px;
     display: inline-flex;
     flex-direction: column;
     margin-left: 120px;
-    margin-top: 30px;
-    padding: 30px;
+    margin-top: 60px;
+    padding: 26px;
     border-radius: 10px;
-    /* background-color: #dadade; */
     gap: 10px;
     background: rgba(0, 0, 0, 0.73);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(1.1px);
     -webkit-backdrop-filter: blur(1.1px);
-    /* border: 1px solid rgba(0, 0, 0, 0.39); */
 }
 
 #label-content {
@@ -276,10 +271,11 @@ input#calander {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     position:fixed;
-    /* left: 665px; */
     width: 20px;
     height: 20px;
     cursor: pointer;
+    /* display: none; */
+    opacity: 0;
 }
 
 input#calander:focus{
@@ -288,13 +284,23 @@ input#calander:focus{
 
 input::-webkit-datetime-edit-fields-wrapper {
     position: relative;
-    left: 15px;
     opacity: 80%;
 }
 input::-webkit-datetime-edit {
     position: relative;
     left: 5%;
 }
+
+input[type="date"]::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f133";
+    background: -webkit-linear-gradient(95deg,#ae006b, #2d3464);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 19px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
 
 button#searchbutton {
     width: 220px;
@@ -461,13 +467,13 @@ div#extradetaildiv:hover {
 p#text-1 {
     margin-top: 100px;
     font-family: 'Caveat', cursive;
-    font-size: 40px;
+    font-size: 55px;
     font-weight: 800;
 }
 
 p#text-2 {
     font-size: 65px;
-    width: 680px;
+    width: 700px;
     font-weight: 900;
     color: #FFFFFF;
     margin-top: -25px;
@@ -502,9 +508,10 @@ p#text-5 {
     gap: 35px;
     margin-top: 10px;
     margin-left: 10px;
-    background: -webkit-linear-gradient(135deg,#ae006b, #2d3464);
+    /* background: -webkit-linear-gradient(135deg,#ae006b, #2d3464);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+    color: #ffffff;
 }
 
 #error{
@@ -864,4 +871,24 @@ input#no-days,input#no-passenger {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     
+}
+
+.bg-socialmedia {
+    background-color: #7b014c;
+    height: 23px;
+    width: 28px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+a{
+    position: absolute;
+    margin-top: -3px;
+}
+
+.fa-instagram,.fa-square-x-twitter,.fa-linkedin{
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2px;
 }

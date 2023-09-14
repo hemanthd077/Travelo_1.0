@@ -12,6 +12,8 @@ router.post('/paymentstatus',userbooking.paymentstatus);
 
 router.get('/generate-pdf/:orderid',userbooking.downloadpdf);
 
+router.post('/ratingUpdate',userbooking.ratingUpdate);
+
 module.exports=router;
 
 

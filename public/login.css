@@ -17,6 +17,7 @@ body {
     user-select: none;
 }
 
+
 .innerlogincontent{
     display: flex;
     align-items: center;
@@ -25,7 +26,7 @@ body {
 }
 
 #block {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     padding: 30px;
     border-radius: 5px;
     height: 560px;
@@ -149,6 +150,8 @@ h2#logintxt-fpwd,.logintxt-verify {
 .loginbutton:hover,.submitbutton:hover {
     background-color: #2d3467;
     color: white;
+    transition: 0.5s;
+    border-radius: 20px;
 }
   
 
@@ -242,7 +245,8 @@ hr#line{
 .verify-btn:hover{
     color: white;
     background-color: #2d3467;
-
+    transition: 1s;
+    border-radius: 20px;
 }
 
 .contentBlock {
@@ -358,7 +362,7 @@ i#togglePassword {
     height: 40px;
     margin-top: 50px;
     width: 220px;
-    border-radius: 30px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     color: white;
@@ -386,6 +390,7 @@ i#togglePassword {
     justify-content: flex-start;
     font-weight: 700;
     cursor: pointer;
+    transition: 0.5s;
     margin-left: 90px;
     .fa-long-arrow-alt-right{
         opacity: 1;
@@ -395,6 +400,11 @@ i#togglePassword {
         animation: swipeLeft 1s ease-out infinite ;
         width: 360px;
     }
+}
+
+#button-home:not(:hover),.verify-btn:not(:hover){
+    transition: 0.5s;
+    border-radius: 5px;
 }
 
 .fa-long-arrow-alt-right{
@@ -450,3 +460,33 @@ p#ortag {
     padding-right: 10px;
 }
 
+.loginbutton:not(:hover),.submitbutton:not(:hover) {
+    transform: scale(1);
+    transition: 0.5s;
+  }
+
+  /* svg{
+    position: absolute;
+    top: 320px;
+    left: 0;
+    z-index: -1;
+}
+
+.bg-filler{
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    background-color: #dadade;
+    height: 320px;
+    min-width: 1530px;
+    width: 100%;
+    z-index: -1;
+} */
+
+.spin-load-animation{
+    display: none;
+}
+
+.submit-btn-content{
+    display: block;
+}

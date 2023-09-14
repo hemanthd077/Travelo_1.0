@@ -16,7 +16,7 @@
     <img id="appicon" src="/images/homelogo.png" alt="logo">
     <div  id="block">
         <div class="img-login-page">
-            <img class="bgimage-signup" src="/images/login-bg.jpg" alt="">
+            <img id="image-bg" class="bgimage-signup" src="/images/login-bg.jpg" alt="">
         </div>
         <div class="inner-formdiv">
             <form action="/signup" method='POST' id="loginform">
@@ -59,6 +59,21 @@
 </body>
 
 <script>
+
+    try{
+        document.querySelector('#image-bg').setAttribute('draggable', false);
+    }
+    catch(e){
+        console.log(e);
+    }
+
+    try{
+        document.querySelector('#appicon').setAttribute('draggable', false);
+    }
+    catch(e){
+        console.log(e);
+    }
+
     const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#pwd1');
 

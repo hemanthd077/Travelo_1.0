@@ -13,6 +13,7 @@ body {
     /* background-color: #dadade; */
     font-style: normal;
     user-select: none;
+    background-color: #e8e8e8;
 }
 
 
@@ -26,15 +27,10 @@ body {
 }
 
 #content {
-    padding: 30px;
     border-radius: 10px;
-    background-color: #FFFFFF;
-    /* box-shadow: 0px 0px 10px -3px #2d3467; */
     display: flex;
     flex-direction: row;
     gap: 100px;
-    padding-right: 80px;
-    padding-left: 10px;
 }
 
 .home-header {
@@ -67,11 +63,32 @@ button#dealer,button#user{
     cursor: pointer;
 }
 
+svg{
+    position: absolute;
+    top: 200px;
+    left: 0;
+    z-index: -1;
+}
+
+.bg-filler{
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    background-color: #dadade;
+    height: 200px;
+    min-width: 1530px;
+    width: 100%;
+}
+
 .circle:hover{
     transition: 0.5s;
     transform: scale(1.2);
-    color: white;    
 }
+
+.circle:not(:hover) {
+    transform: scale(1);
+    transition: 0.5s;
+  }
 
 .fa-user-tie{
     color: black;
@@ -119,3 +136,73 @@ button#dealer,button#user{
     justify-content: center;
     flex-direction: column;
   }
+
+.main-box-div{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.inner-main-box-div{
+    height: 350px;
+    width: 350px;
+    padding: 10px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px -2px #2d3467;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inner-main-box-div:hover{
+    transition: 0.5s;
+    transform: scale(1.05);
+    .nextpop{
+        transition: 0.5s;
+        transform: scale(1.15);
+    }
+}
+
+.inner-main-box-div:not(:hover){
+    transition: 0.5s;
+    transform: scale(1);
+    .nextpop{
+        transition: 0.5s;
+        transform: scale(1);
+    }
+}
+
+.inside-img{
+    width: 180px;
+    height: 200px;
+}
+
+button#dealer {
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    background: #2d3467;
+    border-radius: 50px;
+    position: absolute;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-top:370px;
+}
+
+.content-type {
+    opacity: 50%;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    flex-direction: column;
+    align-items: center;
+}
+
+p.type-header {
+    font-weight: 600;
+    margin-top: -25px;
+    font-size: 20px;
+}

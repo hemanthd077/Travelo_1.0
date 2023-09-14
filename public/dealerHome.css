@@ -359,7 +359,7 @@ input.planinputcontent{
 
 div#plantitle {
     display: flex;
-    background-color: #dadada;
+    background-color: #a3a6bc50;
     padding: 15px;
     border-radius: 5px;
     align-items: center;
@@ -384,7 +384,7 @@ div#planlocation {
 #dayplanlocation{
     display: flex;
     flex-direction: column;
-    background-color: #dadada;
+    background-color: #a3a6bc50;
     padding: 15px;
     border-radius: 5px;
     width: 930px;
@@ -764,7 +764,7 @@ label{
     background-color: white;
     padding: 15px;
     border-radius: 5px;
-    height: 442px;
+    height: 525px;
     width: 425px;
     box-shadow: 0px 2px 5px -1px #2d3467;
 }
@@ -806,7 +806,7 @@ label{
 }
 
 #buspic {
-    height: 207px;
+    height: 290px;
     width: 455px;
     border-radius: 0px 0px 5px 5px;
     margin-left: -15px;
@@ -1016,7 +1016,7 @@ div#contentdivision3 {
     border-radius: 5px;
     margin-bottom: 10px;
     margin-left: 10px;
-    height: 245px;
+    height: 300px;
     width: 435px;
     box-shadow: 0px 0px 5px 1px #2d3467;
 }
@@ -1024,7 +1024,7 @@ div#contentdivision3 {
 .fa-trash-restore-alt {
     margin-left: -110px;
     position: fixed;
-    margin-top: -128px;
+    margin-top: -155px;
     background-color: #dadada;
     color: #2d3467;
     width: 95px;
@@ -1426,12 +1426,16 @@ a#target-page-1 {
     background-color: white;
     padding: 15px;
     border-radius: 5px;
-    height: 442px;
+    height: 525px;
     width: 425px;
     display: flex;
     box-shadow: 0px 0px 5px -1px #2d3467;
     justify-content: center;
 
+}
+
+#search-div-plus:hover {
+    transform: scale(1.03);
 }
 .fa-couch,
 .fa-fan,
@@ -1492,7 +1496,7 @@ button#uploadbutton-1 {
     border-radius: 5px;
     margin-left: 10px;
     margin-bottom: 10px;
-    height: 245px;
+    height: 300px;
     width: 435px;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0px 1px 5px 0px #2d3467;

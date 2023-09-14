@@ -8,7 +8,7 @@
     <link rel="icon" href="/images/logowhite.svg">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/booking.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;500;600;700;800&family=Philosopher&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
                 </form>
 
                 <div id="bookingdivactive">
-                    <button id="bookingbuttonactive"><i class="fa-brands fa-opencart"></i> Booking</button>
+                    <button id="bookingbuttonactive"><i class="fa-solid fa-bus-simple"></i> Booking</button>
                 </div>
 
                 <form action="/likes-bus" class="bookingdiv">
@@ -56,282 +56,474 @@
             <div class="bookinnercontent">
                 <div id="booking-content-div-1">
                     {{#if upcoming}}
-                        {{#each upcomingTour}}
-                            <div id="inner-content-block">
-                                <div>
-                                    {{#if this.[12]}}
-                                        <div class="statusheadercolor"> </div>
-                                    {{else}}
-                                        <div class="statusheadercolorfail"> </div>
-                                    {{/if}}
-                                </div>
-                                <div id="inner-buscontent">
-                                    <img id="busimage" src="data:{{this.[3]}}" alt="">
-                                    <div style="display: flex;flex-direction:column;">
-                                        <div class="buscontent-main-div">
-                                            <div id="buscontent-owner-name">
-                                                <img id="dealerimage" src="data:{{this.[0]}}" alt="">
-                                                <div>
-                                                    <p id="busname">{{this.[2]}}</p>
-                                                    <p id="companyname">{{this.[1]}}</p>
-                                                </div>
-                                            </div>
-                                            {{#if this.[12]}}
-                                                <p id="status-days"><i id="days-staus-icon" class="fa-solid fa-map-location-dot fa-xs"></i> {{this.[13]}}</p>
-                                            {{/if}}
-                                            <div id="datediv-outer">
-                                                <div>
-                                                    <p class="SEdate">Start Date</p>
-                                                    <p class="SEdate-content">{{this.[6]}}</p>
-                                                </div>
-                                                <div>
-                                                    <p class="SEdate">End Date</p>
-                                                    <p class="SEdate-content">{{this.[7]}}</p>
-                                                </div>
-                                            </div>
-                                            <div id="datediv-outer">
-                                                {{#if this.[12]}}
-                                                    <button class="status-button-success">Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
-                                                {{else}}
-                                                    <button class="status-button-fail">Booking Failed <i class="fa-solid fa-xmark fa-xs"></i></button>
-                                                {{/if}}
-                                            </div>
+                        <div class="booking-loading-1">
+                            <div class="skeleton-card">
+                                <div class="skeleton-image"></div>
+                                <div class="skeleton-details">
+                                    <div class="firstdiv-loading">
+                                        <div class="logo-loadingdiv"></div>
+                                        <div class="inner-firstdiv-loading">
+                                            <div class="skeleton-line-logo"></div>
+                                            <div class="skeleton-line-logo-2"></div>
                                         </div>
-                                        <div class="buscontent-main-div">
-                                            <div class="location-content">
-                                                <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
-                                                <p class="pickupdrop-content">{{this.[8]}}</p>
-                                            </div>
-                                            <div class="location-content-1">
-                                                <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
-                                                <div id="cover-location-content">
-                                                    {{#each this.[9]}}
-                                                        <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
-                                                    {{/each}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{#if this.[15]}}
-                                            <br><div class="manager-outer-class">
-                                                    <p class="outer-managerheader-title"><i class="fa-solid fa-user-tie"></i> Guide Assigned</p>
-                                                    <div class="manager-inner-class">
-                                                        <div class="inner-managercontent-namediv">
-                                                            <p class="managerheader-title">Name</p>
-                                                            <p><i class="fa-solid fa-seedling fa-xs"></i> {{this.[16].[0]}}</p>
-                                                        </div>
-                                                        <div class="inner-managercontent-div">
-                                                            <p class="managerheader-title">Contact No</p>
-                                                            <a href="tel:{{this.[16].[1]}}" class="contactnumber-class"><p><i class="fa-solid fa-phone fa-xs"></i> {{this.[16].[1]}}</p></a>
-                                                        </div>
-                                                        <div class="inner-managercontent-div">
-                                                            <p class="managerheader-title">Gender</p>
-                                                            <p><i class="fa-solid fa-venus-mars fa-xs"></i> {{this.[16].[2]}}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        {{else}}
-                                            <br><div class="manager-outer-class">
-                                                    <p class="outer-managerheader-title"><i class="fa-solid fa-user-tie"></i> Travel Guide will assign shortly.</p>
-                                                </div>
-                                        {{/if}}
-                                    {{#if this.[12]}}
-                                            <div class="order-detail-content">
-                                                <div class="bookingcontent-id">
-                                                    <p>Booking Id : </p>
-                                                    <p>{{this.[4]}}</p>
-                                                </div>
-                                                <div class="bookingcontent-date">
-                                                    <p>Booked at : </p>
-                                                    <p>{{this.[5]}}</p>
-                                                </div>
-                                                <div>
-                                                    <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
-                                                </div>
-                                                <div class="paidammount-content">
-                                                    <p>Payment Done</p>
-                                                    <p>{{this.[10]}}</p>
-                                                </div>
-                                                <button class="balanceamount-content">
-                                                    <p>Balance Payment</p>
-                                                    <p>{{this.[11]}}</p>
-                                                </button>
-                                            </div>
-                                    {{/if}}
                                     </div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                </div>
+                                </div>
+                            
+                                <div class="skeleton-card">
+                                <div class="skeleton-image"></div>
+                                <div class="skeleton-details">
+                                    <div class="firstdiv-loading">
+                                        <div class="logo-loadingdiv"></div>
+                                        <div class="inner-firstdiv-loading">
+                                            <div class="skeleton-line-logo"></div>
+                                            <div class="skeleton-line-logo-2"></div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
                                 </div>
                             </div>
-                        {{/each}}
-                    {{/if}}
-                    {{#if upcomingwarning}}
-                        <div class="warning-content">
-                            <i class="fa-solid fa-map-location-dot fa-2xl"></i>
-                            <p id="notfountcompleted">Currently, there are no bookings to display</p>
-                            <a href="/home" id="homereference">
-                                <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
-                            </a>
+                        </div>
+                        <div class="booking-content-1">
+                            {{#if upcomingwarning}}
+                                <div class="warning-content">
+                                    <img class="warning-bg" src="/images/no-upcoming-booking.svg" alt="">
+                                    <p class="notfountcompleted">Currently, there are no bookings to display</p>
+                                    <a href="/home" id="homereference">
+                                        <p class="redirect-txt">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
+                                    </a>
+                                </div>
+                                {{!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,64L40,90.7C80,117,160,171,240,197.3C320,224,400,224,480,197.3C560,171,640,117,720,96C800,75,880,85,960,101.3C1040,117,1120,139,1200,165.3C1280,192,1360,224,1400,240L1440,256L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+                                <div class="svgfiller"></div> --}}
+                                {{else}}
+                                    {{#each upcomingTour}}
+                                        <div id="inner-content-block">
+                                            <div>
+                                                {{#if this.[12]}}
+                                                    <div class="statusheadercolor"> </div>
+                                                {{else}}
+                                                    <div class="statusheadercolorfail"> </div>
+                                                {{/if}}
+                                            </div>
+                                            <div id="inner-buscontent">
+                                                <img id="busimage" src="data:{{this.[3]}}" alt="">
+                                                <div style="display: flex;flex-direction:column;">
+                                                    <div class="buscontent-main-div">
+                                                        <div id="buscontent-owner-name">
+                                                            <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                                                            <div>
+                                                                <p id="busname">{{this.[2]}}</p>
+                                                                <p id="companyname">{{this.[1]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        {{#if this.[12]}}
+                                                            <p id="status-days"><i id="days-staus-icon" class="fa-solid fa-map-location-dot fa-xs"></i> {{this.[13]}}</p>
+                                                        {{/if}}
+                                                        <div id="datediv-outer">
+                                                            <div>
+                                                                <p class="SEdate">Start Date</p>
+                                                                <p class="SEdate-content">{{this.[6]}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="SEdate">End Date</p>
+                                                                <p class="SEdate-content">{{this.[7]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div id="datediv-outer">
+                                                            {{#if this.[12]}}
+                                                                <button class="status-button-success">Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
+                                                            {{else}}
+                                                                <button class="status-button-fail">Booking Failed <i class="fa-solid fa-xmark fa-xs"></i></button>
+                                                            {{/if}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="buscontent-main-div">
+                                                        <div class="location-content">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
+                                                            <p class="pickupdrop-content">{{this.[8]}}</p>
+                                                        </div>
+                                                        <div class="location-content-1">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
+                                                            <div id="cover-location-content">
+                                                                {{#each this.[9]}}
+                                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{#if this.[15]}}
+                                                        <br><div class="manager-outer-class">
+                                                                <p class="outer-managerheader-title"><i class="fa-solid fa-user-tie"></i> Guide Assigned</p>
+                                                                <div class="manager-inner-class">
+                                                                    <div class="inner-managercontent-namediv">
+                                                                        <p class="managerheader-title">Name</p>
+                                                                        <p><i class="fa-solid fa-seedling fa-xs"></i> {{this.[16].[0]}}</p>
+                                                                    </div>
+                                                                    <div class="inner-managercontent-div">
+                                                                        <p class="managerheader-title">Contact No</p>
+                                                                        <a href="tel:{{this.[16].[1]}}" class="contactnumber-class"><p><i class="fa-solid fa-phone fa-xs"></i> {{this.[16].[1]}}</p></a>
+                                                                    </div>
+                                                                    <div class="inner-managercontent-div">
+                                                                        <p class="managerheader-title">Gender</p>
+                                                                        <p><i class="fa-solid fa-venus-mars fa-xs"></i> {{this.[16].[2]}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    {{else}}
+                                                        <br><div class="manager-outer-class">
+                                                                <p class="outer-managerheader-title"><i class="fa-solid fa-user-tie"></i> Travel Guide will assign shortly.</p>
+                                                            </div>
+                                                    {{/if}} 
+                                                    {{#if this.[12]}}
+                                                            <div class="order-detail-content">
+                                                                <div class="bookingcontent-id">
+                                                                    <p>Booking Id : </p>
+                                                                    <p>{{this.[4]}}</p>
+                                                                </div>
+                                                                <div class="bookingcontent-date">
+                                                                    <p>Booked at : </p>
+                                                                    <p>{{this.[5]}}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <a id="receipt_generate" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
+                                                                </div>
+                                                                <div class="paidammount-content">
+                                                                    <p>Payment Done</p>
+                                                                    <p>{{this.[10]}}</p>
+                                                                </div>
+                                                                <button class="balanceamount-content">
+                                                                    <p>Balance Payment</p>
+                                                                    <p>{{this.[11]}}</p>
+                                                                </button>
+                                                            </div>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                            {{/if}}
                         </div>
                     {{/if}}
                 </div>
                 <div id="booking-content-div-2">
                     {{#if completed}}
-                        {{#each completedTour}}
-                            <div id="inner-content-block">
-                                <div>
-                                    {{#if this.[12]}}
-                                        <div class="statusheadercolor"> </div>
-                                    {{else}}
-                                        <div class="statusheadercolorfail"> </div>
-                                    {{/if}}
-                                </div>
-                                <div id="inner-buscontent">
-                                    <img id="busimage" src="data:{{this.[3]}}" alt="">
-                                    <div style="display: flex;flex-direction:column;">
-                                        <div class="buscontent-main-div">
-                                            <div id="buscontent-owner-name">
-                                                <img id="dealerimage" src="data:{{this.[0]}}" alt="">
-                                                <div>
-                                                    <p id="busname">{{this.[2]}}</p>
-                                                    <p id="companyname">{{this.[1]}}</p>
-                                                </div>
-                                            </div>
-                                            {{#if this.[12]}}
-                                                <p id="status-days"><i id="days-staus-icon" class="fa-solid fa-map-location-dot fa-xs"></i> {{this.[13]}}</p>
-                                            {{/if}}
-                                            <div id="datediv-outer">
-                                                <div>
-                                                    <p class="SEdate">Start Date</p>
-                                                    <p class="SEdate-content">{{this.[6]}}</p>
-                                                </div>
-                                                <div>
-                                                    <p class="SEdate">End Date</p>
-                                                    <p class="SEdate-content">{{this.[7]}}</p>
-                                                </div>
-                                            </div>
-                                            <div id="datediv-outer">
-                                                {{#if this.[12]}}
-                                                    <button class="status-button-success">Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
-                                                {{else}}
-                                                    <button class="status-button-fail">Booking Failed <i class="fa-solid fa-xmark fa-xs"></i></button>
-                                                {{/if}}
-                                            </div>
+                        <div class="booking-loading-2">
+                            <div class="skeleton-card">
+                                <div class="skeleton-image"></div>
+                                <div class="skeleton-details">
+                                    <div class="firstdiv-loading">
+                                        <div class="logo-loadingdiv"></div>
+                                        <div class="inner-firstdiv-loading">
+                                            <div class="skeleton-line-logo"></div>
+                                            <div class="skeleton-line-logo-2"></div>
                                         </div>
-                                        <div class="buscontent-main-div">
-                                            <div class="location-content">
-                                                <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
-                                                <p class="pickupdrop-content">{{this.[8]}}</p>
-                                            </div>
-                                            <div class="location-content-1">
-                                                <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
-                                                <div id="cover-location-content">
-                                                    {{#each this.[9]}}
-                                                        <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
-                                                    {{/each}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {{#if this.[12]}}
-                                            <div class="order-detail-content-1">
-                                                <div class="bookingcontent-id">
-                                                    <p>Booking Id : </p>
-                                                    <p>{{this.[4]}}</p>
-                                                </div>
-                                                <div class="bookingcontent-date">
-                                                    <p>Booked at : </p>
-                                                    <p>{{this.[5]}}</p>
-                                                </div>
-                                                <div>
-                                                <a id="receipt_generate_completed" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
-                                                </div>
-                                                <div class="paidammount-content-complete">
-                                                    <p>Total Payment : </p>
-                                                    <p>{{this.[14]}}</p>
-                                                </div>
-                                            </div>
-                                    {{/if}}
                                     </div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                </div>
+                                </div>
+                            
+                                <div class="skeleton-card">
+                                <div class="skeleton-image"></div>
+                                <div class="skeleton-details">
+                                    <div class="firstdiv-loading">
+                                        <div class="logo-loadingdiv"></div>
+                                        <div class="inner-firstdiv-loading">
+                                            <div class="skeleton-line-logo"></div>
+                                            <div class="skeleton-line-logo-2"></div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
                                 </div>
                             </div>
-                        {{/each}} 
-                    {{/if}}
-                    {{#if completedwarning}}
-                        <div class="warning-content">
-                            <i style="color: #2d3467; margin-bottom:20px" class="fa-solid fa-map-location-dot fa-2xl"></i>
-                            <p style="color: #2d3467;">No booking history to Show</p>
-                            <a href="/home" id="homereference">
-                                <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
-                            </a>
+                        </div>
+                        <div class="booking-content-2">
+                            {{#if completedwarning}}
+                                    <div class="warning-content">
+                                        <img class="warning-bg" src="/images/no-completed-booking.svg" alt="">
+                                        <p class="notfountcompleted">No booking history to Show</p>
+                                        <a href="/home" id="homereference">
+                                            <p class="redirect-txt">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
+                                        </a>
+                                    </div>
+                                    {{!-- <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,192L40,213.3C80,235,160,277,240,288C320,299,400,277,480,229.3C560,181,640,107,720,96C800,85,880,139,960,154.7C1040,171,1120,149,1200,122.7C1280,96,1360,64,1400,48L1440,32L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+                                    <div class="svgfiller"></div> --}}
+                                {{else}}
+                                    {{#each completedTour as |outerItem outerIndex|}}
+                                        <div id="inner-content-block">
+                                            <div>
+                                                {{#if this.[12]}}
+                                                    <div class="statusheadercolor-complete"> </div>
+                                                {{/if}}
+                                            </div>
+                                            <div id="inner-buscontent">
+                                                <img id="busimage" src="data:{{this.[3]}}" alt="">
+                                                <div style="display: flex;flex-direction:column;">
+                                                    <div class="buscontent-main-div">
+                                                        <div id="buscontent-owner-name">
+                                                            <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                                                            <div>
+                                                                <p id="busname">{{this.[2]}}</p>
+                                                                <p id="companyname">{{this.[1]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        {{#if this.[12]}}
+                                                            <p id="status-days-complete"><i id="days-staus-icon" class="fa-solid fa-map-location-dot fa-xs"></i> {{this.[13]}}</p>
+                                                        {{/if}}
+                                                        <div id="datediv-outer">
+                                                            <div>
+                                                                <p class="SEdate">Start Date</p>
+                                                                <p class="SEdate-content">{{this.[6]}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="SEdate">End Date</p>
+                                                                <p class="SEdate-content">{{this.[7]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div id="datediv-outer">
+                                                            {{#if this.[12]}}
+                                                                <button class="status-button-success">Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
+                                                            {{else}}
+                                                                <button class="status-button-fail">Booking Failed <i class="fa-solid fa-xmark fa-xs"></i></button>
+                                                            {{/if}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="buscontent-main-div">
+                                                        <div class="location-content">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
+                                                            <p class="pickupdrop-content">{{this.[8]}}</p>
+                                                        </div>
+                                                        <div class="location-content-1">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
+                                                            <div id="cover-location-content">
+                                                                {{#each this.[9]}}
+                                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="rating-outer-div">
+                                                        <div class="star-rating-div">
+                                                            {{#if this.[15].[4]}}
+                                                                <p class="pickupdrop-header ratingstatus">Absolutely Excellent</p>
+                                                            {{else if this.[15].[3]}}
+                                                                <p class="pickupdrop-header ratingstatus">Very Satisfied!</p>
+                                                            {{else if this.[15].[2]}}
+                                                                <p class="pickupdrop-header ratingstatus">Average Experience</p>
+                                                            {{else if this.[15].[1]}}
+                                                                <p class="pickupdrop-header ratingstatus">Could be better</p>
+                                                            {{else if this.[15].[0]}}
+                                                                <p class="pickupdrop-header ratingstatus">Not satisfied at all</p>
+                                                            {{else}}
+                                                                <p class="pickupdrop-header ratingstatus">Rate Your Experience</p>
+                                                            {{/if}}
+                                                            <div class="rating-star-div">
+                                                                {{#each this.[15]}}
+                                                                    {{#if this}}
+                                                                        <button id="ratingbutton" type="button" onclick="toggleStar('{{@index}}','{{outerIndex}}')"><i class="fa-solid fa-star fa-2x rating-star ratingstat-{{outerIndex}}{{@index}}"></i></button>   
+                                                                    {{else}}
+                                                                        <button id="ratingbutton" type="button" onclick="toggleStar('{{@index}}','{{outerIndex}}')"><i class="fa-regular fa-star fa-2x rating-star ratingstat-{{outerIndex}}{{@index}}"></i></button>
+                                                                    {{/if}}
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <button id="givefeedback-btn" onclick="dragdownfeedback('{{@index}}')">Give Feedback here <br> <i class="fa-solid fa-truck-arrow-right"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    {{#if this.[12]}}
+                                                        <div class="order-detail-content-1">
+                                                            <div class="bookingcontent-id">
+                                                                <p>Booking Id : </p>
+                                                                <p>{{this.[4]}}</p>
+                                                            </div>
+                                                            <div class="bookingcontent-date">
+                                                                <p>Booked at : </p>
+                                                                <p>{{this.[5]}}</p>
+                                                            </div>
+                                                            <div>
+                                                            <a id="receipt_generate_completed" href="/generate-pdf/{{this.[4]}}" download="generated.pdf">Invoice <i class="fa-solid fa-download"></i></a>
+                                                            </div>
+                                                            <div class="paidammount-content-complete">
+                                                                <p>Total Payment : </p>
+                                                                <p>{{this.[14]}}</p>
+                                                            </div>
+                                                        </div>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="commandbox-div drag-feedback-{{@index}}">
+                                            <p class="feedback-header" style="color: #ae006b;font-size:18px">Give Feedback</p>
+                                            <div class="inner-feedback-div">
+                                                <div class="ratingstar-block-div">
+                                                    <p class="feedback-txt">What you think of this tour</p>
+                                                    <div class="rating-star-div" style="margin-top: 30px;">
+                                                        {{#each this.[15]}}
+                                                            {{#if this}}
+                                                                <button id="ratingbutton" type="button" onclick="toggleStar('{{@index}}','{{outerIndex}}')"><i class="fa-solid fa-star fa-3x rating-star ratingstat1-{{outerIndex}}{{@index}}"></i></button>   
+                                                            {{else}}
+                                                                <button id="ratingbutton" type="button" onclick="toggleStar('{{@index}}','{{outerIndex}}')"><i class="fa-regular fa-star fa-3x rating-star ratingstat1-{{outerIndex}}{{@index}}"></i></button>
+                                                            {{/if}}
+                                                        {{/each}}
+                                                    </div>
+                                                </div>
+                                                <div class="ratingstar-block-div-1">
+                                                    <p class="feedback-txt">Do You have any thoughts you'd like to share?</p>
+                                                    <div class="inner-ratingstar-block-div">
+                                                        <textarea name="feedback" id="textarea-feedback" cols="90" rows="8" placeholder="Tell us in words..." required></textarea>
+                                                        <div class="ratingstar-block-div-button">
+                                                            <button class="submit-feedback" type="submit" onclick="dragupfeedback('{{@index}}')">Submit Feedback</button>
+                                                            <button class="close-feedback" onclick="dragupfeedback('{{@index}}')">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                            {{/if}} 
                         </div>
                     {{/if}}
                 </div>
                 <div id="booking-content-div-3">
                     {{#if failed}}
-                        {{#each failedTour}}
-                            <div id="inner-content-block">
-                                <div>
-                                    {{#if this.[12]}}
-                                        <div class="statusheadercolor"> </div>
-                                    {{else}}
-                                        <div class="statusheadercolorfail"> </div>
-                                    {{/if}}
-                                </div>
-                                <div id="inner-buscontent">
-                                    <img id="busimage" src="data:{{this.[3]}}" alt="">
-                                    <div style="display: flex;flex-direction:column;">
-                                        <div class="buscontent-main-div">
-                                            <div id="buscontent-owner-name">
-                                                <img id="dealerimage" src="data:{{this.[0]}}" alt="">
-                                                <div>
-                                                    <p id="busname">{{this.[2]}}</p>
-                                                    <p id="companyname">{{this.[1]}}</p>
-                                                </div>
-                                            </div>
-                                            {{#if this.[12]}}
-                                                <p id="status-days">{{this.[13]}}</p>
-                                            {{/if}}
-                                            <div id="datediv-outer">
-                                                <div>
-                                                    <p class="SEdate">Start Date</p>
-                                                    <p class="SEdate-content">{{this.[6]}}</p>
-                                                </div>
-                                                <div>
-                                                    <p class="SEdate">End Date</p>
-                                                    <p class="SEdate-content">{{this.[7]}}</p>
-                                                </div>
-                                            </div>
-                                            <div id="datediv-outer">
-                                                {{#if this.[12]}}
-                                                    <button class="status-button-success">Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
-                                                {{else}}
-                                                    <button class="status-button-fail">Booking Failed <i class="fa-solid fa-xmark fa-xs"></i></button>
-                                                {{/if}}
-                                            </div>
-                                        </div>
-                                        <div class="buscontent-main-div">
-                                            <div class="location-content">
-                                                <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
-                                                <p class="pickupdrop-content">{{this.[8]}}</p>
-                                            </div>
-                                            <div class="location-content-1">
-                                                <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
-                                                <div id="cover-location-content">
-                                                    {{#each this.[9]}}
-                                                        <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
-                                                    {{/each}}
-                                                </div>
-                                            </div>
+                        <div class="booking-loading-3">
+                            <div class="skeleton-card">
+                                <div class="skeleton-image"></div>
+                                <div class="skeleton-details">
+                                    <div class="firstdiv-loading">
+                                        <div class="logo-loadingdiv"></div>
+                                        <div class="inner-firstdiv-loading">
+                                            <div class="skeleton-line-logo"></div>
+                                            <div class="skeleton-line-logo-2"></div>
                                         </div>
                                     </div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                </div>
+                                </div>
+                            
+                                <div class="skeleton-card">
+                                <div class="skeleton-image"></div>
+                                <div class="skeleton-details">
+                                    <div class="firstdiv-loading">
+                                        <div class="logo-loadingdiv"></div>
+                                        <div class="inner-firstdiv-loading">
+                                            <div class="skeleton-line-logo"></div>
+                                            <div class="skeleton-line-logo-2"></div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
+                                    <br>
+                                    <div class="skeleton-line"></div>
+                                    <div class="skeleton-line"></div>
                                 </div>
                             </div>
-                        {{/each}} 
-                    {{/if}}
-                    {{#if failedwarning}}
-                        <div class="warning-content">
-                            <i style="color: #2d3467; margin-bottom:20px" class="fa-solid fa-map-location-dot fa-2xl"></i>
-                            <p style="color: #2d3467;">No booking Failed to Show</p>
-                            <a href="/home" id="homereference">
-                                <p style="display: flex;flex-direction:row;gap:5px;align-items:center;">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
-                            </a>
+                        </div>
+                        <div class="booking-content-3">
+                            {{#if failedwarning}}
+                                <div class="warning-content">
+                                    <img class="warning-bg" src="/images/no-failed-booking.svg" alt="">
+                                    <p class="notfountcompleted-1">No Booking Failed to Show</p>
+                                    <a href="/home" id="homereference">
+                                        <p class="redirect-txt">Find and reserve your next journey,Now!!<i id="rigtharrowicon" class="fa-solid fa-angle-right"></i></p>
+                                    </a>
+                                </div>
+                                {{!-- <svg class="svg-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,224L40,208C80,192,160,160,240,160C320,160,400,192,480,170.7C560,149,640,75,720,74.7C800,75,880,149,960,197.3C1040,245,1120,267,1200,256C1280,245,1360,203,1400,181.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+                                <div class="svgfiller-1"></div> --}}
+                                {{else}}
+                                    {{#each failedTour}}
+                                        <div id="inner-content-block">
+                                            <div>
+                                                {{#if this.[12]}}
+                                                    <div class="statusheadercolor"> </div>
+                                                {{else}}
+                                                    <div class="statusheadercolorfail"> </div>
+                                                {{/if}}
+                                            </div>
+                                            <div id="inner-buscontent">
+                                                <img id="busimage" src="data:{{this.[3]}}" alt="">
+                                                <div style="display: flex;flex-direction:column;">
+                                                    <div class="buscontent-main-div">
+                                                        <div id="buscontent-owner-name">
+                                                            <img id="dealerimage" src="data:{{this.[0]}}" alt="">
+                                                            <div>
+                                                                <p id="busname">{{this.[2]}}</p>
+                                                                <p id="companyname">{{this.[1]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        {{#if this.[12]}}
+                                                            <p id="status-days">{{this.[13]}}</p>
+                                                        {{/if}}
+                                                        <div id="datediv-outer">
+                                                            <div>
+                                                                <p class="SEdate">Start Date</p>
+                                                                <p class="SEdate-content">{{this.[6]}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="SEdate">End Date</p>
+                                                                <p class="SEdate-content">{{this.[7]}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div id="datediv-outer">
+                                                            {{#if this.[12]}}
+                                                                <button class="status-button-success">Booking Success <i class="fa-solid fa-check fa-xs"></i></button>
+                                                            {{else}}
+                                                                <button class="status-button-fail">Booking Failed <i class="fa-solid fa-xmark fa-xs"></i></button>
+                                                            {{/if}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="buscontent-main-div">
+                                                        <div class="location-content">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-departure fa-xs"></i> Pick Up</p>
+                                                            <p class="pickupdrop-content">{{this.[8]}}</p>
+                                                        </div>
+                                                        <div class="location-content-1">
+                                                            <p class="pickupdrop-header"><i class="fa-solid fa-plane-arrival fa-sm"></i> Packages Covers</p>
+                                                            <div id="cover-location-content">
+                                                                {{#each this.[9]}}
+                                                                    <p><i class="fa-solid fa-location-dot"></i> {{this}}</p>
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/each}} 
+                            {{/if}}
                         </div>
                     {{/if}}
                 </div>
@@ -341,6 +533,71 @@
 </body>
 
 <script>
+    try{
+        function toggleStar(innerindex,outerIndex){
+            for(let i=0;i<5;i++){
+                let togglestarrating = document.querySelector(`.ratingstat-${outerIndex}${i}`);
+                if(i<=innerindex){
+                    if(togglestarrating.classList.contains('fa-regular')){
+                        togglestarrating.classList.remove('fa-regular');
+                        togglestarrating.classList.add('fa-solid'); 
+                    }  
+                }
+                else{
+                    if(togglestarrating.classList.contains('fa-solid')){
+                        togglestarrating.classList.remove('fa-solid');
+                        togglestarrating.classList.add('fa-regular'); 
+                    }  
+                }
+
+                togglestarrating = document.querySelector(`.ratingstat1-${outerIndex}${i}`);
+                if(i<=innerindex){
+                    if(togglestarrating.classList.contains('fa-regular')){
+                        togglestarrating.classList.remove('fa-regular');
+                        togglestarrating.classList.add('fa-solid'); 
+                    }  
+                }
+                else{
+                    if(togglestarrating.classList.contains('fa-solid')){
+                        togglestarrating.classList.remove('fa-solid');
+                        togglestarrating.classList.add('fa-regular'); 
+                    }  
+                }
+
+                const paragraph = document.querySelector('.ratingstatus');
+                if(innerindex==='4'){
+                    paragraph.textContent = 'Absolutely Excellent';
+                }
+                else if(innerindex==='3'){
+                paragraph.textContent = 'Very Satisfied!';
+                }
+                else if(innerindex==='2'){
+                    paragraph.textContent = 'Average Experience';
+                }
+                else if(innerindex==='1'){
+                    paragraph.textContent = 'Could be better';
+                }
+                else{
+                    paragraph.textContent = 'Not satisfied at all';
+                }
+
+            }
+            let response=  fetch(`/ratingUpdate?points=${innerindex}&index=${outerIndex}`, {
+                method: 'POST',
+            });
+        }
+    }
+    catch(e){
+        console.log(e);
+    }
+    try{
+        document.getElementById('dealerimage').setAttribute('draggable', false);
+        document.getElementById('busimage').setAttribute('draggable', false);
+        document.getElementById('appicon').setAttribute('draggable', false);
+    }
+    catch(e){
+        console.log(e);
+    }
     function activestatus(id1,id2,id3){
         const element1 = document.getElementById(`bookinnerheader${id1}`);
         if(element1){
@@ -373,9 +630,39 @@
         if(innercontentblock3){
             innercontentblock3.style.display='none';
         }
+
+        setTimeout(function(){
+            document.querySelector(`.booking-loading-${id1}`).style.display = "none";
+            document.querySelector(`.booking-content-${id1}`).style.display = "flex";
+        },2000);
     }
 
     activestatus('1','2','3');
+
+    try{
+        function dragdownfeedback(index){
+            document.querySelector(`.drag-feedback-${index}`).style.marginTop = "-20px";
+            setTimeout(function(){
+                document.querySelector(`.drag-feedback-${index}`).style.zIndex = "0";
+            },800);
+            document.querySelector(`.drag-feedback-${index}`).style.boxShadow = '0px 3px 5px -2px #2d3467';
+        }
+    }
+    catch(e){
+        console.log(e);
+    }
+
+    try{
+        function dragupfeedback(index){
+            document.querySelector(`.drag-feedback-${index}`).style.zIndex = "-1";
+            setTimeout(function(){
+                document.querySelector(`.drag-feedback-${index}`).style.marginTop = "-250px";
+            },500);
+        }
+    }
+    catch(e){
+        console.log(e);
+    }
 </script>
 
 </html>

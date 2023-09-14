@@ -17,31 +17,69 @@
   <div id="logo-container">
     <img id="mainbiglogo" class="tranmission" style="margin-top: -100px; width:250px" src="/images/homelogo.png" style="width: 300px;" alt="Logo">
   </div>
-   
   <div id="content" style="display: none;">
-    <img class="main-bg-img" src="/images/main-bg.svg" alt="">
-    <div class="inner-log-content">
-      <img id="appicon" src="/images/homelogo.png" alt="logo">
-      <p class="home-header">SELECT LOGIN TYPE</p><br>
-      <div id="user-dealer-nav">
+  <div class="bg-filler"></div>
+  <img id="appicon" src="/images/homelogo.png" alt="logo">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#dadade" fill-opacity="1" d="M0,192L48,165.3C96,139,192,85,288,53.3C384,21,480,11,576,21.3C672,32,768,64,864,101.3C960,139,1056,181,1152,192C1248,203,1344,181,1392,170.7L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
+    <div class="main-box-div">
         <form action="/dealer">
-          <button id="dealer">
-            <div class="circle"><img class="image-icon-button" src="/images/agency-icon-bg.svg" alt=""></div><br>
-            <p class="type-select-content">AGENCY</p>
-          </button>
+          <div class="inner-main-box-div">
+              <img class="inside-img" src="/images/agency-icon-bg.svg" alt="">
+              <p class="type-header">AGENCY</p><br>
+              <div class="content-type">
+                  <p>Agency + Travelo = Unstoppable Success!</p>
+                  <p>Click here to make it !</p>
+              </div>
+              <button class="nextpop" id="dealer"><i class="fa-solid fa-arrow-right fa-lg"></i></button>
+          </div>
         </form>
         <form action="/login">
-          <button id="user">
-              <div class="circle"><img class="image-icon-button" src="/images/user-icon-bg.jpg" style="width: 100px;" alt=""></div><br>
-              <p class="type-select-content">USER</p>
-          </button>
+          <div class="inner-main-box-div">
+            <img class="inside-img" src="/images/user-icon-bg.svg" alt="">
+            <p class="type-header">USER</p><br>
+            <div class="content-type">
+              <p>Connecting You to Your Next Destination.</p>
+              <p>Click here to book your bus </p>
+            </div>
+            <button class="nextpop" id="dealer"><i class="fa-solid fa-arrow-right fa-lg"></i></button>
+          </div>
         </form>
-      </div>
     </div>
   </div>
 </body>
 
 <script>
+  try{
+      document.querySelector('#image-icon').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
+  try{
+      document.querySelector('#image-icon-1').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
+  try{
+      document.querySelector('#image-icon-2').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
+  try{
+      document.getElementById('appicon').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
+  try{
+      document.getElementById('mainbiglogo').setAttribute('draggable', false);
+  }
+  catch(e){
+    console.log(e);
+  }
+ 
   document.addEventListener("DOMContentLoaded", function(event) {
     setTimeout(function() {
       document.getElementById("logo-container").style.display = "none";

@@ -1,3 +1,5 @@
+const { intToRGBA } = require('jimp');
+const { Long } = require('mongodb');
 const mongoose = require('mongoose');
 
 const PaymentSchema = new mongoose.Schema({
@@ -54,6 +56,9 @@ const PaymentSchema = new mongoose.Schema({
         type : String,
     },
     nonvegcount :{
+        type : String,
+    },
+    rating : {
         type : String,
     },
 })

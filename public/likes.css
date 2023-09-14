@@ -103,7 +103,7 @@ button#exitbutton:hover,#bookingbutton:hover{
 }
 
 #content-block{
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 15px;
     align-items: center;
@@ -114,7 +114,7 @@ button#exitbutton:hover,#bookingbutton:hover{
     flex-direction: row;
     gap: 20px;
     background-color: #ffffff;
-    width: 1400px;
+    width: 1370px;
     border-radius: 5px;
     padding: 15px;
     box-shadow: 0px -1px 5px -2px #2d3467;
@@ -129,7 +129,7 @@ button#exitbutton:hover,#bookingbutton:hover{
 
 img#busimage {
     width: 400px;
-    height: 210px;
+    height: 250px;
     border-radius: 5px;
     box-shadow: 0px 3px 5px -2px #2d3467;
 }
@@ -163,7 +163,7 @@ img#dealerimage{
 
 #header-content{
     font-size: 33px;
-    margin-left: 40px;
+    margin-left: 45px;
     font-weight: 300;
 }
 
@@ -188,7 +188,7 @@ img#dealerimage{
 
 #heart-status-button{
     position: absolute;
-    margin-left: 950px;
+    margin-left: 915px;
     background-color: transparent;
     border:none;
     margin-top: 5px;
@@ -246,18 +246,174 @@ p#companyname {
     flex-direction: column;
     align-items: center;
     font-size: 20px;
-    margin-top: 220px;
-    background: -webkit-linear-gradient(110deg,#ae006b, #2d3464);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 #homereference:focus{
     color: #2d3467;
 }
 
-#homereference:hover{
-    #rigtharrowicon{
-        display: block;
+.skeleton-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 91%;
+    height: 260px;
+    margin: 10px;
+}
+
+  .skeleton-image {
+    width: 400px;
+    height: 220px;
+    margin: 20px;
+    border-radius: 5px;
+    background-color: #ddd;
+    animation: loading 1.5s infinite;
+  }
+
+  .skeleton-details {
+    width: 66%;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+
+  .skeleton-line {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    animation: loading 1.5s infinite;
+  }
+
+  .skeleton-line-logo {
+    width: 30%;
+    height: 16px;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    animation: loading 1.5s infinite;
+  }
+  .skeleton-line-logo-2 {
+    width: 20%;
+    height: 16px;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      opacity: 0.3;
     }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  .firstdiv-loading{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    background-color: transparent;
+  }
+  .inner-firstdiv-loading {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: transparent;
+}
+  .logo-loadingdiv{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    animation: loading 1.5s infinite;
+  }
+
+  .wishlist-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heart-loader {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    animation: pulse 1s infinite;
+  
+  }
+  
+  .heart-loader::before,
+  .heart-loader::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12px;
+    width: 12px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+  
+  .heart-loader::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  }
+  
+  .heart-loader::before,
+  .heart-loader::after {
+    animation: loading 1.5s infinite;
+  }
+
+  .svg-1{
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    z-index: -1;
+}
+
+.svgfiller-1{
+    height: 30px;
+    min-width: auto;
+    width: 100%;
+    background-color: #f0f0f0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.warning-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.redirect-txt{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-weight: 600;
+    align-items: center;
+    font-size: 14px;
+}
+
+.warning-bg{
+    width: 400x;
+    height: 400px;
+}
+
+.notfountcompleted-1 {
+    margin-top: -30px;
+    color: #2d3467;
+    font-weight: 700;
 }

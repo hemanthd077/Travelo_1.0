@@ -145,7 +145,7 @@ div.mainblock {
 
 #busimg {
     width: 400px;
-    height: 210px;
+    height: 250px;
     border-radius: 5px;
     box-shadow: 0px 3px 5px -2px #2d3467
 }
@@ -163,7 +163,7 @@ div.mainblock {
     gap: 10px;
     align-items: center;
     margin-left: 40px;
-    margin-top:40px
+    margin-top:10px
 }
 
 div#searchresultdiv {
@@ -179,9 +179,11 @@ div#searchresultdiv {
     font-size: 15px;
     margin-left: 40px;
     display: flex;
-    align-items: center;
+    height: 90px;
+    align-items: flex-start;
     color: #2d3467;
     gap: 10px;
+    margin-top: 5px;
 }
 
 #dealercompanyname{
@@ -374,7 +376,7 @@ nav#nav,nav#navcontent {
     position: absolute;
     margin-left: 1120px;
     gap: 10px;
-    margin-top: 170px;
+    margin-top: 225px;
 }
 
 #totalamount-button{
@@ -507,7 +509,7 @@ div#searchresultdiv1 {
     width: 1430px;
     margin-top: -20px;
     padding: 20px;
-    height: 250px;
+    height: 290px;
     margin-left: -20px;
     border-radius: 5px;
     background: transparent;
@@ -530,7 +532,8 @@ div#searchresultdiv1 {
 }
 
 .mySlides{
-    box-shadow: 0px 1px 5px 3px #2d3464;
+    box-shadow: 0px -1px 5px -1px #2d3464;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .mySlides.fade {
@@ -613,7 +616,7 @@ div#searchresultdiv1 {
 #bus-image{
     width: 600px;
     height: 300px;
-    /* border-radius: 5px 5px 0px 0px; */
+    border-radius: 5px 5px 0px 0px;
 }
 
 #bus-feature-data {
@@ -626,11 +629,25 @@ div#searchresultdiv1 {
     align-items: center;
     margin-top: -25px;
     z-index: -1;
-    box-shadow: 0px 1px 5px 0px #2d3464;
+    box-shadow: 0px 1px 5px -2px #2d3464;
     width: 580px;
     position: relative;
     margin-bottom: 20px;
     animation: fadeInDown 1s ease-in-out;
+}
+
+.termsandcondition{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    align-items: center;
+    margin-top: -25px;
+    box-shadow: 0px 1px 5px -2px #2d3464;
+    width: 580px;
+    margin-bottom: 100px;
 }
 
 @-webkit-keyframes fadeInDown {
@@ -651,12 +668,29 @@ div#searchresultdiv1 {
     -webkit-text-fill-color: transparent;
 }
 
+.tc-subheader{
+    padding-left: 10px;
+}
+
 .div-control-rating {
     display: flex;
-    /* margin-top: -10px; */
     align-items: center;
-    gap: 10px;
     width: 580px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rating-num {
+    font-size: 35px;
+    font-weight: bold;
+    font-family: fantasy;
+    margin-top: 10px;
+}
+
+.rowFlex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
 }
 
@@ -853,4 +887,21 @@ h2{
     color: #ae006b;
     font-weight: 600;
 
+}
+
+.ul-block {
+    margin-left: 20px;
+    gap: 15px;
+    display: flex;
+    padding: 10px;
+    text-align: justify;
+    flex-direction: column;
+}
+
+li {
+    color: #ae006b;
+}
+
+li span {
+    color: #2d3467;
 }

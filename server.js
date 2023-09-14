@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const hbs = require('hbs')
-const templatePath = path.join(__dirname,'../tempelates')
+const templatePath = path.join(__dirname,'./tempelates')
 var RateLimit = require('express-rate-limit');
 
 const mongoose = require('mongoose');
@@ -36,20 +36,20 @@ app.use(express.static('public'))
 
 app.use(express.urlencoded({extended:false}))
 
-const loginRoutes = require('../routes/loginroutes')
-const signupRoutes = require('../routes/signuproutes')
-const homeRoutes = require('../routes/homeroutes')
-const dealerRoutes = require('../routes/dealerroutes')
-const profileRoutes = require('../routes/profileroutes')
-const likeRoutes = require('../routes/likeroutes')
-const dealerhomeroutes = require('../routes/dealerhomeroutes')
-const booking = require('../routes/bookingroutes')
-const maproutes = require('../routes/map');
+const loginRoutes = require('./routes/loginroutes')
+const signupRoutes = require('./routes/signuproutes')
+const homeRoutes = require('./routes/homeroutes')
+const dealerRoutes = require('./routes/dealerroutes')
+const profileRoutes = require('./routes/profileroutes')
+const likeRoutes = require('./routes/likeroutes')
+const dealerhomeroutes = require('./routes/dealerhomeroutes')
+const booking = require('./routes/bookingroutes')
+const maproutes = require('./routes/map');
 const passport = require('passport');
 const session = require('express-session');
 
 
-require('../src/passport')
+require('./src/passport')
 app.use(session({secret:secret}))
 app.use(passport.initialize())
 app.use(passport.session())

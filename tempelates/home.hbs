@@ -23,7 +23,7 @@
                 </div>
 
                 <form action="/booking"  class="profilediv">
-                    <button id="profilebutton" href="/booking"><i class="fa-brands fa-opencart"></i> Booking</button>
+                    <button id="profilebutton" href="/booking"><i class="fa-solid fa-bus-simple"></i> Booking</button>
                 </form>
 
                 <form action="/likes-bus" class="profilediv">
@@ -46,19 +46,24 @@
             <div id="content">
                 <div >
                     <p id="text-1">Your Tour Bus In Click</p>
-                    <p id="text-2">BOOK YOUR RENTAL BUS ON</p>
+                    <p id="text-2">BOOK YOUR TOURIST BUS ON</p>
                     <p id="text-3">TRAVELO</p>
                     <p id="text-4"></p><br><br>
-                    <p id="text-5">Follow us on</p>
+                    {{!-- <p id="text-5">Follow us on</p>
                     <div id="account-follow">
-                        <a href=""><i class="fa-brands fa-instagram fa-lg"></i></a>
-                        <a href=""><i class="fa-brands fa-square-x-twitter fa-lg"></i></a>
-                        <a href=""><i class="fa-brands fa-linkedin fa-lg"></i></a>
-                    </div>
+                        <div class="bg-socialmedia">
+                            <a href=""><i class="fa-brands fa-instagram fa-2x"></i></a>
+                        </div>
+                        <div class="bg-socialmedia">
+                            <a href=""><i class="fa-brands fa-square-x-twitter fa-2x"></i></a>
+                        </div>
+                        <div class="bg-socialmedia">
+                            <a href=""><i class="fa-brands fa-linkedin fa-2x"></i></a>
+                        </div>
+                    </div> --}}
                 </div>
                 <div>
                     <form action="/search" method="post" id="fromToBlock">
-                        {{!-- <img id="img-homepage-gif" src="/videos/homepage-gif.gif" alt="gif"><br> --}}
                         <div id="input-content">
                             <input type="hidden" name="fromdistrict" id="fromdistrict">
                             <input type="hidden" name="fromstate" id="fromstate">
@@ -66,7 +71,6 @@
                             <label id="label-content" for="from">From:</label>
                             <p id="fromtext"><i class="fa-solid fa-city"></i><input type="text" id="from" placeholder="Enter the Pick Up Location" name="source" required onchange="handleInputChange()" autocomplete="off"></p>
                             <div id="suggestionfrom"></div>
-                            {{!-- <button id="swapbutton"  onclick="swapInputs()" type="button"><img id="swapicon" src="/images/swap.png" alt="swapicon"></button> --}}
                             <input type="hidden" name="tostate" id="tostate">
                             <input type="hidden" name="tocity" id="tocity">
                             <label id="label-content" for="to">Tour City:</label>
@@ -92,6 +96,18 @@
 </body>
 
 <script>
+
+    try{
+         const dateInput = document.getElementById('calander');
+
+        dateInput.addEventListener('focus', function(event) {
+        event.preventDefault();
+        dateInput.click();
+        });
+    }
+    catch(e){
+        console.log(e);
+    }
 
     const rotateButton = document.getElementById('swapbutton');
      const rotateMe = document.getElementById('swapicon');

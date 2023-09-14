@@ -6,27 +6,24 @@
 body{
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    background-color: #dadade;
+    height: 100vh;
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
     user-select: none;
 }
-
-video {
-    height: 745px;
-    position: absolute;
-    width: 990px;
-    margin-left: 220px;
-}
-
 div#block-1{
     display: flex;
     flex-direction: column;
     width: 320px;
-    height: 735px;
     align-items: center;
     background-color: white;
-    /* border-radius: 0px 25px 25px 0px; */
+    border-radius: 20px;
     position: relative;
     animation: myfirst 2s 1;
+    box-shadow: 0px 0px 5px -1px #2d3467;
     animation-direction: alternate;
     /* height: 705px;
     margin-top: 20px;
@@ -39,11 +36,13 @@ div#block-1{
 }
 
 #p-content {
-    margin-top: 130px;
-    padding: 29px;
-    font-size: 21px;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 15px;
     font-weight: 700;
+    text-align: center;
 }
+
 #disclimer-openmail {
     padding-top: 30px;
     padding-right: 30px;
@@ -61,9 +60,11 @@ div#block-1{
 }
 
 div#block-2 {
-    width: 1199px;
-    height: 735px;
     /* background-color: #009ba9; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 #button {
@@ -94,19 +95,14 @@ div#block-2 {
 }
 
 #content-over-video {
-    margin-left: 140px;
     display: flex;
-    position: absolute;
     z-index: 2;
     font-weight: bolder;
     font-size: 27px;
-    color: #FFFFFF;
-    margin-top: 250px;
     animation: mysecond 3s 1;
     animation-direction: alternate;
     flex-direction: column;
     align-items: center;
-    padding: 40px;
     border-radius: 10px;
 }
 
@@ -117,14 +113,15 @@ div#block-2 {
   }
 
   #app-name{
-    font-size: 90px;
-    background: url('../images/activatepage.avif');
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 20px;
+    color: #2d3467;
   }
 
-  .thankstxt{
-    background: url('../images/activatepage.avif');
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+  .ear-piece-div {
+    width: 100px;
+    margin-top: 20px;
+    height: 25px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px -1px #2d3467;
+}
+

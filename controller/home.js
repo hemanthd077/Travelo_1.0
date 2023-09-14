@@ -142,7 +142,8 @@ const getin = async(req,res)=>{
                                             if(busdata.busimage){
                                                 temp[12] = busdata.busimage[0].ContentType+";base64,"+busdata.busimage[0].data.toString('base64');
                                             }
-                                            temp[13]=Number(busdata.rating.currentrating);
+                                            temp[13] = Number(busdata.rating.currentrating)/Number(busdata.rating.count);
+                                            temp[13] = Math.floor(temp[13] * 10) / 10;
                                             if(busdata.wifi==='yes'){
                                                 temp[14]=true;
                                             }

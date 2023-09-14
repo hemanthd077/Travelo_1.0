@@ -14,6 +14,8 @@ const moment = require('moment');
 
 let userdata = Login.mail();
 let searchdata = home.userSearchdata();
+let OrderidArray = [];
+let OrderidArrayindex =0;
 
 let tourplanarr = [];
 require('dotenv').config();
@@ -144,6 +146,7 @@ const paymentstatus = (async(req,res)=>{
                     phonenumber : phonenumber,
                     vegcount : vegcount,
                     nonvegcount : nonvegcount,
+                    rating:"0",
                 })
 
                 let Fromdate = searchdata[0];
@@ -234,6 +237,7 @@ const paymentstatus = (async(req,res)=>{
       })
 })
 
+
 const bookingdata = (async(req,res)=>{
 
     let upcomingTour = [];
@@ -274,6 +278,17 @@ const bookingdata = (async(req,res)=>{
                             temp[14] = Number(temp[10])+Number(temp[11]);
                             if(temp[12]){
                                 if(checkDateStatus(orderdata.todate)){
+                                    let starstatus=[];
+                                    starstatus[0] = false;
+                                    starstatus[1] = false;
+                                    starstatus[2] = false;
+                                    starstatus[3] = false;
+                                    starstatus[4] = false;
+                                    let rating = Number(paymentdata[paymentindex].rating)
+                                    for (let starindex = 0; starindex < rating; starindex++) {
+                                        starstatus[starindex] = true;
+                                    }
+                                    temp[15] = starstatus;
                                     completedTour[completedTourIndex++] = temp;
                                 }
                                 else{
@@ -301,9 +316,16 @@ const bookingdata = (async(req,res)=>{
                     }
                 })
             }
+
             upcomingTour.reverse();
             failedTour.reverse();
             completedTour.reverse();
+            console.log("UT : " , upcomingTour.length);
+            console.log("CT : ", completedTour.length);
+            console.log("FT : ", failedTour.length);
+            for (let index = 0; index < completedTour.length; index++) {
+                OrderidArray[OrderidArrayindex++] = completedTour[index][4];
+            }
             if (upcomingTour.length === 0 && completedTour.length === 0 && failedTour.length === 0) {
                 res.render('booking', { 'upcoming': true, 'completed': true, 'failed': true, 'upcomingwarning': true, 'completedwarning': true, 'failedwarning': true });
             } else if (upcomingTour.length !== 0 && completedTour.length === 0 && failedTour.length === 0) {
@@ -483,7 +505,7 @@ const downloadpdf = (async (req, res) => {
             justify-content: space-around;
             font-size: 18px;
             font-weight: 700;
-            color: #2d3467;
+            color: #7b014c;
         }
         .pickup_cover_location{
             display: flex;
@@ -581,11 +603,12 @@ const downloadpdf = (async (req, res) => {
             font-size:20px;
             font-weight:700;
         }
+        
     </style>
     <body>
         <div class="outer_main">
             <div class="logo_invoice-content">
-                <img class="appicon" src="https://lh3.googleusercontent.com/drive-viewer/AITFw-zMgx0BYz9_pdcHXtllQIIRAkq44PQrrx8yysDqJu6QSLd1ZN0CUn-sKTmH4PxuMUx4ZoHWUxSy3lE9-bdsxYdUmY0_Kg=s2560" alt="Company Logo">
+                <img class="appicon" src"/images/homelogo.png" alt="Company Logo">
                 <div class="invoice_content">
                     <p style="font-size: 20px;font-weight:800">INVOICE</p>
                     <p class="order_data">Order_id : ${temp[3]}</p>
@@ -624,6 +647,14 @@ const downloadpdf = (async (req, res) => {
                     <p class="dealer-header"><i class="fa-solid fa-phone fa-xs"></i> Dealer Contact No</p>
                     <p>${temp[13]}</p>
                 </div>
+            </div><br>
+            <div class="amount_paid">
+                <hr>
+                <div class="amount-content">
+                    <p class="amount_details">Amount Paid : ${temp[10]}</p>
+                    <p class="amount_details">Balance Amount : ${temp[11]}</p>
+                </div>
+                <hr>
             </div><br>
             <div class="busfeature_content">
                 <div>
@@ -667,14 +698,6 @@ const downloadpdf = (async (req, res) => {
                         <p>${temp[16][rowIndex][1]}</p>
                     </div><br>`
                 ).join('')}
-            </div><br>
-            <div class="amount_paid">
-                <hr>
-                <div class="amount-content">
-                    <p class="amount_details">Amount Paid : ${temp[10]}</p>
-                    <p class="amount_details">Balance Amount : ${temp[11]}</p>
-                </div>
-                <hr>
             </div><br>
             <div>
                 <p class="termsandcondition_header">Terms and Conditions</p>
@@ -725,9 +748,49 @@ const downloadpdf = (async (req, res) => {
     res.send(pdfBuffer);
   });
 
+const ratingUpdate = (async(req,res)=>{
+    const points = Number(req.query.points);
+    const orderindex = req.query.index;
+    await paymentstatusdb.findOne({orderid : OrderidArray[orderindex]}).then(async(data)=>{
+        let bustotaldata  = await busdetails.findOne({id:data.busid});
+        let newvalues1; 
+        if(Number(data.rating)===0){
+            newvalues1 ={$set:{rating:{
+                currentrating:(Number(bustotaldata.rating.currentrating)+points+1)+"",
+                count:(Number(bustotaldata.rating.count)+1)+"",
+            }}};
+        }
+        else{
+            newvalues1 ={$set:{rating:{
+                currentrating:(Number(bustotaldata.rating.currentrating)-Number(data.rating)+points+1)+"",
+                count:bustotaldata.rating.count,
+            }}};
+        }
+        const filter1 = {id : bustotaldata.id}
+        const options1 = { upsert: false };           
+        await busdetails.updateOne(filter1,newvalues1,options1, (err , collection) => {
+            if(err){
+                console.log('Error in Updating Rating  in BusDB in ratingUpdate : '+err)
+            }
+        })
+
+        const newvalues ={$set:{rating:(points+1)+""}};
+        const filter = {orderid : OrderidArray[orderindex]}
+        const options = { upsert: false };           
+        await paymentstatusdb.updateOne(filter,newvalues,options, (err , collection) => {
+            if(err){
+                console.log('error in updating the rating experience in ratingUpdate : '+err)
+            }
+        })
+    }).catch(e=>{
+        console.log("Error in fetching Rating  in PaymentstatusDB in ratingUpdate : "+e);
+    })
+})
+
 module.exports = {
     prepayment,
     paymentstatus,
     bookingdata,
     downloadpdf,
+    ratingUpdate,
 }
