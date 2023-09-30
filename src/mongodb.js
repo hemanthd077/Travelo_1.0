@@ -33,8 +33,7 @@ const loginSchema = new mongoose.Schema({
     },
     profileimage:{
         data:Buffer,
-        ContentType:String,
-    },
+        ContentType:String,    },
     likedbus:[{
         busid:String,
     }],
