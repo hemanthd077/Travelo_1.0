@@ -13,6 +13,7 @@ const orderdatadb = require('../src/orderDatadb');
 const dealerdetails = require('../src/dealerdb');
 const userdb = require('../src/mongodb');
 const moment = require('moment');
+const path = require('path');
 
 function isManagerAvailable(start, end,booking) {
     if(booking.length===0){
@@ -977,7 +978,7 @@ const addManager = (async(req,res)=>{
             <div class="container">
                 <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
                     <tr>
-                        <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AITFw-xDFqJWr-vKyyle-8NrIGubwPsc2z-zhM9hkGD_PHkAi7pbP5UIM6TciN3KblpIYZVrfS7jxKUfqDinz3yB3Z3JJV0AXw=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td> 
+                        <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AK7aPaDaox98J9mit-0TXJAA7LINAgLs03-57IwBCaYweu4ty4S5WU-VVpVGbt9t-AqyByBum1iSKDPuKF7F7ozXMsghSddY2w=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td> 
                     </tr>
                     <tr style="display: flex;align-items: center;">
                         <div class="container-1">
@@ -1041,6 +1042,7 @@ const deletemanager = (async(req,res)=>{
     }
 
 })
+
 
 const requestmanagermail = (async(req,res)=>{
     let managertotaldata = [];
@@ -1135,7 +1137,7 @@ const requestmanagermail = (async(req,res)=>{
             <div class="container">
                 <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
                     <tr>
-                        <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AITFw-xDFqJWr-vKyyle-8NrIGubwPsc2z-zhM9hkGD_PHkAi7pbP5UIM6TciN3KblpIYZVrfS7jxKUfqDinz3yB3Z3JJV0AXw=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td> 
+                         <td style="background-image: url(https://lh3.googleusercontent.com/drive-viewer/AK7aPaDaox98J9mit-0TXJAA7LINAgLs03-57IwBCaYweu4ty4S5WU-VVpVGbt9t-AqyByBum1iSKDPuKF7F7ozXMsghSddY2w=s2560); background-repeat: no-repeat; background-position: center; width: 560px; height: 300px;margin-left:-30px;position:absolute; margin-top:-70px"></td> 
                     </tr>
                     <tr style="display: flex;align-items: center;">
                         <div class="container-1">

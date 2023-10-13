@@ -12,7 +12,7 @@ router.get('/verify',signupcontroller.verify);
 
 router.get('/activation',(req,res)=>{
     res.render('activation');
-});
-
+}); 
+ 
 module.exports =router;
-
+ 
